@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SPFx Serve Task Configuration",
+  "description": "Defines parameters for the webserver which is spun up by the SPFx Serve Task",
+  "type": "object",
+
+  "definitions": {
+    "SpfxServeSessionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pageUrl"
+      ],
+      "properties": {
+        "pageUrl": {
+          "title": "Page URL",
+          "description": "The fully-qualified URL of the page to launch",
+          "type": "string"
+        },
+
+        "customActions": {
+          "title": "Custom Actions",
+          "description": "An optional list of custom actions to provide as query parameters to the page. The key of this object must be the ID of the custom action component.",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$": {
+              "type": "object",
+              "required": [
+                "location"
+              ],
+              "properties": {
+                "location": {
+                  "title": "Location",
+                  "description": "The type of custom action, use \"ClientSideExtension.ApplicationCustomizer\" for the Application Customizer extension.",
+                  "type": "string",
+                  "enum": [
+                    "ClientSideExtension.ApplicationCustomizer",
+                    "ClientSideExtension.ListViewCommandSet.ContextMenu",
+                    "ClientSideExtension.ListViewCommandSet.CommandBar",
+                    "ClientSideExtension.ListViewCommandSet"
+                  ]
+                },
+                "properties": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+
+        "fieldCustomizers": {
+          "title": "Field Customizers",
+          "description": "An optional list of field customizers to provide as query parameters to the page. The key of this object must be the field ID the customizer applies to.",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[A-z0-9]+$": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "title": "ID",
+                  "description": "The ID of the field customizer component.",
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                },
+                "properties": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "description": "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to. Editors may download the schema and use it to perform syntax highlighting.",
+      "type": "string"
+    },
+
+    "serveConfigurations": {
+      "title": "Serve Configurations",
+      "description": "Specify a set of configurations that the serve task can use to load a test page",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "default"
+      ],
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/SpfxServeSessionConfiguration"
+        }
+      },
+      "patternProperties": {
+        "\\S+": {
+          "$ref": "#/definitions/SpfxServeSessionConfiguration"
+        }
+      }
+    },
+
+    "api": {
+      "title": "API server configuration",
+      "description": "Parameters which configure the API server, which runs simultaneously and allows for mock testing",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "port",
+        "entryPath"
+      ],
+      "properties": {
+        "port": {
+          "title": "API Port",
+          "description": "The port which the API server listens on",
+          "type": "number"
+        },
+
+        "entryPath": {
+          "title": "API Entry Point Path",
+          "description": "The path to the script to run as the API server",
+          "type": "string"
+        }
+      }
+    },
+
+    "initialPage": {
+      "title": "Initial Page",
+      "description": "The path to the page which should open automatically after this task completes",
+      "type": "string"
+    },
+
+    "port": {
+      "title": "Port",
+      "description": "The port on which to host the file server.",
+      "type": "number"
+    },
+
+    "hostname": {
+      "title": "Hostname",
+      "description": "The name of the host on which serve is running. Defaults to 'localhost'",
+      "type": "string"
+    },
+
+    "https": {
+      "title": "HTTPS Mode",
+      "description": "If true, the server should run on HTTPS",
+      "type": "boolean"
+    },
+
+    "keyPath": {
+      "title": "HTTPS Key Path",
+      "description": "Path to the HTTPS key",
+      "type": "string"
+    },
+
+    "certPath": {
+      "title": "HTTPS Cert Path",
+      "description": "Path to the HTTPS cert",
+      "type": "string"
+    },
+
+    "pfxPath": {
+      "title": "HTTPS PFX Path",
+      "description": "Path to the HTTPS PFX cert",
+      "type": "string"
+    },
+
+    "tryCreateDevCertificate": {
+      "title": "Should Create Dev Certificate",
+      "description": "If true, when gulp-core-build-serve is initialized and a dev certificate doesn't already exist and hasn't been specified, attempt to generate one and trust it automatically.",
+      "type": "boolean"
+    }
+  }
+}
