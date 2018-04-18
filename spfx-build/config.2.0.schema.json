@@ -1,0 +1,136 @@
+{
+  "title": "Project Configuration (version 2.0)",
+  "description": "Defines the bundles and list of externals for this project",
+
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "bundles"
+  ],
+
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+
+    "version": {
+      "description": "The version number. Must be \"2.0\"",
+      "type": "string",
+      "enum": ["2.0"]
+    },
+
+    "bundles": {
+      "description": "A list of bundle definitions. Bundle names may be between 6 and 64 lowercase alphanumeric or dash characters.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9][a-z0-9-\\.]{4,62}[a-z0-9]$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "components"
+          ],
+
+          "properties": {
+            "components": {
+              "description": "An array of components to be included in this bundle.",
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "description": "A component definition, including the manifest and entrypoint.",
+                "type":"object",
+                "required": [
+                  "entrypoint",
+                  "manifest"
+                ],
+
+                "properties": {
+                  "entrypoint": {
+                    "description": "The path to the code entrypoint for this component, relative to the project root.",
+                    "type": "string",
+                    "minLength": 2
+                  },
+                  "manifest": {
+                    "description": "The path to the manifest for this component, relative to the project root.",
+                    "type": "string",
+                    "minLength": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "externals": {
+      "description": "A mapping of external bundles to the path to the bundled JS, used to create bundle config",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-zA-Z0-9\\.\\$_@/-]+$": {
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "The path to the bundled external file",
+              "minLength": 2
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "globalName"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "The path to the bundled external non-AMD file",
+                  "minLength": 2
+                },
+                "globalName": {
+                  "type": "string",
+                  "description": "The name of the global variable where an non-AMD dependency drops its exports",
+                  "minLength": 1
+                },
+                "globalDependencies": {
+                  "description": "List of non-AMD dependencies for this project",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    "localizedResources": {
+      "description": "A set of localized resources, to be discovered following a specific pattern",
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9\\.\\$_@/-]+$": {
+          "type": "string",
+          "description": "The path to the localized resource file, relative to the root of the project",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "asyncComponents": {
+      "description": "A list of components that should generate a warning if made synchronous dependencies of any component in this project",
+      "uniqueItems": true,
+      "type": "array",
+      "items": {
+        "type":"string"
+      }
+    }
+  }
+}
