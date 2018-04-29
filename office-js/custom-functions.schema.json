@@ -1,0 +1,137 @@
+{
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to. Editors may download the schema and use it to perform syntax highlighting.",
+            "type": "string"
+        },
+        "functions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "title": "The description that gets displayed to the user.",
+                        "default": ""
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "The name of the custom function, which the user will enters in Excel.  This name must also be defined as a function in JavaScript. The name may contain letters, numbers, periods, and underscores. By convention, you should use capital letters for the name.",
+                        "default": "",
+                        "examples": [
+                            "MYFUNCTION",
+                            "SUBNAMESPACE.MYFUNCTION"
+                        ]
+                    },
+                    "options": {
+                        "type": "object",
+                        "properties": {
+                            "cancelable": {
+                                "type": "boolean",
+                                "title": "Indicates whether the function can be cancelled when it's running.  Default is false.",
+                                "default": false
+                            },
+                            "stream": {
+                                "type": "boolean",
+                                "title": "Indicates whether the function is a streaming function that is continuously updated. Default is false.",
+                                "default": false
+                            },
+                            "sync": {
+                                "type": "boolean",
+                                "title": "Indicates whether the function can be run synchronously and statelessly. Set this value to true only if the function does not rely on web service calls or Promises, and does not rely on any global state (e.g., global variables). Marking the function as synchronous enables Excel to run it more efficiently.  The default is false.",
+                                "default": false
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "The display name of the parameter"
+                                },
+                                "dimensionality": {
+                                    "type": "string",
+                                    "title": "Indicates the parameter's dimensionality: either `scalar`, which is a single value of the type, or `matrix`, which is a two-dimensional array of values of the type.",
+                                    "enum": [
+                                        "scalar",
+                                        "matrix"
+                                    ],
+                                    "examples": [
+                                        "scalar",
+                                        "matrix"
+                                    ]
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "title": "The type of the parameter",
+                                    "enum": [
+                                        "string",
+                                        "number",
+                                        "boolean"
+                                    ],
+                                    "examples": [
+                                        "string",
+                                        "number",
+                                        "boolean"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "dimensionality",
+                                "type"
+                            ]
+                        }
+                    },
+                    "result": {
+                        "type": "object",
+                        "properties": {
+                            "dimensionality": {
+                                "type": "string",
+                                "title": "Indicates the result's dimensionality: either `scalar`, which is a single value of the type, or `matrix`, which is a two-dimensional array of values of the type.",
+                                "enum": [
+                                    "scalar",
+                                    "matrix"
+                                ],
+                                "examples": [
+                                    "scalar",
+                                    "matrix"
+                                ]
+                            },
+                            "type": {
+                                "type": "string",
+                                "title": "The type of the result",
+                                "enum": [
+                                    "string",
+                                    "number",
+                                    "boolean"
+                                ],
+                                "examples": [
+                                    "string",
+                                    "number",
+                                    "boolean"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "dimensionality",
+                            "type"
+                        ]
+                    }
+                },
+                "required": [
+                    "name",
+                    "parameters",
+                    "result"
+                ]
+            }
+        }
+    },
+    "required": [
+        "functions"
+    ]
+}
