@@ -13,11 +13,11 @@
       "type": "boolean"
     },
     "rowFormatter": {
-      "$ref": "http://columnformatting.sharepointpnp.com/columnFormattingSchema.json#definitions/elm"
+      "$ref": "https://developer.microsoft.com/en-us/json-schemas/sp/column-formatting.schema.json#definitions/elm"
     },
     "additionalRowClass": {
       "description": "An expression whose output is a class name to be applied to the list row.",
-      "$ref": "http://columnformatting.sharepointpnp.com/columnFormattingSchema.json#definitions/expression"
+      "$ref": "https://developer.microsoft.com/en-us/json-schemas/sp/column-formatting.schema.json#definitions/expression"
     }
   }
 }
