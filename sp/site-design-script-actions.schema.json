@@ -28,6 +28,48 @@
         }
       ]
     },
+    "associateExtension": {
+      "type": "object",
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^associateExtension$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the extension."
+        },
+        "location": {
+          "type": "string",
+          "pattern": "^ClientSideExtension\\..*$",
+          "description": "If this extension creates commands, where the commands are display. Otherwise, this should be set to ClientSideExtension.ApplicationCustomizer."
+        },
+        "clientSideComponentId": {
+          "type": "string",
+          "description": "GUID of the extension."
+        },
+        "clientSideComponentProperties": {
+          "type": "string",
+          "description": "This is an optional parameter, which can be used to provide properties for the instance."
+        },
+        "registrationId": {
+          "type": "string",
+          "description": "This is an optional parameter, which indicates the type of the list to which extension is associated, if the extension is associated with lists."
+        },
+        "registrationType": {
+          "type": "string",
+          "pattern": "^$|^List$",
+          "description": "This is an optional parameter, which should be specified if the extension is associated with a list."
+        },
+        "scope": {
+          "type": "string",
+          "pattern": "^(Web|Site)$",
+          "description": "Indicates whether the extension is associated with a Web or a Site."
+        }
+      },
+      "required": [ "clientSideComponentId", "title", "location", "verb", "scope" ],
+      "additionalProperties": false
+    },
     "createSPList": {
       "type": "object",
       "allOf": [
@@ -61,7 +103,9 @@
                   { "$ref": "#/definitions/SPListSubactions/removeSPView" },
                   { "$ref": "#/definitions/SPListSubactions/addContentType" },
                   { "$ref": "#/definitions/SPListSubactions/removeContentType" },
-                  { "$ref": "#/definitions/SPListSubactions/setSPFieldCustomFormatter" }
+                  { "$ref": "#/definitions/SPListSubactions/setSPFieldCustomFormatter" },
+                  { "$ref": "#/definitions/SPListSubactions/associateFieldCustomizer" },
+                  { "$ref": "#/definitions/SPListSubactions/associateListViewCommandSet" }
                 ]
               },
               "additionalItems": false
@@ -180,7 +224,7 @@
           },
           "fieldType": {
             "type": "string",
-            "pattern": "^Text|Note|Number|Boolean|User|DateTime$",
+            "pattern": "^(Text|Note|Number|Boolean|User|DateTime)$",
             "description": "The type of field to add."
           },
           "displayName": {
@@ -189,7 +233,7 @@
           },
           "internalName": {
             "type": "string",
-            "description": "Optional attribute. If provided, specifies the internal name of the field. If not provided, the internal name will be based on the display name",
+            "description": "Optional attribute. If provided, specifies the internal name of the field. If not provided, the internal name will be based on the display name"
           },
           "isRequired": {
             "type": "boolean",
@@ -241,6 +285,57 @@
         "required": [ "schemaXml", "verb" ],
         "additionalProperties": false
       },
+      "associateFieldCustomizer": {
+        "type": "object",
+        "properties": {
+          "verb": {
+            "type": "string",
+            "pattern": "^associateFieldCustomizer$"
+          },
+          "internalName": {
+            "type": "string",
+            "description": "The internalName of the field to customize."
+          },
+          "clientSideComponentId": {
+            "type": "string",
+            "description": "GUID of the extension to use to customize the field."
+          },
+          "clientSideComponentProperties": {
+            "type": "string",
+            "description": "This is an optional parameter, which can be used to provide properties for the Field Customizer instance."
+          }
+        },
+        "required": [ "clientSideComponentId", "internalName", "verb" ],
+        "additionalProperties": false
+      },
+      "associateListViewCommandSet": {
+        "type": "object",
+        "properties": {
+          "verb": {
+            "type": "string",
+            "pattern": "^associateListViewCommandSet$"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the extension."
+          },
+          "location": {
+            "type": "string",
+            "pattern": "^(ClientSideExtension\\.ListViewCommandSet\\.ContextMenu|ClientSideExtension\\.ListViewCommandSet\\.CommandBar|ClientSideExtension\\.ListViewCommandSet)$",
+            "description": "Where the commands are displayed."
+          },
+          "clientSideComponentId": {
+            "type": "string",
+            "description": "GUID of the extension to use to customize the field."
+          },
+          "clientSideComponentProperties": {
+            "type": "string",
+            "description": "This is an optional parameter, which can be used to provide properties for the Field Customizer instance."
+          }
+        },
+        "required": [ "clientSideComponentId", "title", "location", "verb" ],
+        "additionalProperties": false
+      },
       "addSPView": {
         "type": "object",
         "properties": {
@@ -277,8 +372,12 @@
           },
           "scope": {
             "type": "string",
-            "pattern": "^Default|Recursive|RecursiveAll|FilesOnly$",
+            "pattern": "^(Default|Recursive|RecursiveAll|FilesOnly)$",
             "description": "Optional. The scope of the view. See https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.spviewscope.aspx"
+          },
+          "formatterJSON": {
+            "type": "object",
+            "description": "A JSON object to use as the view CustomFormatter."
           }
         },
         "required": [ "name", "viewFields", "query", "rowLimit", "isPaged", "makeDefault" ],
@@ -347,6 +446,30 @@
       ],
       "additionalProperties": false
     },
+    "addPrincipalToSPGroup": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/definitions/baseAction" },
+        {
+          "properties": {
+            "verb": {
+              "type": "string",
+              "pattern": "^addPrincipalToSPGroup$"
+            },
+            "principal": {
+              "type": "string",
+              "description": "The name of principal to add to the SPGroup."
+            },
+            "group": {
+              "type": "string",
+              "description": "The SPGroup to add the principal to.",
+              "pattern": "^(Members|Owners|Visitors)$"
+            }
+          },
+          "required": [ "principal", "group", "verb" ]
+        }
+      ]
+    },
     "applyTheme": {
       "type": "object",
       "allOf": [
@@ -403,6 +526,10 @@
               "type": "string",
               "description": "The name of the Flow."
             },
+            "waitForReply": {
+              "type": "boolean",
+              "description": "If true, the script will expect that the Flow will call Microsoft.SharePoint.Utilities.SiteScriptUtility.SetSiteScriptStageOutcome() when it has finished executing. Note that this will not cause the script to block. The script will keep executing, but for record-keeping purposes, the run will be considered incomplete until the reply is made."
+            },
             "parameters": {
               "type": "object",
               "description": "An option set of parameters to pass into the Flow."
@@ -413,7 +540,7 @@
       ],
       "additionalProperties": false
     },
-    "installSPFXSolution": {
+    "installSolution": {
       "type": "object",
       "allOf": [
         { "$ref": "#/definitions/baseAction" },
@@ -421,14 +548,18 @@
           "properties": {
             "verb": {
               "type": "string",
-              "pattern": "^installSPFXSolution$"
+              "pattern": "^installSolution$"
             },
             "id": {
               "type": "string",
-              "description": "The ID of the SPFX Solution."
+              "description": "The ID of the Solution."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the Solution."
             }
           },
-          "required": [ "id", "verb" ]
+          "required": [ "id", "verb", "name" ]
         }
       ],
       "additionalProperties": false
@@ -461,6 +592,34 @@
       ],
       "additionalProperties": false
     },
+    "removeNavLink": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/definitions/baseAction" },
+        {
+          "properties": {
+            "verb": {
+              "type": "string",
+              "pattern": "^removeNavLink$"
+            },
+            "url": {
+              "type": "string",
+              "description": "Optionally indicates the url of the link to remove. if this parameter is not provided, the link to be removed will be found based on the displayName only."
+            },
+            "displayName": {
+              "type": "string",
+              "description": "The display name of the link to remove."
+            },
+            "isWebRelative": {
+              "type": "boolean",
+              "description": "Optionally indicates whether the link is web-relative. The default is false."
+            }
+          },
+          "required": [ "displayName", "verb" ]
+        }
+      ],
+      "additionalProperties": false
+    },    
     "joinHubSite": {
       "type": "object",
       "allOf": [
@@ -580,7 +739,7 @@
             },
             "fieldType": {
               "type": "string",
-              "pattern": "^Text|Note|Number|Boolean|User|DateTime$",
+              "pattern": "^(Text|Note|Number|Boolean|User|DateTime)$",
               "description": "The type of column to add."
             },
             "internalName": {
@@ -609,6 +768,30 @@
       ],
       "additionalProperties": false
     },
+    "createSiteColumnXml": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/definitions/baseAction" },
+        {
+          "properties": {
+            "verb": {
+              "type": "string",
+              "pattern": "^createSiteColumnXml$"
+            },
+            "schemaXml": {
+              "type": "string",
+              "description": "The schemaXml specifying the field. See https://msdn.microsoft.com/en-us/library/office/aa979575.aspx"
+            },
+            "pushChanges": {
+              "type": "boolean",
+              "description": "Indicates whether this change should be pushed to lists that already reference this field. Defaults to true."
+            }
+          },
+          "required": [ "verb", "schemaXml" ]
+        }
+      ],
+      "additionalProperties": false
+    },
     "setSiteExternalSharingCapability": {
       "type": "object",
       "allOf": [
@@ -621,7 +804,7 @@
             },
             "capability": {
               "type": "string",
-              "pattern": "^Disabled|ExistingExternalUserSharingOnly|ExternalUserSharingOnly|ExternalUserAndGuestSharing$",
+              "pattern": "^(Disabled|ExistingExternalUserSharingOnly|ExternalUserSharingOnly|ExternalUserAndGuestSharing)$",
               "description": "A string specifying the sharing capability for the site."
             }
           },
@@ -654,7 +837,7 @@
             },
             "hourFormat": {
               "type": "string",
-              "pattern": "^12|24$",
+              "pattern": "^(12|24)$",
               "description": "Specifies whether the site should use 12-hour or 24-hour time."
             }
           },
@@ -674,13 +857,18 @@
       "items": {
         "anyOf": [
           { "$ref": "#/definitions/activateSPFeature" },
+          { "$ref": "#/definitions/associateExtension" },
+          { "$ref": "#/definitions/addPrincipalToSPGroup" },
           { "$ref": "#/definitions/addNavLink" },
           { "$ref": "#/definitions/applyTheme" },
           { "$ref": "#/definitions/createContentType" },
           { "$ref": "#/definitions/createPage" },
           { "$ref": "#/definitions/createSiteColumn" },
+          { "$ref": "#/definitions/createSiteColumnXml" },
           { "$ref": "#/definitions/createSPList" },
+          { "$ref": "#/definitions/installSolution" },
           { "$ref": "#/definitions/joinHubSite" },
+          { "$ref": "#/definitions/removeNavLink" },
           { "$ref": "#/definitions/setRegionalSettings" },
           { "$ref": "#/definitions/setSiteLogo" },
           { "$ref": "#/definitions/setSiteExternalSharingCapability" },
