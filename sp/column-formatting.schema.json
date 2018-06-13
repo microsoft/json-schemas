@@ -231,6 +231,17 @@
                                     "type": "string"
                                 }
                             ]
+                        },
+                        "alt": {
+                            "description": "Specifies the alt attribute",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/expression"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
                         }
                     },
                     "patternProperties": {
