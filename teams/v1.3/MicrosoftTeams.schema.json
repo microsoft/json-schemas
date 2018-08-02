@@ -366,7 +366,7 @@
                     },
                     "commands": {
                         "type": "array",
-                        "maxItems": 1,
+                        "maxItems": 10,
                         "items": {
                             "type": "object",
                             "additionalProperties": false,
