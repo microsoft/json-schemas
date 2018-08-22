@@ -98,6 +98,7 @@
                   { "$ref": "#/definitions/SPListSubactions/addSPField" },
                   { "$ref": "#/definitions/SPListSubactions/deleteSPField" },
                   { "$ref": "#/definitions/SPListSubactions/addSPFieldXml" },
+                  { "$ref": "#/definitions/SPListSubactions/addSPLookupFieldXml" },
                   { "$ref": "#/definitions/SPListSubactions/addSiteColumn" },
                   { "$ref": "#/definitions/SPListSubactions/addSPView" },
                   { "$ref": "#/definitions/SPListSubactions/removeSPView" },
@@ -276,6 +277,33 @@
           "schemaXml": {
             "type": "string",
             "description": "The schemaXml specifying the field. See https://msdn.microsoft.com/en-us/library/office/aa979575.aspx"
+          },
+          "addToDefaultView": {
+            "type": "boolean",
+            "description": "Optional attribute that defaults to false. If true, the newly added field will also be added to the default view."
+          }
+        },
+        "required": [ "schemaXml", "verb" ],
+        "additionalProperties": false
+      },
+      "addSPLookupFieldXml": {
+        "type": "object",
+        "properties": {
+          "verb": {
+            "type": "string",
+            "pattern": "^addSPLookupFieldXml$"
+          },
+          "schemaXml": {
+            "type": "string",
+            "description": "The schemaXml specifying the field. See https://msdn.microsoft.com/en-us/library/office/aa979575.aspx"
+          },
+          "targetListName": {
+            "type": "string",
+            "description": "The name that identifies the list this lookup field is targeted against. Provide either this or targetListUrl."
+          },
+          "targetListUrl": {
+            "type": "string",
+            "description": "A web-relative url that identifies the list this lookup field is targeted against. Provide either this or targetListName."
           },
           "addToDefaultView": {
             "type": "boolean",
@@ -619,7 +647,7 @@
         }
       ],
       "additionalProperties": false
-    },    
+    },
     "joinHubSite": {
       "type": "object",
       "allOf": [
