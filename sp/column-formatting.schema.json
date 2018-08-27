@@ -13,7 +13,10 @@
                     "description": "Name of the action that the custom action button will execute",
                     "enum": [
                         "defaultClick",
-                        "executeFlow"
+                        "executeFlow",
+                        "share",
+                        "delete",
+                        "editItemProps"
                     ]
                 },
                 "actionParams": {
@@ -223,6 +226,16 @@
                         },
                         "d": {
                             "description": "Specifies the d attribute. Used primarily for svg path elements",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/expression"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "title": {
                             "anyOf": [
                                 {
                                     "$ref": "#/definitions/expression"

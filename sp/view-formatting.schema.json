@@ -8,16 +8,16 @@
       "description": "If true, then selection UX in this view will be disabled.",
       "type": "boolean"
     },
-    "hideColumnHeaders": {
+    "hideColumnHeader": {
       "description": "If true, then the list column header UX in this view will be hidden",
       "type": "boolean"
     },
     "rowFormatter": {
-      "$ref": "https://developer.microsoft.com/en-us/json-schemas/sp/column-formatting.schema.json#definitions/elm"
+      "$ref": "https://developer.microsoft.com/json-schemas/sp/column-formatting.schema.json#definitions/elm"
     },
     "additionalRowClass": {
       "description": "An expression whose output is a class name to be applied to the list row.",
-      "$ref": "https://developer.microsoft.com/en-us/json-schemas/sp/column-formatting.schema.json#definitions/expression"
+      "$ref": "https://developer.microsoft.com/json-schemas/sp/column-formatting.schema.json#definitions/expression"
     }
   }
 }
