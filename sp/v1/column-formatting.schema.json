@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "CustomtFormatter JSON",
-    "description": "CustomFormatter renderer for SharePoint lists",
+    "title": "CustomFormatter JSON",
+    "description": "CustomFormatter renderer for SharePoint lists - matching with SP2019 version",
     "definitions": {
         "customAction": {
             "type": "object",
@@ -13,10 +13,7 @@
                     "description": "Name of the action that the custom action button will execute",
                     "enum": [
                         "defaultClick",
-                        "executeFlow",
-                        "share",
-                        "delete",
-                        "editItemProps"
+                        "executeFlow"
                     ]
                 },
                 "actionParams": {
@@ -226,27 +223,6 @@
                         },
                         "d": {
                             "description": "Specifies the d attribute. Used primarily for svg path elements",
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/expression"
-                                },
-                                {
-                                    "type": "string"
-                                }
-                            ]
-                        },
-                        "title": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/expression"
-                                },
-                                {
-                                    "type": "string"
-                                }
-                            ]
-                        },
-                        "alt": {
-                            "description": "Specifies the alt attribute",
                             "anyOf": [
                                 {
                                     "$ref": "#/definitions/expression"
