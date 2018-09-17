@@ -26,6 +26,15 @@
                             "SUBNAMESPACE.MYFUNCTION"
                         ]
                     },
+                    "helpUrl": {
+                        "type": "string",
+                        "title": "URL where your users can get help about the function. (It is displayed in a taskpane.) For example, `https://contoso.com/help/convert-celsius-to-fahrenheit.html`",
+                        "default": "",
+                        "examples": [
+                            "MYFUNCTION",
+                            "SUBNAMESPACE.MYFUNCTION"
+                        ]
+                    },
                     "options": {
                         "type": "object",
                         "properties": {
