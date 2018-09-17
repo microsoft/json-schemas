@@ -38,13 +38,9 @@
                                 "type": "boolean",
                                 "title": "Indicates whether the function is a streaming function that is continuously updated. Default is false.",
                                 "default": false
-                            },
-                            "sync": {
-                                "type": "boolean",
-                                "title": "Indicates whether the function can be run synchronously and statelessly. Set this value to true only if the function does not rely on web service calls or Promises, and does not rely on any global state (e.g., global variables). Marking the function as synchronous enables Excel to run it more efficiently.  The default is false.",
-                                "default": false
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     },
                     "parameters": {
                         "type": "array",
@@ -54,6 +50,11 @@
                                 "name": {
                                     "type": "string",
                                     "title": "The display name of the parameter"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "The description that gets displayed to the user.",
+                                    "default": ""
                                 },
                                 "dimensionality": {
                                     "type": "string",
@@ -86,7 +87,8 @@
                                 "name",
                                 "dimensionality",
                                 "type"
-                            ]
+                            ],
+                            "additionalProperties": false
                         }
                     },
                     "result": {
@@ -129,11 +131,13 @@
                     "name",
                     "parameters",
                     "result"
-                ]
+                ],
+                "additionalProperties": false
             }
         }
     },
     "required": [
         "functions"
-    ]
+    ],
+    "additionalProperties": false
 }
