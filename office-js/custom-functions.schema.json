@@ -12,9 +12,9 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "description": {
+                    "id": {
                         "type": "string",
-                        "title": "The description that gets displayed to the user.",
+                        "title": "A unique ID for the function. This ID should not be changed after it is set.",
                         "default": ""
                     },
                     "name": {
@@ -25,6 +25,11 @@
                             "MYFUNCTION",
                             "SUBNAMESPACE.MYFUNCTION"
                         ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "The description that gets displayed to the user.",
+                        "default": ""
                     },
                     "helpUrl": {
                         "type": "string",
@@ -137,6 +142,7 @@
                     }
                 },
                 "required": [
+                    "id",
                     "name",
                     "parameters",
                     "result"
