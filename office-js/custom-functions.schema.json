@@ -99,7 +99,6 @@
                             },
                             "required": [
                                 "name",
-                                "dimensionality",
                                 "type"
                             ],
                             "additionalProperties": false
@@ -136,7 +135,6 @@
                             }
                         },
                         "required": [
-                            "dimensionality",
                             "type"
                         ]
                     }
