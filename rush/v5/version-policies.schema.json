@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Rush version-policies.json config file",
+  "description": "For use with the Rush tool, this file defines version policies. See http://rushjs.io for details.",
+
+  "type": "array",
+  "items": {
+    "type": "object",
+      "oneOf": [
+        { "$ref": "#/definitions/lockStepVersion" },
+        { "$ref": "#/definitions/individualVersion" }
+      ]
+  },
+  "definitions": {
+    "lockStepVersion": {
+      "type":"object",
+      "description": "Lockstep version policy",
+      "properties": {
+        "policyName": {
+          "description": "The name of the version policy",
+          "type": "string"
+        },
+        "definitionName": {
+          "description": "The name of version policy definition",
+          "type": "string",
+          "enum": [ "lockStepVersion" ]
+        },
+        "version": {
+          "description": "Current version for projects with lockStepVersion policy",
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9a-zA-Z.+\\-]+$"
+        },
+        "nextBump": {
+          "description": "Type of next version bump",
+          "enum": [ "prerelease", "release", "minor", "patch", "major" ]
+        },
+        "mainProject": {
+          "description": "The main project for this version policy",
+          "type": "string"
+        }
+      },
+      "required": [ "policyName", "definitionName", "version", "nextBump" ],
+      "additionalProperties": false
+    },
+    "individualVersion": {
+      "type":"object",
+      "description": "Lockstep version policy",
+      "properties": {
+        "policyName": {
+          "description": "The name of the version policy",
+          "type": "string"
+        },
+        "definitionName": {
+          "description": "The name of version policy definition",
+          "type": "string",
+          "enum": [ "individualVersion" ]
+        },
+        "lockedMajor": {
+          "description": "The locked major version",
+          "type": "number"
+        }
+      },
+      "required": [ "policyName", "definitionName" ],
+      "additionalProperties": false
+    }
+  }
+}
