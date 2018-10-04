@@ -613,6 +613,18 @@
             "isWebRelative": {
               "type": "boolean",
               "description": "Optionally indicates whether the link is web-relative. The default is false."
+            },
+            "parentDisplayName": {
+              "type": "string",
+              "description": "Optional parameter. If provided, makes this nav link a child of the nav link with this displayName. If both this and parentUrl are provided, it searches for a link that matches both to be the parent."
+            },
+            "parentUrl": {
+              "type": "string",
+              "description": "Optional parameter. If provided, makes this nav link a child of the nav link with this url. If both this and parentDisplayName are provided, it searches for a link that matches both to be the parent."
+            },
+            "isParentUrlWebRelative": {
+              "type": "boolean",
+              "description": "Optional parameter. Indicates whether parentUrl is web-relative. The default is false."
             }
           },
           "required": [ "displayName", "url", "verb" ]
