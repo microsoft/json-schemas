@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Describes the metadata required for registering a Custom Function",
+    "description": "Describes the metadata required for registering a Custom Function. See https://aka.ms/customfunctions to learn more.",
     "type": "object",
     "properties": {
         "$schema": {
@@ -52,6 +52,11 @@
                                 "type": "boolean",
                                 "title": "Indicates whether the function is a streaming function that is continuously updated. Default is false.",
                                 "default": false
+                            },
+                            "requiresAddress": {
+                                "type": "boolean",
+                                "title": "Indicates whether the function requires the cell address of the calling cell. Default is false.",
+                                "default": false
                             }
                         },
                         "additionalProperties": false
@@ -80,26 +85,34 @@
                                     "examples": [
                                         "scalar",
                                         "matrix"
-                                    ]
+                                    ],
+                                    "default":"scalar"
                                 },
                                 "type": {
                                     "type": "string",
                                     "title": "The type of the parameter",
                                     "enum": [
+                                        "any",
                                         "string",
                                         "number",
                                         "boolean"
                                     ],
                                     "examples": [
+                                        "any",
                                         "string",
                                         "number",
                                         "boolean"
-                                    ]
+                                    ],
+                                    "default":"any"
+                                },
+                                "optional": {
+                                    "type":"boolean",
+                                    "title":"Specifies if the parameter is optional. Default is false.",
+                                    "default": false
                                 }
                             },
                             "required": [
-                                "name",
-                                "type"
+                                "name"
                             ],
                             "additionalProperties": false
                         }
@@ -123,19 +136,21 @@
                                 "type": "string",
                                 "title": "The type of the result",
                                 "enum": [
+                                    "any",
                                     "string",
                                     "number",
                                     "boolean"
                                 ],
                                 "examples": [
+                                    "any",
                                     "string",
                                     "number",
                                     "boolean"
-                                ]
+                                ],
+                                "default":"any"
                             }
                         },
                         "required": [
-                            "type"
                         ]
                     }
                 },
