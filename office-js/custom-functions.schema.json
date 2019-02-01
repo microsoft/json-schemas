@@ -132,23 +132,6 @@
                                     "matrix"
                                 ]
                             },
-                            "type": {
-                                "type": "string",
-                                "title": "The type of the result",
-                                "enum": [
-                                    "any",
-                                    "string",
-                                    "number",
-                                    "boolean"
-                                ],
-                                "examples": [
-                                    "any",
-                                    "string",
-                                    "number",
-                                    "boolean"
-                                ],
-                                "default":"any"
-                            }
                         },
                         "required": [
                         ]
