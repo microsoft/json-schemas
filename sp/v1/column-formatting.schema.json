@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "CustomFormatter JSON",
+    "title": "CustomFormatter JSON - SharePoint 2019",
     "description": "CustomFormatter renderer for SharePoint lists - matching with SP2019 version",
     "definitions": {
         "customAction": {
