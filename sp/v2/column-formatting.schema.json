@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "CustomtFormatter JSON",
+    "title": "CustomFormatter JSON - SharePoint Online",
     "description": "CustomFormatter renderer for SharePoint lists",
     "definitions": {
         "customAction": {
@@ -45,6 +45,7 @@
                         "-",
                         "*",
                         "/",
+                        "%",
                         "==",
                         "!=",
                         ">",
@@ -59,7 +60,17 @@
                         "Number()",
                         "Date()",
                         "cos",
-                        "sin"
+                        "sin",
+                        "abs",
+                        "length",
+                        "join",
+                        "loopIndex",
+                        "toLowerCase",
+                        "indexOf",
+                        "toDateString()",
+                        "toLocaleString()",
+                        "toLocaleDateString()",
+                        "toLocaleTimeString()"
                     ]
                 },
                 "operands": {
@@ -271,6 +282,11 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "forEach": {
+                    "type": "string",
+                    "description": "For loop properties. The element will be rendered repeatedly based on an array.",
+                    "pattern": "^[^\\]\\$@\\. ]+ in (\\@currentField|\\[\\$.+\\])$"
                 }
             },
             "required": [
