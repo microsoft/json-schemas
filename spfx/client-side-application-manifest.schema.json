@@ -87,6 +87,12 @@
               "type": "string"
             },
 
+            "preloadListItemQueryOptionOverride": {
+              "title": "Preload List Item Query Options (flighted)",
+              "description": "This specifies an optional OData query expression with the syntax that would be used in the URL query parameter for a REST API call that fetches a SharePoint list item.",
+              "type": "string"
+            },
+
             "preloadListItemProperties": {
               "title": "Preload List Item Properties",
               "description": "This specifies what to fetch from a SharePoint list item Properties property.",
