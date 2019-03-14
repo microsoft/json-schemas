@@ -17,43 +17,43 @@
       "oneOf": [
         {
           "title": "Text, media, and content",
-          "description": "This category includes web parts that display text, multi-media, documents, information from the web, and other rich content.",
+          "description": "This group includes web parts that display text, multi-media, documents, information from the web, and other rich content.",
           "type": "string",
           "pattern": "^cf066440-0614-43d6-98ae-0b31cf14c7c3$"
         },
         {
           "title": "Discovery",
-          "description": "This category includes web parts that organize, group, and filter content to help users discover information.",
+          "description": "This group includes web parts that organize, group, and filter content to help users discover information.",
           "type": "string",
           "pattern": "^1edbd9a8-0bfb-4aa2-9afd-14b8c45dd489$"
         },
         {
           "title": "Communication and collaboration",
-          "description": "This category includes web parts that facilitate information sharing, team work, and social interactions.",
+          "description": "This group includes web parts that facilitate information sharing, team work, and social interactions.",
           "type": "string",
           "pattern": "^75e22ed5-fa14-4829-850a-c890608aca2d$"
         },
         {
           "title": "Planning and process",
-          "description": "This category includes web parts that empower team productivity with the use of planning and process tools.",
+          "description": "This group includes web parts that empower team productivity with the use of planning and process tools.",
           "type": "string",
           "pattern": "^1bc7927e-4a5e-4520-b540-71305c79c20a$"
         },
         {
           "title": "Business and intelligence",
-          "description": "This category includes web parts for tracking and analyzing data, and for integrating business flow with pages.",
+          "description": "This group includes web parts for tracking and analyzing data, and for integrating business flow with pages.",
           "type": "string",
           "pattern": "^4aca9e90-eff5-4fa1-bac7-728f5f157b66$"
         },
         {
           "title": "Site tools",
-          "description": "This category includes web parts for site information and management.",
+          "description": "This group includes web parts for site information and management.",
           "type": "string",
           "pattern": "^070951d7-94da-4db8-b06e-9d581f1f55b1$"
         },
         {
           "title": "Other",
-          "description": "This category includes web parts not in other categories.",
+          "description": "This group includes web parts not in other categories.",
           "type": "string",
           "pattern": "^5c03119e-3074-46fd-976b-c60198311f70$"
         }
@@ -71,6 +71,7 @@
         "manifestVersion": { "$ref": "any-value.schema.json" },
         "id": { "$ref": "any-value.schema.json" },
         "alias": { "$ref": "any-value.schema.json" },
+        "properties": { "$ref": "any-value.schema.json" },
         "version": { "$ref": "any-value.schema.json" },
         "loaderConfig": { "$ref": "any-value.schema.json" },
         "preconfiguredEntries": { "$ref": "any-value.schema.json" },
@@ -79,8 +80,14 @@
         "linkPropertyNames": { "$ref": "any-value.schema.json" },
         "imageLinkPropertyNames": { "$ref": "any-value.schema.json" },
         "preloadComponents": { "$ref": "any-value.schema.json" },
+        "requiredCapabilities": { "$ref": "any-value.schema.json" },
         "requiresCustomScript": { "$ref": "any-value.schema.json"},
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "canUpdateConfiguration": {
+          "type": "boolean",
+          "title": "Can Update Configuration",
+          "description": "If set to \"true\", this web part uses the property pane to update the configuration of a web part."
+        },
         "disabledOnClassicSharepoint": {
           "type": "boolean",
           "title": "Disabled On Classic Sharepoint",
@@ -95,6 +102,32 @@
           "type": "boolean",
           "title": "Supports full bleed display experience",
           "description": "If set to \"true\", this web part supports and has been tested for full bleed experience."
+        },
+        "isolationLevel": {
+          "type": "string",
+          "title": "Isolation Level",
+          "description": "Describes the level of isolation (\"None\", \"DOMIsolation\") needed for the \"WebPart\".",
+          "enum": [
+            "None",
+            "DOMIsolation"
+          ]
+        },
+        "supportsThemeVariants": {
+          "type": "boolean",
+          "title":"Supports theme variants experience",
+          "description": "If set to \"true\", this web part supports and has been tested for the theme variants experience."
+        },
+        "supportedHosts": {
+          "description": "An array indicates the web part supports any of following hosts. If this property is missing the default is SharePointFullPage",
+          "type": "array",
+          "items": {
+          "type": "string",
+          "enum": [
+            "SharePointFullPage",
+            "SharePointWebPart",
+            "TeamsTab"
+            ]
+          }
         }
       },
       "additionalProperties": false
@@ -132,6 +165,30 @@
           "title": "Image Link Property Names",
           "description": "List of names of Web Part properties that are image sources and need to be link fixed up and potentially preloaded for performance reasons.",
           "$ref": "#/definitions/propertyNamesArray"
+        },
+
+        "requiredCapabilities": {
+          "title": "Required Capabilities",
+          "description": "The set of capabilities this web part requires from the host page in order to be usable. If the host does not support one of the required capabilities, the web part will not be visible in the toolbox.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "BingMapsKey": {
+              "description": "A boolean flag indicates if the web part requires the Bing maps key to be available in the site. The Bing maps credential key can be used to show the Bing maps control according to a provided coordinate.",
+              "type": "boolean"
+            },
+            "AuthenticationModel": {
+              "description": "An array indicates the web part requires any of following authentication models to be available in the site. The authentication model can be used to connect to Microsoft Graph, O365 connecter, etc.",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "OpenIDConnect",
+                  "Federated"
+                ]
+              }
+            }
+          }
         },
 
         "preconfiguredEntries": {
@@ -172,7 +229,7 @@
 
               "groupId": {
                 "title": "Group ID",
-                "description": "This field is used to determine which toolbox group will contain the web part in the authoring experience. On classic pages, the web part gallery is equivalent to the toolbox. When you choose a GUID as a group ID (as in the table below), use the corresponding classic page category name from the predefined group.",
+                "description": "The group id to determine which modern group contains the web part in modern site page. The SharePoint Framework reserves group ids for predefined groups. The developer can pick one from those groups. If the developer fills an id not in the predefined groups, it falls back to Other group.",
                 "type": "string",
                 "anyOf":[
                   {
@@ -180,8 +237,7 @@
                     "$ref": "#/definitions/predefinedGroups"
                   },
                   {
-                    "title": "Customized Group",
-                    "description": "The customized group is a unique id with a group name. The toolbox will then show the web part in its own group.",
+                    "description": "If the group ID is not from the predefined group list, the web part will go to Other group.",
                     "$ref": "guid.schema.json"
                   }
                 ]
@@ -189,7 +245,7 @@
 
               "group": {
                 "title": "Group",
-                "description": "This field is used to determine which toolbox group will contain the web part in the authoring experience. On classic pages, the web part gallery is equivalent to the toolbox. When you choose a GUID as a group ID, use the corresponding classic page category name from the predefined group.",
+                "description": "The group name in web part picker to contain the web part in the classic page. If no value is provided, then the web part will be displayed in the Miscellaneous group.",
                 "$ref": "localized-string.schema.json"
               },
 
