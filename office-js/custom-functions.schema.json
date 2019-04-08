@@ -57,6 +57,11 @@
                                 "type": "boolean",
                                 "title": "Indicates the function requires the cell address of the calling cell. Default is false. This flag cannot be set on a function that is also declared as a streaming function.",
                                 "default": false
+                            },
+                            "volatile": {
+                                "type": "boolean",
+                                "title": "Indicates the function should recalculate each time Excel recalculates. Default is false. This flag cannot be set on a function that is also declared as a streaming function.",
+                                "default": false
                             }
                         },
                         "additionalProperties": false
