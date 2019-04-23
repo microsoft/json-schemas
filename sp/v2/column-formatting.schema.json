@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "CustomFormatter JSON - SharePoint Online",
+    "title": "CustomFormatter JSON",
     "description": "CustomFormatter renderer for SharePoint lists",
     "definitions": {
         "customAction": {
@@ -16,7 +16,7 @@
                         "executeFlow",
                         "share",
                         "delete",
-                        "editItemProps"
+                        "editProps"
                     ]
                 },
                 "actionParams": {
