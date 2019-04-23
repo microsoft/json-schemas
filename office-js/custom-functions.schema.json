@@ -45,17 +45,22 @@
                         "properties": {
                             "cancelable": {
                                 "type": "boolean",
-                                "title": "Indicates whether the function can be cancelled when it's running.  Default is false.",
+                                "title": "Indicates the function can be cancelled when it's running.  Default is false.",
                                 "default": false
                             },
                             "stream": {
                                 "type": "boolean",
-                                "title": "Indicates whether the function is a streaming function that is continuously updated. Default is false.",
+                                "title": "Indicates the function is a streaming function that is continuously updated. Default is false. This flag cannot be set on a function that is also declared as volatile.",
                                 "default": false
                             },
                             "requiresAddress": {
                                 "type": "boolean",
-                                "title": "Indicates whether the function requires the cell address of the calling cell. Default is false.",
+                                "title": "Indicates the function requires the cell address of the calling cell. Default is false. This flag cannot be set on a function that is also declared as a streaming function.",
+                                "default": false
+                            },
+                            "volatile": {
+                                "type": "boolean",
+                                "title": "Indicates the function should recalculate each time Excel recalculates. Default is false. This flag cannot be set on a function that is also declared as a streaming function.",
                                 "default": false
                             }
                         },
@@ -132,23 +137,6 @@
                                     "matrix"
                                 ]
                             },
-                            "type": {
-                                "type": "string",
-                                "title": "The type of the result",
-                                "enum": [
-                                    "any",
-                                    "string",
-                                    "number",
-                                    "boolean"
-                                ],
-                                "examples": [
-                                    "any",
-                                    "string",
-                                    "number",
-                                    "boolean"
-                                ],
-                                "default":"any"
-                            }
                         },
                         "required": [
                         ]
