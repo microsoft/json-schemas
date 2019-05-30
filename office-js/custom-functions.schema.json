@@ -136,7 +136,7 @@
                                     "scalar",
                                     "matrix"
                                 ]
-                            },
+                            }
                         },
                         "required": [
                         ]
