@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Size auditor Configuration",
+  "description": "Configuration file for the Size Auditor tool",
+  "type": "object",
+  "properties": {
+    "sizeTolerance": {
+      "description": "The tolerance limit above which Size Auditor would fail a pull request",
+      "type": "number"
+    },
+    "trackingEntity": {
+      "description": "The entity that is audited for size regressions by Size Auditor",
+      "type": "string",
+	  "pattern": "/a@(Asset|Chunk|Assembly)\b/"
+    },
+    "devopsDropFolderName": {
+      "description": "The name of the drop location containing build artifacts",
+      "type": "string"
+    },
+	"devopsAssemblyArtifactName": {
+      "description": "The name of the artifact folder on Azure Devops that contains information related to Assembly sizes for the build",
+      "type": "string"
+    },
+	"devopsWebpackStatsArtifactName": {
+      "description": "The name of the artifact folder on Azure Devops that contains information related to Webpack sizes for the build",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [ "devopsDropFolderName", "devopsWebpackStatsArtifactName" ]
+}
