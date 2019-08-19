@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "CustomtFormatter JSON",
+    "title": "CustomFormatter JSON",
     "description": "CustomFormatter renderer for SharePoint lists",
     "definitions": {
         "customAction": {
@@ -16,7 +16,7 @@
                         "executeFlow",
                         "share",
                         "delete",
-                        "editItemProps"
+                        "editProps"
                     ]
                 },
                 "actionParams": {
@@ -45,6 +45,7 @@
                         "-",
                         "*",
                         "/",
+                        "%",
                         "==",
                         "!=",
                         ">",
@@ -59,7 +60,24 @@
                         "Number()",
                         "Date()",
                         "cos",
-                        "sin"
+                        "sin",
+                        "abs",
+                        "floor",
+                        "ceiling",
+                        "pow",
+                        "substring",
+                        "getDate",
+                        "getMonth",
+                        "getYear",
+                        "length",
+                        "join",
+                        "loopIndex",
+                        "toLowerCase",
+                        "indexOf",
+                        "toDateString()",
+                        "toLocaleString()",
+                        "toLocaleDateString()",
+                        "toLocaleTimeString()"
                     ]
                 },
                 "operands": {
@@ -271,6 +289,11 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "forEach": {
+                    "type": "string",
+                    "description": "For loop properties. The element will be rendered repeatedly based on an array.",
+                    "pattern": "^[^\\]\\$@\\. ]+ in (\\@currentField|\\[\\$.+\\])$"
                 }
             },
             "required": [
