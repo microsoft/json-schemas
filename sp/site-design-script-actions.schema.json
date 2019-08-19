@@ -22,6 +22,11 @@
             "featureId": {
               "type": "string",
               "description": "The Guid of the feature to activate."
+            },
+            "scope": {
+              "type": "string",
+              "enum": ["web", "site"],
+              "description": "The scope of the feature to activate."
             }
           },
           "required": [ "featureId", "verb" ]
@@ -247,6 +252,10 @@
           "enforceUnique": {
             "type": "boolean",
             "description": "Optional attribute that defaults to false. If true, then all values for this field must be unique."
+          },
+          "id": {
+            "type": "string",
+            "description": "Optional attribute. The ID Guid of the field. This needs to be uniquely generated Guid. It is strongly recommended that you include this attribute to ensure that this action is reentrant."
           }
         },
         "required": [ "displayName", "fieldType", "isRequired", "verb" ],
@@ -406,9 +415,13 @@
           "formatterJSON": {
             "type": "object",
             "description": "A JSON object to use as the view CustomFormatter."
+          },
+          "addLink": {
+            "type": "string",
+            "description": "If present and not null or empty, a link to the view will added to the QuickLaunch, using the provided string as a name."
           }
         },
-        "required": [ "name", "viewFields", "query", "rowLimit", "isPaged", "makeDefault" ],
+        "required": [ "name", "viewFields", "query", "rowLimit", "isPaged" ],
         "additionalProperties": false
       },
       "removeSPView": {
@@ -426,53 +439,6 @@
         "required": [ "name" ],
         "additionalProperties": false
       }
-    },
-    "createPage": {
-      "type": "object",
-      "allOf": [
-        { "$ref": "#/definitions/baseAction" },
-        {
-          "properties": {
-            "verb": {
-              "type": "string",
-              "pattern": "^createPage$"
-            },
-            "fileName": {
-              "type": "string",
-              "pattern": "^.+\\.aspx&",
-              "description": "The file name of the page."
-            },
-            "pageData": {
-              "type": "object",
-              "properties": {
-                "Title": {
-                  "type": "string",
-                  "description": "The title of the page."
-                },
-                "BannerImageUrl": {
-                  "type": "string",
-                  "description": "The URL of the image to be displayed in the banner."
-                },
-                "CanvasContent1": {
-                  "type": "string",
-                  "description": "The content to be displayed in the canvas, as a string of XML."
-                },
-                "LayoutWebpartsContent": {
-                  "type": "string",
-                  "description": "Information about the page layout, as a string of JSON."
-                }
-              },
-              "required": [ "Title", "BannerImageUrl", "CanvasContent1", "LayoutWebpartsContent" ]
-            },
-            "setAsHomePage": {
-              "type": "boolean",
-              "description": "Whether or not to set this page as the homepage. The default is false."
-            }
-          },
-          "required": [ "fileName", "pageData", "verb" ]
-        }
-      ],
-      "additionalProperties": false
     },
     "addPrincipalToSPGroup": {
       "type": "object",
@@ -510,10 +476,14 @@
             },
             "themeName": {
               "type": "string",
-              "description": "The name of the theme to apply."
+              "description": "The name of the theme to apply. Provide either this or themeJson."
+            },
+            "themeJson": {
+              "type": "object",
+              "description": "An optional JSON object specifying the theme exactly. Provide either this or themeName. See https://docs.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-json-schema for information on how to generate this object."
             }
           },
-          "required": [ "themeName", "verb" ]
+          "required": [ "verb" ]
         }
       ]
     },
@@ -556,7 +526,7 @@
             },
             "waitForReply": {
               "type": "boolean",
-              "description": "If true, the script will expect that the Flow will call Microsoft.SharePoint.Utilities.SiteScriptUtility.SetSiteScriptStageOutcome() when it has finished executing. Note that this will not cause the script to block. The script will keep executing, but for record-keeping purposes, the run will be considered incomplete until the reply is made."
+              "description": "If true, the script will expect that the Flow will call Microsoft.SharePoint.Utilities.WebTemplateExtensions.SiteScriptUtility.SetSiteScriptStageOutcome() when it has finished executing. Note that this will not cause the script to block. The script will keep executing, but for record-keeping purposes, the run will be considered incomplete until the reply is made."
             },
             "parameters": {
               "type": "object",
@@ -625,6 +595,11 @@
             "isParentUrlWebRelative": {
               "type": "boolean",
               "description": "Optional parameter. Indicates whether parentUrl is web-relative. The default is false."
+            },
+            "navComponent": {
+              "type": "string",
+              "description": "Which nav component to add the link to. The QuickLaunch is the default",
+              "pattern": "^(QuickLaunch|Hub|Footer)$"
             }
           },
           "required": [ "displayName", "url", "verb" ]
@@ -653,6 +628,11 @@
             "isWebRelative": {
               "type": "boolean",
               "description": "Optionally indicates whether the link is web-relative. The default is false."
+            },
+            "navComponent": {
+              "type": "string",
+              "description": "Which nav component to remove the link from. The QuickLaunch is the default",
+              "pattern": "^(QuickLaunch|Hub|Footer)$"
             }
           },
           "required": [ "displayName", "verb" ]
@@ -801,6 +781,10 @@
             "enforceUnique": {
               "type": "boolean",
               "description": "Optional attribute that defaults to false. If true, then all values for this column must be unique."
+            },
+            "id": {
+              "type": "string",
+              "description": "Optional attribute. The ID Guid of the field. This needs to be uniquely generated Guid. It is strongly recommended that you include this attribute to ensure that this action is reentrant."
             }
           },
           "required": [ "fieldType", "verb", "internalName", "isRequired" ]
@@ -885,10 +869,43 @@
         }
       ],
       "additionalProperties": false
+    },
+    "setSiteBranding": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/definitions/baseAction" },
+        {
+          "properties": {
+            "verb": {
+              "type": "string",
+              "pattern": "^setSiteBranding$"
+            },
+            "navigationLayout": {
+              "type": "string",
+              "pattern": "^(Cascade|Megamenu)$",
+              "description": "Specifies the layout of the navigation. If this parameter is omitted, the layout will not be changed."
+            },
+            "headerLayout": {
+              "type": "string",
+              "pattern": "^(Standard|Compact)$",
+              "description": "Specifies the layout of the header. If this parameter is omitted, the layout will not be changed."
+            },
+            "headerBackground": {
+              "type": "string",
+              "pattern": "^(None|Neutral|Soft|Strong)$",
+              "description": "Specifies the emphasis on the background color of the header. If this parameter is omitted, it will not be changed."
+            },
+            "showFooter": {
+              "type": "boolean",
+              "description": "Specifies whether the footer should be visible. If this parameter is omitted. The visibility of the footer will not be changed."
+            }
+          },
+          "required": [ "verb" ]
+        }
+      ],
+      "additionalProperties": false
     }
   },
-
-
   "type": "object",
   "properties": {
     "actions": {
@@ -902,7 +919,6 @@
           { "$ref": "#/definitions/addNavLink" },
           { "$ref": "#/definitions/applyTheme" },
           { "$ref": "#/definitions/createContentType" },
-          { "$ref": "#/definitions/createPage" },
           { "$ref": "#/definitions/createSiteColumn" },
           { "$ref": "#/definitions/createSiteColumnXml" },
           { "$ref": "#/definitions/createSPList" },
@@ -910,25 +926,14 @@
           { "$ref": "#/definitions/joinHubSite" },
           { "$ref": "#/definitions/removeNavLink" },
           { "$ref": "#/definitions/setRegionalSettings" },
+          { "$ref": "#/definitions/setSiteBranding" },
           { "$ref": "#/definitions/setSiteLogo" },
           { "$ref": "#/definitions/setSiteExternalSharingCapability" },
           { "$ref": "#/definitions/triggerFlow" }
         ]
       },
       "additionalItems": false
-    },
-    "bindata": {
-      "type": "object",
-      "title": "Binary Data",
-      "description": "guid<->base64encodedstrings key-value pairs",
-      "patternProperties": {
-        "^[a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}$": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "version": { "type": "number" }
+    }
   },
   "additionalProperties": false
 }
