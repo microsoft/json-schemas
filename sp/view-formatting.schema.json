@@ -26,11 +26,15 @@
       "properties": {
         "height": {
           "description": "Height of the tile in pixels.",
-          "type": "string"
+          "type": ["integer","string"],
+          "minimum": 1,
+          "pattern": "^[0-9]+$"
         },
         "width": {
-          "description": "Width of the tile in pixels. Can go from height/2 to 3 x height.",
-          "type": "string"
+          "description": "Width of the tile in pixels. Can go from height /2 to 3x height.",
+          "type": ["integer","string"],
+          "minimum": 1,
+          "pattern": "^[0-9]+$"
         },
         "hideSelection": {
           "description": "If true, then selection UX in 'Tiles' layout will be disabled. Ignored if there is no formatter defined.",
