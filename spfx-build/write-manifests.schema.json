@@ -8,15 +8,14 @@
     "$schema": {
       "type": "string"
     },
+
     "deployCdnPath": {
-      "title": "Path to CDN",
-      "description": "Path to where assets should be staged for deployment to CDN during a production build",
+      "description": "The deploy CDN path. If both deployCdnPath and manifestDeployCdnPath are provided, the deployCdnPath is used for manifest icons and the manifestDeployCdnPath is used for manifest JSON files",
       "type": "string"
     },
 
-    "cdnUrlPrefix": {
-      "title": "CDN URL Prefix",
-      "description": "A prefix to prepend to all assets' URLs. For example, if this value is 'contoso', a resulting CDN path for an asset called 'baz.js' will be 'contoso/baz.js'",
+    "manifestDeployCdnPath": {
+      "description": "The manifest deploy path. If not provided, defaults to deployCdnPath",
       "type": "string"
     },
 
@@ -32,9 +31,9 @@
       "type": "string"
     },
 
-    "debugLocale": {
-      "title": "Debug Locale",
-      "description": "If specified, only use this locale in the debug manifest.",
+    "buildSingleLocale": {
+      "title": "Build Single Locale",
+      "description": "If specified, only use this locale.",
       "type": "string"
     },
 
