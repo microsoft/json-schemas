@@ -107,6 +107,8 @@
                   { "$ref": "#/definitions/SPListSubactions/addSiteColumn" },
                   { "$ref": "#/definitions/SPListSubactions/addSPView" },
                   { "$ref": "#/definitions/SPListSubactions/removeSPView" },
+                  { "$ref": "#/definitions/SPListSubactions/addFile" },
+                  { "$ref": "#/definitions/SPListSubactions/addFolder" },
                   { "$ref": "#/definitions/SPListSubactions/addContentType" },
                   { "$ref": "#/definitions/SPListSubactions/removeContentType" },
                   { "$ref": "#/definitions/SPListSubactions/setSPFieldCustomFormatter" },
@@ -438,6 +440,56 @@
         },
         "required": [ "name" ],
         "additionalProperties": false
+      },
+      "addFile": {
+        "type": "object",
+        "allOf": [
+          { "$ref": "#/definitions/baseAction" },
+          {
+            "properties": {
+              "verb": {
+                "type": "string",
+                "pattern": "^addFile$"
+              },
+              "destination": {
+                "type": "string",
+                "description": "The location in the library to copy the file to, including the filename, relative to the root of the library.",
+                "examples" : [
+                  "Training Documents/Accounting/First Day.pdf"
+                ]
+              },
+              "source": {
+                "type": "string",
+                "description": "The location in the site script package to copy the file from, relative to the root directory."
+              }
+            },
+            "required": [ "verb", "destination", "source" ]
+          }
+        ],
+        "additionalProperties": false
+      },
+      "addFolder": {
+        "type": "object",
+        "allOf": [
+          { "$ref": "#/definitions/baseAction" },
+          {
+            "properties": {
+              "verb": {
+                "type": "string",
+                "pattern": "^addFolder$"
+              },
+              "path": {
+                "type": "string",
+                "description": "The path of the new folder, relative to the root of the library.",
+                "examples" : [
+                  "Training Documents/Accounting"
+                ]
+              }
+            },
+            "required": [ "verb", "path" ]
+          }
+        ],
+        "additionalProperties": false
       }
     },
     "addPrincipalToSPGroup": {
@@ -503,6 +555,25 @@
             }
           },
           "required": [ "url", "verb" ]
+        }
+      ]
+    },
+    "setSiteLogoFromFile": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/definitions/baseAction" },
+        {
+          "properties": {
+            "verb": {
+              "type": "string",
+              "pattern": "^setSiteLogoFromFile$"
+            },
+            "source": {
+              "type": "string",
+              "description": "The location in the site script package to copy the image file from, relative to the root directory."
+            }
+          },
+          "required": [ "source", "verb" ]
         }
       ]
     },
@@ -907,33 +978,34 @@
     }
   },
   "type": "object",
-  "properties": {
-    "actions": {
-      "title": "array of supported actions",
-      "type": "array",
-      "items": {
-        "anyOf": [
-          { "$ref": "#/definitions/activateSPFeature" },
-          { "$ref": "#/definitions/associateExtension" },
-          { "$ref": "#/definitions/addPrincipalToSPGroup" },
-          { "$ref": "#/definitions/addNavLink" },
-          { "$ref": "#/definitions/applyTheme" },
-          { "$ref": "#/definitions/createContentType" },
-          { "$ref": "#/definitions/createSiteColumn" },
-          { "$ref": "#/definitions/createSiteColumnXml" },
-          { "$ref": "#/definitions/createSPList" },
-          { "$ref": "#/definitions/installSolution" },
-          { "$ref": "#/definitions/joinHubSite" },
-          { "$ref": "#/definitions/removeNavLink" },
-          { "$ref": "#/definitions/setRegionalSettings" },
-          { "$ref": "#/definitions/setSiteBranding" },
-          { "$ref": "#/definitions/setSiteLogo" },
-          { "$ref": "#/definitions/setSiteExternalSharingCapability" },
-          { "$ref": "#/definitions/triggerFlow" }
-        ]
-      },
-      "additionalItems": false
-    }
-  },
+    "properties": {
+        "actions": {
+            "title": "array of supported actions",
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    { "$ref": "#/definitions/activateSPFeature" },
+                    { "$ref": "#/definitions/associateExtension" },
+                    { "$ref": "#/definitions/addPrincipalToSPGroup" },
+                    { "$ref": "#/definitions/addNavLink" },
+                    { "$ref": "#/definitions/applyTheme" },
+                    { "$ref": "#/definitions/createContentType" },
+                    { "$ref": "#/definitions/createSiteColumn" },
+                    { "$ref": "#/definitions/createSiteColumnXml" },
+                    { "$ref": "#/definitions/createSPList" },
+                    { "$ref": "#/definitions/installSolution" },
+                    { "$ref": "#/definitions/joinHubSite" },
+                    { "$ref": "#/definitions/removeNavLink" },
+                    { "$ref": "#/definitions/setRegionalSettings" },
+                    { "$ref": "#/definitions/setSiteBranding" },
+                    { "$ref": "#/definitions/setSiteLogo" },
+                    { "$ref": "#/definitions/setSiteExternalSharingCapability" },
+                    { "$ref": "#/definitions/triggerFlow" }
+                ]
+            },
+            "additionalItems": false
+        },
+        "$schema": { "type": "string" }
+    },
   "additionalProperties": false
 }
