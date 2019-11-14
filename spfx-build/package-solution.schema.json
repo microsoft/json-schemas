@@ -180,6 +180,11 @@
               }
             }
           }
+        },
+        "isDomainIsolated": {
+          "title": "Domain Isolation",
+          "description": "If true, web parts in the package are rendered in a different domain for isolation",
+          "type": "boolean"
         }
       }
     }

@@ -1,0 +1,65 @@
+{
+  "id": "client-side-extension-manifest.schema.json",
+  "title": "Client-side extension manifest",
+  "description": "A client-side extension is a plug-in component that customizes or augments the functionality of a client-side application.",
+
+  "definitions": {
+    "clientSideExtensionManifest": {
+      "type": "object",
+      "required": [
+        "componentType",
+        "extensionType"
+      ],
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "enum": [
+            "Extension"
+          ]
+        },
+        "extensionType": {
+          "title": "Client-side Extension Type",
+          "description": "Specifies the type of client-side extension. Some types have their own JSON schemas supporting additional fields.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "ApplicationCustomizer",
+            "FieldCustomizer",
+            "ListViewCommandSet",
+            "SearchQueryModifier"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "$schema": { "type": "string" },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "extensionType": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" },
+        "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json"},
+        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "$ref": "#/definitions/clientSideExtensionManifest"
+    }
+  ]
+}
