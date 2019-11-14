@@ -1,0 +1,90 @@
+{
+  "id": "command-set-extension-manifest.schema.json",
+  "title": "Command set extension manifest",
+  "description": "A client-side extension that defines a set of custom commands that can be shown in a menu, tool bar, etc.",
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "$schema": { "type": "string" },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "extensionType": {
+          "title": "Client-side Extension Type",
+          "description": "For a command set, the extension type must be one of these values: ListViewCommandSet",
+          "type": "string",
+          "enum": [
+            "ListViewCommandSet"
+          ]
+        },
+        "items": { "$ref": "any-value.schema.json" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "$ref": "client-side-extension-manifest.schema.json#/definitions/clientSideExtensionManifest"
+    },
+    {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "object",
+          "title": "Items",
+          "description": "A table of items defined by this command set. The object key is the Item ID. The Item ID is a unique identifier that event handlers use to recognize the item. The identifier must consist of upper-case letters, numbers, and underscores. Example: \"SHOW_INFO\"",
+          "patternProperties": {
+            "^[A-Z0-9_]+$": {
+              "type": "object",
+              "required": [
+                "title",
+                "type"
+              ],
+              "properties": {
+                "title": {
+                  "title": "Title",
+                  "description": "A short label to be displayed by the associated button, menu item, etc. Example: \"Show information\"",
+                  "$ref": "localized-string.schema.json"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "command"
+                  ],
+                  "title": "Type",
+                  "description": "Type of the item. Currently only \"command\" is allowed."
+                },
+                "ariaLabel": {
+                  "title": "ARIA Label",
+                  "description": "Custom accessibility text for the browser's \"aria-label\" attribute.  If omitted, the title property will be used by default.",
+                  "$ref": "localized-string.schema.json"
+                },
+                "iconImageUrl": {
+                  "type": "string",
+                  "title": "Icon Image URL",
+                  "description": "An optional URL for an image to be displayed next to the item. The requirements for this image are defined by the type of extension; some extension types may not display the image at all."
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  ]
+}

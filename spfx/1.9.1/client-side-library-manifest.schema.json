@@ -1,0 +1,43 @@
+{
+  "id": "client-side-library-manifest.schema.json",
+  "title": "Client-side library manifest",
+  "description": "A client-side library is a library containing reusable JavaScript code and/or resources.",
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "$schema": { "type": "string" },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "enum": [
+            "Library"
+          ]
+        }
+      },
+
+      "additionalProperties": true
+    }
+  ]
+}
