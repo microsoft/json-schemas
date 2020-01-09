@@ -25,7 +25,8 @@
             "Unknown",
             "ApplicationCustomizer",
             "FieldCustomizer",
-            "ListViewCommandSet"
+            "ListViewCommandSet",
+            "SearchQueryModifier"
           ]
         }
       },
@@ -49,7 +50,8 @@
         "extensionType": { "$ref": "any-value.schema.json" },
         "preloadComponents": { "$ref": "any-value.schema.json" },
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
-        "requiresCustomScript": { "$ref": "any-value.schema.json"}
+        "requiresCustomScript": { "$ref": "any-value.schema.json"},
+        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" }
       },
       "additionalProperties": false
     },

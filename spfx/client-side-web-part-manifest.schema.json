@@ -83,6 +83,7 @@
         "requiredCapabilities": { "$ref": "any-value.schema.json" },
         "requiresCustomScript": { "$ref": "any-value.schema.json"},
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" },
         "canUpdateConfiguration": {
           "type": "boolean",
           "title": "Can Update Configuration",
@@ -92,6 +93,11 @@
           "type": "boolean",
           "title": "Disabled On Classic Sharepoint",
           "description": "If set to \"true\", this web part is disabled on Classic Sharepoint pages."
+        },
+        "experimentalData": {
+          "type": "object",
+          "title": "Experimental property bag",
+          "description": "Only use for properties not ready for production."
         },
         "hiddenFromToolbox": {
           "type": "boolean",
@@ -117,6 +123,11 @@
           "title":"Supports theme variants experience",
           "description": "If set to \"true\", this web part supports and has been tested for the theme variants experience."
         },
+        "useFallbackWhenPropertiesUpdatedExternally": {
+          "type": "boolean",
+          "title": "Use fallback when properties updated externally",
+          "description": "If true, the web part will be disposed and reloaded when the web part data is updated by an external source. If false, the web part data will be deserialized and the properties of the web part will be updated, onAfterPropertiesUpdatedExternally will be executed. If undefined, web parts developed with SPFx version below 1.9 will default to true and web parts developed with a SPFx version 1.9 or greater will default to false."
+        },
         "supportedHosts": {
           "description": "An array indicates the web part supports any of following hosts. If this property is missing the default is SharePointFullPage",
           "type": "array",
@@ -125,7 +136,8 @@
           "enum": [
             "SharePointFullPage",
             "SharePointWebPart",
-            "TeamsTab"
+            "TeamsTab",
+            "TeamsPersonalApp"
             ]
           }
         }
