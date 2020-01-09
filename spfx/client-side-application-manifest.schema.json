@@ -23,7 +23,8 @@
         "preloadComponents": { "$ref": "any-value.schema.json" },
         "assemblyId": { "$ref": "any-value.schema.json" },
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
-        "requiresCustomScript": { "$ref": "any-value.schema.json" }
+        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "hasSuiteNav": { "$ref": "any-value.schema.json" }
       },
       "additionalProperties": false
     },
@@ -125,6 +126,11 @@
           "title": "Assembly id",
           "description": "Id of the preferred assembly to use to load the application. If no assembly id is provided SPFx will be loaded with the default assembly.",
           "$ref": "guid.schema.json"
+        },
+        "hasSuiteNav": {
+          "title": "Has suite nav",
+          "description": "True if the application has a suite nav.",
+          "type": "boolean"
         }
       },
 

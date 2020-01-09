@@ -1,0 +1,130 @@
+{
+  "id": "client-side-multi-version-manifest.schema.json",
+  "title": "Client-side multi-version manifest",
+  "description": "Multi-version manifests are defined by this schema.",
+
+  "type": "object",
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "versions": {
+              "title": "Versions",
+              "description": "A mapping of version numbers to manifests. This field is used to roll all versions of a component together into a single manifest.",
+              "type": "object",
+              "patternProperties": {
+                "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$": {
+                  "$ref": "client-side-application-manifest.schema.json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "versions": {
+              "title": "Versions",
+              "description": "A mapping of version numbers to manifests. This field is used to roll all versions of a component together into a single manifest.",
+              "type": "object",
+              "patternProperties": {
+                "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$": {
+                  "$ref": "client-side-assembly-manifest.schema.json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "versions": {
+              "title": "Versions",
+              "description": "A mapping of version numbers to manifests. This field is used to roll all versions of a component together into a single manifest.",
+              "type": "object",
+              "patternProperties": {
+                "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$": {
+                  "$ref": "client-side-extension-manifest.schema.json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "versions": {
+              "title": "Versions",
+              "description": "A mapping of version numbers to manifests. This field is used to roll all versions of a component together into a single manifest.",
+              "type": "object",
+              "patternProperties": {
+                "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$": {
+                  "$ref": "client-side-library-manifest.schema.json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "versions": {
+              "title": "Versions",
+              "description": "A mapping of version numbers to manifests. This field is used to roll all versions of a component together into a single manifest.",
+              "type": "object",
+              "patternProperties": {
+                "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$": {
+                  "$ref": "client-side-web-part-manifest.schema.json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "versions": {
+              "title": "Versions",
+              "description": "A mapping of version numbers to manifests. This field is used to roll all versions of a component together into a single manifest.",
+              "type": "object",
+              "patternProperties": {
+                "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$": {
+                  "$ref": "command-set-extension-manifest.schema.json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$ref": "client-side-manifest-base.schema.json"
+    }
+  ]
+}
