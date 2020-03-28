@@ -294,6 +294,43 @@
                     "type": "string",
                     "description": "For loop properties. The element will be rendered repeatedly based on an array.",
                     "pattern": "^[^\\]\\$@\\. ]+ in (\\@currentField|\\[\\$.+\\])$"
+                },
+                "defaultHoverField": {
+                    "type": "string",
+                    "description": "Column name to show the default hover card of",
+                    "pattern": "(\\@currentField(.\\w+)*|\\[\\$.+\\])$"
+                },
+                "customCardProps": {
+                    "type": "object",
+                    "description": "Object that defines custom card props on hover/click",
+                    "properties": {
+                        "openOnEvent": {
+                            "description": "Event name to decide on which the customCard should open",
+                            "type": "string",
+                            "pattern": "(click|hover)$"
+                        },
+                        "directionalHint": {
+                            "description": "Specify the direction relative to the target in which CustomCard will be positioned",
+                            "enum": [
+                                "topCenter",
+                                "bottomCenter",
+                                "leftCenter",
+                                "rightCenter"
+                            ]
+                        },
+                        "isBeakVisible": {
+                            "description": "Specify if the beak is to be shown or not",
+                            "type": "boolean"
+                        },
+                        "formatter": {
+                            "description": "JSON object that defines formatting for customCards",
+                            "$ref": "#/definitions/elm"
+                        }
+                    },
+                    "required": [
+                        "formatter",
+                        "openOnEvent"
+                    ]
                 }
             },
             "required": [
