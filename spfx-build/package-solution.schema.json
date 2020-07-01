@@ -1,14 +1,12 @@
 {
   "title": "Package Solution Task Configuration",
   "description": "Defines parameters for task which creates the SharePoint Package",
-
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "$schema": {
       "type": "string"
     },
-
     "paths": {
       "type": "object",
       "additionalProperties": false,
@@ -45,10 +43,12 @@
         }
       }
     },
-
     "solution": {
       "type": "object",
-      "required": [ "name", "id" ],
+      "required": [
+        "name",
+        "id"
+      ],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -101,7 +101,11 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [ "title", "description", "id" ],
+            "required": [
+              "title",
+              "description",
+              "id"
+            ],
             "properties": {
               "title": {
                 "title": "Title",
@@ -127,7 +131,6 @@
                   "type": "string"
                 }
               },
-
               "assets": {
                 "type": "object",
                 "additionalProperties": false,
@@ -166,7 +169,10 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [ "resource", "scope" ],
+            "required": [
+              "resource",
+              "scope"
+            ],
             "properties": {
               "resource": {
                 "title": "Resource",
@@ -185,6 +191,39 @@
           "title": "Domain Isolation",
           "description": "If true, web parts in the package are rendered in a different domain for isolation",
           "type": "boolean"
+        },
+        "developer": {
+          "title": "Developer Properties",
+          "type": "object",
+          "required": [
+            "name",
+            "websiteUrl",
+            "privacyUrl",
+            "termsOfUseUrl",
+            "mpnId"
+          ],
+          "properties": {
+            "name": {
+              "title": "developer name",
+              "type": "string"
+            },
+            "websiteUrl": {
+              "title": "developer website url",
+              "type": "string"
+            },
+            "privacyUrl": {
+              "title": "developer privacy url",
+              "type": "string"
+            },
+            "termsOfUseUrl": {
+              "title": "terms of use url",
+              "type": "string"
+            },
+            "mpnId": {
+              "title": "microsoft partner network id",
+              "type": "string"
+            }
+          }
         }
       }
     }
