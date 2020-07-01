@@ -239,6 +239,13 @@
                 "minLength": 10
               },
 
+              "fullPageAppIconImageUrl": {
+                "title": "App Page Icon Image URL",
+                "description": "The icon for the Application pages, to be displayed in the new Page experience, represented an image URL. The image at the URL should be approximately 195x110 px. If this field is not defined then the iconimageUrl is used instead.",
+                "type": "string",
+                "minLength": 10
+              },
+
               "groupId": {
                 "title": "Group ID",
                 "description": "The group id to determine which modern group contains the web part in modern site page. The SharePoint Framework reserves group ids for predefined groups. The developer can pick one from those groups. If the developer fills an id not in the predefined groups, it falls back to Other group.",
