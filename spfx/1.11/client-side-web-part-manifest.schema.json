@@ -227,7 +227,7 @@
 
               "officeFabricIconFontName": {
                 "title": "Office Fabric Icon Name",
-                "description": " The icon for the Web Part, to be displayed in the toolbox, represented as a character name in the Office 365 icon font file. The icon font is specified here: http://o365icons.cloudapp.net/. If this field has a value, the 'iconImageUrl' field will be ignored.",
+                "description": " The icon for the Web Part, to be displayed in the toolbox, represented as a character name in the Office 365 icon font file. The icon font is specified here: https://developer.microsoft.com/en-us/fabric#/styles/icons. If this field has a value, the 'iconImageUrl' field will be ignored.",
                 "type": "string",
                 "minLength": 1
               },
