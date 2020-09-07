@@ -43,41 +43,48 @@
                     "enum": [
                         "+",
                         "-",
-                        "*",
                         "/",
+                        "*",
+                        "<",
+                        ">",
                         "%",
                         "==",
                         "!=",
-                        ">",
-                        "<",
-                        ">=",
                         "<=",
+                        ">=",
                         "||",
                         "&&",
                         "?",
                         ":",
-                        "toString()",
-                        "Number()",
-                        "Date()",
-                        "cos",
-                        "sin",
                         "abs",
-                        "floor",
+                        "cos",
                         "ceiling",
-                        "pow",
-                        "substring",
+                        "Date()",
+                        "endsWith",
+                        "floor",
                         "getDate",
                         "getMonth",
                         "getYear",
-                        "length",
-                        "join",
-                        "loopIndex",
-                        "toLowerCase",
                         "indexOf",
+                        "join",
+                        "lastIndexOf",
+                        "length",
+                        "loopIndex",
+                        "Number()",
+                        "padStart",
+                        "padEnd",
+                        "pow",
+                        "replace",
                         "toDateString()",
-                        "toLocaleString()",
                         "toLocaleDateString()",
-                        "toLocaleTimeString()"
+                        "toLocaleString()",
+                        "toLocaleTimeString()",
+                        "toLowerCase",
+                        "toString()",
+                        "toUpperCase",
+                        "sin",
+                        "startsWith",
+                        "substring"
                     ]
                 },
                 "operands": {
@@ -150,6 +157,7 @@
                     ]
                 },
                 "style": {
+                    "type": "object",
                     "description": "Specifies the style object for this element",
                     "patternProperties": {
                         "^[a-z]+(?:-[a-z]+)?$": {
@@ -178,6 +186,17 @@
                     "properties": {
                         "href": {
                             "description": "Specifies the href attribute",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/expression"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "rel": {
+                            "description": "Specifies the rel attribute",
                             "anyOf": [
                                 {
                                     "$ref": "#/definitions/expression"
@@ -273,6 +292,20 @@
                                     "type": "string"
                                 }
                             ]
+                        },
+                        "data-interception": {
+                            "description": "Specifies the data-interception attribute",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/expression"
+                                },
+                                {
+                                    "enum": [
+                                        "on",
+                                        "off"
+                                    ]
+                                }
+                            ]
                         }
                     },
                     "patternProperties": {
@@ -321,6 +354,16 @@
                         "isBeakVisible": {
                             "description": "Specify if the beak is to be shown or not",
                             "type": "boolean"
+                        },
+                        "beakStyle": {
+                            "type": "object",
+                            "description": "Specifies the style object for custom card's beak",
+                            "patternProperties": {
+                                "^[a-z]+(?:-[a-z]+)?$": {
+                                    "description": "Specifies style attributes for for custom card's beak",
+                                    "type": "string"
+                                }
+                            }
                         },
                         "formatter": {
                             "description": "JSON object that defines formatting for customCards",
