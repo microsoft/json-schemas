@@ -1,0 +1,148 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "JSON Schema for Office Add-in Extended Manifest",
+    "description": "A file describing the data format for an Office Add-in's extended manifest.",
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "description": "The extended manifest JSON schema file.",
+        "type": "string",
+        "maxLength": 256
+      },
+      "shortcuts": {
+        "description": "The shortcuts of this Office Add-in.",
+        "type": "array",
+        "items": {"$ref": "#/definitions/shortcut"}
+      },
+      "actions": {
+        "description": "The actions of this Office Add-in.",
+        "type": "array",
+        "items": {"$ref": "#/definitions/action"}
+      },
+      "resources": {
+        "description": "The resources of this Office Add-in.",
+        "type": "object",
+        "required": ["default"],
+        "properties": {
+            "default": {
+                "type": "object",
+                "patternProperties": {
+                    "[\\s\\S]*": {"$ref": "#/definitions/resource"}
+                },
+                "additionalProperties": false,
+                "minProperties":1
+            }
+        },
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "shortcut": {
+            "title": "Shortcut",
+            "description": "Shortcut key.",
+            "type": "object",
+            "required": ["action", "key"],
+            "properties": {
+                "action": {
+                    "title": "Action ID",
+                    "description": "The action to be executed when this shortcut key combination is triggered.",
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "key": {
+                    "title": "Key",
+                    "description": "The key combination that triggers this shortcut action.",
+                    "type": "object",
+                    "maxLength": 256,
+                    "properties": {
+                        "default": {
+                            "title": "Default Key Sequence",
+                            "description": "The default key combination that triggers this shortcut action on all platform.",
+                            "type": "string",
+                            "pattern": "(^\\$\\{resource\\.([A-Za-z0-9_-]+)\\}$)|(^[A-Za-z0-9-_+]+$)"
+                        },
+                        "web": {
+                            "title": "Web Key Sequence",
+                            "description": "The key combination that triggers this shortcut action in the web platform.",
+                            "type": "string",
+                            "pattern": "(^\\$\\{resource\\.([A-Za-z0-9_-]+)\\}$)|(^[A-Za-z0-9-_+]+$)"
+                        },
+                        "windows": {
+                            "title": "Windows Key Sequence",
+                            "description": "The key combination that triggers this shortcut action in the Windows platform.",
+                            "type": "string",
+                            "pattern": "(^\\$\\{resource\\.([A-Za-z0-9_-]+)\\}$)|(^[A-Za-z0-9-_+]+$)"
+                        },
+                        "mac": {
+                            "title": "Mac Key Sequence",
+                            "description": "The key combination that triggers this shortcut action in the Mac platform.",
+                            "type": "string",
+                            "pattern": "(^\\$\\{resource\\.([A-Za-z0-9_-]+)\\}$)|(^[A-Za-z0-9-_+]+$)"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "minProperties":1
+                }
+            },
+            "additionalProperties": false
+        },
+        "action": {
+            "title": "Action",
+            "description": "Action.",
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+                "id": {
+                    "title": "Action Id",
+                    "description": "The ID of the action.",
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "type": {
+                    "title": "Action Type",
+                    "description": "The type of the action.",
+                    "type": "string",
+                    "oneOf": [{
+                        "enum": [
+                            "Undefined",
+                            "MessageSendEvent",
+                            "ExecuteFunction",
+                            "ShowTaskpane"
+                        ]
+                    }],
+                    "maxLength": 16
+                },
+                "name": {
+                    "title": "Action Name",
+                    "description": "The name of the action.",
+                    "type": "string",
+                    "pattern": "(^\\$\\{resource\\.([A-Za-z0-9_-]+)\\}$)|(^[A-Za-z0-9-_+]+$)",
+                    "maxLength": 256
+                }
+            },
+            "additionalProperties": false
+        },
+        "resource": {
+            "title": "resource",
+            "description": "Resource entry.",
+            "type": "object",
+            "required": ["value"],
+            "properties": {
+                "value": {
+                    "title": "Resource Value",
+                    "description": "The value of the resource entry.",
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "comment": {
+                    "title": "Resource Comment",
+                    "description": "The comment of the resource entry.",
+                    "type": "string",
+                    "maxLength": 2084
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
