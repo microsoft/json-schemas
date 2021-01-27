@@ -1,0 +1,167 @@
+{
+  "type": "object",
+  "definitions": {
+    "sharepoint": {
+      "properties": {
+        "id": {
+          "const": "SHAREPOINT"
+        },
+        "spfx-version": {
+          "type": "string",
+          "pattern": "\\d+.\\d+.\\d+"
+        },
+        "node-version": {
+          "type": "string"
+        }
+      }
+    },
+    "teams": {
+      "properties": {
+        "id": {
+          "const": "TEAMS"
+        },
+        "bot": {
+          "type": "string"
+        }
+      }
+    },
+    "microsoftgraph": {
+      "properties": {
+        "id": {
+          "const": "MICROSOFTGRAPH"
+        }
+      }
+    }
+  },
+  "properties": {
+    "sample": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "short-description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "anyOf": [
+              {
+                "$ref": "#/definitions/sharepoint"
+              },
+              {
+                "$ref": "#/definitions/teams"
+              },
+              {
+                "$ref": "#/definitions/microsoftgraph"
+              }
+            ]
+          }
+        },
+        "thumbnails": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "order": {
+                  "type": "integer"
+                },
+                "imageUrl": {
+                  "type": "string"
+                },
+                "alt": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "imageUrl",
+                "alt"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [ "image", "video" ]
+                },
+                "order": {
+                  "type": "integer"
+                },
+                "imageUrl": {
+                  "type": "string",
+                  "pattern": "^https://"
+                },
+                "alt": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "order",
+                "imageUrl",
+                "alt"
+              ]
+            }
+          ]
+        },
+        "authors": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "displayName": {
+                  "type": "string"
+                },
+                "gitHubAccount": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "twitter": {
+                  "type": "string",
+                  "pattern": "^https://twitter.com/"
+                }
+              },
+              "required": [
+                "gitHubAccount"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "source",
+        "short-description",
+        "technologies",
+        "thumbnails",
+        "authors",
+        "url"
+      ]
+    }
+  },
+  "required": [
+    "sample"
+  ]
+}
