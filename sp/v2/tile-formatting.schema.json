@@ -6,19 +6,13 @@
   "properties": {
     "height": {
       "description": "Height of the tile in pixels.",
-      "type": [
-        "integer",
-        "string"
-      ],
+      "type": ["integer", "string"],
       "minimum": 1,
       "pattern": "^[0-9]+$"
     },
     "width": {
       "description": "Width of the tile in pixels. Can go from height /2 to 3x height.",
-      "type": [
-        "integer",
-        "string"
-      ],
+      "type": ["integer", "string"],
       "minimum": 1,
       "pattern": "^[0-9]+$"
     },
@@ -29,6 +23,16 @@
     "formatter": {
       "description": "JSON object that defines formatting of a tile.",
       "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#definitions/elm"
+    },
+    "groupProps": {
+      "type": "object",
+      "description": "Specify the group header formatter",
+      "properties": {
+        "headerFormatter": {
+          "description": "JSON object that defines formatting for the group headers",
+          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#definitions/elm"
+        }
+      }
     }
   }
 }

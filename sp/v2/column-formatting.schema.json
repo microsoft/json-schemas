@@ -11,13 +11,7 @@
       "properties": {
         "action": {
           "description": "Name of the action that the custom action button will execute",
-          "enum": [
-            "defaultClick",
-            "executeFlow",
-            "share",
-            "delete",
-            "editProps"
-          ]
+          "enum": ["defaultClick", "executeFlow", "share", "delete", "editProps", "openContextMenu"]
         },
         "actionParams": {
           "description": "Parameters for the custom action",
