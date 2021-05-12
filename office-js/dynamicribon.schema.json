@@ -1,0 +1,393 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON Schema for Office Add-in Dynamic Ribbon",
+  "description": "A file describing the data format for an Office Add-in's Dynamic Ribbon definition used in the requestUpdate() API.",
+  "type": "object",
+  "properties": {
+    "actions": {
+      "description": "Ribbon actions.",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/showTaskpaneAction"
+          },
+          {
+            "$ref": "#/definitions/executeFunctionAction"
+          }
+        ]
+      }
+    },
+    "tabs": {
+      "description": "Ribbon tab definitions.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/tabElement"
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "version": {
+      "description": "The version of the ribbon JSON schema.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "actions",
+    "tabs",
+    "version"
+  ],
+  "definitions": {
+    "showTaskpaneAction": {
+      "title": "ShowTaskpane Action",
+      "description": "An action that will display content in a task pane.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Action ID",
+          "description": "The unique ID of the action.",
+          "type": "string"
+        },
+        "type": {
+          "title": "Action type",
+          "description": "The type of the action.",
+          "const": "ShowTaskpane"
+        },
+        "sourceLocation": {
+          "title": "Source Location",
+          "description": "The source file location for the start page of the task pane. For shared runtime, this can be omitted.",
+          "type": "string",
+          "format": "uri"
+        },
+        "taskpaneId": {
+          "title": "Taskpane ID",
+          "description": "The ID of the task pane container.",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "description": "The custom title for the task pane.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 125
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "executeFunctionAction": {
+      "title": "ExecuteFunction Action",
+      "description": "An action that runs a JavaScript function loaded by the file referenced by FunctionFile.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Action ID",
+          "description": "The unique ID of the action. If functionName property not present it is the name of the function to execute defined in the function file.",
+          "type": "string"
+        },
+        "type": {
+          "title": "Action type",
+          "description": "The type of the action.",
+          "const": "ExecuteFunction"
+        },
+        "functionName": {
+          "title": "Function Name",
+          "description": "The name of the function to execute defined in the function file.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "superTip": {
+      "title": "SuperTip",
+      "description": "The supertip for this button, which is defined by title and description.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "Title",
+          "description": "The text for the supertip.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 125
+        },
+        "description": {
+          "title": "Description",
+          "description": "The description for the supertip. Note: (Outlook) Only Windows and Mac clients are supported.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 250
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "icon": {
+      "title": "Icon",
+      "description": "The images for elements.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "title": "Size",
+            "description": "The size in pixels of the image.",
+            "type": "integer",
+            "enum": [
+              16,
+              20,
+              24,
+              32,
+              40,
+              48,
+              64,
+              80
+            ]
+          },
+          "sourceLocation": {
+            "title": "Source Location",
+            "description": "The URL of the icon.",
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "size",
+          "sourceLocation"
+        ]
+      },
+      "additionalProperties": false
+    },
+    "element": {
+      "$comment": "The root type for any control in Office ribbon.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Element ID",
+          "description": "The unique ID of the control element. Can be a maximum of 125 characters.",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "description": "The text for the element.",
+          "type": "string",
+          "maxLength": 125
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "tabElement": {
+      "title": "Ribbon Tab Element",
+      "allOf": [
+        {
+          "$ref": "#/definitions/element"
+        },
+        {
+          "properties": {
+            "visible": {
+              "description": "The visibility of this tab.",
+              "type": "boolean",
+              "default": false
+            },
+            "groups": {
+              "description": "The groups under this tab.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/groupElement"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "groups"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "iconElement": {
+      "$comment": "An abstract type represents any control within a ribbon tab (i.e. Group, Button), which owns an icon.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/element"
+        },
+        {
+          "properties": {
+            "icon": {
+              "$ref": "#/definitions/icon"
+            }
+          },
+          "required": [
+            "icon"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "groupElement": {
+      "title": "Group element",
+      "description": "Defines a group of UI controls in a tab.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/iconElement"
+        },
+        {
+          "properties": {
+            "controls": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/menuElement"
+                  },
+                  {
+                    "$ref": "#/definitions/buttonElement"
+                  }
+                ]
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "controls"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "buttonLikeElement": {
+      "$comment": "An abstract type represents the control under a Group (i.e. Menu, Button).",
+      "allOf": [
+        {
+          "$ref": "#/definitions/iconElement"
+        },
+        {
+          "properties": {
+            "superTip": {
+              "$ref": "#/definitions/superTip"
+            }
+          },
+          "required": [
+            "superTip"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "actionableElement": {
+      "$comment": "An abstract type represents controls which can trigger an action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/buttonLikeElement"
+        },
+        {
+          "properties": {
+            "enabled": {
+              "title": "Title",
+              "description": "Specifies whether the control is enabled when the ribbon is generated.",
+              "type": "boolean",
+              "default": true
+            },
+            "actionId": {
+              "title": "Action ID",
+              "description": "The action to perform.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "actionId"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "buttonElement": {
+      "title": "Button Element",
+      "description": "A button performs a single action when the user selects it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/actionableElement"
+        },
+        {
+          "properties": {
+            "type": {
+              "title": "Type",
+              "description": "Type of the element.",
+              "const": "Button"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "menuItemElement": {
+      "title": "Menu Item Element",
+      "description": "A menu item element in a menu.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/actionableElement"
+        },
+        {
+          "properties": {
+            "type": {
+              "title": "Type",
+              "description": "Type of the element.",
+              "const": "MenuItem"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "menuElement": {
+      "title": "Menu Element",
+      "description": "A menu element in the ribbon, may contain multiple menu items. Submenus are not supported.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/buttonLikeElement"
+        },
+        {
+          "properties": {
+            "type": {
+              "title": "Type",
+              "description": "Type of the element",
+              "const": "Menu"
+            },
+            "items": {
+              "description": "A collection of one or more menu items.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/menuItemElement"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "type",
+            "items"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}
