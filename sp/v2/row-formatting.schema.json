@@ -14,7 +14,7 @@
     },
     "rowFormatter": {
       "description": "JSON object that defines formatting of a row.",
-      "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#definitions/elm"
+      "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#"
     },
     "additionalRowClass": {
       "description": "CSS class(es) that is applied to the entire row. Supports expressions. Only valid for 'List' and 'Compact List' layouts.",
@@ -26,7 +26,7 @@
       "properties": {
         "headerFormatter": {
           "description": "JSON object that defines formatting for the group headers",
-          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#definitions/elm"
+          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#"
         },
         "hideFooter": {
           "description": "Boolean value to hide the group footer",
@@ -34,7 +34,7 @@
         },
         "footerFormatter": {
           "description": "JSON object that defines formatting for the group footers",
-          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#definitions/elm"
+          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#"
         }
       }
     },
@@ -44,7 +44,7 @@
     },
     "footerFormatter": {
       "description": "JSON object that defines formatting for the list footer",
-      "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#definitions/elm"
+      "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#"
     }
   }
 }
