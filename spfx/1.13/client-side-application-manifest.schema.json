@@ -1,0 +1,140 @@
+{
+  "id": "client-side-application-manifest.schema.json",
+  "title": "Client-side application manifest",
+  "description": "A client-side application is the architectural component that manages the appearance and behavior of an entire web page.",
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+
+      "properties": {
+        "$schema": { "type": "string" },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "preloadOptions": { "$ref": "any-value.schema.json" },
+        "title": { "$ref": "any-value.schema.json" },
+        "description": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" },
+        "assemblyId": { "$ref": "any-value.schema.json" },
+        "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "hasSuiteNav": { "$ref": "any-value.schema.json" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "type": "object",
+      "required": [
+        "preloadOptions",
+        "componentType",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "enum": [
+            "Application"
+          ]
+        },
+
+        "preloadOptions": {
+          "title": "Preload Options",
+          "description": "Represents flags to preload information in host aspx page.",
+          "type": "object",
+          "properties": {
+            "shouldPreloadWeb": {
+              "title": "Should Preload Web",
+              "description": "A value indicating whether or not to preload the web object when loading the application page. If not present, defaults to false.",
+              "type": "boolean"
+            },
+
+            "shouldPreloadUser": {
+              "title": "Should Preload User",
+              "description": "A value indicating whether or not to preload the user object when loading the application page. If not present, defaults to false.",
+              "type": "boolean"
+            },
+
+            "shouldPreloadList": {
+              "title": "Should Preload List",
+              "description": "A value indicating whether or not to preload the list object when loading the application page. If not present, defaults to false.",
+              "type": "boolean"
+            },
+
+            "shouldPreloadItem": {
+              "title": "Should Preload List Item",
+              "description": "A value indicating whether or not to preload the list item object when loading the application page. If not present, defaults to false.",
+              "type": "boolean"
+            },
+
+            "shouldPreloadQuickLaunch": {
+              "title": "Should Preload Quick Launch",
+              "description": "A value indicating whether or not to preload the quick launch navigation menu items when loading the application page. If not present, defaults to false.",
+              "type": "boolean"
+            },
+
+            "preloadListItemQueryOption": {
+              "title": "Preload List Item Query Options",
+              "description": "This specifies an optional OData query expression with the syntax that would be used in the URL query parameter for a REST API call that fetches a SharePoint list item.",
+              "type": "string"
+            },
+
+            "preloadListItemQueryOptionOverride": {
+              "title": "Preload List Item Query Options (flighted)",
+              "description": "This specifies an optional OData query expression with the syntax that would be used in the URL query parameter for a REST API call that fetches a SharePoint list item.",
+              "type": "string"
+            },
+
+            "preloadListItemProperties": {
+              "title": "Preload List Item Properties",
+              "description": "This specifies what to fetch from a SharePoint list item Properties property.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 0,
+              "items": {
+                "type": "string",
+                "minLength": 0
+              }
+            }
+          },
+
+          "additionalProperties": false
+        },
+
+        "title": {
+          "title": "Title",
+          "description": "Title of the application as a dictionary of locale keys to title values. This value will be displayed to the user in the (page creation) interface. A dictionary must contain a \"default\" key.",
+          "$ref": "localized-string.schema.json"
+        },
+
+        "description": {
+          "title": "Description",
+          "description": "Description of the application represented as a dictionary of locale keys to description values. This value will be displayed to the user in the (page creation) interface. A dictionary must contain a \"default\" key.",
+          "$ref": "localized-string.schema.json"
+        },
+
+        "assemblyId": {
+          "title": "Assembly id",
+          "description": "Id of the preferred assembly to use to load the application. If no assembly id is provided SPFx will be loaded with the default assembly.",
+          "$ref": "guid.schema.json"
+        },
+        "hasSuiteNav": {
+          "title": "Has suite nav",
+          "description": "True if the application has a suite nav.",
+          "type": "boolean"
+        }
+      },
+
+      "additionalProperties": true
+    }
+  ]
+}

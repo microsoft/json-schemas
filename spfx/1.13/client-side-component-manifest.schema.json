@@ -1,0 +1,136 @@
+{
+  "id": "client-side-component-manifest.schema.json",
+  "title": "Client-side component manifest",
+  "description": "All client side components built on the SharePoint framework need a valid component manifest. This interface represents properties that are required by all types of client side components like Applications and Web Parts. Component specific manifests will extend this interface to add properties required by that component type.",
+  "definitions": {
+    "clientSideComponentManifest": {
+      "type": "object",
+      "allOf": [
+        {
+          "type": "object",
+          "required": [
+            "componentType",
+            "alias",
+            "version"
+          ],
+
+          "not": {
+            "description": "If both properties are missing, this succeeds since it BOTH schemas are NOT matched. If only one property exists, this succeeds since BOTH schemas are NOT matched. If both properties are specified, this fails since BOTH schemas ARE matched",
+            "type": "object",
+            "allOf": [
+              {
+                "type": "object",
+                "additionalProperties": true,
+                "required": [ "requiresCustomScript" ],
+                "properties": {
+                  "requiresCustomScript": { "type": "boolean" }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": true,
+                "required": [ "safeWithCustomScriptDisabled" ],
+                "properties": {
+                  "safeWithCustomScriptDisabled": { "type": "boolean" }
+                }
+              }
+            ]
+          },
+
+          "properties": {
+            "alias": {
+              "type": "string",
+              "title": "Alias",
+              "description": "A short name usually given by developer. It does not need to be localized and is expected to stay the same through the lifetime of the component.",
+              "maxLength": 40,
+              "pattern": "^[a-zA-Z0-9-]*$",
+              "minLength": 5
+            },
+
+            "componentType": {
+              "type": "string",
+              "title": "Component Type",
+              "description": "Type of client side component (\"Application\", \"Extension\", \"Library\", or \"WebPart\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
+              "enum": [
+                "Application",
+                "WebPart",
+                "Library",
+                "Extension"
+              ]
+            },
+
+            "loadLegacyFabricCss": {
+              "type": "boolean",
+              "title": "Load Legacy Fabric CSS",
+              "description": "Indicates whether to use the legacy Fabric CSS load sequence. Components after 1.1 can leave this false, unless there are visual regressions after updating your SPFx version."
+            },
+
+            "properties": {
+              "type": "object",
+              "title": "Properties",
+              "description": "Property bag for the component manifest."
+            },
+
+            "version": {
+              "title": "Version",
+              "description": "Client side component version. The value of this field is expected to be controlled by the developer of the client side component. The purpose of this field is to help client side component developers upgrade their client side components in a managed way. This helps the consumers of the client side component make decisions about when and how to upgrade the client side component. As the developer evolves the code for their client side component, they can decide to bump the MAJOR, MINOR or PATCH version of the component. All incompatible API changes should result in a MAJOR version bump. Backwards compatible functionality changes should result in a MINOR version bump, and backwards compatible bug fixes should result in a PATCH version bump. Please see http://semver.org for more details on how to manage the version of your components.",
+              "oneOf": [
+                {
+                  "$ref": "semver.schema.json"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "*"
+                  ]
+                }
+              ]
+            },
+
+            "preloadComponents": {
+              "title": "Preload Components",
+              "description": "A list of component manifests that must be preloaded alongside this component. These may include external resources that are needed during initial render, or components that should be loaded only on demand.",
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 0,
+              "items": {
+                "type": "string",
+                "minLength": 10
+              }
+            },
+
+            "loaderConfig": {
+              "$ref": "client-side-component-loader-configuration.schema.json"
+            }
+          },
+
+          "additionalProperties": true
+        },
+        {
+          "$ref": "client-side-manifest-base.schema.json"
+        }
+      ]
+    }
+  },
+
+  "oneOf": [
+    {
+      "$ref": "client-side-application-manifest.schema.json"
+    },
+    {
+      "$ref": "client-side-extension-manifest.schema.json"
+    },
+    {
+      "$ref": "client-side-library-manifest.schema.json"
+    },
+    {
+      "$ref": "client-side-web-part-manifest.schema.json"
+    },
+    {
+      "$ref": "command-set-extension-manifest.schema.json"
+    },
+    {
+      "$ref": "client-side-assembly-manifest.schema.json"
+    }
+  ]
+}

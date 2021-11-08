@@ -11,7 +11,14 @@
       "properties": {
         "action": {
           "description": "Name of the action that the custom action button will execute",
-          "enum": ["defaultClick", "executeFlow", "share", "delete", "editProps", "openContextMenu"]
+          "enum": [
+            "defaultClick",
+            "executeFlow",
+            "share",
+            "delete",
+            "editProps",
+            "openContextMenu"
+          ]
         },
         "actionParams": {
           "description": "Parameters for the custom action",
@@ -103,33 +110,90 @@
           }
         }
       },
-      "required": ["operator", "operands"]
+      "required": [
+        "operator",
+        "operands"
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "description": "schema of the JSON",
+      "type": "string"
     },
-    "elm": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "$schema": {
-          "description": "schema of the JSON",
+    "debugMode": {
+      "description": "Is this JSON in debug mode?",
+      "type": "boolean",
+      "default": true
+    },
+    "elmType": {
+      "description": "The type of element to create",
+      "enum": [
+        "div",
+        "button",
+        "span",
+        "a",
+        "img",
+        "svg",
+        "path"
+      ]
+    },
+    "children": {
+      "description": "Children elements",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#"
+      },
+      "default": [
+        {
+          "elmType": ""
+        }
+      ]
+    },
+    "txtContent": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/expression"
+        },
+        {
           "type": "string"
-        },
-        "debugMode": {
-          "description": "Is this JSON in debug mode?",
-          "type": "boolean"
-        },
-        "elmType": {
-          "description": "The type of element to create",
-          "enum": ["div", "button", "span", "a", "img", "svg", "path"]
-        },
-        "children": {
-          "description": "Children elements",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/elm"
-          }
-        },
-        "txtContent": {
+        }
+      ]
+    },
+    "style": {
+      "type": "object",
+      "description": "Specifies the style object for this element",
+      "patternProperties": {
+        "^[a-z]+(?:-[a-z]+)?$": {
+          "description": "Specifies style attributes for this element",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "default": {}
+    },
+    "customRowAction": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/customAction"
+        }
+      ]
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Additional attributes to be added to elmType",
+      "properties": {
+        "href": {
+          "description": "Specifies the href attribute",
           "anyOf": [
             {
               "$ref": "#/definitions/expression"
@@ -139,253 +203,238 @@
             }
           ]
         },
-        "style": {
-          "type": "object",
-          "description": "Specifies the style object for this element",
-          "patternProperties": {
-            "^[a-z]+(?:-[a-z]+)?$": {
-              "description": "Specifies style attributes for this element",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
-          }
-        },
-        "customRowAction": {
+        "rel": {
+          "description": "Specifies the rel attribute",
           "anyOf": [
             {
-              "$ref": "#/definitions/customAction"
+              "$ref": "#/definitions/expression"
+            },
+            {
+              "type": "string"
             }
           ]
         },
-        "attributes": {
-          "type": "object",
-          "description": "Additional attributes to be added to elmType",
-          "properties": {
-            "href": {
-              "description": "Specifies the href attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+        "src": {
+          "description": "Specifies the src attribute",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "rel": {
-              "description": "Specifies the rel attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "class": {
+          "description": "Specifies the class attribute",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "src": {
-              "description": "Specifies the src attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "target": {
+          "description": "Specifies the target attribute, used primarily for <a> element types.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "class": {
-              "description": "Specifies the class attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "role": {
+          "description": "Specifies the role attribute, used accessibility.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "target": {
-              "description": "Specifies the target attribute, used primarily for <a> element types.",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "iconName": {
+          "description": "Specifies the Fabric icon to display before this element",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "role": {
-              "description": "Specifies the role attribute, used accessibility.",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "d": {
+          "description": "Specifies the d attribute. Used primarily for svg path elements",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "iconName": {
-              "description": "Specifies the Fabric icon to display before this element",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "title": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "d": {
-              "description": "Specifies the d attribute. Used primarily for svg path elements",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "alt": {
+          "description": "Specifies the alt attribute",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "title": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "data-interception": {
+          "description": "Specifies the data-interception attribute",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
             },
-            "alt": {
-              "description": "Specifies the alt attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "data-interception": {
-              "description": "Specifies the data-interception attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "enum": ["on", "off"]
-                }
-              ]
-            },
-            "viewBox": {
-              "description": "Specifies the svg viewBox attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string",
-                  "pattern": "^(?:[\\-+]?\\d+\\s*[\\s,]\\s*){3}(?:[\\-+]?\\d+)$"
-                }
-              ]
-            },
-            "preserveAspectRatio": {
-              "description": "Specifies the preserveAspectRatio attribute",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string",
-                  "pattern": "^(?:x(?:Min|Mid|Max)Y(?:Min|Mid|Max)(?:\\s+(?:slice|meet))|none)$"
-                }
+            {
+              "enum": [
+                "on",
+                "off"
               ]
             }
-          },
-          "patternProperties": {
-            "^aria\\-[a-z]+$": {
-              "description": "Specifies aria- attributes for the element",
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/expression"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            }
-          },
-          "additionalProperties": false
+          ]
         },
-        "forEach": {
-          "type": "string",
-          "description": "For loop properties. The element will be rendered repeatedly based on an array.",
-          "pattern": "^[^\\]\\$@\\. ]+ in (\\@currentField|\\[\\$.+\\])$"
-        },
-        "defaultHoverField": {
-          "type": "string",
-          "description": "Column name to show the default hover card of",
-          "pattern": "(\\@currentField(.\\w+)*|\\[\\$.+\\])$"
-        },
-        "customCardProps": {
-          "type": "object",
-          "description": "Object that defines custom card props on hover/click",
-          "properties": {
-            "openOnEvent": {
-              "description": "Event name to decide on which the customCard should open",
+        "viewBox": {
+          "description": "Specifies the svg viewBox attribute",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
+            },
+            {
               "type": "string",
-              "pattern": "(click|hover)$"
-            },
-            "directionalHint": {
-              "description": "Specify the direction relative to the target in which CustomCard will be positioned",
-              "enum": ["topCenter", "bottomCenter", "leftCenter", "rightCenter"]
-            },
-            "isBeakVisible": {
-              "description": "Specify if the beak is to be shown or not",
-              "type": "boolean"
-            },
-            "beakStyle": {
-              "type": "object",
-              "description": "Specifies the style object for custom card's beak",
-              "patternProperties": {
-                "^[a-z]+(?:-[a-z]+)?$": {
-                  "description": "Specifies style attributes for for custom card's beak",
-                  "type": "string"
-                }
-              }
-            },
-            "formatter": {
-              "description": "JSON object that defines formatting for customCards",
-              "$ref": "#/definitions/elm"
+              "pattern": "^(?:[\\-+]?\\d+\\s*[\\s,]\\s*){3}(?:[\\-+]?\\d+)$"
             }
-          },
-          "required": ["formatter", "openOnEvent"]
+          ]
         },
-        "columnFormatterReference": {
-          "type": "string",
-          "description": "Referring the column formatter of specified field",
-          "pattern": "\\[\\$.+\\]$"
+        "preserveAspectRatio": {
+          "description": "Specifies the preserveAspectRatio attribute",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
+            },
+            {
+              "type": "string",
+              "pattern": "^(?:x(?:Min|Mid|Max)Y(?:Min|Mid|Max)(?:\\s+(?:slice|meet))|none)$"
+            }
+          ]
         }
       },
-      "oneOf": [
-        {
-          "required": ["elmType"]
-        },
-        {
-          "required": ["columnFormatterReference"]
+      "patternProperties": {
+        "^aria\\-[a-z]+$": {
+          "description": "Specifies aria- attributes for the element",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
+            },
+            {
+              "type": "string"
+            }
+          ]
         }
-      ]
+      },
+      "additionalProperties": false
+    },
+    "forEach": {
+      "type": "string",
+      "description": "For loop properties. The element will be rendered repeatedly based on an array.",
+      "pattern": "^[^\\]\\$@\\. ]+ in (\\@currentField|\\[\\$.+\\])$",
+      "default": "iteratorName in [$FieldName]"
+    },
+    "defaultHoverField": {
+      "type": "string",
+      "description": "Column name to show the default hover card of",
+      "pattern": "(\\@currentField(.\\w+)*|\\[\\$.+\\])$",
+      "default": "[$FieldName]"
+    },
+    "customCardProps": {
+      "type": "object",
+      "description": "Object that defines custom card props on hover/click",
+      "properties": {
+        "openOnEvent": {
+          "description": "Event name to decide on which the customCard should open",
+          "enum": [
+            "click",
+            "hover"
+          ]
+        },
+        "directionalHint": {
+          "description": "Specify the direction relative to the target in which CustomCard will be positioned",
+          "enum": [
+            "topCenter",
+            "bottomCenter",
+            "leftCenter",
+            "rightCenter"
+          ]
+        },
+        "isBeakVisible": {
+          "description": "Specify if the beak is to be shown or not",
+          "type": "boolean",
+          "default": true
+        },
+        "beakStyle": {
+          "type": "object",
+          "description": "Specifies the style object for custom card's beak",
+          "patternProperties": {
+            "^[a-z]+(?:-[a-z]+)?$": {
+              "description": "Specifies style attributes for for custom card's beak",
+              "type": "string"
+            }
+          }
+        },
+        "formatter": {
+          "description": "JSON object that defines formatting for customCards",
+          "$ref": "#"
+        }
+      },
+      "required": [
+        "formatter",
+        "openOnEvent"
+      ],
+      "default": {
+        "openOnEvent": "click",
+        "formatter": {
+          "elmType": ""
+        }
+      }
+    },
+    "columnFormatterReference": {
+      "type": "string",
+      "description": "Referring the column formatter of specified field",
+      "pattern": "\\[\\$.+\\]$",
+      "default": "[$FieldName]"
     }
   },
-  "$ref": "#/definitions/elm"
+  "oneOf": [
+    {
+      "required": [
+        "elmType"
+      ]
+    },
+    {
+      "required": [
+        "columnFormatterReference"
+      ]
+    }
+  ]
 }
