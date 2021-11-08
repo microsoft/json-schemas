@@ -1,6 +1,45 @@
 {
   "title": "Package Solution Task Configuration",
   "description": "Defines parameters for task which creates the SharePoint Package",
+
+  "definitions": {
+    "localized-string": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": ["default"]
+        },
+        {
+          "required": ["id"]
+        }
+      ],
+      "properties": {
+        "default": {
+          "title": "Default string",
+          "description": "String to be used if a locale doesn't exist",
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "title": "Id for the localized string",
+          "description": "Id for the localized string in the form '$<moduleName>:<expression>;'",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^\\$[^:]+\\:.+\\;$"
+        }
+      },
+      "patternProperties": {
+        ".+": {
+          "title": "Localized string",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+
+      "additionalProperties": false
+    }
+  },
+
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -30,25 +69,12 @@
           "title": "Feature XML Directory",
           "description": "The folder containing the raw feature_xml to import into the package. Defaults to 'feature_xml'",
           "type": "string"
-        },
-        "manifestsMatch": {
-          "title": "Manifests Match Pattern",
-          "description": "The glob to match against to find manifest files. Looks in dist/ when running in normal, but deploy/ for production",
-          "type": "string"
-        },
-        "distributionDir": {
-          "title": "Distribution Directory",
-          "description": "The path to the folder where manifests and client-side build resources are stored. Defaults to buildConfig.distFolder",
-          "type": "string"
         }
       }
     },
     "solution": {
       "type": "object",
-      "required": [
-        "name",
-        "id"
-      ],
+      "required": ["name", "id"],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -101,11 +127,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "title",
-              "description",
-              "id"
-            ],
+            "required": ["title", "description", "id"],
             "properties": {
               "title": {
                 "title": "Title",
@@ -169,10 +191,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "resource",
-              "scope"
-            ],
+            "required": ["resource", "scope"],
             "properties": {
               "resource": {
                 "title": "Resource",
@@ -195,13 +214,7 @@
         "developer": {
           "title": "Developer Properties",
           "type": "object",
-          "required": [
-            "name",
-            "websiteUrl",
-            "privacyUrl",
-            "termsOfUseUrl",
-            "mpnId"
-          ],
+          "required": ["name", "websiteUrl", "privacyUrl", "termsOfUseUrl", "mpnId"],
           "properties": {
             "name": {
               "title": "developer name",
@@ -222,6 +235,63 @@
             "mpnId": {
               "title": "microsoft partner network id",
               "type": "string"
+            }
+          }
+        },
+        "metadata": {
+          "title": "Additional Solution Metadata",
+          "type": "object",
+          "properties": {
+            "shortDescription": {
+              "title": "Short Description",
+              "description": "Short description of the solution. This value will be displayed on Add an app page. A dictionary must contain a \"default\" key.",
+              "$ref": "#/definitions/localized-string"
+            },
+            "longDescription": {
+              "title": "Long Description",
+              "description": "Long description of the solution with HTML support. This value will be displayed on the App's About page. A dictionary must contain a \"default\" key.",
+              "$ref": "#/definitions/localized-string"
+            },
+            "screenshotPaths": {
+              "type": "array",
+              "maxItems": 5,
+              "items": {
+                "type": "string"
+              },
+              "title": "Solution Screenshots",
+              "description": "Relative paths to the screenshots. Base path is the base package directory. The screenshots will be displayed on the App's About page. The developer may add up to 5 screenshots."
+            },
+            "videoUrl": {
+              "title": "Video link (YouTube or Vimeo only)",
+              "description": "Add a URL for your video (YouTube or Vimeo only). Recommended length: 60-90 seconds. Your video should communicate the value of your product in narrative form and/or demonstrate how the product works.",
+              "type": "string"
+            },
+            "categories": {
+              "title": "Categories",
+              "description": "Choose the right categories to help your customers find your product in the marketplace. Your product description should show how these categories apply to your product.",
+              "type": "array",
+              "maxItems": 3,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Accounting + Finance",
+                  "Collaboration",
+                  "Content management",
+                  "CRM",
+                  "Data + analytics",
+                  "File managers",
+                  "IT/admin",
+                  "Legal + HR",
+                  "News + weather",
+                  "Productivity",
+                  "Project management",
+                  "Reference",
+                  "Sales + marketing",
+                  "Site Design",
+                  "Social",
+                  "Workflow & Process Management"
+                ]
+              }
             }
           }
         }

@@ -1,0 +1,28 @@
+{
+  "id": "client-side-manifest-base.schema.json",
+  "title": "Client-side component manifest base",
+  "description": "Properties common to all deployable manifests.",
+
+  "type": "object",
+  "required": [
+    "id",
+    "manifestVersion"
+  ],
+
+  "properties": {
+    "manifestVersion": {
+      "type": "integer",
+      "title": "Manifest Version",
+      "description": "Version of the component manifest schema. The value of this field is controlled by Microsoft. The purpose of this field is to help manage upgrades of the component manifest schema. A component developer needs to only confirm that they are using the correct value per the manifest schema. Please read the \"manifest upgrade rules\" for more details on when the schema could change. Note, manifest schema version upgrade will be considered a big API change event and will be advertised broadly.",
+      "minimum": 2
+    },
+
+    "id": {
+      "$ref": "guid.schema.json",
+      "title": "ID",
+      "description": "A universally unique component id. Each client side component is required to have this id. Once an id has been used for a component, it cannot be changed. A change in this value is treated same as the creation of a new component. Two components are never expected to have the same id."
+    }
+  },
+
+  "additionalProperties": true
+}
