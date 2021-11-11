@@ -17,11 +17,12 @@
             "share",
             "delete",
             "editProps",
-            "openContextMenu"
+            "openContextMenu",
+            "setValue"
           ]
         },
         "actionParams": {
-          "description": "Parameters for the custom action",
+          "description": "Parameters for the executeFlow action",
           "anyOf": [
             {
               "$ref": "#/definitions/expression"
@@ -29,9 +30,36 @@
             {
               "type": "string"
             }
-          ]
+          ],
+          "default": ""
+        },
+        "actionInput": {
+          "description": "Input for setValue action",
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z_].+$": {
+              "description": "Specifies value to set for each field",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/expression"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "default": {
+            "FieldName": "Value to set"
+          }
         }
-      }
+      },
+      "default": {
+        "action": ""
+      },
+      "required": [
+        "action"
+      ]
     },
     "expression": {
       "type": "object",
@@ -167,7 +195,7 @@
       "type": "object",
       "description": "Specifies the style object for this element",
       "patternProperties": {
-        "^[a-z]+(?:-[a-z]+)?$": {
+        "^(?:[a-z]+(?:-[a-z]+)?|--inline-editor-border(?:-[a-z]+))$": {
           "description": "Specifies style attributes for this element",
           "anyOf": [
             {
@@ -422,6 +450,12 @@
       "type": "string",
       "description": "Referring the column formatter of specified field",
       "pattern": "\\[\\$.+\\]$",
+      "default": "[$FieldName]"
+    },
+    "inlineEditField": {
+      "type": "string",
+      "description": "Allow inline editing for a field",
+      "pattern": "(\\@currentField(.\\w+)*|\\[\\$.+\\])$",
       "default": "[$FieldName]"
     }
   },
