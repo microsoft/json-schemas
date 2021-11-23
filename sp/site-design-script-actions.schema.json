@@ -1,9 +1,9 @@
-﻿{
-  "$schema": "http://json-schema.org/draft-04/schema#",
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "JSON Schema for SiteScript Extensions",
   "definitions": {
     "activateSPFeature": {
-      "type": "object",        
+      "type": "object",
       "properties": {
         "verb": {
           "type": "string",
@@ -19,8 +19,26 @@
           "description": "The scope of the feature to activate."
         }
       },
-      "required": [ "featureId", "verb" ]        
-
+      "required": ["featureId", "verb"]
+    },
+    "deactivateSPFeature": {
+      "type": "object",
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^deactivateSPFeature$"
+        },
+        "featureId": {
+          "type": "string",
+          "description": "The Guid of the feature to deactivate."
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["web", "site"],
+          "description": "Optional parameter. The scope of the feature to deactivate. Defaults to web."
+        }
+      },
+      "required": ["featureId", "verb"]
     },
     "associateExtension": {
       "type": "object",
@@ -61,67 +79,114 @@
           "description": "Indicates whether the extension is associated with a Web or a Site."
         }
       },
-      "required": [ "clientSideComponentId", "title", "location", "verb", "scope" ],
+      "required": ["clientSideComponentId", "title", "location", "verb", "scope"],
       "additionalProperties": false
     },
     "createSPList": {
       "type": "object",
-          "properties": {
-            "verb": {
-              "type": "string",
-              "pattern": "^createSPList$"
-            },
-            "listName": {
-              "type": "string",
-              "description": "An identifying name for the list."
-            },
-            "templateType": {
-              "type": "number",
-              "description": "Specifies the type of a list definition or a list template."
-            },
-            "addNavLink": {
-               "type": "boolean",
-               "description": "Add a link to this list into the Quicklaunch using this list's title."
-            },
-            "color": {
-               "type": "string",
-               "description": "Specifies the list color."
-            },
-            "icon": {
-               "type": "string",
-               "description": "Specifies the list icon."
-            },
-            "subactions": {
-              "description": "Sub-actions to run on the list.",
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  { "$ref": "#/definitions/SPListSubactions/setTitle" },
-                  { "$ref": "#/definitions/SPListSubactions/setDescription" },
-                  { "$ref": "#/definitions/SPListSubactions/addSPField" },
-                  { "$ref": "#/definitions/SPListSubactions/deleteSPField" },
-                  { "$ref": "#/definitions/SPListSubactions/addSPFieldXml" },
-                  { "$ref": "#/definitions/SPListSubactions/addSPLookupFieldXml" },
-                  { "$ref": "#/definitions/SPListSubactions/addSiteColumn" },
-                  { "$ref": "#/definitions/SPListSubactions/addSPView" },
-                  { "$ref": "#/definitions/SPListSubactions/removeSPView" },
-                  { "$ref": "#/definitions/SPListSubactions/addFile" },
-                  { "$ref": "#/definitions/SPListSubactions/addFolder" },
-                  { "$ref": "#/definitions/SPListSubactions/setDocumentTemplates" },
-                  { "$ref": "#/definitions/SPListSubactions/addContentType" },
-                  { "$ref": "#/definitions/SPListSubactions/removeContentType" },
-                  { "$ref": "#/definitions/SPListSubactions/setClientFormCustomFormatter" },
-                  { "$ref": "#/definitions/SPListSubactions/setSPFieldCustomFormatter" },
-                  { "$ref": "#/definitions/SPListSubactions/associateFieldCustomizer" },
-                  { "$ref": "#/definitions/SPListSubactions/associateListViewCommandSet" }
-                ]
-              },
-              "additionalItems": false
-            }
-          },
-          "required": [ "listName", "templateType", "verb" ],
-          "additionalProperties": false
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^createSPList$"
         },
+        "listName": {
+          "type": "string",
+          "description": "An identifying name for the list."
+        },
+        "templateType": {
+          "type": "number",
+          "description": "Specifies the type of a list definition or a list template."
+        },
+        "addNavLink": {
+          "type": "boolean",
+          "description": "Add a link to this list into the Quicklaunch using this list's title."
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "Optional attribute that defaults to false. If true, the list created will be hidden."
+        },
+        "color": {
+          "type": "string",
+          "description": "Optional attribute that specifies the list color."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Optional attribute that specifies the list icon."
+        },
+        "fieldRefsXml": {
+          "type": "array",
+          "description": "Optional list of FieldRefs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subactions": {
+          "description": "Sub-actions to run on the list.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/SPListSubactions/setTitle"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/setDescription"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addSPField"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/deleteSPField"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addSPFieldXml"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addSPLookupFieldXml"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addSiteColumn"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addSPView"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/removeSPView"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addFile"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addFolder"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/setDocumentTemplates"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/addContentType"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/removeContentType"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/setClientFormCustomFormatter"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/setSPFieldCustomFormatter"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/associateFieldCustomizer"
+              },
+              {
+                "$ref": "#/definitions/SPListSubactions/associateListViewCommandSet"
+              }
+            ]
+          },
+          "additionalItems": false
+        }
+      },
+      "required": ["listName", "templateType", "verb"],
+      "additionalProperties": false
+    },
     "SPListSubactions": {
       "addContentType": {
         "type": "object",
@@ -133,9 +198,13 @@
           "name": {
             "type": "string",
             "description": "The name of the ContentType to add."
+          },
+          "id": {
+            "type": "string",
+            "description": "Optional, the id of the ContentType to add."
           }
         },
-        "required": [ "name", "verb" ],
+        "required": ["name", "verb"],
         "additionalProperties": false
       },
       "removeContentType": {
@@ -150,7 +219,7 @@
             "description": "The name of the ContentType to remove."
           }
         },
-        "required": [ "name", "verb" ],
+        "required": ["name", "verb"],
         "additionalProperties": false
       },
       "setSPFieldCustomFormatter": {
@@ -169,7 +238,7 @@
             "description": "A JSON object to use as the field CustomFormatter."
           }
         },
-        "required": [ "fieldDisplayName", "verb", "formatterJSON" ],
+        "required": ["fieldDisplayName", "verb", "formatterJSON"],
         "additionalProperties": false
       },
       "setTitle": {
@@ -184,7 +253,7 @@
             "description": "The new title of the list."
           }
         },
-        "required": [ "title", "verb" ],
+        "required": ["title", "verb"],
         "additionalProperties": false
       },
       "setDescription": {
@@ -199,7 +268,7 @@
             "description": "The new description of the list."
           }
         },
-        "required": [ "description", "verb" ],
+        "required": ["description", "verb"],
         "additionalProperties": false
       },
       "addSiteColumn": {
@@ -218,7 +287,7 @@
             "description": "Optional attribute that defaults to false. If true, the newly added field will also be added to the default view."
           }
         },
-        "required": [ "internalName", "verb" ],
+        "required": ["internalName", "verb"],
         "additionalProperties": false
       },
       "addSPField": {
@@ -258,7 +327,7 @@
             "description": "Optional attribute. The ID Guid of the field. This needs to be uniquely generated Guid. It is strongly recommended that you include this attribute to ensure that this action is reentrant."
           }
         },
-        "required": [ "displayName", "fieldType", "isRequired", "verb" ],
+        "required": ["displayName", "fieldType", "isRequired", "verb"],
         "additionalProperties": false
       },
       "deleteSPField": {
@@ -273,7 +342,7 @@
             "description": "The display name of the field to delete."
           }
         },
-        "required": [ "displayName" ],
+        "required": ["displayName"],
         "additionalProperties": false
       },
       "addSPFieldXml": {
@@ -292,7 +361,7 @@
             "description": "Optional attribute that defaults to false. If true, the newly added field will also be added to the default view."
           }
         },
-        "required": [ "schemaXml", "verb" ],
+        "required": ["schemaXml", "verb"],
         "additionalProperties": false
       },
       "addSPLookupFieldXml": {
@@ -319,7 +388,7 @@
             "description": "Optional attribute that defaults to false. If true, the newly added field will also be added to the default view."
           }
         },
-        "required": [ "schemaXml", "verb" ],
+        "required": ["schemaXml", "verb"],
         "additionalProperties": false
       },
       "associateFieldCustomizer": {
@@ -342,7 +411,7 @@
             "description": "This is an optional parameter, which can be used to provide properties for the Field Customizer instance."
           }
         },
-        "required": [ "clientSideComponentId", "internalName", "verb" ],
+        "required": ["clientSideComponentId", "internalName", "verb"],
         "additionalProperties": false
       },
       "associateListViewCommandSet": {
@@ -370,7 +439,7 @@
             "description": "This is an optional parameter, which can be used to provide properties for the Field Customizer instance."
           }
         },
-        "required": [ "clientSideComponentId", "title", "location", "verb" ],
+        "required": ["clientSideComponentId", "title", "location", "verb"],
         "additionalProperties": false
       },
       "addSPView": {
@@ -427,9 +496,13 @@
           "replaceViewFields": {
             "type": "boolean",
             "description": "Optional parameter, defaulting to false. If true, the view fields already on the view will be replaced by the those specified by the viewFields paramter."
+          },
+          "columnWidthXml": {
+            "type": "string",
+            "description": "Optional parameter, The xml specifying the column width."
           }
         },
-        "required": [ "name", "viewFields", "query", "rowLimit", "isPaged" ],
+        "required": ["name", "viewFields", "query", "rowLimit", "isPaged"],
         "additionalProperties": false
       },
       "removeSPView": {
@@ -444,7 +517,7 @@
             "description": "The name of the view to remove."
           }
         },
-        "required": [ "name" ],
+        "required": ["name"],
         "additionalProperties": false
       },
       "addFile": {
@@ -457,9 +530,7 @@
           "destination": {
             "type": "string",
             "description": "The location in the library to copy the file to, including the filename, relative to the root of the library.",
-            "examples" : [
-              "Training Documents/Accounting/First Day.pdf"
-            ]
+            "examples": ["Training Documents/Accounting/First Day.pdf"]
           },
           "source": {
             "type": "string",
@@ -470,11 +541,11 @@
             "description": "Optional parameter. The location in the tenant to copy the file from, as an absolute url. Provide either this or source."
           }
         },
-        "required": [ "verb", "destination" ],
+        "required": ["verb", "destination"],
         "additionalProperties": false
       },
       "addFolder": {
-        "type": "object",        
+        "type": "object",
         "properties": {
           "verb": {
             "type": "string",
@@ -483,17 +554,14 @@
           "path": {
             "type": "string",
             "description": "The path of the new folder, relative to the root of the library.",
-            "examples" : [
-              "Training Documents/Accounting"
-            ]
+            "examples": ["Training Documents/Accounting"]
           }
         },
-        "required": [ "verb", "path" ],
+        "required": ["verb", "path"],
         "additionalProperties": false
       },
       "setDocumentTemplates": {
         "type": "object",
-        
         "properties": {
           "verb": {
             "type": "string",
@@ -504,22 +572,22 @@
             "description": "A JSON object representing the new document templates."
           }
         },
-        "required": [ "verb", "templateJSON" ],
+        "required": ["verb", "templateJSON"],
         "additionalProperties": false
       },
       "setClientFormCustomFormatter": {
         "type": "object",
         "properties": {
-            "verb": {
+          "verb": {
             "type": "string",
             "pattern": "^setClientFormCustomFormatter$"
-            },
-            "clientFormCustomFormatter": {
+          },
+          "clientFormCustomFormatter": {
             "type": "object",
             "description": "A JSON object representing the formatter for form."
-            }
+          }
         },
-        "required": [ "clientFormCustomFormatter", "verb" ],
+        "required": ["clientFormCustomFormatter", "verb"],
         "additionalProperties": false
       }
     },
@@ -540,7 +608,7 @@
           "pattern": "^(Members|Owners|Visitors)$"
         }
       },
-      "required": [ "principal", "group", "verb" ]
+      "required": ["principal", "group", "verb"]
     },
     "applyTheme": {
       "type": "object",
@@ -558,21 +626,21 @@
           "description": "An optional JSON object specifying the theme exactly. Provide either this or themeName. See https://docs.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-json-schema for information on how to generate this object."
         }
       },
-      "required": [ "verb" ]     
+      "required": ["verb"]
     },
     "setSiteLogo": {
       "type": "object",
-          "properties": {
-            "verb": {
-              "type": "string",
-              "pattern": "^setSiteLogo$"
-            },
-            "url": {
-              "type": "string",
-              "description": "The URL of the new SiteLogo."
-            }
-          },
-          "required": [ "url", "verb" ]
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^setSiteLogo$"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the new SiteLogo."
+        }
+      },
+      "required": ["url", "verb"]
     },
     "setSiteLogoFromFile": {
       "type": "object",
@@ -583,14 +651,18 @@
         },
         "source": {
           "type": "string",
-          "description": "The location in the site script package to copy the image file from, relative to the root directory. Provide either this or sourceUrl."
+          "description": "The location in the site script package to copy the image file from, relative to the root directory. Provide either this or sourceUrl or templateImageUrl."
         },
         "sourceUrl": {
           "type": "string",
-          "description": "Optional parameter. The location in the tenant to copy the image file from, as an absolute url. Provide either this or source."
+          "description": "Optional parameter. The location in the tenant to copy the image file from, as an absolute url. Provide either this or source or templateImageUrl."
+        },
+        "templateImageUrl": {
+          "type": "string",
+          "description": "Optional parameter. The location of the template image file. Provide either this or source or sourceUrl."
         }
       },
-      "required": [ "source", "verb" ]
+      "required": ["verb"]
     },
     "triggerFlow": {
       "type": "object",
@@ -616,7 +688,7 @@
           "description": "An option set of parameters to pass into the Flow."
         }
       },
-      "required": [ "name", "url", "verb" ],
+      "required": ["name", "url", "verb"],
       "additionalProperties": false
     },
     "installSolution": {
@@ -635,7 +707,7 @@
           "description": "The name of the Solution."
         }
       },
-      "required": [ "id", "verb", "name" ],
+      "required": ["id", "verb", "name"],
       "additionalProperties": false
     },
     "addNavLink": {
@@ -675,7 +747,7 @@
           "pattern": "^(QuickLaunch|Hub|Footer)$"
         }
       },
-      "required": [ "displayName", "url", "verb" ],
+      "required": ["displayName", "url", "verb"],
       "additionalProperties": false
     },
     "removeNavLink": {
@@ -703,7 +775,7 @@
           "pattern": "^(QuickLaunch|Hub|Footer)$"
         }
       },
-      "required": [ "displayName", "verb" ],
+      "required": ["displayName", "verb"],
       "additionalProperties": false
     },
     "joinHubSite": {
@@ -722,7 +794,7 @@
           "description": "An optional string specifying the name of the hub site."
         }
       },
-      "required": [ "hubSiteId", "verb" ],
+      "required": ["hubSiteId", "verb"],
       "additionalProperties": false
     },
     "createContentType": {
@@ -765,14 +837,18 @@
           "type": "array",
           "items": {
             "anyOf": [
-              { "$ref": "#/definitions/SPContentTypeSubactions/addSiteColumn" },
-              { "$ref": "#/definitions/SPContentTypeSubactions/removeSiteColumn" }
+              {
+                "$ref": "#/definitions/SPContentTypeSubactions/addSiteColumn"
+              },
+              {
+                "$ref": "#/definitions/SPContentTypeSubactions/removeSiteColumn"
+              }
             ]
           },
           "additionalItems": false
         }
       },
-      "required": [ "verb", "name", "hidden" ],
+      "required": ["verb", "name", "hidden"],
       "additionalProperties": false
     },
     "SPContentTypeSubactions": {
@@ -788,7 +864,7 @@
             "description": "The internal name of the site column to add."
           }
         },
-        "required": [ "internalName", "verb" ],
+        "required": ["internalName", "verb"],
         "additionalProperties": false
       },
       "removeSiteColumn": {
@@ -803,7 +879,7 @@
             "description": "The internal name of the site column to remove."
           }
         },
-        "required": [ "internalName", "verb" ],
+        "required": ["internalName", "verb"],
         "additionalProperties": false
       }
     },
@@ -844,7 +920,7 @@
           "description": "Optional attribute. The ID Guid of the field. This needs to be uniquely generated Guid. It is strongly recommended that you include this attribute to ensure that this action is reentrant."
         }
       },
-      "required": [ "fieldType", "verb", "internalName", "isRequired" ],
+      "required": ["fieldType", "verb", "internalName", "isRequired"],
       "additionalProperties": false
     },
     "createSiteColumnXml": {
@@ -863,7 +939,7 @@
           "description": "Indicates whether this change should be pushed to lists that already reference this field. Defaults to true."
         }
       },
-      "required": [ "verb", "schemaXml" ],
+      "required": ["verb", "schemaXml"],
       "additionalProperties": false
     },
     "setSiteExternalSharingCapability": {
@@ -879,7 +955,7 @@
           "description": "A string specifying the sharing capability for the site."
         }
       },
-      "required": [ "capability", "verb" ],
+      "required": ["capability", "verb"],
       "additionalProperties": false
     },
     "setRegionalSettings": {
@@ -907,69 +983,133 @@
           "description": "Specifies whether the site should use 12-hour or 24-hour time."
         }
       },
-      "required": [ "sortOrder", "verb" ],
+      "required": ["sortOrder", "verb"],
       "additionalProperties": false
     },
     "setSiteBranding": {
-        "type": "object",
-        "properties": {
-            "verb": {
-                "type": "string",
-                "pattern": "^setSiteBranding$"
-            },
-            "navigationLayout": {
-                "type": "string",
-                "pattern": "^(Cascade|Megamenu)$",
-                "description": "Specifies the layout of the navigation. If this parameter is omitted, the layout will not be changed."
-            },
-            "headerLayout": {
-                "type": "string",
-                "pattern": "^(Standard|Compact)$",
-                "description": "Specifies the layout of the header. If this parameter is omitted, the layout will not be changed."
-            },
-            "headerBackground": {
-                "type": "string",
-                "pattern": "^(None|Neutral|Soft|Strong)$",
-                "description": "Specifies the emphasis on the background color of the header. If this parameter is omitted, it will not be changed."
-            },
-            "showFooter": {
-                "type": "boolean",
-                "description": "Specifies whether the footer should be visible. If this parameter is omitted. The visibility of the footer will not be changed."
-            }
+      "type": "object",
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^setSiteBranding$"
         },
-        "required": [ "verb" ],
-        "additionalProperties": false
-    }
-    },  
-    "type": "object",
-    "properties": {
-        "actions": {
-            "title": "array of supported actions",
-            "type": "array",
-            "items": {
-                "anyOf": [
-                    { "$ref": "#/definitions/activateSPFeature" },
-                    { "$ref": "#/definitions/associateExtension" },
-                    { "$ref": "#/definitions/addPrincipalToSPGroup" },
-                    { "$ref": "#/definitions/addNavLink" },
-                    { "$ref": "#/definitions/applyTheme" },
-                    { "$ref": "#/definitions/createContentType" },
-                    { "$ref": "#/definitions/createSiteColumn" },
-                    { "$ref": "#/definitions/createSiteColumnXml" },
-                    { "$ref": "#/definitions/createSPList" },
-                    { "$ref": "#/definitions/installSolution" },
-                    { "$ref": "#/definitions/joinHubSite" },
-                    { "$ref": "#/definitions/removeNavLink" },
-                    { "$ref": "#/definitions/setRegionalSettings" },
-                    { "$ref": "#/definitions/setSiteBranding" },
-                    { "$ref": "#/definitions/setSiteLogo" },
-                    { "$ref": "#/definitions/setSiteExternalSharingCapability" },
-                    { "$ref": "#/definitions/triggerFlow" }
-                ]
-            },
-            "additionalItems": false
+        "navigationLayout": {
+          "type": "string",
+          "pattern": "^(Cascade|Megamenu)$",
+          "description": "Specifies the layout of the navigation. If this parameter is omitted, the layout will not be changed."
         },
-        "$schema": { "type": "string" }
+        "headerLayout": {
+          "type": "string",
+          "pattern": "^(Standard|Compact)$",
+          "description": "Specifies the layout of the header. If this parameter is omitted, the layout will not be changed."
+        },
+        "headerBackground": {
+          "type": "string",
+          "pattern": "^(None|Neutral|Soft|Strong)$",
+          "description": "Specifies the emphasis on the background color of the header. If this parameter is omitted, it will not be changed."
+        },
+        "showFooter": {
+          "type": "boolean",
+          "description": "Specifies whether the footer should be visible. If this parameter is omitted. The visibility of the footer will not be changed."
+        }
+      },
+      "required": ["verb"],
+      "additionalProperties": false
     },
+    "setFooterLogo": {
+      "type": "object",
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^setFooterLogo$"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "The image URL of the footer logo. If empty string is provided, the current footer logo will be removed."
+        },
+        "imageUrlType": {
+          "type": "string",
+          "enum": ["WebRelativeUrl", "TemplateImage"],
+          "description": "Optional parameter. Specifies the type of imageUrl. The default is WebRelativeUrl."
+        }
+      },
+      "required": ["verb", "imageUrl"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "actions": {
+      "title": "array of supported actions",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/activateSPFeature"
+          },
+          {
+            "$ref": "#/definitions/deactivateSPFeature"
+          },
+          {
+            "$ref": "#/definitions/associateExtension"
+          },
+          {
+            "$ref": "#/definitions/addPrincipalToSPGroup"
+          },
+          {
+            "$ref": "#/definitions/addNavLink"
+          },
+          {
+            "$ref": "#/definitions/applyTheme"
+          },
+          {
+            "$ref": "#/definitions/createContentType"
+          },
+          {
+            "$ref": "#/definitions/createSiteColumn"
+          },
+          {
+            "$ref": "#/definitions/createSiteColumnXml"
+          },
+          {
+            "$ref": "#/definitions/createSPList"
+          },
+          {
+            "$ref": "#/definitions/installSolution"
+          },
+          {
+            "$ref": "#/definitions/joinHubSite"
+          },
+          {
+            "$ref": "#/definitions/removeNavLink"
+          },
+          {
+            "$ref": "#/definitions/setRegionalSettings"
+          },
+          {
+            "$ref": "#/definitions/setSiteBranding"
+          },
+          {
+            "$ref": "#/definitions/setSiteLogo"
+          },
+          {
+            "$ref": "#/definitions/setSiteLogoFromFile"
+          },
+          {
+            "$ref": "#/definitions/setSiteExternalSharingCapability"
+          },
+          {
+            "$ref": "#/definitions/triggerFlow"
+          },
+          {
+            "$ref": "#/definitions/setFooterLogo"
+          }
+        ]
+      },
+      "additionalItems": false
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
   "additionalProperties": false
 }
