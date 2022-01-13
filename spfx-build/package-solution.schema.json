@@ -259,7 +259,7 @@
                 "type": "string"
               },
               "title": "Solution Screenshots",
-              "description": "Relative paths to the screenshots. Base path is the base package directory. The screenshots will be displayed on the App's About page. The developer may add up to 5 screenshots."
+              "description": "Relative paths or absolute external URLs to the screenshots. The base for relative paths is the base package directory. The screenshots will be displayed on the App's About page. The developer may add up to 5 screenshots."
             },
             "videoUrl": {
               "title": "Video link (YouTube or Vimeo only)",
