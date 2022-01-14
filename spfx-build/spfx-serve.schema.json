@@ -3,14 +3,11 @@
   "title": "SPFx Serve Task Configuration",
   "description": "Defines parameters for the webserver which is spun up by the SPFx Serve Task",
   "type": "object",
-
   "definitions": {
     "SpfxServeSessionConfiguration": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "pageUrl"
-      ],
+      "required": ["pageUrl"],
       "properties": {
         "pageUrl": {
           "title": "Page URL",
@@ -26,9 +23,7 @@
           "patternProperties": {
             "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$": {
               "type": "object",
-              "required": [
-                "location"
-              ],
+              "required": ["location"],
               "properties": {
                 "location": {
                   "title": "Location",
@@ -38,7 +33,8 @@
                     "ClientSideExtension.ApplicationCustomizer",
                     "ClientSideExtension.ListViewCommandSet.ContextMenu",
                     "ClientSideExtension.ListViewCommandSet.CommandBar",
-                    "ClientSideExtension.ListViewCommandSet"
+                    "ClientSideExtension.ListViewCommandSet",
+                    "ClientSideExtension.SearchQueryModifier"
                   ]
                 },
                 "properties": {
@@ -57,9 +53,7 @@
           "patternProperties": {
             "^[A-z0-9]+$": {
               "type": "object",
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "id": {
                   "title": "ID",
@@ -90,9 +84,7 @@
       "description": "Specify a set of configurations that the serve task can use to load a test page",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "default"
-      ],
+      "required": ["default"],
       "properties": {
         "default": {
           "$ref": "#/definitions/SpfxServeSessionConfiguration"
@@ -110,10 +102,7 @@
       "description": "Parameters which configure the API server, which runs simultaneously and allows for mock testing",
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "port",
-        "entryPath"
-      ],
+      "required": ["port", "entryPath"],
       "properties": {
         "port": {
           "title": "API Port",
@@ -127,6 +116,18 @@
           "type": "string"
         }
       }
+    },
+
+    "contentBase": {
+      "title": "Static Server Base",
+      "description": "The project relative path or array of paths to serve static content from",
+      "type": ["string", "array"]
+    },
+
+    "contentBasePublicPath": {
+      "title": "Static Server URL Path",
+      "description": "The URL path to serve static content requests from",
+      "type": "string"
     },
 
     "initialPage": {
@@ -144,6 +145,12 @@
     "hostname": {
       "title": "Hostname",
       "description": "The name of the host on which serve is running. Defaults to 'localhost'",
+      "type": "string"
+    },
+
+    "ipAddress": {
+      "title": "IP Address",
+      "description": "IP address of the host on which serve is running. This parameter is helpful when using Docker containers. For example, to set the serve host as '0.0.0.0'.",
       "type": "string"
     },
 
@@ -173,7 +180,7 @@
 
     "tryCreateDevCertificate": {
       "title": "Should Create Dev Certificate",
-      "description": "If true, when gulp-core-build-serve is initialized and a dev certificate doesn't already exist and hasn't been specified, attempt to generate one and trust it automatically.",
+      "description": "If true, when serve is initialized and a dev certificate doesn't already exist and hasn't been specified, attempt to generate one and trust it automatically.",
       "type": "boolean"
     }
   }
