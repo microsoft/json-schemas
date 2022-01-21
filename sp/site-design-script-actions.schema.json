@@ -21,24 +21,26 @@
       },
       "required": ["featureId", "verb"]
     },
-    "deactivateSPFeature": {
+    "addContentTypesFromHub": {
       "type": "object",
       "properties": {
         "verb": {
           "type": "string",
-          "pattern": "^deactivateSPFeature$"
+          "pattern": "^addContentTypesFromHub$"
         },
-        "featureId": {
-          "type": "string",
-          "description": "The Guid of the feature to deactivate."
-        },
-        "scope": {
-          "type": "string",
-          "enum": ["web", "site"],
-          "description": "Optional parameter. The scope of the feature to deactivate. Defaults to web."
+        "ids": {
+          "type": "array",
+          "description": "Optional parameter. If provided, an array of content type ids indicating the content types to be synced from the content type hub. If not provided, this action will sync all content types from the content type hub",
+          "items": [
+            {
+              "type": "string",
+              "description": "The content type id"
+            }
+          ]
         }
       },
-      "required": ["featureId", "verb"]
+      "required": ["verb"],
+      "additionalProperties": false
     },
     "associateExtension": {
       "type": "object",
@@ -120,6 +122,21 @@
             "type": "string"
           }
         },
+        "output": {
+          "type": "object",
+          "description": "Optional parameter. Used to bind list properties to run parameters.",
+          "properties": {
+            "webRelativeUrl": {
+              "type": "string",
+              "description": "Optional parameter. If provided, the web-relative url of the list will be bound to the provided run parameter label."
+            },
+            "absoluteUrl": {
+              "type": "string",
+              "description": "Optional parameter. If provided, the absolute url of the list will be bound to the provided run parameter label."
+            }
+          },
+          "additionalProperties": false
+        },
         "subactions": {
           "description": "Sub-actions to run on the list.",
           "type": "array",
@@ -186,6 +203,25 @@
       },
       "required": ["listName", "templateType", "verb"],
       "additionalProperties": false
+    },
+    "deactivateSPFeature": {
+      "type": "object",
+      "properties": {
+        "verb": {
+          "type": "string",
+          "pattern": "^deactivateSPFeature$"
+        },
+        "featureId": {
+          "type": "string",
+          "description": "The Guid of the feature to deactivate."
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["web", "site"],
+          "description": "Optional parameter. The scope of the feature to deactivate. Defaults to web."
+        }
+      },
+      "required": ["featureId", "verb"]
     },
     "SPListSubactions": {
       "addContentType": {
@@ -492,6 +528,10 @@
           "viewType2": {
             "type": "string",
             "description": "Optional parameter. Specifies type data for the view."
+          },
+          "viewDataXml": {
+            "type": "string",
+            "description": "Optional parameter, The xml specifying the view data."
           },
           "replaceViewFields": {
             "type": "boolean",
@@ -1047,7 +1087,7 @@
             "$ref": "#/definitions/activateSPFeature"
           },
           {
-            "$ref": "#/definitions/deactivateSPFeature"
+            "$ref": "#/definitions/addContentTypesFromHub"
           },
           {
             "$ref": "#/definitions/associateExtension"
@@ -1072,6 +1112,9 @@
           },
           {
             "$ref": "#/definitions/createSPList"
+          },
+          {
+            "$ref": "#/definitions/deactivateSPFeature"
           },
           {
             "$ref": "#/definitions/installSolution"
