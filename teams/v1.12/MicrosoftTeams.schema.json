@@ -937,11 +937,11 @@
       "properties": {
         "permissions": {
           "type": "object",
-          "description": "Specify Permissions which App lists for accessing Resource.",
+          "description": "List of permissions that the app needs to function.",
           "additionalProperties": false,
           "properties": {
             "resourceSpecific": {
-              "description": "App's resource specific permissions provided by user.",
+              "description": "Permissions that guard data access on a resource instance level.",
               "maxItems": 16,
               "type": "array",
               "uniqueItems": true,
@@ -951,7 +951,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "The Permission name of app's permission node.",
+                    "description": "The name of the resource-specific permission.",
                     "maxLength": 128
                   },
                   "type": {
@@ -960,7 +960,7 @@
                       "Application",
                       "Delegated"
                     ],
-                    "description": "The Permission type of app's permission node."
+                    "description": "The type of the resource-specific permission."
                   }
                 },
                 "required": [
