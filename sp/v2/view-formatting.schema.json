@@ -14,6 +14,14 @@
           "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/tile-formatting.schema.json"
         }
       }
+    },
+    {
+      "properties": {
+        "kanbanProps": {
+          "description": "JSON object that defines cards in 'Board' layout.",
+          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/board-formatting.schema.json"
+        }
+      }
     }
   ]
 }
