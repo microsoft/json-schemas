@@ -165,7 +165,8 @@
         "a",
         "img",
         "svg",
-        "path"
+        "path",
+        "filepreview"
       ]
     },
     "children": {
@@ -457,6 +458,28 @@
       "description": "Allow inline editing for a field",
       "pattern": "(\\@currentField(.\\w+)*|\\[\\$.+\\])$",
       "default": "[$FieldName]"
+    },
+    "filePreviewProps": {
+      "type": "object",
+      "description": "Object that defines additional properties to style fileTypeIcon and brandTypeIcon in the filepreview element",
+      "properties": {
+        "fileTypeIconClass": {
+          "description": "Class name or an Expression which evaluates to one, to add to the FileTypeIcon",
+          "$ref": "#/properties/attributes/class"
+        },
+        "fileTypeIconStyle": {
+          "description": "Style object or an Expression which evaluates to one, to add to the FileTypeIcon",
+          "$ref": "#/properties/style"
+        },
+        "brandTypeIconClass": {
+          "description": "Class name or an Expression which evaluates to one, to add to the BrandTypeIcon",
+          "$ref": "#/properties/attributes/class"
+        },
+        "brandTypeIconStyle": {
+          "description": "Style object or an Expression which evaluates to one, to add to the BrandTypeIcon",
+          "$ref": "#/properties/style"
+        }
+      }
     }
   },
   "oneOf": [
