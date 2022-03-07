@@ -11,6 +11,10 @@
     "formatter": {
       "description": "JSON object that defines formatting of a card.",
       "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#"
+    },
+    "commandBarProps": {
+      "description": "JSON object that defines command bar customization options",
+      "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/view-formatting.schema.json#definitions/commandBarProps"
     }
   }
 }
