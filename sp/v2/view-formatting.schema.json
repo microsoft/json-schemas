@@ -2,6 +2,188 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "ViewFormatter JSON",
   "description": "View Formatter JSON for SharePoint lists.",
+  "definitions": {
+    "commandBarProps": {
+      "type": "object",
+      "description": "JSON object that defines command bar customization options",
+      "additionalProperties": false,
+      "required": [
+        "commands"
+      ],
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "enum": [
+                  "new",
+                  "newFolder",
+                  "newWordDocument",
+                  "newExcelWorkbook",
+                  "newPowerPointPresentation",
+                  "newOneNoteNotebook",
+                  "newFormsForExcel",
+                  "newVisioDrawing",
+                  "upload",
+                  "uploadFile",
+                  "uploadFolder",
+                  "open",
+                  "share",
+                  "copyLink",
+                  "download",
+                  "rename",
+                  "copyTo",
+                  "moveTo",
+                  "delete",
+                  "edit",
+                  "comment",
+                  "editNewMenu",
+                  "powerBI",
+                  "powerBIVisualizeList",
+                  "automate",
+                  "automateCreateRule",
+                  "automateManageRules",
+                  "powerAutomate",
+                  "powerAutomateCreateFlow",
+                  "powerAutomateSeeFlows",
+                  "powerAutomateConfigureFlows",
+                  "aiBuilderCreate",
+                  "aiBuilderGoto",
+                  "aiBuilder",
+                  "alertMe",
+                  "newLink",
+                  "integrate",
+                  "manageAlert",
+                  "powerApps",
+                  "powerAppsCreateApp",
+                  "powerAppsSeeAllApps",
+                  "powerAppsCustomizeForms",
+                  "viewDocumentUnderstandingModels",
+                  "versionHistory",
+                  "openInImmersiveReader",
+                  "classifyAndExtract",
+                  "checkOut",
+                  "checkIn",
+                  "undoCheckOut",
+                  "properties",
+                  "pinItem",
+                  "exportExcel",
+                  "exportCSV",
+                  "export",
+                  "editInGridView",
+                  "sync",
+                  "uploadTemplate",
+                  "addTemplate",
+                  "openInOfficeOnline",
+                  "openInOfficeClient",
+                  "addShortcut",
+                  "pinToQuickAccess",
+                  "unpinFromQuickAccess"
+                ]
+              },
+              "hide": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/expression"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "enum": [
+                      "true",
+                      "false"
+                    ]
+                  }
+                ]
+              },
+              "position": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/expression"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^[0-9]+$"
+                  }
+                ]
+              },
+              "primary": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/expression"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "enum": [
+                      "true",
+                      "false"
+                    ]
+                  }
+                ]
+              },
+              "text": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/expression"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "iconName": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/expression"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "title": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/expression"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "sectionType": {
+                "enum": [
+                  "Primary",
+                  "Overflow"
+                ]
+              },
+              "selectionModes": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "NoSelection",
+                    "SingleSelection",
+                    "MultiSelection"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "key"
+            ]
+          }
+        }
+      }
+    }
+  },
   "type": "object",
   "allOf": [
     {
@@ -20,6 +202,14 @@
         "kanbanProps": {
           "description": "JSON object that defines cards in 'Board' layout.",
           "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/board-formatting.schema.json"
+        }
+      }
+    },
+    {
+      "properties": {
+        "calendarProps": {
+          "description": "JSON object that defines customization in 'Calendar' view.",
+          "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/calendar-formatting.schema.json"
         }
       }
     }
