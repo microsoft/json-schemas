@@ -33,11 +33,18 @@
     },
     {
       "type": "object",
-      "required": ["preloadOptions", "componentType", "title", "description"],
+      "required": [
+        "preloadOptions",
+        "componentType",
+        "title",
+        "description"
+      ],
       "properties": {
         "componentType": {
           "type": "string",
-          "enum": ["Application"]
+          "enum": [
+            "Application"
+          ]
         },
 
         "preloadOptions": {

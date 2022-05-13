@@ -1,0 +1,232 @@
+{
+  "id": "adaptive-card-extension-manifest.schema.json",
+  "title": "Adaptive Card Extension manifest",
+  "description": "All Adaptive Card Extension built on the SharePoint framework need a valid component manifest. This interface represents properties that are required by all types of BaseAdaptiveCardExtension. Adaptive Card Extension specific manifests will extend this interface to add properties required by that component type.",
+  "definitions": {
+    "predefinedGroups": {
+      "oneOf": [
+        {
+          "title": "Text, media, and content",
+          "description": "This group includes AdaptiveCardExtensions that display text, multi-media, documents, information from the web, and other rich content.",
+          "type": "string",
+          "pattern": "^cf066440-0614-43d6-98ae-0b31cf14c7c3$"
+        },
+        {
+          "title": "Discovery",
+          "description": "This group includes AdaptiveCardExtensions that organize, group, and filter content to help users discover information.",
+          "type": "string",
+          "pattern": "^1edbd9a8-0bfb-4aa2-9afd-14b8c45dd489$"
+        },
+        {
+          "title": "Communication and collaboration",
+          "description": "This group includes AdaptiveCardExtensions that facilitate information sharing, team work, and social interactions.",
+          "type": "string",
+          "pattern": "^75e22ed5-fa14-4829-850a-c890608aca2d$"
+        },
+        {
+          "title": "Planning and process",
+          "description": "This group includes AdaptiveCardExtensions that empower team productivity with the use of planning and process tools.",
+          "type": "string",
+          "pattern": "^1bc7927e-4a5e-4520-b540-71305c79c20a$"
+        },
+        {
+          "title": "Business and intelligence",
+          "description": "This group includes AdaptiveCardExtensions for tracking and analyzing data, and for integrating business flow with pages.",
+          "type": "string",
+          "pattern": "^4aca9e90-eff5-4fa1-bac7-728f5f157b66$"
+        },
+        {
+          "title": "Site tools",
+          "description": "This group includes AdaptiveCardExtensions for site information and management.",
+          "type": "string",
+          "pattern": "^070951d7-94da-4db8-b06e-9d581f1f55b1$"
+        },
+        {
+          "title": "Other",
+          "description": "This group includes AdaptiveCardExtensions not in other categories.",
+          "type": "string",
+          "pattern": "^5c03119e-3074-46fd-976b-c60198311f70$"
+        }
+      ]
+    }
+  },
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "$schema": { "type": "string" },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "properties": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "preconfiguredEntries": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" },
+        "experimentalData": {
+          "type": "object",
+          "title": "Experimental property bag",
+          "description": "Only use for properties not ready for production."
+        },
+        "hiddenFromToolbox": {
+          "type": "boolean",
+          "title": "Hidden from the modern SharePoint toolbox",
+          "description": "If set to \"true\", this AdaptiveCardExtension will not be visible on the modern SharePoint toolbox."
+        },
+        "isolationLevel": {
+          "type": "string",
+          "title": "Isolation Level",
+          "description": "Describes the level of isolation needed for the \"AdaptiveCardExtension\".",
+          "enum": ["None", "DOMIsolation", "DomainIsolation"]
+        },
+        "useFallbackWhenPropertiesUpdatedExternally": {
+          "type": "boolean",
+          "title": "Use fallback when properties updated externally",
+          "description": "If true, the AdaptiveCardExtension will be disposed and reloaded when the AdaptiveCardExtension data is updated by an external source. If false, the AdaptiveCardExtension data will be deserialized and the properties of the AdaptiveCardExtension will be updated, onAfterPropertiesUpdatedExternally will be executed. If undefined, AdaptiveCardExtensions developed with SPFx version below 1.9 will default to true and AdaptiveCardExtensions developed with a SPFx version 1.9 or greater will default to false."
+        },
+        "supportedHosts": {
+          "description": "An array indicates the AdaptiveCardExtension supports any of following hosts. Currently, only Dashboard is supported.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["Dashboard"]
+          }
+        },
+        "connectedTeamsAppId": {
+          "title": "ConnectedTeamsAppId",
+          "description": "Id matching the Teams SaaS application that the ACE will redirect to when a “full page” experience is required",
+          "type": "string"
+        },
+        "connectedSPFXAppId": {
+          "title": "ConnectedSPFXAppId",
+          "description": "Id of the SPFx application that the ACE will redirect to when a “full page” experience is required",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "type": "object",
+      "required": ["preconfiguredEntries", "componentType"],
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "enum": ["AdaptiveCardExtension"]
+        },
+
+        "preconfiguredEntries": {
+          "title": "Pre-configured Entries",
+          "description": "A AdaptiveCardExtension can have pre-configured properties like the title, description, toolbox group name and AdaptiveCardExtension specific custom properties.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "description": "This interface specifies the set of properties that can be pre-configured by a AdaptiveCardExtension developer. Each pre-configured instance of the AdaptiveCardExtension will need a copy of these properties. Organization admins and content authors can modify these properties on a need basis.",
+            "type": "object",
+
+            "properties": {
+              "cardSize": {
+                "title": "CardSize",
+                "description": "Size of the AdaptiveCardExtension when it is rendered. This is value must be one of the supported CardSizes defined in the sp-adaptive-card-base project",
+                "type": "string",
+                "enum": ["Medium", "Large"]
+              },
+              "title": {
+                "title": "Title",
+                "description": "Title of the AdaptiveCardExtension represented as a single a dictionary of locale keys to title values. This value will be displayed to the user in the toolbox. A dictionary must contain a \"default\" key. This title should be used in the Toolbox and other display areas. The AdaptiveCardExtension developer may give an initial title to the webpart. The organization admin and page author will have the ability to change this title as per need.",
+                "$ref": "localized-string.schema.json"
+              },
+
+              "description": {
+                "title": "Description",
+                "description": "Description of the AdaptiveCardExtension represented as a dictionary of locale keys to description values. This value will be displayed to the user in the toolbox. A dictionary must contain a 'default' key. This description should be used in the Toolbox tooltip and other display areas. The AdaptiveCardExtension developer may give an initial description to the webpart. The organization admin and page author will have the ability to change this description as per need.",
+                "$ref": "localized-string.schema.json"
+              },
+
+              "officeFabricIconFontName": {
+                "title": "Office Fabric Icon Name",
+                "description": " The icon for the AdaptiveCardExtension, to be displayed in the toolbox, represented as a character name in the Office 365 icon font file. The icon font is specified here: http://o365icons.cloudapp.net/. If this field has a value, the 'iconImageUrl' field will be ignored.",
+                "type": "string",
+                "minLength": 1
+              },
+
+              "iconImageUrl": {
+                "title": "Icon Image URL",
+                "description": " The icon for the WebPart, to be displayed in the toolbox, represented an image URL. The image at the URL must be exactly 38x38 px. If the 'officeFabricIconName' field does not have a value, this field must have a value.",
+                "type": "string",
+                "minLength": 10
+              },
+
+              "groupId": {
+                "title": "Group ID",
+                "description": "The group id to determine which modern group contains the AdaptiveCardExtension in modern site page. The SharePoint Framework reserves group ids for predefined groups. The developer can pick one from those groups. If the developer fills an id not in the predefined groups, it falls back to Other group.",
+                "type": "string",
+                "anyOf": [
+                  {
+                    "title": "Predefined Group",
+                    "$ref": "#/definitions/predefinedGroups"
+                  },
+                  {
+                    "description": "If the group ID is not from the predefined group list, the AdaptiveCardExtension will go to Other group.",
+                    "$ref": "guid.schema.json"
+                  }
+                ]
+              },
+
+              "group": {
+                "title": "Group",
+                "description": "The group name in web part picker. If no value is provided, then the ACE will be displayed in the Miscellaneous group.",
+                "$ref": "localized-string.schema.json"
+              },
+
+              "tags": {
+                "title": "Tags",
+                "description": "This field is used to tag a AdaptiveCardExtension with keywords that are different from the AdaptiveCardExtension group name. Tags can be used for categorization and searching of AdaptiveCardExtensions. For example, in the AdaptiveCardExtension toolbox.",
+                "type": "array",
+                "maxItems": 10,
+                "items": {
+                  "$ref": "localized-string.schema.json"
+                }
+              },
+
+              "properties": {
+                "title": "Properties",
+                "description": "every AdaptiveCardExtension is expected to have some custom properties. e.g. an image AdaptiveCardExtension may have the image url and caption text as custom properties, a list AdaptiveCardExtension may have the list id and list title as custom properties, and so on.",
+                "$ref": "any-value.schema.json"
+              }
+            },
+
+            "anyOf": [
+              {
+                "required": [
+                  "title",
+                  "description",
+                  "officeFabricIconFontName",
+                  "groupId",
+                  "properties",
+                  "cardSize"
+                ]
+              },
+              {
+                "required": ["title", "description", "iconImageUrl", "groupId", "properties", "cardSize"]
+              }
+            ],
+
+            "additionalProperties": false
+          }
+        }
+      },
+
+      "additionalProperties": true
+    }
+  ]
+}

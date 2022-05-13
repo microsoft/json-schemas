@@ -4,10 +4,14 @@
   "type": "object",
   "oneOf": [
     {
-      "required": ["default"]
+      "required": [
+        "default"
+      ]
     },
     {
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     }
   ],
   "properties": {

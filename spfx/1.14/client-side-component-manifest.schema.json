@@ -8,7 +8,11 @@
       "allOf": [
         {
           "type": "object",
-          "required": ["componentType", "alias", "version"],
+          "required": [
+            "componentType",
+            "alias",
+            "version"
+          ],
 
           "not": {
             "description": "If both properties are missing, this succeeds since it BOTH schemas are NOT matched. If only one property exists, this succeeds since BOTH schemas are NOT matched. If both properties are specified, this fails since BOTH schemas ARE matched",
@@ -17,7 +21,7 @@
               {
                 "type": "object",
                 "additionalProperties": true,
-                "required": ["requiresCustomScript"],
+                "required": [ "requiresCustomScript" ],
                 "properties": {
                   "requiresCustomScript": { "type": "boolean" }
                 }
@@ -25,7 +29,7 @@
               {
                 "type": "object",
                 "additionalProperties": true,
-                "required": ["safeWithCustomScriptDisabled"],
+                "required": [ "safeWithCustomScriptDisabled" ],
                 "properties": {
                   "safeWithCustomScriptDisabled": { "type": "boolean" }
                 }
@@ -46,8 +50,13 @@
             "componentType": {
               "type": "string",
               "title": "Component Type",
-              "description": "Type of client side component (\"Application\", \"Extension\", \"Library\", \"WebPart\", or \"AdaptiveCardExtension\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
-              "enum": ["Application", "WebPart", "Library", "Extension", "AdaptiveCardExtension"]
+              "description": "Type of client side component (\"Application\", \"Extension\", \"Library\", or \"WebPart\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
+              "enum": [
+                "Application",
+                "WebPart",
+                "Library",
+                "Extension"
+              ]
             },
 
             "loadLegacyFabricCss": {
@@ -71,7 +80,9 @@
                 },
                 {
                   "type": "string",
-                  "enum": ["*"]
+                  "enum": [
+                    "*"
+                  ]
                 }
               ]
             },
@@ -103,9 +114,6 @@
   },
 
   "oneOf": [
-    {
-      "$ref": "adaptive-card-extension-manifest.schema.json"
-    },
     {
       "$ref": "client-side-application-manifest.schema.json"
     },

@@ -25,11 +25,15 @@
     },
     {
       "type": "object",
-      "required": ["componentType"],
+      "required": [
+        "componentType"
+      ],
       "properties": {
         "componentType": {
           "type": "string",
-          "enum": ["Library"]
+          "enum": [
+            "Library"
+          ]
         }
       },
 

@@ -4,7 +4,10 @@
   "description": "Properties common to all deployable manifests.",
 
   "type": "object",
-  "required": ["id", "manifestVersion"],
+  "required": [
+    "id",
+    "manifestVersion"
+  ],
 
   "properties": {
     "manifestVersion": {
