@@ -69,6 +69,11 @@
           "title": "Feature XML Directory",
           "description": "The folder containing the raw feature_xml to import into the package. Defaults to 'feature_xml'",
           "type": "string"
+        },
+        "sharepointAssetDir": {
+          "title": "SharePoint Assets Directory",
+          "description": "The folder containing SharePoint assets (elements.xml, upgrade actions, etc.). Defaults to 'assets'",
+          "type": "string"
         }
       }
     },

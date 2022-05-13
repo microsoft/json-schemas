@@ -23,7 +23,9 @@
           "title": "Client-side Extension Type",
           "description": "For a command set, the extension type must be one of these values: ListViewCommandSet",
           "type": "string",
-          "enum": ["ListViewCommandSet"]
+          "enum": [
+            "ListViewCommandSet"
+          ]
         },
         "items": { "$ref": "any-value.schema.json" }
       },
@@ -37,7 +39,9 @@
     },
     {
       "type": "object",
-      "required": ["items"],
+      "required": [
+        "items"
+      ],
       "properties": {
         "items": {
           "type": "object",
@@ -46,7 +50,10 @@
           "patternProperties": {
             "^[A-Z0-9_]+$": {
               "type": "object",
-              "required": ["title", "type"],
+              "required": [
+                "title",
+                "type"
+              ],
               "properties": {
                 "title": {
                   "title": "Title",
@@ -55,7 +62,9 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["command"],
+                  "enum": [
+                    "command"
+                  ],
                   "title": "Type",
                   "description": "Type of the item. Currently only \"command\" is allowed."
                 },

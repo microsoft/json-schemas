@@ -10,11 +10,17 @@
       "title": "Module Configuration",
       "description": "This is the base interface for a script module's definition.",
 
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["component", "path", "localizedPath"]
+          "enum": [
+            "component",
+            "path",
+            "localizedPath"
+          ]
         },
 
         "shouldNotPreload": {
@@ -30,24 +36,32 @@
     "path": {
       "oneOf": [
         {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["path"],
-          "properties": {
-            "path": {
-              "type": "string",
-              "title": "Path",
-              "description": "The path to the resource."
-            },
-            "integrity": {
-              "type": "string",
-              "title": "Integrity",
-              "description": "The subresource integrity hash of the resource referenced in \"path\"."
-            }
-          }
+          "type": "string",
+          "minLength": 5
         },
         {
-          "type": "string"
+          "title": "Path",
+          "description": "This is the base interface for a set of debug and non-debug/minimized paths.",
+          "type": "object",
+          "required": [
+            "default"
+          ],
+          "properties": {
+            "default": {
+              "title": "Default Path",
+              "description": "A path to this module's javascript resource either as a fully-qualified URL or as a path under the paths provided in the \"internalModuleBaseUrls\" field. The script referenced by this field is loaded by default unless a debug version of the script is provided and explicitly requested.",
+              "type": "string",
+              "minLength": 5
+            },
+
+            "debug": {
+              "title": "Debug Path",
+              "description": "A path to this module's debug javascript resource either as a fully-qualified URL or as a path under the paths provided in the \"internalModuleBaseUrls\" field. The script referenced by this field is only loaded if it is present and debug scripts are explicitly requested.",
+              "type": "string",
+              "minLength": 5
+            }
+          },
+          "additionalProperties": false
         }
       ]
     }
@@ -56,7 +70,9 @@
   "oneOf": [
     {
       "type": "object",
-      "required": ["internalModuleBaseUrls"],
+      "required": [
+        "internalModuleBaseUrls"
+      ],
       "properties": {
         "internalModuleBaseUrls": {
           "type": "array",
@@ -114,11 +130,17 @@
                     },
                     {
                       "type": "object",
-                      "required": ["type", "version", "id"],
+                      "required": [
+                        "type",
+                        "version",
+                        "id"
+                      ],
                       "properties": {
                         "type": {
                           "type": "string",
-                          "enum": ["component"]
+                          "enum": [
+                            "component"
+                          ]
                         },
 
                         "version": {
@@ -130,7 +152,9 @@
                             },
                             {
                               "type": "string",
-                              "enum": ["latest"]
+                              "enum": [
+                                "latest"
+                              ]
                             }
                           ]
                         },
@@ -173,11 +197,16 @@
                     },
                     {
                       "type": "object",
-                      "required": ["type", "path"],
+                      "required": [
+                        "type",
+                        "path"
+                      ],
                       "properties": {
                         "type": {
                           "type": "string",
-                          "enum": ["path"]
+                          "enum": [
+                            "path"
+                          ]
                         },
 
                         "path": {
@@ -229,11 +258,16 @@
                     },
                     {
                       "type": "object",
-                      "required": ["type", "defaultPath"],
+                      "required": [
+                        "type",
+                        "defaultPath"
+                      ],
                       "properties": {
                         "type": {
                           "type": "string",
-                          "enum": ["localizedPath"]
+                          "enum": [
+                            "localizedPath"
+                          ]
                         },
 
                         "defaultPath": {

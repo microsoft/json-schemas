@@ -6,11 +6,16 @@
   "definitions": {
     "clientSideExtensionManifest": {
       "type": "object",
-      "required": ["componentType", "extensionType"],
+      "required": [
+        "componentType",
+        "extensionType"
+      ],
       "properties": {
         "componentType": {
           "type": "string",
-          "enum": ["Extension"]
+          "enum": [
+            "Extension"
+          ]
         },
         "extensionType": {
           "title": "Client-side Extension Type",
@@ -21,8 +26,7 @@
             "ApplicationCustomizer",
             "FieldCustomizer",
             "ListViewCommandSet",
-            "SearchQueryModifier",
-            "FormCustomizer"
+            "SearchQueryModifier"
           ]
         }
       },
@@ -46,7 +50,7 @@
         "extensionType": { "$ref": "any-value.schema.json" },
         "preloadComponents": { "$ref": "any-value.schema.json" },
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
-        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json"},
         "loadLegacyFabricCss": { "$ref": "any-value.schema.json" }
       },
       "additionalProperties": false

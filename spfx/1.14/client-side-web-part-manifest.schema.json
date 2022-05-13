@@ -81,7 +81,7 @@
         "imageLinkPropertyNames": { "$ref": "any-value.schema.json" },
         "preloadComponents": { "$ref": "any-value.schema.json" },
         "requiredCapabilities": { "$ref": "any-value.schema.json" },
-        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json"},
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
         "loadLegacyFabricCss": { "$ref": "any-value.schema.json" },
         "canUpdateConfiguration": {
@@ -112,12 +112,15 @@
         "isolationLevel": {
           "type": "string",
           "title": "Isolation Level",
-          "description": "Describes the level of isolation needed for the \"WebPart\".",
-          "enum": ["None", "DOMIsolation", "DomainIsolation"]
+          "description": "Describes the level of isolation (\"None\", \"DOMIsolation\") needed for the \"WebPart\".",
+          "enum": [
+            "None",
+            "DOMIsolation"
+          ]
         },
         "supportsThemeVariants": {
           "type": "boolean",
-          "title": "Supports theme variants experience",
+          "title":"Supports theme variants experience",
           "description": "If set to \"true\", this web part supports and has been tested for the theme variants experience."
         },
         "useFallbackWhenPropertiesUpdatedExternally": {
@@ -129,13 +132,12 @@
           "description": "An array indicates the web part supports any of following hosts. If this property is missing the default is SharePointFullPage",
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "SharePointFullPage",
-              "SharePointWebPart",
-              "TeamsTab",
-              "TeamsPersonalApp",
-              "TeamsMeetingApp"
+          "type": "string",
+          "enum": [
+            "SharePointFullPage",
+            "SharePointWebPart",
+            "TeamsTab",
+            "TeamsPersonalApp"
             ]
           }
         }
@@ -147,11 +149,16 @@
     },
     {
       "type": "object",
-      "required": ["preconfiguredEntries", "componentType"],
+      "required": [
+        "preconfiguredEntries",
+        "componentType"
+      ],
       "properties": {
         "componentType": {
           "type": "string",
-          "enum": ["WebPart"]
+          "enum": [
+            "WebPart"
+          ]
         },
 
         "searchablePropertyNames": {
@@ -187,7 +194,10 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["OpenIDConnect", "Federated"]
+                "enum": [
+                  "OpenIDConnect",
+                  "Federated"
+                ]
               }
             }
           }
@@ -217,7 +227,7 @@
 
               "officeFabricIconFontName": {
                 "title": "Office Fabric Icon Name",
-                "description": " The icon for the Web Part, to be displayed in the toolbox, represented as a character name in the Office 365 icon font file. The icon font is specified here: http://o365icons.cloudapp.net/. If this field has a value, the 'iconImageUrl' field will be ignored.",
+                "description": " The icon for the Web Part, to be displayed in the toolbox, represented as a character name in the Office 365 icon font file. The icon font is specified here: https://developer.microsoft.com/en-us/fabric#/styles/icons. If this field has a value, the 'iconImageUrl' field will be ignored.",
                 "type": "string",
                 "minLength": 1
               },
@@ -240,7 +250,7 @@
                 "title": "Group ID",
                 "description": "The group id to determine which modern group contains the web part in modern site page. The SharePoint Framework reserves group ids for predefined groups. The developer can pick one from those groups. If the developer fills an id not in the predefined groups, it falls back to Other group.",
                 "type": "string",
-                "anyOf": [
+                "anyOf":[
                   {
                     "title": "Predefined Group",
                     "$ref": "#/definitions/predefinedGroups"
@@ -277,13 +287,22 @@
 
             "anyOf": [
               {
-                "required": ["title", "description", "officeFabricIconFontName", "groupId", "properties"]
+                "required": [
+                  "title",
+                  "description",
+                  "officeFabricIconFontName",
+                  "groupId",
+                  "properties"
+                ]
               },
               {
-                "required": ["title", "description", "iconImageUrl", "groupId", "properties"]
-              },
-              {
-                "required": ["title", "description", "fullPageAppIconImageUrl", "groupId", "properties"]
+                "required": [
+                  "title",
+                  "description",
+                  "iconImageUrl",
+                  "groupId",
+                  "properties"
+                ]
               }
             ],
 

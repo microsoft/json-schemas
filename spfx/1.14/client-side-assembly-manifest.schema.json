@@ -1,7 +1,7 @@
 {
-  "id": "client-side-library-manifest.schema.json",
-  "title": "Client-side library manifest",
-  "description": "A client-side library is a library containing reusable JavaScript code and/or resources.",
+  "id": "client-side-assembly-manifest.schema.json",
+  "title": "Client-side assembly manifest",
+  "description": "A client-side assembly is a standalone-executable bundle containing a component, the loader, and all of their dependencies.",
 
   "type": "object",
   "allOf": [
@@ -16,7 +16,7 @@
         "version": { "$ref": "any-value.schema.json" },
         "loaderConfig": { "$ref": "any-value.schema.json" },
         "componentType": { "$ref": "any-value.schema.json" },
-        "preloadComponents": { "$ref": "any-value.schema.json" }
+        "rootComponentId": { "$ref": "any-value.schema.json" }
       },
       "additionalProperties": false
     },
@@ -25,11 +25,22 @@
     },
     {
       "type": "object",
-      "required": ["componentType"],
+      "required": [
+        "componentType",
+        "rootComponentId"
+      ],
       "properties": {
         "componentType": {
           "type": "string",
-          "enum": ["Library"]
+          "enum": [
+            "Library"
+          ]
+        },
+
+        "rootComponentId": {
+          "$ref": "guid.schema.json",
+          "title": "ID",
+          "description": "The ID of the component from which the assembly is built."
         }
       },
 

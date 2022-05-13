@@ -67,6 +67,43 @@
               }
             }
           }
+        },
+
+        "formCustomizer": {
+          "title": "Form Customizer",
+          "description": "An optional form customizer to provide as query parameter to the page.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "componentId": {
+              "title": "Component Id",
+              "description": "The Id of the form customizer component.",
+              "type": "string"
+            },
+            "PageType": {
+              "title": "Page Type",
+              "description": "Form display mode.",
+              "type": "integer"
+            },
+            "RootFolder": {
+              "title": "Root Folder",
+              "description": "Server relative URL of the list folder.",
+              "type": "string"
+            },
+            "ContentTypeID": {
+              "title": "Content Type ID",
+              "description": "The ID of the content type to use for the form.",
+              "type": "string"
+            },
+            "ID": {
+              "title": "ID",
+              "description": "The ID of the list item",
+              "type": "integer"
+            },
+            "properties": {
+              "type": "object"
+            }
+          }
         }
       }
     }
