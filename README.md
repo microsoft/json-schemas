@@ -1,4 +1,4 @@
-# Microsoft scheman publishing repositories
+# Microsoft JSON schema publishing repository
 
 This repository contains schemas which are published at  https://developer.microsoft.com/json-schemas/. Maintenance and publishing is performed by Microsoft employees from different organizations. 
 
