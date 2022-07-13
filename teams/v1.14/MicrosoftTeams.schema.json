@@ -674,46 +674,6 @@
         ]
       }
     },
-    "scopeConstraints": {
-      "type": "object",
-      "properties": {
-        "teams": {
-          "type": "array",
-          "description": "A list of team thread ids to which your app is restricted to.",
-          "maxItems": 128,
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Team's thread Id.",
-                "type": "string",
-                "maxLength": 64
-              }
-            },
-            "required": [ "id" ],
-            "additionalProperties": false
-          }
-        },
-        "groupChats": {
-          "type": "array",
-          "description": "A list of chat thread ids to which your app is restricted to.",
-          "maxItems": 128,
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Chat's thread Id.",
-                "type": "string",
-                "maxLength": 64
-              }
-            },
-            "required": [ "id" ],
-            "additionalProperties": false
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "permissions": {
       "type": "array",
       "description": "Specifies the permissions the app requests from users.",
