@@ -801,7 +801,7 @@
     },
     "supportedChannelTypes": {
       "type": "array",
-      "description": "The set of supported channel type that an app belongs to.",
+      "description": "List of 'non-standard' channel types that the app supports. Note: Channels of standard type are supported by default if the app supports team scope.",
       "maxItems": 2,
       "items": {
         "enum": [
