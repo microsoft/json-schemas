@@ -22,37 +22,37 @@
           "pattern": "^cf066440-0614-43d6-98ae-0b31cf14c7c3$"
         },
         {
-          "title": "Discovery",
+          "title": "Documents, lists, and libraries",
           "description": "This group includes web parts that organize, group, and filter content to help users discover information.",
           "type": "string",
           "pattern": "^1edbd9a8-0bfb-4aa2-9afd-14b8c45dd489$"
         },
         {
-          "title": "Communication and collaboration",
+          "title": "Feeds",
           "description": "This group includes web parts that facilitate information sharing, team work, and social interactions.",
           "type": "string",
           "pattern": "^75e22ed5-fa14-4829-850a-c890608aca2d$"
         },
         {
-          "title": "Planning and process",
+          "title": "News, people and events",
           "description": "This group includes web parts that empower team productivity with the use of planning and process tools.",
           "type": "string",
           "pattern": "^1bc7927e-4a5e-4520-b540-71305c79c20a$"
         },
         {
-          "title": "Business and intelligence",
+          "title": "Data Analysis",
           "description": "This group includes web parts for tracking and analyzing data, and for integrating business flow with pages.",
           "type": "string",
           "pattern": "^4aca9e90-eff5-4fa1-bac7-728f5f157b66$"
         },
         {
-          "title": "Site tools",
-          "description": "This group includes web parts for site information and management.",
+          "title": "Regional information",
+          "description": "This group includes web parts that display information based on current region and geographical location",
           "type": "string",
-          "pattern": "^070951d7-94da-4db8-b06e-9d581f1f55b1$"
+          "pattern": "^cfc8bda5-cb9b-49e3-8526-2ee6e52b256a$"
         },
         {
-          "title": "Other",
+          "title": "Advanced",
           "description": "This group includes web parts not in other categories.",
           "type": "string",
           "pattern": "^5c03119e-3074-46fd-976b-c60198311f70$"
@@ -288,6 +288,18 @@
             ],
 
             "additionalProperties": false
+          }
+        },
+
+        "propertiesMetadata": {
+          "additionalProperties": false,
+          "type": "object",
+          "required": ["current"],
+          "properties": {
+            "current": {
+              "type": "object",
+              "additionalProperties": true
+            }
           }
         }
       },
