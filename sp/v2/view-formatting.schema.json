@@ -86,7 +86,7 @@
               "hide": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/expression"
+                    "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#/definitions/expression"
                   },
                   {
                     "type": "boolean"
@@ -102,7 +102,7 @@
               "position": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/expression"
+                    "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#/definitions/expression"
                   },
                   {
                     "type": "number"
@@ -116,7 +116,7 @@
               "primary": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/expression"
+                    "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#/definitions/expression"
                   },
                   {
                     "type": "boolean"
@@ -132,7 +132,7 @@
               "text": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/expression"
+                    "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#/definitions/expression"
                   },
                   {
                     "type": "string"
@@ -142,7 +142,7 @@
               "iconName": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/expression"
+                    "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#/definitions/expression"
                   },
                   {
                     "type": "string"
@@ -152,7 +152,7 @@
               "title": {
                 "anyOf": [
                   {
-                    "$ref": "#/definitions/expression"
+                    "$ref": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json#/definitions/expression"
                   },
                   {
                     "type": "string"
