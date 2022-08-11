@@ -73,6 +73,7 @@
                   "exportCSV",
                   "export",
                   "editInGridView",
+                  "exitGridView",
                   "sync",
                   "uploadTemplate",
                   "addTemplate",
