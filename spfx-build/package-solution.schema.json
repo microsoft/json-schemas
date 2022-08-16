@@ -192,11 +192,15 @@
         "webApiPermissionRequests": {
           "title": "Web Api Permission Requests",
           "type": "array",
-          "description": "Create a list of required WebApiPermissionRequests neccesary for the solution.",
+          "description": "Create a list of required WebApiPermissionRequests necessary for the solution.",
           "items": {
             "type": "object",
             "additionalProperties": false,
             "required": ["resource", "scope"],
+            "dependencies": {
+              "appId": ["replyUrl"],
+              "replyUrl": ["appId"]
+            },
             "properties": {
               "resource": {
                 "title": "Resource",
@@ -206,6 +210,16 @@
               "scope": {
                 "title": "Scope",
                 "description": "Specifies the name of the scope claim that the resource application should expect in the OAuth 2.0 access token.",
+                "type": "string"
+              },
+              "appId": {
+                "title": "AppId",
+                "description": "Specifies the multi tenant application id of resource service principal application to which access should be granted",
+                "type": "string"
+              },
+              "replyUrl": {
+                "title": "ReplyUrl",
+                "description": "Specifies the multi tenant app's replyUrl of resource service principal application, we need this for consenting flow",
                 "type": "string"
               }
             }
