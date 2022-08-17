@@ -894,37 +894,6 @@
           "maxItems": 5,
           "type": "array",
           "uniqueItems": true
-        },
-        "filters": {
-          "description": "Meeting supported A/V filters.",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "id": {
-                "$ref": "#/definitions/guid",
-                "description": "A unique identifier for this A/V filter. This id must be a GUID."
-              },
-              "name": {
-                "type": "string",
-                "description": "A/V filter's name.",
-                "maxLength": 128
-              },
-              "thumbnail": {
-                "$ref": "#/definitions/relativePath",
-                "description": "A relative file path to a A/V filter's thumbnail."
-              }
-            },
-            "required": [ "id", "name", "thumbnail" ]
-          },
-          "maxItems": 100,
-          "type": "array",
-          "uniqueItems": true
-        },
-        "videoAppContentUrl": {
-          "type": "string",
-          "description": "The url which indicates A/V filters' video app content.",
-          "maxLength": 2048
         }
       },
       "description": "Specify meeting extension definition.",
