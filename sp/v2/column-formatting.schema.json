@@ -166,7 +166,8 @@
         "img",
         "svg",
         "path",
-        "filepreview"
+        "filepreview",
+        "p"
       ]
     },
     "children": {
@@ -365,6 +366,20 @@
             {
               "type": "string",
               "pattern": "^(?:x(?:Min|Mid|Max)Y(?:Min|Mid|Max)(?:\\s+(?:slice|meet))|none)$"
+            }
+          ]
+        },
+        "draggable": {
+          "description": "Specifies specifies whether an element is draggable or not",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/expression"
+            },
+            {
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           ]
         }
