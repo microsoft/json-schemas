@@ -270,7 +270,13 @@
 
               "properties": {
                 "title": "Properties",
-                "description": "every Web Part is expected to have some custom properties. e.g. an image Web Part may have the image url and caption text as custom properties, a list Web Part may have the list id and list title as custom properties, and so on.",
+                "description": "Every Web Part is expected to have some custom properties. e.g. an image Web Part may have the image url and caption text as custom properties, a list Web Part may have the list id and list title as custom properties, and so on.",
+                "$ref": "any-value.schema.json"
+              },
+
+              "dataVersion": {
+                "title": "Data Version",
+                "description": "Set a data version for this preconfigured entry. This is optional and can be used in cases where the SPPKG is updated independently from code (e.g. hosted on a CDN). Web Parts can read this value for backwards compatibility with out of date default properties.",
                 "$ref": "any-value.schema.json"
               }
             },
