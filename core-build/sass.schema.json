@@ -51,6 +51,12 @@
       "title": "Create CSS Files",
       "description": "If true, we will generate a CSS in the lib folder. If false, the CSS is directly embedded into the TypeScript file",
       "type": "boolean"
+    },
+
+    "quietDeps": {
+      "title": "Silence compiler warnings from dependencies",
+      "description": "If true, silences compiler warnings from stylesheets loaded through importers and load paths.",
+      "type": "boolean"
     }
   }
 }
