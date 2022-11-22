@@ -54,7 +54,7 @@
     },
 
     "quietDeps": {
-      "title": "Silence compiler warnings from dependencies",
+      "title": "Silence compiler warnings from dependencies", 
       "description": "If true, silences compiler warnings from stylesheets loaded through importers and load paths.",
       "type": "boolean"
     }
