@@ -182,7 +182,7 @@
                         "items": {
                             "enum": [
                                 "team",
-                                "groupchat"
+                                "groupChat"
                             ]
                         }
                     },
@@ -290,7 +290,7 @@
                             "enum": [
                                 "team",
                                 "personal",
-                                "groupchat"
+                                "groupChat"
                             ]
                         }
                     },
@@ -310,7 +310,7 @@
                                         "enum": [
                                             "team",
                                             "personal",
-                                            "groupchat"
+                                            "groupChat"
                                         ]
                                     }
                                 },
