@@ -112,7 +112,8 @@
         }
       },
       "required": [
-        "short"
+        "short",
+        "full"
       ]
     },
     "description": {
@@ -181,7 +182,7 @@
             "items": {
               "enum": [
                 "team",
-                "groupchat"
+                "groupChat"
               ]
             }
           },
@@ -369,7 +370,7 @@
               "enum": [
                 "team",
                 "personal",
-                "groupchat"
+                "groupChat"
               ]
             }
           },
@@ -389,7 +390,7 @@
                     "enum": [
                       "team",
                       "personal",
-                      "groupchat"
+                      "groupChat"
                     ]
                   }
                 },
@@ -822,7 +823,7 @@
       "enum": [
         "personal",
         "team",
-        "groupchat",
+        "groupChat",
         "meetings"
       ],
       "description": "The install scope defined for this app by default. This will be the option displayed on the button when a user tries to add the app"
