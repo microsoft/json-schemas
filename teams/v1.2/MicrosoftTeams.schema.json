@@ -78,7 +78,8 @@
                 }
             },
             "required": [
-                "short"
+                "short",
+                "full"
             ]
         },
         "description": {
