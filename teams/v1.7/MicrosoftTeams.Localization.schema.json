@@ -73,6 +73,5 @@
       "type": "string",
       "maxLength": 128
     }
-  },
-  "required": [ "name.short", "name.full", "description.short", "description.full" ]
+  }
 }
