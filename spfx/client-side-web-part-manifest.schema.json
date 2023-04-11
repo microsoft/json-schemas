@@ -138,6 +138,11 @@
               "TeamsMeetingApp"
             ]
           }
+        },
+        "supportsSelfFramingInTeams": {
+          "type": "boolean",
+          "title": "Allow to iframe pages from the same SharePoint tenant (domain)",
+          "description": "If set to \"true\", this web part can have iframed pages from the same tenant (domain). The flag is only applicable to web parts that are hosted as Teams applications."
         }
       },
       "additionalProperties": false
@@ -162,13 +167,13 @@
 
         "linkPropertyNames": {
           "title": "Link Property Names",
-          "description": "List of names of Web Part properties that are links and need to be link fixed up. Link fixup is a SharePoint feature to help make sure SharePoint internal links in the content are correct. Pages and content can be moved around within SharePoint site hierarchy.",
+          "description": "(Deprecated) Please use Web Part propertiesMetadata field instead.",
           "$ref": "#/definitions/propertyNamesArray"
         },
 
         "imageLinkPropertyNames": {
           "title": "Image Link Property Names",
-          "description": "List of names of Web Part properties that are image sources and need to be link fixed up and potentially preloaded for performance reasons.",
+          "description": "(Deprecated) Please use Web Part propertiesMetadata field instead.",
           "$ref": "#/definitions/propertyNamesArray"
         },
 
