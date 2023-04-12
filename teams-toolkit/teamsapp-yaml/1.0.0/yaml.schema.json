@@ -54,7 +54,7 @@
           { "$ref": "#/definitions/botframeworkCreate" },
           { "$ref": "#/definitions/fileCreateOrUpdateEnvironmentFile" },
           { "$ref": "#/definitions/fileCreateOrUpdateJsonFile" },
-          { "$ref": "#/definitions/prerequisiteInstall" },
+          { "$ref": "#/definitions/devToolInstall" },
           { "$ref": "#/definitions/m365TitleAcquire" },
           { "$ref": "#/definitions/spfxDeploy" },
           { "$ref": "#/definitions/teamsAppCopyAppPackageToSPFx" },
@@ -1071,7 +1071,19 @@
             "envs": {
               "type": "object",
               "description": "the environment variable(s) to be generated",
-              "additionalProperties": { "type": [ "boolean", "number", "string" ] }
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
             },
             "target": {
               "type": "string",
@@ -1121,10 +1133,10 @@
         }
       }
     },
-    "prerequisiteInstall": {
+    "devToolInstall": {
       "type": "object",
       "additionalProperties": false,
-      "description": "Install prerequisite(s). Refer to https://aka.ms/teamsfx-actions/prerequisite-install for more details.",
+      "description": "Install development tool(s). Refer to https://aka.ms/teamsfx-actions/devtool-install for more details.",
       "required": ["uses", "with"],
       "properties": {
         "name": {
@@ -1140,8 +1152,8 @@
         },
         "uses": {
           "type": "string",
-          "description": "Install prerequisite(s). Refer to https://aka.ms/teamsfx-actions/prerequisite-install for more details.",
-          "const": "prerequisite/install"
+          "description": "Install development tool(s). Refer to https://aka.ms/teamsfx-actions/devtool-install for more details.",
+          "const": "devTool/install"
         },
         "with": {
           "type": "object",
