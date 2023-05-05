@@ -20,4 +20,5 @@ steps:
     Destination: 'AzureBlob'
     storage: 'graphstagingblobstorage'
     ContainerName: 'content'
+    BlobPrefix: 'json-schemas'
     additionalFlags: '--sync-copy'
