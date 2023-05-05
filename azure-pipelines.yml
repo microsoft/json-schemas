@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- live
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- script: echo Triggering production deployment of JSON-SCHEMAS in github, this copy files to production blob storage!
+  displayName: 'Production deployment JSON-SCHEMAS'
+
+- task: AzureFileCopy@5
+  inputs:
+    SourcePath: '$(Build.Repository.LocalPath)\*'
+    azureSubscription: 'M365DevPortals-ContentDeployment-ProductionBlob- PRODUCTION'
+    Destination: 'AzureBlob'
+    storage: 'graphprodblobstorage'
+    ContainerName: 'content'
+    BlobPrefix: 'json-schemas'
+    additionalFlags: '--sync-copy'
