@@ -10,8 +10,8 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: echo Triggering staging deployment of JSON-SCHEMAS in github, this copy files to staging blob storage!
+  displayName: 'Staging  deployment JSON-SCHEMAS'
 
 - task: AzureFileCopy@5
   inputs:
