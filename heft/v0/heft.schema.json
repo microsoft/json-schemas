@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Heft Configuration",
+  "description": "Defines configuration used by core Heft.",
+  "type": "object",
+
+  "definitions": {
+    "anything": {
+      "type": ["array", "boolean", "integer", "number", "object", "string"],
+      "items": { "$ref": "#/definitions/anything" }
+    },
+
+    "heft-plugin": {
+      "description": "A plugin that can be used to extend Heft functionality.",
+      "type": "object",
+      "required": ["pluginPackage"],
+      "additionalProperties": false,
+      "properties": {
+        "pluginPackage": {
+          "description": "The plugin package name.",
+          "type": "string",
+          "pattern": "[^\\\\]"
+        },
+        "pluginName": {
+          "description": "Name of the plugin to load from the specified package. If not specified and the plugin package provides a single plugin, that plugin will be loaded.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*([-][a-z0-9]+)*$"
+        },
+        "options": {
+          "description": "Options to pass to the plugin.",
+          "type": "object"
+        }
+      }
+    },
+
+    "heft-event": {
+      "description": "An event that can be used to extend Heft functionality.",
+      "type": "object",
+      "required": ["eventKind"],
+      "additionalProperties": false,
+      "properties": {
+        "eventKind": {
+          "description": "Name of the event to trigger.",
+          "type": "string",
+          "enum": ["copyFiles", "deleteFiles", "runScript", "nodeService"]
+        },
+        "options": {
+          "description": "Options to pass to the event.",
+          "type": "object"
+        }
+      }
+    },
+
+    "delete-operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourcePath": {
+          "title": "Source Path",
+          "type": "string",
+          "description": "The target file or folder, relative to the project root. Settings such as \"includeGlobs\" and \"excludeGlobs\" will be resolved relative to this folder. If no globs or file extensions are specified, the file or folder will be deleted.",
+          "pattern": "[^\\\\]"
+        },
+        "fileExtensions": {
+          "type": "array",
+          "description": "If specified, this option recursively scans all folders under \"sourcePath\" and includes any files that match the specified extensions.  (If \"fileExtensions\" and \"includeGlobs\" are both specified, their selections are added together.)",
+          "items": {
+            "type": "string",
+            "pattern": "^\\.[A-z0-9-_.]*[A-z0-9-_]+$"
+          }
+        },
+        "excludeGlobs": {
+          "type": "array",
+          "description": "A list of glob patterns that exclude files or folders from being copied.  The paths are resolved relative to \"sourcePath\".  These exclusions eliminate items that were selected by the \"includeGlobs\" or \"fileExtensions\" setting.",
+          "items": {
+            "type": "string",
+            "pattern": "[^\\\\]"
+          }
+        },
+        "includeGlobs": {
+          "type": "array",
+          "description": "A list of glob patterns that select files to be copied.  The paths are resolved relative to \"sourcePath\".",
+          "items": {
+            "type": "string",
+            "pattern": "[^\\\\]"
+          }
+        }
+      }
+    }
+  },
+
+  "additionalProperties": false,
+
+  "properties": {
+    "$schema": {
+      "description": "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to. Editors may download the schema and use it to perform syntax highlighting.",
+      "type": "string"
+    },
+
+    "extends": {
+      "description": "Optionally specifies another JSON config file that this file extends from.  This provides a way for standard settings to be shared across multiple projects.",
+      "type": "string"
+    },
+
+    "heftPlugins": {
+      "type": "array",
+      "description": "List of Heft plugins that are used by a project.",
+      "items": { "$ref": "#/definitions/heft-plugin" }
+    },
+
+    "aliasesByName": {
+      "type": "object",
+      "description": "Defines aliases for existing Heft actions, and allows them to be invoked by name with default parameters.",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9]*([-][a-z0-9]+)*$": {
+          "description": "Defines a Heft action alias.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["actionName"],
+          "properties": {
+            "actionName": {
+              "description": "The name of the Heft action to invoke.",
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*([-][a-z0-9]+)*$"
+            },
+            "defaultParameters": {
+              "description": "Parameters to pass to the Heft action by default. These parameters will be appended after the specified action and before any user-specified parameters.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "phasesByName": {
+      "type": "object",
+      "description": "Heft phases that can be run during an execution of Heft.",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9]*([-][a-z0-9]+)*$": {
+          "description": "Defines a Heft phase.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "phaseDescription": {
+              "description": "A description of the purpose of the Heft phase.",
+              "type": "string"
+            },
+
+            "phaseDependencies": {
+              "type": "array",
+              "description": "List of phase names that must be run before this phase.",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*([-][a-z0-9]+)*$"
+              }
+            },
+
+            "cleanFiles": {
+              "description": "List of delete operations to perform when cleaning at the beginning of phase execution.",
+              "type": "array",
+              "items": { "$ref": "#/definitions/delete-operation" }
+            },
+
+            "tasksByName": {
+              "description": "Heft tasks that are run during an execution of the Heft phase.",
+              "type": "object",
+              "additionalProperties": false,
+              "patternProperties": {
+                "^[a-z][a-z0-9]*([-][a-z0-9]+)*$": {
+                  "type": "object",
+                  "description": "Defines a Heft task.",
+                  "additionalProperties": false,
+                  "oneOf": [
+                    {
+                      "required": ["taskPlugin"],
+                      "properties": {
+                        "taskPlugin": { "$ref": "#/definitions/heft-plugin" }
+                      }
+                    },
+                    {
+                      "required": ["taskEvent"],
+                      "properties": {
+                        "taskEvent": { "$ref": "#/definitions/heft-event" }
+                      }
+                    }
+                  ],
+                  "properties": {
+                    "taskPlugin": {
+                      "description": "A plugin that can be used to extend Heft functionality.",
+                      "type": "object"
+                    },
+                    "taskEvent": {
+                      "description": "An event that can be used to extend Heft functionality.",
+                      "type": "object"
+                    },
+
+                    "taskDependencies": {
+                      "type": "array",
+                      "description": "List of task names that must be run before this task.",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9]*([-][a-z0-9]+)*$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
