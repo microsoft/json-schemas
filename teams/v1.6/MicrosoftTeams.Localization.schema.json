@@ -65,6 +65,5 @@
       "type": "string",
       "maxLength": 64
     }
-  },
-  "required": [ "name.short", "name.full", "description.short", "description.full" ]
+  }
 }
