@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- script: echo Triggering staging deployment of JSON-SCHEMAS in github, this copy files to staging blob storage!
+  displayName: 'Staging  deployment JSON-SCHEMAS'
+
+- task: AzureFileCopy@5
+  inputs:
+    SourcePath: '$(Build.Repository.LocalPath)\*'
+    azureSubscription: 'M365DevPortals-ContentDeployment-StagingBlob - STAGING'
+    Destination: 'AzureBlob'
+    storage: 'graphstagingblobstorage'
+    ContainerName: 'content'
+    BlobPrefix: 'json-schemas'
+    additionalFlags: '--sync-copy'
