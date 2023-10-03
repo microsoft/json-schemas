@@ -12,8 +12,7 @@
             "description": "The version of the schema this manifest is using.",
             "enum": [
                 "devPreview",
-                "m365DevPreview",
-                "m365devpreview"
+                "m365DevPreview"
             ]
         },
         "version": {
@@ -116,7 +115,8 @@
                 }
             },
             "required": [
-                "short"
+                "short",
+                "full"
             ]
         },
         "description": {
@@ -185,7 +185,7 @@
                         "items": {
                             "enum": [
                                 "team",
-                                "groupchat"
+                                "groupChat"
                             ]
                         }
                     },
@@ -289,24 +289,13 @@
                     },
                     "scopes": {
                         "type": "array",
-                        "description": "Specifies whether the tab offers an experience in the context of a channel in a team, or an experience scoped to an individual user alone or group chat. These options are non-exclusive. Currently static tabs are only supported in the 'personal' scope.",
+                        "description": "Specifies whether the tab offers an experience in the context of a channel in a team, or an experience scoped to an individual user alone or a group chat. These options are non-exclusive. Currently static tabs are only supported in the 'personal' scope.",
                         "maxItems": 3,
                         "items": {
                             "enum": [
                                 "team",
                                 "personal",
                                 "groupChat"
-                            ]
-                        }
-                    },
-                    "meetingSurfaces": {
-                        "type": "array",
-                        "description": "The set of meetingSurfaceItem scopes that a tab belongs to",
-                        "maxItems": 2,
-                        "items": {
-                            "enum": [
-                                "sidePanel",
-                                "stage"
                             ]
                         }
                     },
@@ -361,21 +350,30 @@
                     "configuration": {
                         "type": "object",
                         "additionalProperties": false,
-                        "properties": {
-                            "team": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "fetchTask": {
-                                        "$ref": "#/properties/composeExtensions/items/properties/commands/items/properties/fetchTask"
-                                    },
-                                    "taskInfo": {
-                                        "$ref": "#/properties/composeExtensions/items/properties/commands/items/properties/taskInfo"
-                                    }
-                                }
+                        "team": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "fetchTask": {
+                                "type": "boolean",
+                                "description": "A boolean value that indicates if it should fetch bot config task module dynamically.",
+                                "default": false
                             },
-                            "groupChat": {
-                                "$ref": "#/properties/bots/items/properties/configuration/properties/team"
+                            "taskInfo": {
+                                "$ref": "#/definitions/taskInfo",
+                                "description": "Task module to be launched when fetch task set to false."
+                            }
+                        },
+                        "groupChat": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "fetchTask": {
+                                "type": "boolean",
+                                "description": "A boolean value that indicates if it should fetch bot config task module dynamically.",
+                                "default": false
+                            },
+                            "taskInfo": {
+                                "$ref": "#/definitions/taskInfo",
+                                "description": "Task module to be launched when fetch task set to false."
                             }
                         }
                     },
@@ -417,7 +415,7 @@
                             "enum": [
                                 "team",
                                 "personal",
-                                "groupchat"
+                                "groupChat"
                             ]
                         }
                     },
@@ -437,7 +435,7 @@
                                         "enum": [
                                             "team",
                                             "personal",
-                                            "groupchat"
+                                            "groupChat"
                                         ]
                                     }
                                 },
@@ -552,6 +550,10 @@
                         "$ref": "#/definitions/relativePath",
                         "description": "A relative file path to the api specification file in the manifest package."
                     },
+                    "apiResponseRenderingTemplateFile": {
+                        "$ref": "#/definitions/relativePath",
+                        "description": "A relative file path for api response rendering template file."
+                    },
                     "canUpdateConfiguration": {
                         "type": [
                             "boolean",
@@ -580,10 +582,6 @@
                                     ],
                                     "description": "Type of the command",
                                     "default": "query"
-                                },
-                                "apiResponseRenderingTemplateFile": {
-                                    "$ref": "#/definitions/relativePath",
-                                    "description": "A relative file path for api response rendering template file."
                                 },
                                 "context": {
                                     "type": "array",
@@ -696,27 +694,8 @@
                                     }
                                 },
                                 "taskInfo": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "properties": {
-                                        "title": {
-                                            "type": "string",
-                                            "description": "Initial dialog title",
-                                            "maxLength": 64
-                                        },
-                                        "width": {
-                                            "$ref": "#/definitions/taskInfoDimension",
-                                            "description": "Dialog width - either a number in pixels or default layout such as 'large', 'medium', or 'small'"
-                                        },
-                                        "height": {
-                                            "$ref": "#/definitions/taskInfoDimension",
-                                            "description": "Dialog height - either a number in pixels or default layout such as 'large', 'medium', or 'small'"
-                                        },
-                                        "url": {
-                                            "$ref": "#/definitions/httpsUrl",
-                                            "description": "Initial webview URL"
-                                        }
-                                    }
+                                    "$ref": "#/definitions/taskInfo",
+                                    "description": "Task module to be launched when fetch task set to false."
                                 }
                             },
                             "required": [
@@ -751,20 +730,14 @@
                                             }
                                         },
                                         "supportsAnonymousAccess": {
-                                            "type": [
-                                                "boolean",
-                                                "null"
-                                            ],
-                                            "description": "A boolean that indicates whether the app's link message handler supports anonymous invoke flow.",
-                                            "default": null
+                                            "type": "boolean",
+                                            "description": "A boolean value that indicates whether the app's link message handler supports anonymous invoke flow. [Deprecated]. This property has been superceded by 'supportsAnonymizedPayloads'.",
+                                            "default": false
                                         },
                                         "supportsAnonymizedPayloads": {
-                                            "type": [
-                                                "boolean",
-                                                "null"
-                                            ],
-                                            "description": "A boolean that indicates whether the app's link message handler supports anonymous invoke flow.",
-                                            "default": null
+                                            "type": "boolean",
+                                            "description": "A boolean value that indicates whether the app's link message handler supports anonymous invoke flow.",
+                                            "default": false
                                         }
                                     }
                                 }
@@ -912,7 +885,7 @@
                         "properties": {
                             "type": {
                                 "type": "string",
-                                "maxLength": 64
+                                "maxLength": 32
                             },
                             "description": {
                                 "type": "string",
@@ -977,7 +950,7 @@
             "enum": [
                 "personal",
                 "team",
-                "groupchat",
+                "groupChat",
                 "meetings"
             ],
             "description": "The install scope defined for this app by default. This will be the option displayed on the button when a user tries to add the app"
@@ -1078,7 +1051,7 @@
                             },
                             "name": {
                                 "type": "string",
-                                "description": "A/V filter's name.",
+                                "description": "Video filter's name.",
                                 "maxLength": 128
                             },
                             "thumbnail": {
@@ -1092,13 +1065,13 @@
                             "thumbnail"
                         ]
                     },
-                    "maxItems": 100,
+                    "maxItems": 32,
                     "type": "array",
                     "uniqueItems": true
                 },
                 "videoFiltersConfigurationUrl": {
                     "type": "string",
-                    "description": "The url which indicates video filters' video app configuration.",
+                    "description": "A URL for configuring the video filters.",
                     "maxLength": 2048
                 },
                 "supportsStreaming": {
@@ -1106,21 +1079,10 @@
                     "description": "A boolean value indicating whether this app can stream the meeting's audio video content to an RTMP endpoint.",
                     "default": false
                 },
-                "isAnonymousAccessAllowed": {
-                    "type": [
-                        "boolean",
-                        "null"
-                    ],
-                    "description": "A boolean value indicating whether this app allows management by anonymous users.",
-                    "default": null
-                },
                 "supportsAnonymousGuestUsers": {
-                    "type": [
-                        "boolean",
-                        "null"
-                    ],
-                    "description": "A boolean value indicating whether this app allows management by anonymous users.",
-                    "default": null
+                    "type": "boolean",
+                    "description": "A boolean value indicating whether this app supports access by anonymous guest users.",
+                    "default": false
                 }
             },
             "description": "Specify meeting extension definition.",
@@ -1133,40 +1095,11 @@
             "properties": {
                 "permissions": {
                     "type": "object",
-                    "description": "Specify Permissions which App lists for accessing Resource.",
+                    "description": "List of permissions that the app needs to function.",
                     "additionalProperties": false,
                     "properties": {
-                        "orgWide": {
-                            "description": "App's organization wide classic permissions provided by user.",
-                            "maxItems": 16,
-                            "type": "array",
-                            "uniqueItems": true,
-                            "items": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "description": "The Permission name of app's permission node.",
-                                        "maxLength": 128
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "Application",
-                                            "Delegated"
-                                        ],
-                                        "description": "The Permission type of app's permission node."
-                                    }
-                                },
-                                "required": [
-                                    "name",
-                                    "type"
-                                ]
-                            }
-                        },
                         "resourceSpecific": {
-                            "description": "App's resource specific permissions provided by user.",
+                            "description": "Permissions that guard data access on a resource instance level.",
                             "maxItems": 16,
                             "type": "array",
                             "uniqueItems": true,
@@ -1176,7 +1109,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "The Permission name of app's permission node.",
+                                        "description": "The name of the resource-specific permission.",
                                         "maxLength": 128
                                     },
                                     "type": {
@@ -1185,7 +1118,7 @@
                                             "Application",
                                             "Delegated"
                                         ],
-                                        "description": "The Permission type of app's permission node."
+                                        "description": "The type of the resource-specific permission."
                                     }
                                 },
                                 "required": [
@@ -1241,6 +1174,29 @@
         "languageTag": {
             "type": "string",
             "pattern": "^[A-Za-z0-9]{1,8}(-[A-Za-z0-9]{1,8}){0,2}$"
+        },
+        "taskInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Initial dialog title.",
+                    "maxLength": 64
+                },
+                "width": {
+                    "$ref": "#/definitions/taskInfoDimension",
+                    "description": "Dialog width - either a number in pixels or default layout such as 'large', 'medium', or 'small'."
+                },
+                "height": {
+                    "$ref": "#/definitions/taskInfoDimension",
+                    "description": "Dialog height - either a number in pixels or default layout such as 'large', 'medium', or 'small'."
+                },
+                "url": {
+                    "$ref": "#/definitions/httpsUrl",
+                    "description": "Initial webview URL."
+                }
+            }
         },
         "taskInfoDimension": {
             "type": "string",
@@ -1421,16 +1377,6 @@
                     "type": "string",
                     "description": "View where the page should be opened. Maximum length is 64 characters.  ",
                     "maxLength": 64
-                },
-                "multiselect": {
-                    "type": "boolean",
-                    "description": "Whether allows the action to have multiple selection.",
-                    "default": false
-                },
-                "supportsNoItemContext": {
-                    "type": "boolean",
-                    "description": "Whether allows task pane add-ins to activate without the Reading Pane enabled or a message selected. ",
-                    "default": false
                 }
             },
             "additionalProperties": false,
