@@ -550,10 +550,6 @@
                         "$ref": "#/definitions/relativePath",
                         "description": "A relative file path to the api specification file in the manifest package."
                     },
-                    "apiResponseRenderingTemplateFile": {
-                        "$ref": "#/definitions/relativePath",
-                        "description": "A relative file path for api response rendering template file."
-                    },
                     "canUpdateConfiguration": {
                         "type": [
                             "boolean",
@@ -582,6 +578,10 @@
                                     ],
                                     "description": "Type of the command",
                                     "default": "query"
+                                },
+                                "apiResponseRenderingTemplateFile": {
+                                    "$ref": "#/definitions/relativePath",
+                                    "description": "A relative file path for api response rendering template file."
                                 },
                                 "context": {
                                     "type": "array",
