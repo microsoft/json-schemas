@@ -350,30 +350,32 @@
                     "configuration": {
                         "type": "object",
                         "additionalProperties": false,
-                        "team": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "fetchTask": {
-                                "type": "boolean",
-                                "description": "A boolean value that indicates if it should fetch bot config task module dynamically.",
-                                "default": false
+                        "properties": {
+                            "team": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "fetchTask": {
+                                    "type": "boolean",
+                                    "description": "A boolean value that indicates if it should fetch bot config task module dynamically.",
+                                    "default": false
+                                },
+                                "taskInfo": {
+                                    "$ref": "#/definitions/taskInfo",
+                                    "description": "Task module to be launched when fetch task set to false."
+                                }
                             },
-                            "taskInfo": {
-                                "$ref": "#/definitions/taskInfo",
-                                "description": "Task module to be launched when fetch task set to false."
-                            }
-                        },
-                        "groupChat": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "fetchTask": {
-                                "type": "boolean",
-                                "description": "A boolean value that indicates if it should fetch bot config task module dynamically.",
-                                "default": false
-                            },
-                            "taskInfo": {
-                                "$ref": "#/definitions/taskInfo",
-                                "description": "Task module to be launched when fetch task set to false."
+                            "groupChat": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "fetchTask": {
+                                    "type": "boolean",
+                                    "description": "A boolean value that indicates if it should fetch bot config task module dynamically.",
+                                    "default": false
+                                },
+                                "taskInfo": {
+                                    "$ref": "#/definitions/taskInfo",
+                                    "description": "Task module to be launched when fetch task set to false."
+                                }
                             }
                         }
                     },
