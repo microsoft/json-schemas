@@ -587,7 +587,7 @@
                                 },
                                 "apiResponseRenderingTemplateFile": {
                                     "$ref": "#/definitions/relativePath",
-                                    "description": "A relative file path for api response rendering template file."
+                                    "description": "A relative file path for api response rendering template file. The schema of the file can be referred to in this link:'https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.ResponseRenderingTemplate.schema.json'."
                                 },
                                 "context": {
                                     "type": "array",
