@@ -18,6 +18,10 @@
         "displayName": {
           "type": "string",
           "description": "how the artifact is listed in the UI"
+        },
+		"Description": {
+          "type": "string",
+          "description": "verbal description of the artifact, as written by the author"
         }
       },
       "required": ["type", "displayName"]
