@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.github.com/Lordfirespeed/NuGet-GameLib-Dehumidifier/tree/main/assets/dotnet-target-framework-moniker.schema.json",
   "title": ".NET Target Framework Moniker",
   "description": "Used to specify a particular .NET framework version as a build target.",
   "type": "string",
