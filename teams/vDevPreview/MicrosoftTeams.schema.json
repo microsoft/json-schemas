@@ -1142,6 +1142,14 @@
         },
         "actions": {
             "$ref": "#/definitions/elementActions"
+        },
+        "dashboardCards": {
+            "type": "array",
+            "description": "Defines the list of cards which could be pinned to dashboards that can provide summarized view of information relevant to user.",
+            "items": {
+                "$ref": "#/definitions/dashboardCard"
+            },
+            "additionalProperties": false
         }
     },
     "required": [
@@ -2130,6 +2138,95 @@
                     }
                 }
             }
+        },
+        "dashboardCard": {
+            "type": "object",
+            "description": "Cards wich could be pinned to dashboard providing summarized view of information relevant to user.",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/guid",
+                    "description": "Unique Id for the card. Must be unique inside the app."
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "Represents the name of the card. Maximum length is 255 characters.",
+                    "maxLength": 255
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the card.Maximum length is 255 characters.",
+                    "maxLength": 255
+                },
+                "pickerGroupId": {
+                    "$ref": "#/definitions/guid",
+                    "description": "Id of the group in the card picker. This must be guid."
+                },
+                "icon": {
+                    "$ref": "#/definitions/dashboardCardIcon"
+                },
+                "contentSource": {
+                    "$ref": "#/definitions/dashboardCardContentSource"
+                },
+                "defaultSize": {
+                    "type": "string",
+                    "enum": [
+                        "medium",
+                        "large"
+                    ],
+                    "description": "Rendering Size for dashboard card."
+                }
+            },
+            "required": [
+                "id",
+                "displayName",
+                "pickerGroupId",
+                "description",
+                "contentSource",
+                "defaultSize"
+            ],
+            "additionalProperties": false
+        },
+        "dashboardCardIcon": {
+            "type": "object",
+            "description": "Represents a configuration for the source of the card’s content",
+            "properties": {
+                "iconUrl": {
+                    "type": "string",
+                    "description": "The icon for the card, to be displayed in the toolbox and card bar, represented as URL.",
+                    "maxLength": 2048
+                },
+                "officeUIFabricIconName": {
+                    "type": "string",
+                    "description": "Office UI Fabric/Fluent UI icon friendly name for the card. This value will be used if ‘iconUrl’ is not specified.",
+                    "maxLength": 255
+                }
+            },
+            "additionalProperties": false
+        },
+        "dashboardCardContentSource": {
+            "type": "object",
+            "description": "Represents a configuration for the source of the card’s content.",
+            "properties": {
+                "sourceType": {
+                    "type": "string",
+                    "enum": [
+                        "bot"
+                    ],
+                    "description": "The content of the dashboard card is sourced from a bot."
+                },
+                "botConfiguration": {
+                    "type": "object",
+                    "description": "The configuration for the bot source. Required if sourceType is set to bot.",
+                    "properties": {
+                        "botId": {
+                            "$ref": "#/definitions/guid",
+                            "description": "The unique Microsoft app ID for the bot as registered with the Bot Framework."
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
         }
     }
 }
