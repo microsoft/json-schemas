@@ -691,6 +691,11 @@
                                                         "value"
                                                     ]
                                                 }
+                                            },
+                                            "semanticDescription": {
+                                                "type": "string",
+                                                "description": "semantic description of the parameter. This is typically meant for consumption by the large language model.",
+                                                "maxLength": 2000
                                             }
                                         },
                                         "required": [
@@ -702,6 +707,11 @@
                                 "taskInfo": {
                                     "$ref": "#/definitions/taskInfo",
                                     "description": "Task module to be launched when fetch task set to false."
+                                },
+                                "semanticDescription": {
+                                    "type": "string",
+                                    "description": "semantic description of the command. This is typically meant for consumption by the large language model.",
+                                    "maxLength": 5000
                                 }
                             },
                             "required": [
@@ -1148,6 +1158,18 @@
             "description": "Defines the list of cards which could be pinned to dashboards that can provide summarized view of information relevant to user.",
             "items": {
                 "$ref": "#/definitions/dashboardCard"
+            },
+            "additionalProperties": false
+        },
+        "intuneInfo": {
+            "type": "object",
+            "description": "The Intune-related properties for the app.",
+            "properties": {
+                "supportedMobileAppManagementVersion": {
+                    "type": "string",
+                    "description": "Supported mobile app managment version that the app is compliant with.",
+                    "maxLength": 64
+                }
             },
             "additionalProperties": false
         }
