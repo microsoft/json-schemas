@@ -307,6 +307,10 @@
               "type": "string",
               "pattern": "^[a-z0-9.@]+([-/][a-z0-9.@]+)*$"
             }
+          },
+          "subspaceName": {
+            "description": "(EXPERIMENTAL) An optional entry for specifying which subspace this project belongs to if the subspaces feature is enabled.",
+            "type": "string"
           }
         },
         "additionalProperties": false,
@@ -340,6 +344,20 @@
         },
         "postRushBuild": {
           "description": "The list of scripts to run after the Rush build command finishes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preRushx": {
+          "description": "The list of scripts to run before rushx starts.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "postRushx": {
+          "description": "The list of scripts to run after rushx finishes.",
           "type": "array",
           "items": {
             "type": "string"
