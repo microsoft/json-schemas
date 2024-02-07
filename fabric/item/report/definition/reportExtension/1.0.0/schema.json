@@ -1,0 +1,203 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "Name of the extension.",
+            "default": "extension",
+            "type": "string"
+        },
+        "entities": {
+            "description": "Entities in the semantic model that are extended.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ReportExtensionEntity.7a98ec06"
+            }
+        },
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report-extension/1.0.0/schema.json"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "name"
+    ],
+    "definitions": {
+        "ReportExtensionEntity.7a98ec06": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the extension entity - must match a name in the semantic model.",
+                    "type": "string"
+                },
+                "measures": {
+                    "description": "Additional measures to include on this entity.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ReportExtensionMeasure.1b09f82f"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name"
+            ]
+        },
+        "ReportExtensionMeasure.1b09f82f": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the extension measure - must be unique across the semantic model and other extension measures.",
+                    "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/PrimitiveTypeName.ccd02159",
+                    "description": "Data type for the measure."
+                },
+                "dataCategory": {
+                    "description": "Extended data category for the measure.",
+                    "type": "string"
+                },
+                "expression": {
+                    "description": "DAX expression for this measure.",
+                    "type": "string"
+                },
+                "hidden": {
+                    "description": "Sets the measure to be hidden.",
+                    "type": "boolean"
+                },
+                "formatString": {
+                    "description": "Format string for this measure in VBA format.",
+                    "type": "string"
+                },
+                "measureTemplate": {
+                    "description": "Template information that was used to create this measure.",
+                    "$ref": "#/definitions/ReportExtensionMeasureTemplate.7cfeffa8"
+                },
+                "description": {
+                    "description": "A description for the measure.",
+                    "type": "string"
+                },
+                "displayFolder": {
+                    "description": "Display folder for the measure.",
+                    "type": "string"
+                },
+                "annotations": {
+                    "description": "Additional annotations to include for this measure.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MeasureExtensionAnnotation.3a1fdb3f"
+                    }
+                },
+                "references": {
+                    "description": "References to other model measures and extensions used in the DAX of this measure.",
+                    "$ref": "#/definitions/ExpressionReferences.43ae603e"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "dataType",
+                "expression",
+                "name"
+            ]
+        },
+        "PrimitiveTypeName.ccd02159": {
+            "enum": [
+                "Binary",
+                "Boolean",
+                "Date",
+                "DateTime",
+                "DateTimeZone",
+                "Decimal",
+                "Double",
+                "Duration",
+                "Integer",
+                "Json",
+                "None",
+                "Null",
+                "Text",
+                "Time",
+                "Variant"
+            ],
+            "type": "string"
+        },
+        "ReportExtensionMeasureTemplate.7cfeffa8": {
+            "type": "object",
+            "properties": {
+                "daxTemplateName": {
+                    "description": "Name of the template.",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Version of the template used.",
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "daxTemplateName",
+                "version"
+            ]
+        },
+        "MeasureExtensionAnnotation.3a1fdb3f": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Unique name for this annotation.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value for the annotation.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "ExpressionReferences.43ae603e": {
+            "type": "object",
+            "properties": {
+                "unrecognizedReferences": {
+                    "description": "False if all references are recognized.",
+                    "type": "boolean"
+                },
+                "measures": {
+                    "description": "References to model measures and other extensions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MeasureReference.ad680435"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "MeasureReference.ad680435": {
+            "type": "object",
+            "properties": {
+                "schema": {
+                    "description": "Name of the schema - leave empty if using model measures. Use name of extension if using other measures from the extension.",
+                    "type": "string"
+                },
+                "entity": {
+                    "description": "Entity name of the measure.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the measure.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "entity",
+                "name"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
