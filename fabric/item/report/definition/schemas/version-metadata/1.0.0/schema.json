@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/version-metadata/1.0.0/schema.json"
+        },
+        "version": {
+            "description": "Defines the report definition version, format of version is major.minor.patch\n- major: >=1\n- minor: >=0\n- patch: always 0",
+            "pattern": "^[1-9][0-9]*\\.(0|[1-9][0-9]*)\\.0$",
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "version"
+    ],
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
