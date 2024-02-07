@@ -78,13 +78,13 @@
             "properties": {
                 "scopeId": {
                     "description": "Defines the intersection of scopes. For example - product color = red.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                 },
                 "wildcard": {
                     "description": "Defines a match against all instances of a given DataView scope. Does not match Subtotals.\nDeprecated: - Use roles instead.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                     }
                 },
                 "roles": {
@@ -98,7 +98,7 @@
                     "description": "Matches against the totals and subtotals.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                     }
                 },
                 "dataViewWildcard": {

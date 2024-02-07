@@ -167,7 +167,7 @@
                 },
                 "field": {
                     "description": "Defines the field from your data that is filtered.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                 },
                 "type": {
                     "description": "The type of a filter.",
@@ -207,7 +207,7 @@
                 },
                 "filter": {
                     "description": "Defines the actual filter definition - it is dependent on the type of filter.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
                 },
                 "restatement": {
                     "description": "A custom restatement to show for the filter - only applies to Passthrough filter type. For all other filters, a restatement is generated based on the filter definition.",
@@ -271,7 +271,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>.9caaad68",
@@ -403,7 +403,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{pageInformationName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};pageInformationQnaPodEnabled:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};pageInformationAltName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};pageInformationType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>.9caaad68",
@@ -423,7 +423,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{pageSizeTypes:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};pageSizeWidth:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};pageSizeHeight:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -443,7 +443,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -463,7 +463,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};}>.9caaad68",
@@ -483,7 +483,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>_1.9caaad68",
@@ -503,7 +503,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};titleSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};searchTextSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};headerSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};checkboxAndApplyColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};};}>.9caaad68",
@@ -523,7 +523,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};textSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};}>.9caaad68",
@@ -543,7 +543,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};refreshType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};duration:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{duration:boolean;};};dialogLauncher:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{};};measure:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};checkEvery:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};}>.9caaad68",
@@ -563,7 +563,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};perspectiveRef:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{perspective:boolean;};};};applyToAllPages:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{applyToAllPages:boolean;};};}>.9caaad68",
@@ -727,7 +727,7 @@
                     "description": "Data fields to use for the auto page generation",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                     }
                 },
                 "visualContainerConfigurations": {
@@ -759,7 +759,7 @@
                     "description": "Specific data fields used to build this visual from the full set of selected fields",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                     }
                 }
             },

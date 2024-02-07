@@ -215,7 +215,7 @@
                 },
                 "field": {
                     "description": "Defines the field from your data that is filtered.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                 },
                 "type": {
                     "description": "The type of a filter.",
@@ -255,7 +255,7 @@
                 },
                 "filter": {
                     "description": "Defines the actual filter definition - it is dependent on the type of filter.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
                 },
                 "restatement": {
                     "description": "A custom restatement to show for the filter - only applies to Passthrough filter type. For all other filters, a restatement is generated based on the filter definition.",
@@ -319,7 +319,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>.9caaad68",
@@ -353,7 +353,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>.9caaad68",
@@ -373,7 +373,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>.9caaad68",

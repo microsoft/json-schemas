@@ -144,11 +144,11 @@
                 },
                 "filter": {
                     "description": "Defines a filter element as a partial query structure",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
                 },
                 "expression": {
                     "description": "Holds a single expression and associated metadata. \nName, NativeReferenceName, and Annotations may be specified for any expression.\nEach other property represents a specific type of expression and exactly one of these other properties must be specified.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                 },
                 "restatement": {
                     "type": "string"
@@ -273,7 +273,7 @@
                     "description": "Updated ordering of data.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QuerySortClause.3a4594a7"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QuerySortClause.3a4594a7"
                     }
                 },
                 "activeProjections": {
@@ -314,7 +314,7 @@
             "properties": {
                 "merge": {
                     "description": "ObjectDefinitions to be merged with the target.",
-                    "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/DataViewObjectDefinitions.022fbdf8"
+                    "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/DataViewObjectDefinitions.022fbdf8"
                 },
                 "remove": {
                     "description": "ObjectDefinitions to be deleted from the existing instances.",
@@ -338,7 +338,7 @@
                     "type": "string"
                 },
                 "selector": {
-                    "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc",
+                    "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc",
                     "description": "Scope at which to apply this change."
                 }
             },
@@ -354,7 +354,7 @@
             "additionalProperties": {
                 "type": "array",
                 "items": {
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                 }
             }
         },
@@ -371,7 +371,7 @@
             "type": "object",
             "properties": {
                 "expr": {
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2",
                     "description": "Parameter expression."
                 },
                 "index": {
@@ -526,7 +526,7 @@
                                 "^[0-9]+$": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                                     }
                                 }
                             }
@@ -557,7 +557,7 @@
                     "$ref": "#/definitions/DecomposedTree<QueryExpressionContainer>.3e622ce5"
                 },
                 "value": {
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
                 }
             },
             "additionalProperties": false
@@ -585,7 +585,7 @@
             "additionalProperties": {
                 "type": "array",
                 "items": {
-                    "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/DataRepetitionSelector.c81ac91d"
+                    "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/DataRepetitionSelector.c81ac91d"
                 }
             }
         },

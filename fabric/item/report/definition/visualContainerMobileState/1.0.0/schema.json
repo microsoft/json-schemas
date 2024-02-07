@@ -1,676 +1,30 @@
 {
     "type": "object",
     "properties": {
-        "name": {
-            "description": "A unique identifier for the visual across the whole page.",
-            "maxLength": 50,
-            "type": "string"
+        "objects": {
+            "description": "Specifies the mobile specific formatting changes for different \"objects\" of a visual.",
+            "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/DataViewObjectDefinitions.022fbdf8"
+        },
+        "visualContainerObjects": {
+            "description": "Specifies the mobile specific formatting changes for different \"objects\" of the visual container.",
+            "$ref": "#/definitions/TypedDataViewObjectDefinitions<{title:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};};};subTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};};};divider:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};ignorePadding:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};style:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};spacing:{properties:{customizeSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};verticalSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowSubTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitleArea:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};padding:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{top:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};bottom:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};left:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};right:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};lockAspect:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};general:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};allowBinnedLineSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};allowOverlappingPointsSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};keepLayerOrder:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};radius:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};dropShadow:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};preset:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};position:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowSpread:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowBlur:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};angle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowDistance:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};visualLink:{displayName:(resourceProvider:IStringResourceProvider)=>string;suppressFormatPainterCopy:boolean;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};bookmark:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{bookmark:boolean;};};};disabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};drillthroughSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};enabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};qna:{type:{qnaVisualLink:boolean;};};suppressDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};navigationSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};tooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};tooltipPlaceholderText:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};webUrl:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{misc:{webUrl:boolean;};};};};};visualTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};valueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};actionFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};themedValueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};};};stylePreset:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{name:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{stylePreset:boolean;};};};};};visualHeader:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};foreground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};showVisualInformationButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualWarningButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualErrorButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillRoleSelector:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillUpButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownLevelButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownExpandButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPinButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFilterRestatementButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFocusModeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCopyVisualImageButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSeeDataLayoutToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showOptionsMenu:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCommentButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showTooltipButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPersonalizeVisualButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSmartNarrativeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};visualHeaderTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{type:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};};};}>.9d93c182"
         },
         "position": {
             "$ref": "#/definitions/VisualContainerPosition.5bfcdbae",
-            "description": "Defines where the visual is position on the page and how big it should be, along\nwith z-index (stacking) for that visual.\nAlso defines the order in which visuals are navigated when using just keyboard (tabOrder)."
-        },
-        "filterConfig": {
-            "description": "Filters that apply to all this visual - on top of the filters defined for the report and page.",
-            "$ref": "#/definitions/FilterConfig.09c5d403"
-        },
-        "isHidden": {
-            "description": "Marks the visual as hidden.",
-            "type": "boolean"
-        },
-        "visual": {
-            "description": "Defines a chart to be shown inside of this container.",
-            "$ref": "#/definitions/VisualConfig.cf583d26"
-        },
-        "visualGroup": {
-            "description": "Defines that this container should be used as a grouping container.",
-            "$ref": "#/definitions/VisualGroupConfig.3ed5a719"
-        },
-        "parentGroupName": {
-            "description": "Name of the parent group (visual container), if it is part of one.",
-            "type": "string"
-        },
-        "annotations": {
-            "description": "Additional information to be saved (for example comments, readme, etc) for this visual.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/Annotation.512bf3af"
-            }
-        },
-        "howCreated": {
-            "description": "Source of creation of this visual.",
-            "type": "string",
-            "anyOf": [
-                {
-                    "const": "Default",
-                    "description": "Used when it doesn't fall in any of the buckets below."
-                },
-                {
-                    "const": "Copilot",
-                    "description": "Created by copilot."
-                },
-                {
-                    "const": "CheckboxTickedInFieldList",
-                    "description": "Selecting data from field list."
-                },
-                {
-                    "const": "DraggedToCanvas",
-                    "description": "Dragging data from field list to the canvas."
-                },
-                {
-                    "const": "VisualTypeIconClicked",
-                    "description": "Clicking a specific visual icon in visualizations list."
-                },
-                {
-                    "const": "DraggedToFieldWell",
-                    "description": "Dragging data from field list to field wells."
-                },
-                {
-                    "const": "InsertVisualButton",
-                    "description": "Clicking the \"Insert visual\" button in ribbon."
-                },
-                {
-                    "const": "WhatIfParameterControl",
-                    "description": "Automatically by what-if parameter."
-                },
-                {
-                    "const": "QnaAppBar",
-                    "description": "Ask a question in app bar."
-                },
-                {
-                    "const": "QnaDoubleClick",
-                    "description": "Double clicking on the canvas to generate a Q&A visual."
-                },
-                {
-                    "const": "QnaKeyboardShortcut",
-                    "description": "Use keyboard shortcut for Q&A visual."
-                },
-                {
-                    "const": "FieldParameterControl",
-                    "description": "Automatically by field parameters."
-                },
-                {
-                    "const": "CanvasBackgroundContextMenu",
-                    "description": "Using on-object context menu for the canvas."
-                },
-                {
-                    "const": "AssistedCreation"
-                },
-                {
-                    "const": "ContextMenuPaste",
-                    "description": "By using paste from context manu."
-                },
-                {
-                    "const": "CopyPaste",
-                    "description": "By using copy paste."
-                }
-            ]
+            "description": "Describes a mobile specific position for this visuals."
         },
         "$schema": {
             "description": "Defines the schema to use for an item.",
             "type": "string",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visual-container/1.0.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visual-container-mobile-state/1.0.0/schema.json"
         }
     },
     "additionalProperties": false,
     "required": [
         "$schema",
-        "name",
         "position"
     ],
     "definitions": {
-        "VisualContainerPosition.5bfcdbae": {
-            "type": "object",
-            "properties": {
-                "x": {
-                    "description": "Horizontal position of the left edge of the visual.\nShould be between 0 and width of the containing page.",
-                    "type": "number"
-                },
-                "y": {
-                    "description": "Vertical position of the top edge of the visual.\nShould be between 0 and height of the containing page.",
-                    "type": "number"
-                },
-                "z": {
-                    "description": "Defines the stacking order for the visual.\nHigher z-index visuals are shown on top of the lower ones.",
-                    "type": "number"
-                },
-                "height": {
-                    "description": "Height of the visual.\ny + height should be less than the height of the containing page.",
-                    "type": "number"
-                },
-                "width": {
-                    "description": "Width of the visual.\nx + width should be less than the width of the containing page.",
-                    "type": "number"
-                },
-                "tabOrder": {
-                    "description": "Defines the selection order for this visual when using keyboard (tab key)\nto navigate the visuals on the containing page.",
-                    "type": "number"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "height",
-                "width",
-                "x",
-                "y"
-            ]
-        },
-        "FilterConfig.09c5d403": {
-            "type": "object",
-            "properties": {
-                "filters": {
-                    "description": "Defines the definitions and metadata for the filters.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FilterContainer.53e03047"
-                    }
-                },
-                "filterSortOrder": {
-                    "description": "Defines how the filters sorted - by name or custom sorting\nIf custom sorting, then ordinal property of every filter is used as the sort order, \nfilters where ordinal is skipped will be shown at the end; ordering will fallback to display name of the field.",
-                    "type": "string",
-                    "anyOf": [
-                        {
-                            "const": "Ascending",
-                            "description": "Sorted ascending by display name of the filter field."
-                        },
-                        {
-                            "const": "Descending",
-                            "description": "Sorted descending by display name of the filter field."
-                        },
-                        {
-                            "const": "Custom",
-                            "description": "Sorted ascending by ordinal property of filters."
-                        }
-                    ]
-                }
-            },
-            "additionalProperties": false
-        },
-        "FilterContainer.53e03047": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "A unique name (across the whole report definition) defined for this filter.",
-                    "type": "string"
-                },
-                "displayName": {
-                    "description": "An alternate name to use when displaying this filter - by default the display name of the field will be used, if there is no field or display name, \nthen restatement of the filter will be shown. Only applies to certain filter types.",
-                    "type": "string"
-                },
-                "ordinal": {
-                    "description": "Defines the ordering of this filter w.r.t. other filters - only applies when Custom sort order is set.",
-                    "type": "number"
-                },
-                "field": {
-                    "description": "Defines the field from your data that is filtered.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
-                },
-                "type": {
-                    "description": "The type of a filter.",
-                    "type": "string",
-                    "anyOf": [
-                        {
-                            "const": "Categorical"
-                        },
-                        {
-                            "const": "Range"
-                        },
-                        {
-                            "const": "Advanced"
-                        },
-                        {
-                            "const": "Passthrough"
-                        },
-                        {
-                            "const": "TopN"
-                        },
-                        {
-                            "const": "Include"
-                        },
-                        {
-                            "const": "Exclude"
-                        },
-                        {
-                            "const": "RelativeDate"
-                        },
-                        {
-                            "const": "Tuple"
-                        },
-                        {
-                            "const": "RelativeTime"
-                        }
-                    ]
-                },
-                "filter": {
-                    "description": "Defines the actual filter definition - it is dependent on the type of filter.",
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
-                },
-                "restatement": {
-                    "description": "A custom restatement to show for the filter - only applies to Passthrough filter type. For all other filters, a restatement is generated based on the filter definition.",
-                    "type": "string"
-                },
-                "howCreated": {
-                    "description": "Specifies how this filter was first created.",
-                    "type": "string",
-                    "anyOf": [
-                        {
-                            "const": "Auto",
-                            "description": "Created automatically when a field is used in the visual."
-                        },
-                        {
-                            "const": "User",
-                            "description": "Filters created from fields not used in a visual by the user."
-                        },
-                        {
-                            "const": "Drill",
-                            "description": "Created when drilling down on a data point in a visual."
-                        },
-                        {
-                            "const": "Include",
-                            "description": "Created by including a data point in a visual."
-                        },
-                        {
-                            "const": "Exclude",
-                            "description": "Created by excluding a data point from a visual."
-                        },
-                        {
-                            "const": "Drillthrough",
-                            "description": "Created by drill context that is applied to the page when using drill-through\naction from another page."
-                        }
-                    ]
-                },
-                "isHiddenInViewMode": {
-                    "description": "Defines whether to hide this filter when viewing the report.",
-                    "type": "boolean"
-                },
-                "isLockedInViewMode": {
-                    "description": "Defines whether the filter value can be changed when viewing the report.",
-                    "type": "boolean"
-                },
-                "objects": {
-                    "description": "Formatting for different \"objects\" of a filter card",
-                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>.9d93c182"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "name"
-            ]
-        },
-        "TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>.9d93c182": {
-            "type": "object",
-            "properties": {
-                "general": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "selector": {
-                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
-                            },
-                            "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>.9caaad68",
-                                "description": "Describes the properties of the object to apply formatting changes to."
-                            }
-                        },
-                        "additionalProperties": false,
-                        "required": [
-                            "properties"
-                        ]
-                    }
-                }
-            },
-            "additionalProperties": false
-        },
-        "TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>.9caaad68": {
-            "type": "object",
-            "properties": {
-                "requireSingleSelect": {},
-                "isInvertedSelectionMode": {}
-            },
-            "additionalProperties": false
-        },
-        "VisualConfig.cf583d26": {
-            "type": "object",
-            "properties": {
-                "visualType": {
-                    "description": "Name of the visual.",
-                    "type": "string"
-                },
-                "autoSelectVisualType": {
-                    "description": "VisualType is automatically picked by the system based on the data used in the visual.",
-                    "type": "boolean"
-                },
-                "query": {
-                    "description": "Defines the data to be plotted in the visual.",
-                    "$ref": "#/definitions/Query.5f65001d"
-                },
-                "expansionStates": {
-                    "description": "Defines the specific data points that are expanded.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ExpansionState.a8c6fc15"
-                    }
-                },
-                "objects": {
-                    "description": "Specifies the formatting to be set for different \"objects\" of the visual.",
-                    "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/DataViewObjectDefinitions.022fbdf8"
-                },
-                "visualContainerObjects": {
-                    "description": "Specifies the formatting to be set for different \"objects\" of the container.",
-                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{title:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};};};subTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};};};divider:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};ignorePadding:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};style:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};spacing:{properties:{customizeSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};verticalSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowSubTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitleArea:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};padding:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{top:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};bottom:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};left:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};right:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};lockAspect:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};general:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};allowBinnedLineSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};allowOverlappingPointsSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};keepLayerOrder:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};radius:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};dropShadow:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};preset:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};position:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowSpread:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowBlur:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};angle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowDistance:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};visualLink:{displayName:(resourceProvider:IStringResourceProvider)=>string;suppressFormatPainterCopy:boolean;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};bookmark:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{bookmark:boolean;};};};disabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};drillthroughSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};enabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};qna:{type:{qnaVisualLink:boolean;};};suppressDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};navigationSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};tooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};tooltipPlaceholderText:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};webUrl:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{misc:{webUrl:boolean;};};};};};visualTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};valueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};actionFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};themedValueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};};};stylePreset:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{name:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{stylePreset:boolean;};};};};};visualHeader:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};foreground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};showVisualInformationButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualWarningButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualErrorButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillRoleSelector:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillUpButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownLevelButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownExpandButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPinButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFilterRestatementButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFocusModeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCopyVisualImageButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSeeDataLayoutToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showOptionsMenu:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCommentButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showTooltipButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPersonalizeVisualButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSmartNarrativeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};visualHeaderTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{type:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};};};}>.9d93c182"
-                },
-                "syncGroup": {
-                    "description": "Defines the sync group that this visual is part of.\nOnly applies to slicer visuals.",
-                    "$ref": "#/definitions/VisualSyncGroup.0c1e1f6f"
-                },
-                "drillFilterOtherVisuals": {
-                    "description": "When another visual is drilled, if visual interactions are enabled between the two visuals,\nthen this property specifies if that drill should be applied as a filter to this visual.\nOverrides the default setting of the report.",
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "visualType"
-            ]
-        },
-        "Query.5f65001d": {
-            "type": "object",
-            "properties": {
-                "sortDefinition": {
-                    "description": "Defines how the data should be sorted in a visual",
-                    "$ref": "#/definitions/SortDefinition.4b873351"
-                },
-                "options": {
-                    "description": "Specific options to apply when running the query. Applies to certain visuals only.",
-                    "$ref": "#/definitions/VisualQueryOptions.360d5363"
-                },
-                "queryState": {
-                    "description": "Describes how the data should be arranged and used in the visual.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/ProjectionState.497dae2f"
-                    }
-                },
-                "isDrillDisabled": {
-                    "description": "Should drill be allowed in the visual - only used by specific custom visuals.",
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "queryState"
-            ]
-        },
-        "SortDefinition.4b873351": {
-            "type": "object",
-            "properties": {
-                "sort": {
-                    "description": "Defines the fields the data is sorted by.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/QuerySort.d2122d55"
-                    }
-                },
-                "isDefaultSort": {
-                    "description": "If the sort if explicitly set by user, then this will be false, Power BI can update the sort to match\nthe visual in this case.",
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false
-        },
-        "QuerySort.d2122d55": {
-            "type": "object",
-            "properties": {
-                "field": {
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2",
-                    "description": "Field to sort by"
-                },
-                "direction": {
-                    "$ref": "#/definitions/SortDirection.98721362",
-                    "description": "Direction of sort - ascending or descending."
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "direction",
-                "field"
-            ]
-        },
-        "SortDirection.98721362": {
-            "type": "string",
-            "anyOf": [
-                {
-                    "const": "Ascending",
-                    "description": "Sort smallest to biggest."
-                },
-                {
-                    "const": "Descending",
-                    "description": "Sort biggest to smallest."
-                }
-            ]
-        },
-        "VisualQueryOptions.360d5363": {
-            "type": "object",
-            "properties": {
-                "allowBinnedLineSample": {
-                    "description": "A better sampling for line charts.",
-                    "type": "boolean"
-                },
-                "allowOverlappingPointsSample": {
-                    "description": "A better sampling for scatter charts.",
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false
-        },
-        "ProjectionState.497dae2f": {
-            "type": "object",
-            "properties": {
-                "showAll": {
-                    "description": "Show all values for all fields in this projection.",
-                    "type": "boolean"
-                },
-                "projections": {
-                    "description": "Defines the fields and their properties for this visual role.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RoleProjection.d0db1f63"
-                    }
-                },
-                "fieldParameters": {
-                    "description": "Defines any field parameters used as projections.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RoleFieldParameter.9ddcdeb1"
-                    }
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "projections"
-            ]
-        },
-        "RoleProjection.d0db1f63": {
-            "type": "object",
-            "properties": {
-                "field": {
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2",
-                    "description": "The data field from the semantic model."
-                },
-                "queryRef": {
-                    "description": "A unique name for this field - unique per visual.",
-                    "type": "string"
-                },
-                "nativeQueryRef": {
-                    "description": "Native reference name for this field - unique per visual, used for referencing fields in visual calculations.",
-                    "type": "string"
-                },
-                "displayName": {
-                    "description": "An override for display name - by default it is the field name in the semantic model.",
-                    "type": "string"
-                },
-                "format": {
-                    "description": "A custom format defined for this field.",
-                    "type": "string"
-                },
-                "active": {
-                    "description": "Is the field currently active in the visual - used as part of drill operations.",
-                    "type": "boolean"
-                },
-                "hidden": {
-                    "description": "Is the field visible in the visual - used as part of visual calculations.",
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "field",
-                "queryRef"
-            ]
-        },
-        "RoleFieldParameter.9ddcdeb1": {
-            "type": "object",
-            "properties": {
-                "parameterExpr": {
-                    "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2",
-                    "description": "Defines the parameter field."
-                },
-                "index": {
-                    "description": "Index at which parameter fields begin in the projections list.",
-                    "type": "number"
-                },
-                "length": {
-                    "description": "Number of fields replaced by the parameter in the projections list.",
-                    "type": "number"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "index",
-                "parameterExpr"
-            ]
-        },
-        "ExpansionState.a8c6fc15": {
-            "type": "object",
-            "properties": {
-                "roles": {
-                    "description": "Visual roles (projection names) that have individual points expanded.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "root": {
-                    "description": "Defines the specific values that are expanded for each field in the hierarchy",
-                    "$ref": "#/definitions/NodeExpansionState.3e683a33"
-                },
-                "levels": {
-                    "description": "Describes the fields participating in the expansion",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/LevelExpansionState.d69c1f9a"
-                    }
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "roles"
-            ]
-        },
-        "NodeExpansionState.3e683a33": {
-            "type": "object",
-            "properties": {
-                "identityValues": {
-                    "description": "Describes the instances that are expanded.\nMust by Literal expressions.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
-                    }
-                },
-                "isToggled": {
-                    "description": "True if the value is expanded.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "children": {
-                    "description": "Child values in the hierarchy that are expanded",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/NodeExpansionState.3e683a33"
-                    }
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "identityValues"
-            ]
-        },
-        "LevelExpansionState.d69c1f9a": {
-            "type": "object",
-            "properties": {
-                "identityKeys": {
-                    "description": "Describes the fields in the visual.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "../../semantic-query/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
-                    }
-                },
-                "isCollapsed": {
-                    "description": "True if the entire field isn't expanded (i.e. false if only specific instances are expanded).",
-                    "type": "boolean"
-                },
-                "queryRefs": {
-                    "description": "Which fields in the query does this relate to - must match a queryRef in the query.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "isPinned": {
-                    "description": "Is the field pinned.",
-                    "type": "boolean"
-                },
-                "isLocked": {
-                    "description": "Is the field locked (used for decomposition tree)",
-                    "type": "boolean"
-                },
-                "AIInformation": {
-                    "description": "More information about how the expansion is done (used for decomposition tree)",
-                    "$ref": "#/definitions/AILevelInformation.fcc3edee"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "queryRefs"
-            ]
-        },
-        "AILevelInformation.fcc3edee": {
-            "type": "object",
-            "properties": {
-                "method": {
-                    "$ref": "#/definitions/AIDecompositionMethod.88b8a7a8",
-                    "description": "Type of expansion."
-                },
-                "disabled": {
-                    "description": "Is the level disabled.",
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "method"
-            ]
-        },
-        "AIDecompositionMethod.88b8a7a8": {
-            "enum": [
-                "BestSplit",
-                "MaxSplit",
-                "MinSplit"
-            ],
-            "type": "string"
-        },
         "TypedDataViewObjectDefinitions<{title:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};};};subTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};};};divider:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};ignorePadding:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};style:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};spacing:{properties:{customizeSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};verticalSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowSubTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitleArea:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};padding:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{top:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};bottom:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};left:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};right:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};lockAspect:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};general:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};allowBinnedLineSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};allowOverlappingPointsSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};keepLayerOrder:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};radius:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};dropShadow:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};preset:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};position:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowSpread:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowBlur:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};angle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowDistance:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};visualLink:{displayName:(resourceProvider:IStringResourceProvider)=>string;suppressFormatPainterCopy:boolean;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};bookmark:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{bookmark:boolean;};};};disabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};drillthroughSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};enabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};qna:{type:{qnaVisualLink:boolean;};};suppressDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};navigationSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};tooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};tooltipPlaceholderText:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};webUrl:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{misc:{webUrl:boolean;};};};};};visualTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};valueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};actionFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};themedValueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};};};stylePreset:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{name:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{stylePreset:boolean;};};};};};visualHeader:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};foreground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};showVisualInformationButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualWarningButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualErrorButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillRoleSelector:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillUpButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownLevelButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownExpandButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPinButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFilterRestatementButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFocusModeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCopyVisualImageButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSeeDataLayoutToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showOptionsMenu:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCommentButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showTooltipButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPersonalizeVisualButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSmartNarrativeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};visualHeaderTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{type:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};};};}>.9d93c182": {
             "type": "object",
             "properties": {
@@ -681,7 +35,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};}>.9caaad68",
@@ -701,7 +55,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};suppressFormatPainterCopy:boolean;};heading:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};titleWrap:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};alignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{alignment:boolean;};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};}>.9caaad68",
@@ -721,7 +75,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};ignorePadding:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};style:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -741,7 +95,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{customizeSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};verticalSpacing:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowSubTitle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};spaceBelowTitleArea:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -761,7 +115,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -781,7 +135,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{top:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};bottom:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};left:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};right:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -801,7 +155,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>.9caaad68",
@@ -821,7 +175,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};allowBinnedLineSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};allowOverlappingPointsSample:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};keepLayerOrder:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>.9caaad68",
@@ -841,7 +195,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};radius:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -861,7 +215,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};preset:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};position:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowSpread:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowBlur:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};angle:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};shadowDistance:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>.9caaad68",
@@ -881,7 +235,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};bookmark:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{bookmark:boolean;};};};disabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};drillthroughSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};enabledTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};qna:{type:{qnaVisualLink:boolean;};};suppressDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDefaultTooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};navigationSection:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};tooltip:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};tooltipPlaceholderText:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};webUrl:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{misc:{webUrl:boolean;};};};}>.9caaad68",
@@ -901,7 +255,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};type:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};valueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};actionFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};themedValueFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};}>.9caaad68",
@@ -921,7 +275,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{name:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{stylePreset:boolean;};};};}>.9caaad68",
@@ -941,7 +295,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};foreground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};showVisualInformationButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualWarningButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showVisualErrorButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillRoleSelector:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillUpButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownLevelButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showDrillDownExpandButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPinButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFilterRestatementButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showFocusModeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCopyVisualImageButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSeeDataLayoutToggleButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showOptionsMenu:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showCommentButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showTooltipButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showPersonalizeVisualButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};showSmartNarrativeButton:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>.9caaad68",
@@ -961,7 +315,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
                             },
                             "properties": {
                                 "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{type:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{section:boolean;};};};text:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};titleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};fontSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontSize:boolean;};};};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};};bold:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};italic:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};underline:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};themedTitleFontColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};themedBackground:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:{nullable:boolean;};};};};};}>.9caaad68",
@@ -1194,185 +548,42 @@
             },
             "additionalProperties": false
         },
-        "VisualSyncGroup.0c1e1f6f": {
+        "VisualContainerPosition.5bfcdbae": {
             "type": "object",
             "properties": {
-                "groupName": {
-                    "description": "Unique name for the sync group.",
-                    "type": "string"
+                "x": {
+                    "description": "Horizontal position of the left edge of the visual.\nShould be between 0 and width of the containing page.",
+                    "type": "number"
                 },
-                "fieldChanges": {
-                    "description": "Should synced visuals update when fields change.",
-                    "type": "boolean"
+                "y": {
+                    "description": "Vertical position of the top edge of the visual.\nShould be between 0 and height of the containing page.",
+                    "type": "number"
                 },
-                "filterChanges": {
-                    "description": "Should synced visuals update when filters change.",
-                    "type": "boolean"
+                "z": {
+                    "description": "Defines the stacking order for the visual.\nHigher z-index visuals are shown on top of the lower ones.",
+                    "type": "number"
+                },
+                "height": {
+                    "description": "Height of the visual.\ny + height should be less than the height of the containing page.",
+                    "type": "number"
+                },
+                "width": {
+                    "description": "Width of the visual.\nx + width should be less than the width of the containing page.",
+                    "type": "number"
+                },
+                "tabOrder": {
+                    "description": "Defines the selection order for this visual when using keyboard (tab key)\nto navigate the visuals on the containing page.",
+                    "type": "number"
                 }
             },
             "additionalProperties": false,
             "required": [
-                "groupName"
-            ]
-        },
-        "VisualGroupConfig.3ed5a719": {
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "description": "Display name for the group.",
-                    "type": "string"
-                },
-                "groupMode": {
-                    "$ref": "#/definitions/GroupLayoutMode.265a7851",
-                    "description": "Defines how the visuals are organized inside this group."
-                },
-                "objects": {
-                    "description": "Specifies the formatting to be set for different \"objects\" of this group.",
-                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};lockAspect:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};general:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};};};}>.9d93c182"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "displayName",
-                "groupMode"
-            ]
-        },
-        "GroupLayoutMode.265a7851": {
-            "type": "string",
-            "anyOf": [
-                {
-                    "const": "ScaleMode",
-                    "description": "Visuals are scaled as group resizes to preserve the aspect ratio and avoid scrolling."
-                },
-                {
-                    "const": "ScrollMode",
-                    "description": "Visuals are not resized, if the containing box for group is smaller than the space\nneeded for visuals, then scrollbar is added."
-                }
-            ]
-        },
-        "TypedDataViewObjectDefinitions<{background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};lockAspect:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};general:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};};};}>.9d93c182": {
-            "type": "object",
-            "properties": {
-                "background": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "selector": {
-                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
-                            },
-                            "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>_1.9caaad68",
-                                "description": "Describes the properties of the object to apply formatting changes to."
-                            }
-                        },
-                        "additionalProperties": false,
-                        "required": [
-                            "properties"
-                        ]
-                    }
-                },
-                "lockAspect": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "selector": {
-                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
-                            },
-                            "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>_1.9caaad68",
-                                "description": "Describes the properties of the object to apply formatting changes to."
-                            }
-                        },
-                        "additionalProperties": false,
-                        "required": [
-                            "properties"
-                        ]
-                    }
-                },
-                "general": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "selector": {
-                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formatting-object-definitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
-                            },
-                            "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};}>.9caaad68",
-                                "description": "Describes the properties of the object to apply formatting changes to."
-                            }
-                        },
-                        "additionalProperties": false,
-                        "required": [
-                            "properties"
-                        ]
-                    }
-                }
-            },
-            "additionalProperties": false
-        },
-        "TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};color:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;description:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>_1.9caaad68": {
-            "type": "object",
-            "properties": {
-                "show": {},
-                "color": {},
-                "transparency": {}
-            },
-            "additionalProperties": false
-        },
-        "TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>_1.9caaad68": {
-            "type": "object",
-            "properties": {
-                "show": {}
-            },
-            "additionalProperties": false
-        },
-        "TypedDataViewObjectPropertyDefinitions<{x:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};y:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};height:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};altText:{displayName:(resourceProvider:IStringResourceProvider)=>string;placeHolderText:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};}>.9caaad68": {
-            "type": "object",
-            "properties": {
-                "x": {},
-                "y": {},
-                "width": {},
-                "height": {},
-                "altText": {}
-            },
-            "additionalProperties": false
-        },
-        "Annotation.512bf3af": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "Unique name for the annotation.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "A value for this annotation.",
-                    "type": "string"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "name",
-                "value"
+                "height",
+                "width",
+                "x",
+                "y"
             ]
         }
     },
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "oneOf": [
-        {
-            "required": [
-                "visual"
-            ]
-        },
-        {
-            "required": [
-                "visualGroup"
-            ]
-        }
-    ]
+    "$schema": "http://json-schema.org/draft-07/schema#"
 }
