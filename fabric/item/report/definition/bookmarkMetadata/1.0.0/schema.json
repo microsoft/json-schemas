@@ -1,0 +1,72 @@
+{
+    "type": "object",
+    "properties": {
+        "items": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/SingleBookmarkMetadata.e16d14c5"
+                    },
+                    {
+                        "$ref": "#/definitions/BookmarkGroupMetadata.13d948d6"
+                    }
+                ]
+            }
+        },
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarks-metadata/1.0.0/schema.json"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "items"
+    ],
+    "definitions": {
+        "SingleBookmarkMetadata.e16d14c5": {
+            "description": "Defines a bookmark that is not part of a group (standalong bookmark).",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the bookmark - use if not under a specific group. Should be unique across the report.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name"
+            ]
+        },
+        "BookmarkGroupMetadata.13d948d6": {
+            "description": "Defines a group of related bookmarks.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the bookmark group - unique across the report.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "Display name of the group.",
+                    "type": "string"
+                },
+                "children": {
+                    "description": "Name of the bookmarks under this group.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "children",
+                "displayName",
+                "name"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

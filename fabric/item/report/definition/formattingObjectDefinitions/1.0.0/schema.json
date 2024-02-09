@@ -1,0 +1,142 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "DataViewObjectDefinitions.022fbdf8": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/DataViewObjectDefinition.6e3faee5"
+                }
+            }
+        },
+        "DataViewObjectDefinition.6e3faee5": {
+            "type": "object",
+            "properties": {
+                "selector": {
+                    "$ref": "#/definitions/Selector.bf3a7dcc"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataViewObjectPropertyDefinitions.88eb7485"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "properties"
+            ]
+        },
+        "DataViewObjectPropertyDefinitions.88eb7485": {
+            "type": "object",
+            "additionalProperties": {}
+        },
+        "Selector.bf3a7dcc": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "description": "Scope is defined by data bound to the visual.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataRepetitionSelector.c81ac91d"
+                    }
+                },
+                "metadata": {
+                    "description": "Defines the scope to a specific field.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "User defined scope.",
+                    "type": "string"
+                },
+                "highlightMatching": {
+                    "description": "Describes how the Selector should behave towards Highlighted Values within the Scope matched by that Selector.",
+                    "default": "ValuesOnly",
+                    "type": "number",
+                    "anyOf": [
+                        {
+                            "const": 0,
+                            "description": "Only non-highlighted value will be selected, even if a highlighted value exists."
+                        },
+                        {
+                            "const": 1,
+                            "description": "Non-highlighted values are selected. If highlighted values exist, they are selected as well."
+                        },
+                        {
+                            "const": 2,
+                            "description": "If a highlighted value exists, it's selected. Otherwise, the non-highlighted value is selected."
+                        }
+                    ]
+                },
+                "order": {
+                    "description": "Specifies a user-defined ordering of identical properties.\nSelector constructors should strive to monitonically increase this number across identical properties differing by id.",
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DataRepetitionSelector.c81ac91d": {
+            "type": "object",
+            "properties": {
+                "scopeId": {
+                    "description": "Defines the intersection of scopes. For example - product color = red.",
+                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                },
+                "wildcard": {
+                    "description": "Defines a match against all instances of a given DataView scope. Does not match Subtotals.\nDeprecated: - Use roles instead.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    }
+                },
+                "roles": {
+                    "description": "Matches against all fields in a role.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "total": {
+                    "description": "Matches against the totals and subtotals.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    }
+                },
+                "dataViewWildcard": {
+                    "description": "Matches all instances or all totals or both.",
+                    "$ref": "#/definitions/DataViewWildcard.622371b1"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DataViewWildcard.622371b1": {
+            "type": "object",
+            "properties": {
+                "matchingOption": {
+                    "$ref": "#/definitions/DataViewWildcardMatchingOption.ef589313",
+                    "description": "Defines the matching option to use."
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "matchingOption"
+            ]
+        },
+        "DataViewWildcardMatchingOption.ef589313": {
+            "type": "number",
+            "anyOf": [
+                {
+                    "const": 0,
+                    "description": "Match Identities and Totals (default)"
+                },
+                {
+                    "const": 1,
+                    "description": "Match Instances with Identities only"
+                },
+                {
+                    "const": 2,
+                    "description": "Match Totals only"
+                }
+            ]
+        }
+    }
+}
