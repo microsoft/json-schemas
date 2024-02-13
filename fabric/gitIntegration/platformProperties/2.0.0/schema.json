@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Fabric item git integration configuration",
-  "description": "Configuration file used by fabric git integration on items in git repositories",
+  "title": "Fabric item Git integration configuration",
+  "description": "Configuration file used by fabric Git integration on items in Git repositories",
   "type": "object",
   "properties": {
     "$schema": {
