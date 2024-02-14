@@ -150,6 +150,10 @@
                 "color": {
                     "$ref": "#/definitions/relativePath",
                     "description": "A relative file path to a full color PNG icon. Size 192x192."
+                },
+                "color32x32": {
+                    "$ref": "#/definitions/relativePath",
+                    "description": "A relative file path to a full color PNG icon with transparent background. Size 32x32."
                 }
             },
             "required": [
