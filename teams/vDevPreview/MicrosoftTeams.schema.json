@@ -556,6 +556,46 @@
                         ],
                         "description": "Type of the compose extension."
                     },
+                    "authorization": {
+                        "type": "object",
+                        "description": "Object capturing authorization information.",
+                        "properties": {
+                            "authType": {
+                                "type": "string",
+                                "enum": [
+                                    "none",
+                                    "apiSecretServiceAuth",
+                                    "microsoftEntra"
+                                ],
+                                "description": "Enum of possible authorization types."
+                            },
+                            "microsoftEntraConfiguration": {
+                                "type": "object",
+                                "description": "Object capturing details needed to do single aad auth flow. It will be only present when auth type is entraId.",
+                                "properties": {
+                                    "supportsSingleSignOn": {
+                                        "type": "boolean",
+                                        "default": false,
+                                        "description": "Boolean indicating whether single sign on is configured for the app."
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            "apiSecretServiceAuthConfiguration": {
+                                "type": "object",
+                                "description": "Object capturing details needed to do service auth. It will be only present when auth type is apiSecretServiceAuth.",
+                                "properties": {
+                                    "apiSecretRegistrationId": {
+                                        "type": "string",
+                                        "description": "Registration id returned when developer submits the api key through Developer Portal.",
+                                        "maxLength": 128
+                                    }
+                                },
+                                "additionalProperties": false
+                            }
+                        },
+                        "additionalProperties": false
+                    },
                     "apiSpecificationFile": {
                         "$ref": "#/definitions/relativePath",
                         "description": "A relative file path to the api specification file in the manifest package."
