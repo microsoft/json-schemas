@@ -4,7 +4,7 @@
         "$schema": {
             "description": "Defines the schema to use for an item.",
             "type": "string",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/version-metadata/1.0.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/versionMetadata/1.0.0/schema.json"
         },
         "version": {
             "description": "Defines the report definition version, format of version is major.minor.patch\n- major: >=1\n- minor: >=0\n- patch: always 0",
