@@ -80,6 +80,82 @@
         "^meetingExtensionDefinition.videoFilters\\[([0-9]|1[0-5])\\]\\.name$": {
             "type": "string",
             "maxLength": 128
+        },
+        "^extensions\\[[0]\\]\\.audienceClaimUrl$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.label$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.customMobileRibbonGroups\\[[0-9]\\]\\.label$": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.customMobileRibbonGroups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.icons\\[[0-8]\\]\\.url$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.icons\\[[0-2]\\]\\.url$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.label$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.icons\\[[0-2]\\]\\.url$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.label$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.supertip\\.title$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.supertip\\.description$": {
+          "type": "string",
+          "maxLength": 250
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.icons\\[[0-2]\\]\\.url$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.label$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.supertip\\.title$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.ribbons\\[[0-9]\\]\\.tabs\\[[1]?[0-9]\\]\\.groups\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.supertip\\.description$": {
+          "type": "string",
+          "maxLength": 250
+        },
+        "^extensions\\[[0]\\]\\.runtimes\\[[1]?[0-9]\\]\\.code\\.page$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.runtimes\\[[1]?[0-9]\\]\\.code\\.script$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.runtimes\\[[1]?[0-9]\\]\\.actions\\[[1]?[0-9]\\]\\.displayName$": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "^extensions\\[[0]\\]\\.alternates\\[[0-9]\\]\\.alternateIcons\\.icon\\.url$": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "^extensions\\[[0]\\]\\.alternates\\[[0-9]\\]\\.alternateIcons\\.highResolutionIcon\\.url$": {
+          "type": "string",
+          "maxLength": 2048
         }
     },
     "required": [
