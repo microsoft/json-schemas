@@ -1932,7 +1932,7 @@
                         "$ref": "#/definitions/extensionCustomMobileIcon"
                     },
                     "minItems": 9,
-                    "maxItem": 9
+                    "maxItems": 9
                 },
                 "actionId": {
                     "type": "string",
