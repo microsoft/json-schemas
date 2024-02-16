@@ -571,7 +571,7 @@
                             },
                             "microsoftEntraConfiguration": {
                                 "type": "object",
-                                "description": "Object capturing details needed to do single aad auth flow. It will be only present when auth type is entraId.",
+                                "description": "Object capturing details needed to do microsoftEntra auth flow. It will be only present when auth type is microsoftEntra.",
                                 "properties": {
                                     "supportsSingleSignOn": {
                                         "type": "boolean",
@@ -1289,6 +1289,7 @@
             "maxItems": 1,
             "items": {
                 "type": "object",
+                "minProperties": 1,
                 "properties": {
                     "requirements": {
                         "$ref": "#/definitions/requirementsExtensionElement"
@@ -1316,20 +1317,27 @@
         },
         "requirementsExtensionElement": {
             "type": "object",
+            "minProperties": 1,
             "properties": {
                 "capabilities": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 100,
                     "items": {
                         "type": "object",
                         "properties": {
                             "name": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Identifies the name of the requirement sets that the add-in needs to run.",
+                                "maxLength": 128
                             },
                             "minVersion": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Identifies the minimum version for the requirement sets that the add-in needs to run."
                             },
                             "maxVersion": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Identifies the maximum version for the requirement sets that the add-in needs to run."
                             }
                         },
                         "additionalProperties": false,
@@ -1340,6 +1348,7 @@
                 },
                 "scopes": {
                     "type": "array",
+                    "description": "Identifies the scopes in which the add-in can run. Currently the only supported enum value is mail. This effectively defines the Office applications in which the extension can run. For example, mail means Outlook.",
                     "maxItems": 1,
                     "items": {
                         "type": "string",
@@ -1350,6 +1359,9 @@
                 },
                 "formFactors": {
                     "type": "array",
+                    "description": "Identifies the form factors that support the add-in. Supported values: mobile, desktop.",
+                    "minItems": 1,
+                    "maxItems": 2,
                     "items": {
                         "type": "string",
                         "enum": [
@@ -1364,6 +1376,7 @@
         "extensionRuntimesArray": {
             "type": "array",
             "minItems": 1,
+            "maxItems": 20,
             "items": {
                 "type": "object",
                 "description": "A runtime environment for a page or script",
@@ -1423,6 +1436,9 @@
         },
         "extensionRuntimesActions": {
             "type": "array",
+            "description": "Specifies the set of actions supported by this runtime. An action is either running a JavaScript function or opening a view such as a task pane.",
+            "minItems": 1,
+            "maxItems": 20,
             "items": {
                 "$ref": "#/definitions/extensionRuntimesActionsItem"
             },
@@ -1457,6 +1473,16 @@
                     "type": "string",
                     "description": "View where the page should be opened. Maximum length is 64 characters.  ",
                     "maxLength": 64
+                },
+                "multiselect": {
+                    "type": "boolean",
+                    "description": "Whether allows the action to have multiple selection.",
+                    "default": false
+                },
+                "supportsNoItemContext": {
+                    "type": "boolean",
+                    "description": "Whether allows task pane add-ins to activate without the Reading Pane enabled or a message selected. ",
+                    "default": false
                 }
             },
             "additionalProperties": false,
@@ -1467,6 +1493,8 @@
         },
         "extensionRibbonsArray": {
             "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
             "items": {
                 "type": "object",
                 "properties": {
@@ -1478,6 +1506,7 @@
                     },
                     "tabs": {
                         "type": "array",
+                        "maxItems": 20,
                         "items": {
                             "$ref": "#/definitions/extensionRibbonsArrayTabsItem"
                         }
@@ -1491,19 +1520,25 @@
         },
         "extensionContexts": {
             "type": "array",
-            "maxItems": 4,
+            "description": "Specifies the Office application windows in which the ribbon customization is available to the user. Each item in the array is a member of a string array. Possible values are: mailRead, mailCompose, meetingDetailsOrganizer, meetingDetailsAttendee.",
+            "minItems": 1,
+            "maxItems": 7,
             "items": {
                 "type": "string",
                 "enum": [
                     "mailRead",
                     "mailCompose",
                     "meetingDetailsOrganizer",
-                    "meetingDetailsAttendee"
+                    "meetingDetailsAttendee",
+                    "onlineMeetingDetailsOrganizer",
+                    "logEventMeetingDetailsAttendee",
+                    "default"
                 ]
             }
         },
         "extensionRibbonsArrayTabsItem": {
             "type": "object",
+            "minProperties": 1,
             "properties": {
                 "id": {
                     "type": "string",
@@ -1545,10 +1580,21 @@
                 },
                 "groups": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 10,
+                    "description": "Defines tab groups.",
                     "items": {
                         "$ref": "#/definitions/extensionRibbonsCustomTabGroupsItem"
-                    },
-                    "minItems": 1
+                    }
+                },
+                "customMobileRibbonGroups": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 10,
+                    "description": "Defines mobile group item.",
+                    "items": {
+                        "$ref": "#/definitions/extensionRibbonsCustomMobileGroupItem"
+                    }
                 }
             },
             "dependencies": {
@@ -1556,6 +1602,7 @@
                     "properties": {
                         "groups": {
                             "type": "array",
+                            "maxItems": 10,
                             "items": {
                                 "$ref": "#/definitions/extensionCommonCustomGroup"
                             }
@@ -1590,6 +1637,8 @@
                 },
                 "icons": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -1599,7 +1648,8 @@
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomGroupControlsItem"
                     },
-                    "minItems": 1
+                    "minItems": 1,
+                    "maxItems": 20
                 },
                 "builtInGroupId": {
                     "type": "string",
@@ -1624,16 +1674,21 @@
                 },
                 "icons": {
                     "type": "array",
+                    "description": "Displayed icons for the group.",
+                    "minItems": 1,
+                    "maxItems": 3,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
                 },
                 "controls": {
                     "type": "array",
+                    "description": "Configures the buttons and menus in the group.",
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomGroupControlsItem"
                     },
-                    "minItems": 1
+                    "minItems": 1,
+                    "maxItems": 20
                 }
             },
             "required": [
@@ -1654,6 +1709,7 @@
                 },
                 "type": {
                     "type": "string",
+                    "description": "Defines the type of control whether button or menu.",
                     "enum": [
                         "button",
                         "menu"
@@ -1671,6 +1727,8 @@
                 },
                 "icons": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -1685,6 +1743,7 @@
                 },
                 "overriddenByRibbonApi": {
                     "type": "boolean",
+                    "description": "Specifies whether a group, button, menu, or menu item will be hidden on application and platform combinations that support the API (Office.ribbon.requestCreateControls) that installs custom contextual tabs on the ribbon. Default is false.",
                     "default": "false"
                 },
                 "enabled": {
@@ -1694,6 +1753,9 @@
                 },
                 "items": {
                     "type": "array",
+                    "description": "Configures the items for a menu control.",
+                    "minItems": 1,
+                    "maxItems": 20,
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
                     }
@@ -1704,7 +1766,36 @@
                 "type",
                 "label",
                 "icons",
-                "supertip"
+                "supertip",
+                "actionId"
+            ]
+        },
+        "extensionRibbonsCustomMobileGroupItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Specify the Id of the group. Used for mobileMessageRead ext point.",
+                    "maxLength": 250
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Short label of the control. Maximum length is 32 characters.",
+                    "maxLength": 32
+                },
+                "controls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 20,
+                    "items": {
+                        "$ref": "#/definitions/extensionRibbonsCustomMobileControlButtonItem"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "label",
+                "controls"
             ]
         },
         "extensionCommonCustomControlMenu": {
@@ -1728,6 +1819,8 @@
                 },
                 "icons": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -1737,12 +1830,15 @@
                 },
                 "items": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 20,
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
                     }
                 },
                 "overriddenByRibbonApi": {
                     "type": "boolean",
+                    "description": "Specifies whether a group, button, menu, or menu item will be hidden on application and platform combinations that support the API (Office.ribbon.requestCreateControls) that installs custom contextual tabs on the ribbon. Default is false.",
                     "default": "false"
                 }
             },
@@ -1766,6 +1862,7 @@
                 },
                 "type": {
                     "type": "string",
+                    "description": "Supported values: menuItem.",
                     "enum": [
                         "menuItem"
                     ]
@@ -1777,6 +1874,8 @@
                 },
                 "icons": {
                     "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -1808,6 +1907,80 @@
                 "actionId"
             ]
         },
+        "extensionRibbonsCustomMobileControlButtonItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Specify the Id of the button like msgReadFunctionButton.",
+                    "maxLength": 250
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "mobileButton"
+                    ]
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Short label of the control. Maximum length is 32 characters.",
+                    "maxLength": 32
+                },
+                "icons": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/extensionCustomMobileIcon"
+                    },
+                    "minItems": 9,
+                    "maxItems": 9
+                },
+                "actionId": {
+                    "type": "string",
+                    "description": "The ID of an action defined in runtimes. Maximum length is 64 characters.",
+                    "maxLength": 64
+                }
+            },
+            "required": [
+                "id",
+                "type",
+                "label",
+                "icons",
+                "actionId"
+            ]
+        },
+        "extensionCustomMobileIcon": {
+            "type": "object",
+            "properties": {
+                "size": {
+                    "type": "number",
+                    "description": "Size in pixels of the icon. Three image sizes are required (25, 32, and 48 pixels).",
+                    "enum": [
+                        25,
+                        32,
+                        48
+                    ]
+                },
+                "url": {
+                    "$ref": "#/definitions/httpsUrl",
+                    "description": "Url to the icon."
+                },
+                "scale": {
+                    "type": "number",
+                    "description": "How to scale - 1,2,3 for each image. This attribute specifies the UIScreen.scale property for iOS devices.",
+                    "enum": [
+                        1,
+                        2,
+                        3
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "size",
+                "url",
+                "scale"
+            ]
+        },
         "extensionCommonSuperToolTip": {
             "type": "object",
             "properties": {
@@ -1818,8 +1991,8 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "Description of the super tip. Maximum length is 128 characters.",
-                    "maxLength": 128
+                    "description": "Description of the super tip. Maximum length is 250 characters.",
+                    "maxLength": 250
                 }
             },
             "additionalProperties": false,
@@ -1847,20 +2020,19 @@
                 },
                 "url": {
                     "$ref": "#/definitions/httpsUrl",
-                    "description": "Url to the icon."
-                },
-                "file": {
-                    "$ref": "#/definitions/relativePath",
-                    "description": "Relative path to the file that contains the icon. This property is currently not supported as a relative path."
+                    "description": "Absolute Url to the icon."
                 }
             },
             "additionalProperties": false,
             "required": [
-                "size"
+                "size",
+                "url"
             ]
         },
         "extensionAutoRunEventsArray": {
             "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
             "items": {
                 "type": "object",
                 "properties": {
@@ -1869,6 +2041,8 @@
                     },
                     "events": {
                         "type": "array",
+                        "maxItems": 20,
+                        "description": "Specifies the type of event. For supported types, please see: https://review.learn.microsoft.com/en-us/office/dev/add-ins/outlook/autolaunch?tabs=xmlmanifest#supported-events.",
                         "items": {
                             "type": "object",
                             "properties": {
@@ -1883,6 +2057,7 @@
                                 },
                                 "options": {
                                     "type": "object",
+                                    "description": "Configures how Outlook responds to the event.",
                                     "properties": {
                                         "sendMode": {
                                             "type": "string",
@@ -1915,6 +2090,8 @@
         },
         "extensionAlternateVersionsArray": {
             "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
             "items": {
                 "type": "object",
                 "properties": {
@@ -1922,6 +2099,7 @@
                         "$ref": "#/definitions/requirementsExtensionElement"
                     },
                     "prefer": {
+                        "type": "object",
                         "properties": {
                             "comAddin": {
                                 "type": "object",
@@ -1937,9 +2115,11 @@
                                     "progId"
                                 ]
                             }
-                        }
+                        },
+                        "minProperties": 1
                     },
                     "hide": {
+                        "type": "object",
                         "properties": {
                             "storeOfficeAddin": {
                                 "type": "object",
@@ -1975,10 +2155,31 @@
                                     "officeAddinId"
                                 ]
                             }
-                        }
+                        },
+                        "minProperties": 1
+                    },
+                    "alternateIcons": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "icon": {
+                                "$ref": "#/definitions/extensionCommonIcon"
+                            },
+                            "highResolutionIcon": {
+                                "$ref": "#/definitions/extensionCommonIcon"
+                            }
+                        },
+                        "required": [
+                            "icon",
+                            "highResolutionIcon"
+                        ]
                     }
                 },
-                "additionalProperties": false
+                "minProperties": 1,
+                "additionalProperties": false,
+                "required": [
+                    "alternateIcons"
+                ]
             }
         },
         "elementActions": {
