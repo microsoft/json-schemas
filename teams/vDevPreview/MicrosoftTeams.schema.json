@@ -696,6 +696,9 @@
                                                 "description": "Type of the parameter",
                                                 "default": "text"
                                             },
+                                            "isRequired": {
+                                                "type": "boolean"
+                                            },
                                             "title": {
                                                 "type": "string",
                                                 "description": "Title of the parameter.",
