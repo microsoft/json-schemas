@@ -697,7 +697,8 @@
                                                 "default": "text"
                                             },
                                             "isRequired": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "description": "Indicates whether this parameter is required or not. By default, it is not."
                                             },
                                             "title": {
                                                 "type": "string",
