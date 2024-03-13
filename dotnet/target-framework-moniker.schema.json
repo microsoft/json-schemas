@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": ".NET Target Framework Moniker",
+  "description": "Used to specify a particular .NET framework version as a build target.",
+  "type": "string",
+  "anyOf": [
+    {
+      "description": ".NET Core",
+      "type": "string",
+      "enum": [
+        "netcoreapp1.0",
+        "netcoreapp1.1",
+        "netcoreapp2.0",
+        "netcoreapp2.1",
+        "netcoreapp2.2",
+        "netcoreapp3.0",
+        "netcoreapp3.1"
+      ]
+    },
+    {
+      "description": ".NET 5",
+      "type": "string",
+      "pattern": "^net5\\.0(-windows((0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){0,2})?)?$"
+    },
+    {
+      "description": ".NET 6",
+      "type": "string",
+      "pattern": "^net6\\.0(-(android|ios|maccatalyst|macos|tvos|windows)((0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){0,2})?)?$"
+    },
+    {
+      "description": ".NET 7",
+      "type": "string",
+      "pattern": "^net7\\.0(-(android|ios|maccatalyst|macos|tvos|windows)((0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){0,2})?)?$"
+    },
+    {
+      "description": ".NET 8",
+      "type": "string",
+      "pattern": "^net8\\.0(-(android|browser|ios|maccatalyst|macos|tvos|windows)((0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){0,2})?)?$"
+    },
+    {
+      "description": ".NET Standard",
+      "type": "string",
+      "enum": [
+        "netstandard1.0",
+        "netstandard1.1",
+        "netstandard1.2",
+        "netstandard1.3",
+        "netstandard1.4",
+        "netstandard1.5",
+        "netstandard1.6",
+        "netstandard2.0",
+        "netstandard2.1"
+      ]
+    },
+    {
+      "description": ".NET Framework",
+      "type": "string",
+      "enum": [
+        "net11",
+        "net20",
+        "net35",
+        "net40",
+        "net403",
+        "net45",
+        "net451",
+        "net452",
+        "net46",
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ]
+    },
+    {
+      "description": "Windows Store",
+      "type": "string",
+      "enum": [
+        "netcore",
+        "netcore45",
+        "netcore451"
+      ]
+    },
+    {
+      "description": ".NET Micro Framework",
+      "type": "string",
+      "enum": [
+        "netmf"
+      ]
+    },
+    {
+      "description": "Silverlight",
+      "type": "string",
+      "enum": [
+        "sl4", "sl5"
+      ]
+    },
+    {
+      "description": "Windows Phone",
+      "type": "string",
+      "enum": [
+        "wp",
+        "wp7",
+        "wp75",
+        "wp8",
+        "wp81",
+        "wpa81"
+      ]
+    },
+    {
+      "description": "Universal Windows Platform",
+      "type": "string",
+      "enum": [
+        "uap",
+        "uap10.0"
+      ]
+    },
+    {
+      "description": "Deprecated",
+      "type": "string",
+      "enum": [
+        "aspnet50",
+        "aspnetcore50",
+        "dnxcore50",
+        "dnx",
+        "dnx45",
+        "dnx451",
+        "dnx452",
+        "dotnet",
+        "dotnet50",
+        "dotnet51",
+        "dotnet52",
+        "dotnet53",
+        "dotnet54",
+        "dotnet55",
+        "dotnet56",
+        "netcore50",
+        "win",
+        "win8",
+        "win81",
+        "win10",
+        "wirt"
+      ]
+    }
+  ]
+}
