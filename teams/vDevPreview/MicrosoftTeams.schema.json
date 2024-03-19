@@ -1313,6 +1313,18 @@
                     "audienceClaimUrl": {
                         "$ref": "#/definitions/httpsUrl",
                         "description": "The url for your extension, used to validate Exchange user identity tokens."
+                    },
+                    "appDeeplinks": {
+                        "$ref": "#/definitions/extensionAppDeeplinksArray"
+                    },
+                    "contentRuntimes": {
+                        "$ref": "#/definitions/extensionContentRuntimeArray"
+                    },
+                    "getStartedMessages": {
+                        "$ref": "#/definitions/extensionGetStartedMessageArray"
+                    },
+                    "contextMenus": {
+                        "$ref": "#/definitions/extensionContextMenuArray"
                     }
                 },
                 "additionalProperties": false
@@ -1352,12 +1364,15 @@
                 },
                 "scopes": {
                     "type": "array",
-                    "description": "Identifies the scopes in which the add-in can run. Currently the only supported enum value is mail. This effectively defines the Office applications in which the extension can run. For example, mail means Outlook.",
-                    "maxItems": 1,
+                    "description": "Identifies the scopes in which the add-in can run. For example, mail means Outlook.",
+                    "maxItems": 4,
                     "items": {
                         "type": "string",
                         "enum": [
-                            "mail"
+                            "mail",
+                            "workbook",
+                            "document",
+                            "presentation"
                         ]
                     }
                 },
@@ -1402,21 +1417,7 @@
                         "description": "Supports running functions and launching pages."
                     },
                     "code": {
-                        "type": "object",
-                        "properties": {
-                            "page": {
-                                "$ref": "#/definitions/httpsUrl",
-                                "description": "URL of the .html page to be loaded in browser-based runtimes."
-                            },
-                            "script": {
-                                "$ref": "#/definitions/httpsUrl",
-                                "description": "URL of the .js script file to be loaded in UI-less runtimes."
-                            }
-                        },
-                        "additionalProperties": false,
-                        "required": [
-                            "page"
-                        ]
+                        "$ref": "#/definitions/extensionRuntimeCode"
                     },
                     "lifetime": {
                         "type": "string",
@@ -2186,6 +2187,193 @@
                 ]
             }
         },
+        "extensionAppDeeplinksArray": {
+            "type": "array",
+            "description": "Represents the copilot extension point",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "requirements": {
+                        "type": "object",
+                        "$ref": "#/definitions/requirementsExtensionElement"
+                    },
+                    "contexts": {
+                        "type": "array",
+                        "$ref": "#/definitions/extensionContexts"
+                    },
+                    "actionId": {
+                        "type": "string",
+                        "description": "The ID of an action defined in runtimes. Manifest should be invalidated if no action with an id matching actionId is present in runtimes.",
+                        "maxLength": 64
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "the text that will be shown on the app as a clickable item.",
+                        "maxLength": 64
+                    },
+                    "semanticDescription": {
+                        "type": "string",
+                        "description": "the text metadata, for recommendation engine.",
+                        "maxLength": 255
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "contexts",
+                    "actionId",
+                    "label",
+                    "semanticDescription"
+                ]
+            }
+        },
+        "extensionContentRuntimeArray": {
+            "type": "array",
+            "description": "Content runtime is for 'ContentApp', which can be embedded directly into Excel or PowerPoint documents.",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "requirements": {
+                  "type": "object",
+                  "$ref": "#/definitions/requirementsExtensionElement"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "A unique identifier for this runtime within the app. This is developer specified.",
+                  "maxLength": 64
+                },
+                "code": {
+                  "$ref": "#/definitions/extensionRuntimeCode"
+                },
+                "requestedHeight": {
+                  "type": "number",
+                  "description": "The desired height in pixels for the initial content placeholder. This value MUST be between 32 and 1000 pixels. Default value will be determined by host.",
+                  "minimum": 32,
+                  "maximum": 1000
+                },
+                "requestedWidth": {
+                  "type": "number",
+                  "description": "The desired width in pixels for the initial content placeholder. This value MUST be between 32 and 1000 pixels. Default value will be determined by host.",
+                  "minimum": 32,
+                  "maximum": 1000
+                },
+                "disableSnapshot": {
+                  "type": "boolean",
+                  "description": "Specifies whether a snapshot image of your content add-in is saved with the host document. Default value is false. Set true to disable.",
+                  "default": false
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "code"
+              ]
+            }
+          },
+          "extensionGetStartedMessageArray": {
+            "type": "array",
+            "description": "Provides information used by the callout that appears when the add-in is installed.",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "properties": {
+                "requirements": {
+                  "type": "object",
+                  "$ref": "#/definitions/requirementsExtensionElement"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title used for the top of the callout.",
+                  "maxLength": 125
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The description/body content for the callout.",
+                  "maxLength": 250
+                },
+                "learnMoreUrl": {
+                  "$ref": "#/definitions/httpsUrl",
+                  "description": "A URL to a page that explains the add-in in detail."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "title",
+                "description",
+                "learnMoreUrl"
+              ]
+            }
+          },
+          "extensionRuntimeCode": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "$ref": "#/definitions/httpsUrl",
+                "description": "URL of the .html page to be loaded in browser-based runtimes."
+              },
+              "script": {
+                "$ref": "#/definitions/httpsUrl",
+                "description": "URL of the .js script file to be loaded in UI-less runtimes."
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "page"
+            ]
+          },
+          "extensionContextMenuArray": {
+            "type": "array",
+            "description": "A shortcut menu that appears when you right-click in the Office UI.",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "requirements": {
+                  "type": "object",
+                  "$ref": "#/definitions/requirementsExtensionElement"
+                },
+                "menus": {
+                  "$ref": "#/definitions/extensionMenuItem"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "menus"
+              ]
+            }
+          },
+          "extensionMenuItem": {
+            "type": "array",
+            "description": "The title used for the top of the callout.",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "entryPoint": {
+                  "type": "string",
+                  "description": "Use text or cell here for Office context menu. Use text if the context menu should open when a user right-clicks on the selected text. Use cell if the context menu should open when the user right-clicks on a cell on an Excel spreadsheet.",
+                  "enum": [
+                    "text",
+                    "cell"
+                  ]
+                },
+                "controls": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/extensionCommonCustomGroupControlsItem"
+                  },
+                  "minItems": 1
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "entryPoint",
+                "controls"
+              ]
+            }
+          },
         "elementActions": {
             "type": "array",
             "description": "Actions node contains an array of actions object.",
