@@ -1,21 +1,23 @@
 {
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
         "themeCollection": {
-            "$ref": "#/definitions/ThemeCollection.5c95bdcc",
+            "$ref": "#/definitions/ThemeCollection",
             "description": "Define a theme (built-in and/or a custom theme) to be used for this report."
         },
         "layoutOptimization": {
-            "$ref": "#/definitions/LayoutOptimization.e2a1233a",
+            "$ref": "#/definitions/LayoutOptimization",
             "description": "Is the report optimized for mobile consumption."
         },
         "filterConfig": {
             "description": "Filters that apply to the entire report (all pages and all visuals).",
-            "$ref": "#/definitions/FilterConfig.09c5d403"
+            "$ref": "#/definitions/FilterConfig"
         },
         "objects": {
             "description": "Specifies the formatting to be set for different \"objects\" of a report.",
-            "$ref": "#/definitions/TypedDataViewObjectDefinitions<{outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{type:{enumeration:IEnumType;};};};};}>.9d93c182"
+            "$ref": "#/definitions/TypedDataViewObjectDefinitions<{outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{type:{enumeration:IEnumType;};};};};}>"
         },
         "reportSource": {
             "description": "Defines how the report was created.",
@@ -62,21 +64,21 @@
             "description": "Set of resources used within this report.",
             "type": "array",
             "items": {
-                "$ref": "#/definitions/ResourcePackage.a62637a8"
+                "$ref": "#/definitions/ResourcePackage"
             }
         },
         "organizationCustomVisuals": {
             "description": "Names and metadata of the organization approved custom visuals used in the report.",
             "type": "array",
             "items": {
-                "$ref": "#/definitions/OrganizationCustomVisual.52e744fa"
+                "$ref": "#/definitions/OrganizationCustomVisual"
             }
         },
         "annotations": {
             "description": "Additional information to be saved (for example comments, readme, etc) for this report.",
             "type": "array",
             "items": {
-                "$ref": "#/definitions/Annotation.512bf3af"
+                "$ref": "#/definitions/Annotation"
             }
         },
         "dataSourceVariables": {
@@ -85,11 +87,11 @@
         },
         "settings": {
             "description": "Settings for the report.",
-            "$ref": "#/definitions/ExplorationSettings.5ea662c1"
+            "$ref": "#/definitions/ExplorationSettings"
         },
         "slowDataSourceSettings": {
             "description": "Settings for slow data sources (for example turning all apply all button for filters).",
-            "$ref": "#/definitions/ExplorationSlowDataSourceSettings.04d50c9c"
+            "$ref": "#/definitions/ExplorationSlowDataSourceSettings"
         },
         "$schema": {
             "description": "Defines the schema to use for an item.",
@@ -104,21 +106,21 @@
         "themeCollection"
     ],
     "definitions": {
-        "ThemeCollection.5c95bdcc": {
+        "ThemeCollection": {
             "type": "object",
             "properties": {
                 "baseTheme": {
                     "description": "Defines the base monthly release themes shipped with Power BI.",
-                    "$ref": "#/definitions/ThemeMetadata.e7cc8520"
+                    "$ref": "#/definitions/ThemeMetadata"
                 },
                 "customTheme": {
                     "description": "Defines a custom theme that is applied on top of the base theme.\nProperties not defined in the custom theme will fallback to using the base theme.",
-                    "$ref": "#/definitions/ThemeMetadata.e7cc8520"
+                    "$ref": "#/definitions/ThemeMetadata"
                 }
             },
             "additionalProperties": false
         },
-        "ThemeMetadata.e7cc8520": {
+        "ThemeMetadata": {
             "type": "object",
             "properties": {
                 "name": {
@@ -130,7 +132,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "$ref": "#/definitions/ThemeResourcePackageType.81bc7776",
+                    "$ref": "#/definitions/ThemeResourcePackageType",
                     "description": "Built-in or user specific custom theme."
                 }
             },
@@ -141,7 +143,7 @@
                 "type"
             ]
         },
-        "ThemeResourcePackageType.81bc7776": {
+        "ThemeResourcePackageType": {
             "type": "string",
             "anyOf": [
                 {
@@ -154,7 +156,7 @@
                 }
             ]
         },
-        "LayoutOptimization.e2a1233a": {
+        "LayoutOptimization": {
             "type": "string",
             "anyOf": [
                 {
@@ -167,14 +169,14 @@
                 }
             ]
         },
-        "FilterConfig.09c5d403": {
+        "FilterConfig": {
             "type": "object",
             "properties": {
                 "filters": {
                     "description": "Defines the definitions and metadata for the filters.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/FilterContainer.53e03047"
+                        "$ref": "#/definitions/FilterContainer"
                     }
                 },
                 "filterSortOrder": {
@@ -198,7 +200,7 @@
             },
             "additionalProperties": false
         },
-        "FilterContainer.53e03047": {
+        "FilterContainer": {
             "type": "object",
             "properties": {
                 "name": {
@@ -215,7 +217,7 @@
                 },
                 "field": {
                     "description": "Defines the field from your data that is filtered.",
-                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json#/definitions/QueryExpressionContainer"
                 },
                 "type": {
                     "description": "The type of a filter.",
@@ -255,7 +257,7 @@
                 },
                 "filter": {
                     "description": "Defines the actual filter definition - it is dependent on the type of filter.",
-                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/FilterDefinition.883d2076"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json#/definitions/FilterDefinition"
                 },
                 "restatement": {
                     "description": "A custom restatement to show for the filter - only applies to Passthrough filter type. For all other filters, a restatement is generated based on the filter definition.",
@@ -301,7 +303,7 @@
                 },
                 "objects": {
                     "description": "Formatting for different \"objects\" of a filter card",
-                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>.9d93c182"
+                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>"
                 }
             },
             "additionalProperties": false,
@@ -309,7 +311,7 @@
                 "name"
             ]
         },
-        "TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>.9d93c182": {
+        "TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>": {
             "type": "object",
             "properties": {
                 "general": {
@@ -319,10 +321,10 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>.9caaad68",
+                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -335,7 +337,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>.9caaad68": {
+        "TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>": {
             "type": "object",
             "properties": {
                 "requireSingleSelect": {},
@@ -343,7 +345,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectDefinitions<{outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{type:{enumeration:IEnumType;};};};};}>.9d93c182": {
+        "TypedDataViewObjectDefinitions<{outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{type:{enumeration:IEnumType;};};};};}>": {
             "type": "object",
             "properties": {
                 "outspacePane": {
@@ -353,10 +355,10 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>.9caaad68",
+                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -373,10 +375,10 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json/#/definitions/Selector.bf3a7dcc"
+                                "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>.9caaad68",
+                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -389,7 +391,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>.9caaad68": {
+        "TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>": {
             "type": "object",
             "properties": {
                 "expanded": {},
@@ -397,14 +399,14 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>.9caaad68": {
+        "TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>": {
             "type": "object",
             "properties": {
                 "verticalAlignment": {}
             },
             "additionalProperties": false
         },
-        "ResourcePackage.a62637a8": {
+        "ResourcePackage": {
             "type": "object",
             "properties": {
                 "id": {
@@ -414,12 +416,12 @@
                     "type": "string"
                 },
                 "type": {
-                    "$ref": "#/definitions/ResourcePackageType.fd9b9ac3"
+                    "$ref": "#/definitions/ResourcePackageType"
                 },
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ResourcePackageItem.39fb9878"
+                        "$ref": "#/definitions/ResourcePackageItem"
                     }
                 },
                 "disabled": {
@@ -433,7 +435,7 @@
                 "type"
             ]
         },
-        "ResourcePackageType.fd9b9ac3": {
+        "ResourcePackageType": {
             "type": "string",
             "anyOf": [
                 {
@@ -450,7 +452,7 @@
                 }
             ]
         },
-        "ResourcePackageItem.39fb9878": {
+        "ResourcePackageItem": {
             "type": "object",
             "properties": {
                 "id": {
@@ -463,7 +465,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "$ref": "#/definitions/ResourcePackageItemType.fb4368de"
+                    "$ref": "#/definitions/ResourcePackageItemType"
                 }
             },
             "additionalProperties": false,
@@ -473,7 +475,7 @@
                 "type"
             ]
         },
-        "ResourcePackageItemType.fb4368de": {
+        "ResourcePackageItemType": {
             "type": "string",
             "anyOf": [
                 {
@@ -526,7 +528,7 @@
                 }
             ]
         },
-        "OrganizationCustomVisual.52e744fa": {
+        "OrganizationCustomVisual": {
             "type": "object",
             "properties": {
                 "name": {
@@ -548,7 +550,7 @@
                 "path"
             ]
         },
-        "Annotation.512bf3af": {
+        "Annotation": {
             "type": "object",
             "properties": {
                 "name": {
@@ -566,7 +568,7 @@
                 "value"
             ]
         },
-        "ExplorationSettings.5ea662c1": {
+        "ExplorationSettings": {
             "type": "object",
             "properties": {
                 "isPersistentUserStateDisabled": {
@@ -707,7 +709,7 @@
             },
             "additionalProperties": false
         },
-        "ExplorationSlowDataSourceSettings.04d50c9c": {
+        "ExplorationSlowDataSourceSettings": {
             "type": "object",
             "properties": {
                 "isCrossHighlightingDisabled": {
@@ -733,6 +735,5 @@
             },
             "additionalProperties": false
         }
-    },
-    "$schema": "http://json-schema.org/draft-07/schema#"
+    }
 }
