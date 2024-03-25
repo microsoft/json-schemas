@@ -1,4 +1,6 @@
 {
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
         "items": {
@@ -6,10 +8,10 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/SingleBookmarkMetadata.e16d14c5"
+                        "$ref": "#/definitions/SingleBookmarkMetadata"
                     },
                     {
-                        "$ref": "#/definitions/BookmarkGroupMetadata.13d948d6"
+                        "$ref": "#/definitions/BookmarkGroupMetadata"
                     }
                 ]
             }
@@ -17,7 +19,7 @@
         "$schema": {
             "description": "Defines the schema to use for an item.",
             "type": "string",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarkMetadata/1.0.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json"
         }
     },
     "additionalProperties": false,
@@ -26,8 +28,8 @@
         "items"
     ],
     "definitions": {
-        "SingleBookmarkMetadata.e16d14c5": {
-            "description": "Defines a bookmark that is not part of a group (standalong bookmark).",
+        "SingleBookmarkMetadata": {
+            "description": "Defines a bookmark that is not part of a group (standalone bookmark).",
             "type": "object",
             "properties": {
                 "name": {
@@ -40,7 +42,7 @@
                 "name"
             ]
         },
-        "BookmarkGroupMetadata.13d948d6": {
+        "BookmarkGroupMetadata": {
             "description": "Defines a group of related bookmarks.",
             "type": "object",
             "properties": {
@@ -67,6 +69,5 @@
                 "name"
             ]
         }
-    },
-    "$schema": "http://json-schema.org/draft-07/schema#"
+    }
 }

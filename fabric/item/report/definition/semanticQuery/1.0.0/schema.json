@@ -1,27 +1,28 @@
 {
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/semanticQuery/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "FilterDefinition.883d2076": {
+        "FilterDefinition": {
             "description": "Defines a filter element as a partial query structure",
             "type": "object",
             "properties": {
                 "Version": {
                     "description": "Version of the query",
                     "type": "number",
-                    "const": "2"
+                    "const": 2
                 },
                 "From": {
                     "description": "Set of tables from which the data will be picked.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/EntitySource.e30cbfb1"
+                        "$ref": "#/definitions/EntitySource"
                     }
                 },
                 "Where": {
                     "description": "Set of filters to apply to the data.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryFilter.149e43e9"
+                        "$ref": "#/definitions/QueryFilter"
                     }
                 }
             },
@@ -31,18 +32,18 @@
                 "Where"
             ]
         },
-        "QueryFilter.149e43e9": {
+        "QueryFilter": {
             "type": "object",
             "properties": {
                 "Target": {
                     "description": "Set of expressions over which the condition applies. Applied to the set of all non-aggregate, non-measure expressions in the Select if not specified.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "Condition": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Condition to apply to the target. Must be an expression that evaluates to a boolean."
                 },
                 "Annotations": {
@@ -56,7 +57,7 @@
                 "Condition"
             ]
         },
-        "QueryExpressionContainer.1ec1cfb2": {
+        "QueryExpressionContainer": {
             "description": "Holds a single expression and associated metadata. \nName, NativeReferenceName, and Annotations may be specified for any expression.\nEach other property represents a specific type of expression and exactly one of these other properties must be specified.",
             "type": "object",
             "properties": {
@@ -77,192 +78,192 @@
                     "description": "The SourceRef element contains an expression which is reference to a source table in the query or the data.",
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/StandaloneSourceRefExpression.a3ad0a94"
+                            "$ref": "#/definitions/StandaloneSourceRefExpression"
                         },
                         {
-                            "$ref": "#/definitions/QuerySourceRefExpression.e24be8a0"
+                            "$ref": "#/definitions/QuerySourceRefExpression"
                         }
                     ]
                 },
                 "Column": {
                     "description": "The Column element contains an expression which is a reference to a column in a source table.",
-                    "$ref": "#/definitions/QueryColumnExpression.5c5d43af"
+                    "$ref": "#/definitions/QueryColumnExpression"
                 },
                 "Measure": {
                     "description": "The Measure element contains an expression which is a reference to a measure in a source table.",
-                    "$ref": "#/definitions/QueryMeasureExpression.e4fb3887"
+                    "$ref": "#/definitions/QueryMeasureExpression"
                 },
                 "Min": {
                     "description": "The Min element contains an expression whose min aggregation needs to be computed.",
-                    "$ref": "#/definitions/QueryMinExpression.6a6b45cd"
+                    "$ref": "#/definitions/QueryMinExpression"
                 },
                 "Max": {
                     "description": "The Max element contains an expression whose max aggregation needs to be computed.",
-                    "$ref": "#/definitions/QueryMaxExpression.a2e5da60"
+                    "$ref": "#/definitions/QueryMaxExpression"
                 },
                 "Aggregation": {
                     "description": "The Aggregation element contains an expression which is an aggregation of an expression.",
-                    "$ref": "#/definitions/QueryAggregationExpression.beb2ed3b"
+                    "$ref": "#/definitions/QueryAggregationExpression"
                 },
                 "Percentile": {
                     "description": "The Percentile element contains an expression which computes a percentile of an expression.",
-                    "$ref": "#/definitions/QueryPercentileExpression.3295313f"
+                    "$ref": "#/definitions/QueryPercentileExpression"
                 },
                 "Hierarchy": {
                     "description": "Hierarchy is an element which represents a reference to a hierarchy in a source table.",
-                    "$ref": "#/definitions/QueryHierarchyExpression.835683de"
+                    "$ref": "#/definitions/QueryHierarchyExpression"
                 },
                 "HierarchyLevel": {
                     "description": "HierarchyLevel is an element which represents a reference to a hierarchy level in a hierarchy.",
-                    "$ref": "#/definitions/QueryHierarchyLevelExpression.069df9fd"
+                    "$ref": "#/definitions/QueryHierarchyLevelExpression"
                 },
                 "PropertyVariationSource": {
                     "description": "PropertyVariationSource is an element which represents a reference to a source of variations associated with a property.",
-                    "$ref": "#/definitions/QueryPropertyVariationSourceExpression.3bde0c75"
+                    "$ref": "#/definitions/QueryPropertyVariationSourceExpression"
                 },
                 "Subquery": {
                     "description": "Subquery is an element which holds a query.",
-                    "$ref": "#/definitions/QuerySubqueryExpression.8fc8727d"
+                    "$ref": "#/definitions/QuerySubqueryExpression"
                 },
                 "Discretize": {
                     "description": "Transforms a continuous space of numerical values into a discrete space of numerical values.",
-                    "$ref": "#/definitions/QueryDiscretizeExpression.14f116ce"
+                    "$ref": "#/definitions/QueryDiscretizeExpression"
                 },
                 "And": {
                     "description": "The And element contains an expression which represents an \"and\" between two expressions that evaluate to a boolean value.",
-                    "$ref": "#/definitions/QueryBinaryExpression.613f5f42"
+                    "$ref": "#/definitions/QueryBinaryExpression"
                 },
                 "Between": {
                     "description": "The Between element contains an expression which is a comparison between an expression and two bounds.",
-                    "$ref": "#/definitions/QueryBetweenExpression.a68e594b"
+                    "$ref": "#/definitions/QueryBetweenExpression"
                 },
                 "In": {
                     "description": "The In element contains an expression which is a comparison between an ordered list of expressions and a set of ordered lists of values.\nIf the tuple defined in Expressions matches any tuple defined in Values, then In returns true.",
-                    "$ref": "#/definitions/QueryInExpression.6ad447bc"
+                    "$ref": "#/definitions/QueryInExpression"
                 },
                 "Or": {
                     "description": "The And element contains an expression which represents an \"or\" between two expressions that evaluate to a boolean value.",
-                    "$ref": "#/definitions/QueryBinaryExpression.613f5f42"
+                    "$ref": "#/definitions/QueryBinaryExpression"
                 },
                 "Comparison": {
                     "description": "The Comparison element contains an expression which is a comparison between two expressions.",
-                    "$ref": "#/definitions/QueryComparisonExpression.afc89ec0"
+                    "$ref": "#/definitions/QueryComparisonExpression"
                 },
                 "Not": {
                     "description": "The Not element contains an expression which represents a \"not\" of an expression that evaluate to a boolean value.",
-                    "$ref": "#/definitions/QueryNotExpression.f70dcde3"
+                    "$ref": "#/definitions/QueryNotExpression"
                 },
                 "Contains": {
                     "description": "The Contains element contains an expression which is a \"contains\" comparison between two expressions.\nThe operation is case insensitive and accent sensitive.",
-                    "$ref": "#/definitions/QueryContainsExpression.5dd32cc3"
+                    "$ref": "#/definitions/QueryContainsExpression"
                 },
                 "StartsWith": {
                     "description": "The StartsWith element contains an expression which is a \"starts with\" comparison between two expressions.",
-                    "$ref": "#/definitions/QueryStartsWithExpression.5db896f8"
+                    "$ref": "#/definitions/QueryStartsWithExpression"
                 },
                 "Exists": {
                     "description": "The Exists element contains an expression which represents confirming the existence of at least one instance of an expression.",
-                    "$ref": "#/definitions/QueryExistsExpression.1e103f9d"
+                    "$ref": "#/definitions/QueryExistsExpression"
                 },
                 "Literal": {
                     "description": "The Literal element contains an expression which is a literal value.",
-                    "$ref": "#/definitions/QueryLiteralExpression.a830027a"
+                    "$ref": "#/definitions/QueryLiteralExpression"
                 },
                 "DateSpan": {
                     "description": "The DateSpan element contains an expression which is a datespan calculation of an expression.\nA DateSpan can be compared directly to a Date via Comparison or Between.",
-                    "$ref": "#/definitions/QueryDateSpanExpression.d26f4964"
+                    "$ref": "#/definitions/QueryDateSpanExpression"
                 },
                 "DateAdd": {
                     "description": "The DateAdd element contains an expression which is a dateadd calculation of an expression.",
-                    "$ref": "#/definitions/QueryDateAddExpression.bf32ff5d"
+                    "$ref": "#/definitions/QueryDateAddExpression"
                 },
                 "Now": {
                     "description": "The Now element contains an expression which returns the current date and time.",
-                    "$ref": "#/definitions/QueryNowExpression.5b9f7f3e"
+                    "$ref": "#/definitions/QueryNowExpression"
                 },
                 "DefaultValue": {
                     "description": "The DefaultValue element represents the model-defined default value for a column.\nIt may only be used as the Right expression in a Comparison expression with a ComparisonKind of Equal.",
-                    "$ref": "#/definitions/QueryDefaultValueExpression.a9cea67c"
+                    "$ref": "#/definitions/QueryDefaultValueExpression"
                 },
                 "AnyValue": {
                     "description": "The AnyValue element represents a wildcard value that will match any value in a column.\nIt may only be used as the Right expression in a Comparison expression with a ComparisonKind of Equal.",
-                    "$ref": "#/definitions/QueryAnyValueExpression.767a9998"
+                    "$ref": "#/definitions/QueryAnyValueExpression"
                 },
                 "Arithmetic": {
                     "description": "The Arithmetic element contains an expression which is an arithmetic operation on two expressions.",
-                    "$ref": "#/definitions/QueryArithmeticExpression.6e988c81"
+                    "$ref": "#/definitions/QueryArithmeticExpression"
                 },
                 "Floor": {
                     "description": "The Floor element represents an operation to round the specified expression toward zero to a multiple of the specified size.",
-                    "$ref": "#/definitions/QueryFloorExpression.ef63e1f9"
+                    "$ref": "#/definitions/QueryFloorExpression"
                 },
                 "ScopedEval": {
                     "description": "ScopedEval is an element which evaluates an expression in a specified scope.",
-                    "$ref": "#/definitions/QueryScopedEvalExpression.6cac0120"
+                    "$ref": "#/definitions/QueryScopedEvalExpression"
                 },
                 "FilteredEval": {
                     "description": "The FilteredEval element contains a set of filters to apply to the measure.",
-                    "$ref": "#/definitions/QueryFilteredEvalExpression.58724a4a"
+                    "$ref": "#/definitions/QueryFilteredEvalExpression"
                 },
                 "TransformTableRef": {
                     "description": "The TransformTableRef element contains an expression which is reference to a TransformTable in the query.",
-                    "$ref": "#/definitions/QueryTransformTableRefExpression.05fe7936"
+                    "$ref": "#/definitions/QueryTransformTableRefExpression"
                 },
                 "TransformOutputRoleRef": {
                     "description": "The TransformOutputRoleRef element contains an expression which is reference to a column produced by a Transform algorithm.\nThe reference is resolved by the Role attached to the output column by the transform.",
-                    "$ref": "#/definitions/QueryTransformOutputRoleRefExpression.6346b1bf"
+                    "$ref": "#/definitions/QueryTransformOutputRoleRefExpression"
                 },
                 "SparklineData": {
                     "description": "Used to represent the data behind a sparkline. The data returned will be JSON formatted X/Y value pairs.",
-                    "$ref": "#/definitions/QuerySparklineDataExpression.50182179"
+                    "$ref": "#/definitions/QuerySparklineDataExpression"
                 },
                 "NativeVisualCalculation": {
                     "description": "The NativeVisualCalculation element represents invocation of an expression defined using an expression in an underlying query language.\nThe expression should be invoked in the Visual Calculation Context for this query.",
-                    "$ref": "#/definitions/QueryNativeVisualCalc.0c53ba39"
+                    "$ref": "#/definitions/QueryNativeVisualCalc"
                 },
                 "FillRule": {
                     "description": "The FillRule element represents an operation to apply a dynamic fill operation.",
-                    "$ref": "#/definitions/QueryFillRuleExpression.a37b0742"
+                    "$ref": "#/definitions/QueryFillRuleExpression"
                 },
                 "GroupRef": {
                     "description": "The GroupRef element contains an expression which is a reference to a model grouping column.",
-                    "$ref": "#/definitions/QueryGroupRefExpression.40930e98"
+                    "$ref": "#/definitions/QueryGroupRefExpression"
                 },
                 "ResourcePackageItem": {
                     "description": "The ResourcePackageItem element contains an expression which references a ResourcePackage item.",
-                    "$ref": "#/definitions/QueryResourcePackageItem.5cfa9e6c"
+                    "$ref": "#/definitions/QueryResourcePackageItem"
                 },
                 "RoleRef": {
                     "description": "The RoleRef element contains an expression which is a reference to a named Role defined by a Visual.",
-                    "$ref": "#/definitions/QueryRoleRefExpression.f123dc98"
+                    "$ref": "#/definitions/QueryRoleRefExpression"
                 },
                 "SummaryValueRef": {
                     "description": "The SumaryValueRef element contains an expression which is a reference to a summary value in Insights Summary.",
-                    "$ref": "#/definitions/QuerySummaryValueRefExpression.f50a5ab9"
+                    "$ref": "#/definitions/QuerySummaryValueRefExpression"
                 },
                 "AllRolesRef": {
                     "description": "The AllRolesRef element is used to reference all the roles in a visual.",
-                    "$ref": "#/definitions/QueryAllRolesRefExpression.d1469265"
+                    "$ref": "#/definitions/QueryAllRolesRefExpression"
                 },
                 "SelectRef": {
                     "description": "The SelectRef element contains an expression which is a reference to a named item in the select clause of the query.",
-                    "$ref": "#/definitions/QuerySelectRefExpression.72cd296a"
+                    "$ref": "#/definitions/QuerySelectRefExpression"
                 },
                 "ThemeDataColor": {
                     "description": "The ThemeDataColor element represents an operation to select a color from a theme.",
-                    "$ref": "#/definitions/QueryThemeDataColorExpression.44754d24"
+                    "$ref": "#/definitions/QueryThemeDataColorExpression"
                 },
                 "Conditional": {
                     "description": "The Conditional element represents an operation to select between several possible cases or an optional default.",
-                    "$ref": "#/definitions/QueryConditionalExpression.558260b6"
+                    "$ref": "#/definitions/QueryConditionalExpression"
                 },
                 "NativeMeasure": {
                     "description": "The NativeMeasure element represents invocation of a measure defined using an expression in an underlying query language.",
-                    "$ref": "#/definitions/QueryNativeMeasure.ab67d533"
+                    "$ref": "#/definitions/QueryNativeMeasure"
                 },
                 "NativeColumn": {
                     "description": "The NativeColumn element represents invocation of a column defined using an expression in an underlying query language.",
-                    "$ref": "#/definitions/QueryNativeColumn.09bfbb80"
+                    "$ref": "#/definitions/QueryNativeColumn"
                 }
             },
             "additionalProperties": false,
@@ -499,7 +500,7 @@
                 }
             ]
         },
-        "QueryNativeColumn.09bfbb80": {
+        "QueryNativeColumn": {
             "type": "object",
             "properties": {
                 "DataType": {
@@ -515,12 +516,12 @@
                     "type": "string"
                 },
                 "Source": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Defines the table that this column should be considered as part of."
                 },
                 "ExpressionContentCache": {
                     "description": "Holds metadata about the expression content.",
-                    "$ref": "#/definitions/QueryExpressionContentCache.eb6a76c4"
+                    "$ref": "#/definitions/QueryExpressionContentCache"
                 },
                 "ProposedName": {
                     "description": "The preferred name that should be used if the expression needs to be associated with a name in order to be evaluated.",
@@ -539,13 +540,13 @@
                 "Source"
             ]
         },
-        "QueryExpressionContentCache.eb6a76c4": {
+        "QueryExpressionContentCache": {
             "type": "object",
             "properties": {
                 "Dependencies": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "UnrecognizedIdentifiers": {
@@ -554,7 +555,7 @@
             },
             "additionalProperties": false
         },
-        "QueryNativeMeasure.ab67d533": {
+        "QueryNativeMeasure": {
             "type": "object",
             "properties": {
                 "DataType": {
@@ -572,7 +573,7 @@
                 },
                 "ExpressionContentCache": {
                     "description": "Holds metadata about the expression content.",
-                    "$ref": "#/definitions/QueryExpressionContentCache.eb6a76c4"
+                    "$ref": "#/definitions/QueryExpressionContentCache"
                 },
                 "ProposedName": {
                     "description": "The preferred name that should be used if the expression needs to be associated with a name in order to be evaluated.",
@@ -590,19 +591,19 @@
                 "Language"
             ]
         },
-        "QueryConditionalExpression.558260b6": {
+        "QueryConditionalExpression": {
             "type": "object",
             "properties": {
                 "Cases": {
                     "description": "Cases are considered in the specified order. \nThe result is the Case.Value of the first case where Case.Condition evaluates to true.\nIf no Case.Condition evaluates to true, the result is the DefaultValue, if DefaultValue is specified.\nOtherwise, the result is null.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryCase.1cc11f17"
+                        "$ref": "#/definitions/QueryCase"
                     }
                 },
                 "DefaultValue": {
                     "description": "An optional value to return when no case evaluates to true.",
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "#/definitions/QueryExpressionContainer"
                 }
             },
             "additionalProperties": false,
@@ -610,15 +611,15 @@
                 "Cases"
             ]
         },
-        "QueryCase.1cc11f17": {
+        "QueryCase": {
             "type": "object",
             "properties": {
                 "Condition": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "An expression producing a boolean indicating whether or not to match this Case."
                 },
                 "Value": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "An expression producing the result when this case is matched."
                 }
             },
@@ -628,7 +629,7 @@
                 "Value"
             ]
         },
-        "QueryThemeDataColorExpression.44754d24": {
+        "QueryThemeDataColorExpression": {
             "type": "object",
             "properties": {
                 "ColorId": {
@@ -645,7 +646,7 @@
                 "Percent"
             ]
         },
-        "QuerySelectRefExpression.72cd296a": {
+        "QuerySelectRefExpression": {
             "type": "object",
             "properties": {
                 "ExpressionName": {
@@ -658,11 +659,11 @@
                 "ExpressionName"
             ]
         },
-        "QueryAllRolesRefExpression.d1469265": {
+        "QueryAllRolesRefExpression": {
             "type": "object",
             "additionalProperties": false
         },
-        "QuerySummaryValueRefExpression.f50a5ab9": {
+        "QuerySummaryValueRefExpression": {
             "type": "object",
             "properties": {
                 "Name": {
@@ -675,7 +676,7 @@
                 "Name"
             ]
         },
-        "QueryRoleRefExpression.f123dc98": {
+        "QueryRoleRefExpression": {
             "type": "object",
             "properties": {
                 "Role": {
@@ -688,7 +689,7 @@
                 "Role"
             ]
         },
-        "QueryResourcePackageItem.5cfa9e6c": {
+        "QueryResourcePackageItem": {
             "type": "object",
             "properties": {
                 "PackageName": {
@@ -711,18 +712,18 @@
                 "PackageType"
             ]
         },
-        "QueryGroupRefExpression.40930e98": {
+        "QueryGroupRefExpression": {
             "type": "object",
             "properties": {
                 "GroupedColumns": {
                     "description": "The underlying columns for the desired grouping.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Reference to the source table containing the property. Must be a SourceRef, PropertyVariationSource, or TransformTableRef expression."
                 },
                 "Property": {
@@ -737,11 +738,11 @@
                 "Property"
             ]
         },
-        "QueryFillRuleExpression.a37b0742": {
+        "QueryFillRuleExpression": {
             "type": "object",
             "properties": {
                 "Input": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "The expression providing the input value to the rule."
                 },
                 "FillRule": {
@@ -754,7 +755,7 @@
                 "Input"
             ]
         },
-        "QueryNativeVisualCalc.0c53ba39": {
+        "QueryNativeVisualCalc": {
             "type": "object",
             "properties": {
                 "Language": {
@@ -778,18 +779,18 @@
                 "Name"
             ]
         },
-        "QuerySparklineDataExpression.50182179": {
+        "QuerySparklineDataExpression": {
             "type": "object",
             "properties": {
                 "Measure": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "The measure to compute sparkline data for."
                 },
                 "Groupings": {
                     "description": "The granularity at which to evaluate the measure.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "PointsPerSparkline": {
@@ -805,7 +806,7 @@
                 "PointsPerSparkline"
             ]
         },
-        "QueryTransformOutputRoleRefExpression.6346b1bf": {
+        "QueryTransformOutputRoleRefExpression": {
             "type": "object",
             "properties": {
                 "Role": {
@@ -822,7 +823,7 @@
                 "Role"
             ]
         },
-        "QueryTransformTableRefExpression.05fe7936": {
+        "QueryTransformTableRefExpression": {
             "type": "object",
             "properties": {
                 "Source": {
@@ -835,18 +836,18 @@
                 "Source"
             ]
         },
-        "QueryFilteredEvalExpression.58724a4a": {
+        "QueryFilteredEvalExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "The expression over which the condition applies. Must be a scalar."
                 },
                 "Filters": {
                     "description": "List of filters to apply to the measure.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryFilter.149e43e9"
+                        "$ref": "#/definitions/QueryFilter"
                     }
                 }
             },
@@ -856,18 +857,18 @@
                 "Filters"
             ]
         },
-        "QueryScopedEvalExpression.6cac0120": {
+        "QueryScopedEvalExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to evaluate in the new scope."
                 },
                 "Scope": {
                     "description": "Set of expressions defining the new scope.  These expressions can only be Columns.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 }
             },
@@ -877,11 +878,11 @@
                 "Scope"
             ]
         },
-        "QueryFloorExpression.ef63e1f9": {
+        "QueryFloorExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to round"
                 },
                 "Size": {
@@ -933,19 +934,19 @@
                 "Size"
             ]
         },
-        "QueryArithmeticExpression.6e988c81": {
+        "QueryArithmeticExpression": {
             "type": "object",
             "properties": {
                 "Left": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "First operand expression"
                 },
                 "Right": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Second operand expression"
                 },
                 "Operator": {
-                    "$ref": "#/definitions/ArithmeticOperatorKind.fc41eb20",
+                    "$ref": "#/definitions/ArithmeticOperatorKind",
                     "description": "The arithmetic operation to perform"
                 }
             },
@@ -956,7 +957,7 @@
                 "Right"
             ]
         },
-        "ArithmeticOperatorKind.fc41eb20": {
+        "ArithmeticOperatorKind": {
             "type": "number",
             "anyOf": [
                 {
@@ -977,7 +978,7 @@
                 }
             ]
         },
-        "QueryAnyValueExpression.767a9998": {
+        "QueryAnyValueExpression": {
             "type": "object",
             "properties": {
                 "DefaultValueOverridesAncestors": {
@@ -987,15 +988,15 @@
             },
             "additionalProperties": false
         },
-        "QueryDefaultValueExpression.a9cea67c": {
+        "QueryDefaultValueExpression": {
             "type": "object",
             "additionalProperties": false
         },
-        "QueryNowExpression.5b9f7f3e": {
+        "QueryNowExpression": {
             "type": "object",
             "additionalProperties": false
         },
-        "QueryDateAddExpression.bf32ff5d": {
+        "QueryDateAddExpression": {
             "type": "object",
             "properties": {
                 "Amount": {
@@ -1003,11 +1004,11 @@
                     "type": "number"
                 },
                 "TimeUnit": {
-                    "$ref": "#/definitions/TimeUnit.137a7a9e",
+                    "$ref": "#/definitions/TimeUnit",
                     "description": "Unit of time to add to the date."
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to which to add."
                 }
             },
@@ -1018,7 +1019,7 @@
                 "TimeUnit"
             ]
         },
-        "TimeUnit.137a7a9e": {
+        "TimeUnit": {
             "type": "number",
             "anyOf": [
                 {
@@ -1055,15 +1056,15 @@
                 }
             ]
         },
-        "QueryDateSpanExpression.d26f4964": {
+        "QueryDateSpanExpression": {
             "type": "object",
             "properties": {
                 "TimeUnit": {
-                    "$ref": "#/definitions/TimeUnit.137a7a9e",
+                    "$ref": "#/definitions/TimeUnit",
                     "description": "Unit of time used for datespan function."
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to which to apply the datespan function."
                 }
             },
@@ -1073,7 +1074,7 @@
                 "TimeUnit"
             ]
         },
-        "QueryLiteralExpression.a830027a": {
+        "QueryLiteralExpression": {
             "type": "object",
             "properties": {
                 "Value": {
@@ -1086,11 +1087,11 @@
                 "Value"
             ]
         },
-        "QueryExistsExpression.1e103f9d": {
+        "QueryExistsExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to verify there exists at least one instance of. Must be a SourceRef expression."
                 }
             },
@@ -1099,15 +1100,15 @@
                 "Expression"
             ]
         },
-        "QueryStartsWithExpression.5db896f8": {
+        "QueryStartsWithExpression": {
             "type": "object",
             "properties": {
                 "Left": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "First expression to which to apply the operator."
                 },
                 "Right": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Second expression to which to apply the operator."
                 }
             },
@@ -1117,15 +1118,15 @@
                 "Right"
             ]
         },
-        "QueryContainsExpression.5dd32cc3": {
+        "QueryContainsExpression": {
             "type": "object",
             "properties": {
                 "Left": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "First expression to which to apply the operator."
                 },
                 "Right": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Second expression to which to apply the operator."
                 }
             },
@@ -1135,11 +1136,11 @@
                 "Right"
             ]
         },
-        "QueryNotExpression.f70dcde3": {
+        "QueryNotExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to negate. Must be an expression that evaluates to a boolean value."
                 }
             },
@@ -1148,19 +1149,19 @@
                 "Expression"
             ]
         },
-        "QueryComparisonExpression.afc89ec0": {
+        "QueryComparisonExpression": {
             "type": "object",
             "properties": {
                 "ComparisonKind": {
-                    "$ref": "#/definitions/QueryComparisonKind.5b77e3c4",
+                    "$ref": "#/definitions/QueryComparisonKind",
                     "description": "Type of the comparison."
                 },
                 "Left": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "First expression to which to apply the operator."
                 },
                 "Right": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Second expression to which to apply the operator."
                 }
             },
@@ -1171,7 +1172,7 @@
                 "Right"
             ]
         },
-        "QueryComparisonKind.5b77e3c4": {
+        "QueryComparisonKind": {
             "type": "number",
             "anyOf": [
                 {
@@ -1196,15 +1197,15 @@
                 }
             ]
         },
-        "QueryBinaryExpression.613f5f42": {
+        "QueryBinaryExpression": {
             "type": "object",
             "properties": {
                 "Left": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "First expression to which to apply the operator."
                 },
                 "Right": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Second expression to which to apply the operator."
                 }
             },
@@ -1214,14 +1215,14 @@
                 "Right"
             ]
         },
-        "QueryInExpression.6ad447bc": {
+        "QueryInExpression": {
             "type": "object",
             "properties": {
                 "Expressions": {
                     "description": "The tuple of expressions to compare.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "Values": {
@@ -1230,13 +1231,13 @@
                     "items": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                            "$ref": "#/definitions/QueryExpressionContainer"
                         }
                     }
                 },
                 "Table": {
                     "description": "An expression, which must be a SourceRef, holding a table to compare against the Expressions. \nThe number of columns in the table must match the number of Expressions.  \nEach row in the table is considered a tuple to be matched against the expressions.",
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "#/definitions/QueryExpressionContainer"
                 }
             },
             "additionalProperties": false,
@@ -1244,19 +1245,19 @@
                 "Expressions"
             ]
         },
-        "QueryBetweenExpression.a68e594b": {
+        "QueryBetweenExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to compare."
                 },
                 "LowerBound": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Lower (inclusive) bound for the value of the expression."
                 },
                 "UpperBound": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Upper (inclusive) bound for the value of the expression."
                 }
             },
@@ -1267,11 +1268,11 @@
                 "UpperBound"
             ]
         },
-        "QueryDiscretizeExpression.14f116ce": {
+        "QueryDiscretizeExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "The expression to be discretized."
                 },
                 "Count": {
@@ -1285,11 +1286,11 @@
                 "Expression"
             ]
         },
-        "QuerySubqueryExpression.8fc8727d": {
+        "QuerySubqueryExpression": {
             "type": "object",
             "properties": {
                 "Query": {
-                    "$ref": "#/definitions/QueryDefinition.88324f0e",
+                    "$ref": "#/definitions/QueryDefinition",
                     "description": "The query to evaluate."
                 }
             },
@@ -1298,62 +1299,62 @@
                 "Query"
             ]
         },
-        "QueryDefinition.88324f0e": {
+        "QueryDefinition": {
             "description": "Defines a query to be executed.",
             "type": "object",
             "properties": {
                 "Version": {
                     "description": "Version of the query",
                     "type": "number",
-                    "const": "2"
+                    "const": 2
                 },
                 "From": {
                     "description": "Set of tables from which the data will be picked.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/EntitySource.e30cbfb1"
+                        "$ref": "#/definitions/EntitySource"
                     }
                 },
                 "Where": {
                     "description": "Set of filters to apply to the data.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryFilter.149e43e9"
+                        "$ref": "#/definitions/QueryFilter"
                     }
                 },
                 "OrderBy": {
                     "description": "List of expressions over which to sort the results.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QuerySortClause.3a4594a7"
+                        "$ref": "#/definitions/QuerySortClause"
                     }
                 },
                 "Select": {
                     "description": "List of expressions to display in the results.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "VisualShape": {
                     "description": "Provides metadata information about the structure and state of the visualization.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Axis.e1068171"
+                        "$ref": "#/definitions/Axis"
                     }
                 },
                 "GroupBy": {
                     "description": "List of expressions that represent the items to group by.\nThese additional groupings can be columns that we don't project or entity tables.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "Transform": {
                     "description": "List of table manipulation operations to apply within the query.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryTransform.5b6e48b5"
+                        "$ref": "#/definitions/QueryTransform"
                     }
                 },
                 "Top": {
@@ -1367,7 +1368,7 @@
                 "Select"
             ]
         },
-        "QueryTransform.5b6e48b5": {
+        "QueryTransform": {
             "type": "object",
             "properties": {
                 "Name": {
@@ -1379,11 +1380,11 @@
                     "type": "string"
                 },
                 "Input": {
-                    "$ref": "#/definitions/QueryTransformInput.c7ede161",
+                    "$ref": "#/definitions/QueryTransformInput",
                     "description": "Describes the information needed to invoke the transform."
                 },
                 "Output": {
-                    "$ref": "#/definitions/QueryTransformOutput.dc0e8d75",
+                    "$ref": "#/definitions/QueryTransformOutput",
                     "description": "Describes the expected results from the invoked transform."
                 }
             },
@@ -1395,17 +1396,17 @@
                 "Output"
             ]
         },
-        "QueryTransformOutput.dc0e8d75": {
+        "QueryTransformOutput": {
             "type": "object",
             "properties": {
                 "Table": {
                     "description": "The structure of the data produced by the transform.",
-                    "$ref": "#/definitions/QueryTransformTable.6f6093aa"
+                    "$ref": "#/definitions/QueryTransformTable"
                 }
             },
             "additionalProperties": false
         },
-        "QueryTransformTable.6f6093aa": {
+        "QueryTransformTable": {
             "type": "object",
             "properties": {
                 "Name": {
@@ -1416,7 +1417,7 @@
                     "description": "The columns that make up this table.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryTransformTableColumn.7ef0fb1a"
+                        "$ref": "#/definitions/QueryTransformTableColumn"
                     }
                 }
             },
@@ -1426,7 +1427,7 @@
                 "Name"
             ]
         },
-        "QueryTransformTableColumn.7ef0fb1a": {
+        "QueryTransformTableColumn": {
             "type": "object",
             "properties": {
                 "Role": {
@@ -1434,7 +1435,7 @@
                     "type": "string"
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "The expression defining this column. ExpressionContainer.Name property defines the name of the column.\nExpressionContainer.Name is required and must be unique across all other columns in this table."
                 }
             },
@@ -1443,19 +1444,19 @@
                 "Expression"
             ]
         },
-        "QueryTransformInput.c7ede161": {
+        "QueryTransformInput": {
             "type": "object",
             "properties": {
                 "Parameters": {
                     "description": "Parameters to be supplied when invoking the algorithm",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "Table": {
                     "description": "The structure of the table of data passed to the transform.",
-                    "$ref": "#/definitions/QueryTransformTable.6f6093aa"
+                    "$ref": "#/definitions/QueryTransformTable"
                 }
             },
             "additionalProperties": false,
@@ -1463,14 +1464,14 @@
                 "Parameters"
             ]
         },
-        "Axis.e1068171": {
+        "Axis": {
             "type": "object",
             "properties": {
                 "Groups": {
                     "description": "Ordered list of hierarchical groupings in this axis.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AxisGroup.adaba4c4"
+                        "$ref": "#/definitions/AxisGroup"
                     }
                 },
                 "Name": {
@@ -1484,14 +1485,14 @@
                 "Name"
             ]
         },
-        "AxisGroup.adaba4c4": {
+        "AxisGroup": {
             "type": "object",
             "properties": {
                 "Keys": {
                     "description": "List of expressions that define the keys of this group.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "#/definitions/QueryExpressionContainer"
                     }
                 },
                 "Subtotal": {
@@ -1504,11 +1505,11 @@
                 "Subtotal"
             ]
         },
-        "QuerySortClause.3a4594a7": {
+        "QuerySortClause": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression over which to sort the results."
                 },
                 "Direction": {
@@ -1521,7 +1522,7 @@
                 "Expression"
             ]
         },
-        "EntitySource.e30cbfb1": {
+        "EntitySource": {
             "type": "object",
             "properties": {
                 "Name": {
@@ -1538,7 +1539,7 @@
                 },
                 "Expression": {
                     "description": "An expression that produces a table. Mandatory if Type is Expression.",
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "#/definitions/QueryExpressionContainer"
                 },
                 "Type": {
                     "description": "Type of entity source - defaults to Table (0)",
@@ -1565,11 +1566,11 @@
                 "Name"
             ]
         },
-        "QueryPropertyVariationSourceExpression.3bde0c75": {
+        "QueryPropertyVariationSourceExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Reference to the source property containing the property variation source. Must be a SourceRef expression."
                 },
                 "Name": {
@@ -1588,11 +1589,11 @@
                 "Property"
             ]
         },
-        "QueryHierarchyLevelExpression.069df9fd": {
+        "QueryHierarchyLevelExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Reference to the hierarchy containing the level. Must be a Hierarchy expression."
                 },
                 "Level": {
@@ -1606,11 +1607,11 @@
                 "Level"
             ]
         },
-        "QueryHierarchyExpression.835683de": {
+        "QueryHierarchyExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Reference to the source table containing the hierarchy. Must be a SourceRef or a PropertyVariationSource expression."
                 },
                 "Hierarchy": {
@@ -1624,11 +1625,11 @@
                 "Hierarchy"
             ]
         },
-        "QueryPercentileExpression.3295313f": {
+        "QueryPercentileExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "The expression to be evaluated for the percentile."
                 },
                 "K": {
@@ -1647,15 +1648,15 @@
                 "K"
             ]
         },
-        "QueryAggregationExpression.beb2ed3b": {
+        "QueryAggregationExpression": {
             "type": "object",
             "properties": {
                 "Function": {
-                    "$ref": "#/definitions/QueryAggregateFunction.67cb2735",
+                    "$ref": "#/definitions/QueryAggregateFunction",
                     "description": "Type of the aggregation."
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression to aggregate."
                 }
             },
@@ -1665,7 +1666,7 @@
                 "Function"
             ]
         },
-        "QueryAggregateFunction.67cb2735": {
+        "QueryAggregateFunction": {
             "type": "number",
             "anyOf": [
                 {
@@ -1706,15 +1707,15 @@
                 }
             ]
         },
-        "QueryMaxExpression.a2e5da60": {
+        "QueryMaxExpression": {
             "type": "object",
             "properties": {
                 "IncludeAllTypes": {
-                    "$ref": "#/definitions/IncludeAllTypes.9ccfab6f",
+                    "$ref": "#/definitions/IncludeAllTypes",
                     "description": "Defines how variant types should be treated."
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression whose min will be computed."
                 }
             },
@@ -1724,7 +1725,7 @@
                 "IncludeAllTypes"
             ]
         },
-        "IncludeAllTypes.9ccfab6f": {
+        "IncludeAllTypes": {
             "description": "Argument for QueryMinExpression and QueryMaxExpression to decide behavior for variant types.",
             "type": "number",
             "anyOf": [
@@ -1742,15 +1743,15 @@
                 }
             ]
         },
-        "QueryMinExpression.6a6b45cd": {
+        "QueryMinExpression": {
             "type": "object",
             "properties": {
                 "IncludeAllTypes": {
-                    "$ref": "#/definitions/IncludeAllTypes.9ccfab6f",
+                    "$ref": "#/definitions/IncludeAllTypes",
                     "description": "Defines how variant types should be treated."
                 },
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Expression whose min will be computed."
                 }
             },
@@ -1760,11 +1761,11 @@
                 "IncludeAllTypes"
             ]
         },
-        "QueryMeasureExpression.e4fb3887": {
+        "QueryMeasureExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Reference to the source table containing the property. Must be a SourceRef, PropertyVariationSource, or TransformTableRef expression."
                 },
                 "Property": {
@@ -1778,11 +1779,11 @@
                 "Property"
             ]
         },
-        "QueryColumnExpression.5c5d43af": {
+        "QueryColumnExpression": {
             "type": "object",
             "properties": {
                 "Expression": {
-                    "$ref": "#/definitions/QueryExpressionContainer.1ec1cfb2",
+                    "$ref": "#/definitions/QueryExpressionContainer",
                     "description": "Reference to the source table containing the property. Must be a SourceRef, PropertyVariationSource, or TransformTableRef expression."
                 },
                 "Property": {
@@ -1796,7 +1797,7 @@
                 "Property"
             ]
         },
-        "QuerySourceRefExpression.e24be8a0": {
+        "QuerySourceRefExpression": {
             "type": "object",
             "properties": {
                 "Source": {
@@ -1809,7 +1810,7 @@
                 "Source"
             ]
         },
-        "StandaloneSourceRefExpression.a3ad0a94": {
+        "StandaloneSourceRefExpression": {
             "type": "object",
             "properties": {
                 "Schema": {

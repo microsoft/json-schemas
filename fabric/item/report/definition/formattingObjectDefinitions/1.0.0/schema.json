@@ -1,23 +1,24 @@
 {
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/formattingObjectDefinitions/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "DataViewObjectDefinitions.022fbdf8": {
+        "DataViewObjectDefinitions": {
             "type": "object",
             "additionalProperties": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/definitions/DataViewObjectDefinition.6e3faee5"
+                    "$ref": "#/definitions/DataViewObjectDefinition"
                 }
             }
         },
-        "DataViewObjectDefinition.6e3faee5": {
+        "DataViewObjectDefinition": {
             "type": "object",
             "properties": {
                 "selector": {
-                    "$ref": "#/definitions/Selector.bf3a7dcc"
+                    "$ref": "#/definitions/Selector"
                 },
                 "properties": {
-                    "$ref": "#/definitions/DataViewObjectPropertyDefinitions.88eb7485"
+                    "$ref": "#/definitions/DataViewObjectPropertyDefinitions"
                 }
             },
             "additionalProperties": false,
@@ -25,18 +26,18 @@
                 "properties"
             ]
         },
-        "DataViewObjectPropertyDefinitions.88eb7485": {
+        "DataViewObjectPropertyDefinitions": {
             "type": "object",
             "additionalProperties": {}
         },
-        "Selector.bf3a7dcc": {
+        "Selector": {
             "type": "object",
             "properties": {
                 "data": {
                     "description": "Scope is defined by data bound to the visual.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/DataRepetitionSelector.c81ac91d"
+                        "$ref": "#/definitions/DataRepetitionSelector"
                     }
                 },
                 "metadata": {
@@ -73,18 +74,18 @@
             },
             "additionalProperties": false
         },
-        "DataRepetitionSelector.c81ac91d": {
+        "DataRepetitionSelector": {
             "type": "object",
             "properties": {
                 "scopeId": {
                     "description": "Defines the intersection of scopes. For example - product color = red.",
-                    "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                    "$ref": "../../semanticQuery/1.0.0/schema.json#/definitions/QueryExpressionContainer"
                 },
                 "wildcard": {
                     "description": "Defines a match against all instances of a given DataView scope. Does not match Subtotals.\nDeprecated: - Use roles instead.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json#/definitions/QueryExpressionContainer"
                     }
                 },
                 "roles": {
@@ -98,21 +99,21 @@
                     "description": "Matches against the totals and subtotals.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semanticQuery/1.0.0/schema.json/#/definitions/QueryExpressionContainer.1ec1cfb2"
+                        "$ref": "../../semanticQuery/1.0.0/schema.json#/definitions/QueryExpressionContainer"
                     }
                 },
                 "dataViewWildcard": {
                     "description": "Matches all instances or all totals or both.",
-                    "$ref": "#/definitions/DataViewWildcard.622371b1"
+                    "$ref": "#/definitions/DataViewWildcard"
                 }
             },
             "additionalProperties": false
         },
-        "DataViewWildcard.622371b1": {
+        "DataViewWildcard": {
             "type": "object",
             "properties": {
                 "matchingOption": {
-                    "$ref": "#/definitions/DataViewWildcardMatchingOption.ef589313",
+                    "$ref": "#/definitions/DataViewWildcardMatchingOption",
                     "description": "Defines the matching option to use."
                 }
             },
@@ -121,7 +122,7 @@
                 "matchingOption"
             ]
         },
-        "DataViewWildcardMatchingOption.ef589313": {
+        "DataViewWildcardMatchingOption": {
             "type": "number",
             "anyOf": [
                 {

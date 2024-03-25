@@ -1,4 +1,6 @@
 {
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
         "name": {
@@ -10,7 +12,7 @@
             "description": "Entities in the semantic model that are extended.",
             "type": "array",
             "items": {
-                "$ref": "#/definitions/ReportExtensionEntity.7a98ec06"
+                "$ref": "#/definitions/ReportExtensionEntity"
             }
         },
         "$schema": {
@@ -25,7 +27,7 @@
         "name"
     ],
     "definitions": {
-        "ReportExtensionEntity.7a98ec06": {
+        "ReportExtensionEntity": {
             "type": "object",
             "properties": {
                 "name": {
@@ -36,7 +38,7 @@
                     "description": "Additional measures to include on this entity.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ReportExtensionMeasure.1b09f82f"
+                        "$ref": "#/definitions/ReportExtensionMeasure"
                     }
                 }
             },
@@ -45,7 +47,7 @@
                 "name"
             ]
         },
-        "ReportExtensionMeasure.1b09f82f": {
+        "ReportExtensionMeasure": {
             "type": "object",
             "properties": {
                 "name": {
@@ -53,7 +55,7 @@
                     "type": "string"
                 },
                 "dataType": {
-                    "$ref": "#/definitions/PrimitiveTypeName.ccd02159",
+                    "$ref": "#/definitions/PrimitiveTypeName",
                     "description": "Data type for the measure."
                 },
                 "dataCategory": {
@@ -74,7 +76,7 @@
                 },
                 "measureTemplate": {
                     "description": "Template information that was used to create this measure.",
-                    "$ref": "#/definitions/ReportExtensionMeasureTemplate.7cfeffa8"
+                    "$ref": "#/definitions/ReportExtensionMeasureTemplate"
                 },
                 "description": {
                     "description": "A description for the measure.",
@@ -88,12 +90,12 @@
                     "description": "Additional annotations to include for this measure.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/MeasureExtensionAnnotation.3a1fdb3f"
+                        "$ref": "#/definitions/MeasureExtensionAnnotation"
                     }
                 },
                 "references": {
                     "description": "References to other model measures and extensions used in the DAX of this measure.",
-                    "$ref": "#/definitions/ExpressionReferences.43ae603e"
+                    "$ref": "#/definitions/ExpressionReferences"
                 }
             },
             "additionalProperties": false,
@@ -103,7 +105,7 @@
                 "name"
             ]
         },
-        "PrimitiveTypeName.ccd02159": {
+        "PrimitiveTypeName": {
             "enum": [
                 "Binary",
                 "Boolean",
@@ -123,7 +125,7 @@
             ],
             "type": "string"
         },
-        "ReportExtensionMeasureTemplate.7cfeffa8": {
+        "ReportExtensionMeasureTemplate": {
             "type": "object",
             "properties": {
                 "daxTemplateName": {
@@ -141,7 +143,7 @@
                 "version"
             ]
         },
-        "MeasureExtensionAnnotation.3a1fdb3f": {
+        "MeasureExtensionAnnotation": {
             "type": "object",
             "properties": {
                 "name": {
@@ -159,7 +161,7 @@
                 "value"
             ]
         },
-        "ExpressionReferences.43ae603e": {
+        "ExpressionReferences": {
             "type": "object",
             "properties": {
                 "unrecognizedReferences": {
@@ -170,13 +172,13 @@
                     "description": "References to model measures and other extensions.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/MeasureReference.ad680435"
+                        "$ref": "#/definitions/MeasureReference"
                     }
                 }
             },
             "additionalProperties": false
         },
-        "MeasureReference.ad680435": {
+        "MeasureReference": {
             "type": "object",
             "properties": {
                 "schema": {
@@ -198,6 +200,5 @@
                 "name"
             ]
         }
-    },
-    "$schema": "http://json-schema.org/draft-07/schema#"
+    }
 }
