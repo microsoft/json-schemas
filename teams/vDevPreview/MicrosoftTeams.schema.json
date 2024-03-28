@@ -90,7 +90,46 @@
                 "termsOfUseUrl": {
                     "$ref": "#/definitions/httpsUrl",
                     "description": "The url to the page that provides the terms of use for the app."
-                }
+                },
+                "contactInfo": {
+                  "type": "object",
+                  "description": "App developer contact information.",
+                  "properties": {
+                    "defaultSupport": {
+                      "type": "object",
+                      "description": "Support configuration.",
+                      "properties": {
+                        "userEmailsForChatSupport": {
+                          "type": "array",
+                          "description": "User email for chat support contacts.",
+                          "maxItems": 10,
+                          "minItems": 1,
+                          "items": {
+                            "type": "string",
+                            "maxLength": 80
+                          }
+                        },
+                        "emailsForEmailSupport": {
+                          "type": "array",
+                          "description": "Email address for email support.",
+                          "maxItems": 1,
+                          "minItems": 1,
+                          "items": {
+                            "type": "string",
+                            "maxLength": 80
+                          }
+                        }
+                      },
+                      "required": [
+                        "emailsForEmailSupport",
+                        "userEmailsForChatSupport"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "defaultSupport"
+                  ]
+                }    
             },
             "required": [
                 "name",
@@ -628,6 +667,25 @@
                                     ],
                                     "description": "Type of the command",
                                     "default": "query"
+                                },
+                                "samplePrompts": {
+                                  "type": "array",
+                                  "maxItems": 5,
+                                  "minItems": 1,
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "text": {
+                                        "type": "string",
+                                        "description": "This string will hold the sample prompt",
+                                        "maxLength": 128
+                                      }
+                                    },
+                                    "required": [
+                                      "text"
+                                    ]
+                                  }
                                 },
                                 "apiResponseRenderingTemplateFile": {
                                     "$ref": "#/definitions/relativePath",
