@@ -21,11 +21,6 @@
       "$ref": "#/definitions/guid",
       "description": "A unique identifier for this app. This id must be a GUID."
     },
-    "packageName": {
-      "type": "string",
-      "description": "A unique identifier for this app in reverse domain notation. It's deprecated since manifest version 1.17.",
-      "maxLength": 64
-    },
     "localizationInfo": {
       "type": "object",
       "additionalProperties": false,
@@ -200,7 +195,7 @@
           "context": {
             "type": "array",
             "description": "The set of contextItem scopes that a tab belong to",
-            "maxItems": 8,
+            "maxItems": 7,
             "items": {
               "enum": [
                 "personalTab",
@@ -209,8 +204,7 @@
                 "meetingChatTab",
                 "meetingDetailsTab",
                 "meetingSidePanel",
-                "meetingStage",
-                "callingSidePanel"
+                "meetingStage"
               ]
             }
           },
@@ -497,10 +491,62 @@
             "$ref": "#/definitions/guid",
             "description": "The Microsoft App ID specified for the bot powering the compose extension in the Bot Framework portal (https://dev.botframework.com/bots)"
           },
+          "composeExtensionType": {
+            "type": "string",
+            "enum": [
+              "botBased",
+              "apiBased"
+            ],
+            "description": "Type of the compose extension."
+          },
+          "authorization": {
+            "type": "object",
+            "description": "Object capturing authorization information.",
+            "properties": {
+              "authType": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "apiSecretServiceAuth",
+                  "microsoftEntra"
+                ],
+                "description": "Enum of possible authentication types."
+              },
+              "microsoftEntraConfiguration": {
+                "type": "object",
+                "description": "Object capturing details needed to do single aad auth flow. It will be only present when auth type is entraId.",
+                "properties": {
+                  "supportsSingleSignOn": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Boolean indicating whether single sign on is configured for the app."
+                  }
+                },
+                "additionalProperties": false
+              },
+              "apiSecretServiceAuthConfiguration": {
+                "type": "object",
+                "description": "Object capturing details needed to do service auth. It will be only present when auth type is apiSecretServiceAuth.",
+                "properties": {
+                  "apiSecretRegistrationId": {
+                    "type": "string",
+                    "description": "Registration id returned when developer submits the api key through Developer Portal.",
+                    "maxLength": 128
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          },
+          "apiSpecificationFile": {
+            "$ref": "#/definitions/relativePath",
+            "description": "A relative file path to the api specification file in the manifest package."
+          },
           "canUpdateConfiguration": {
-            "type": "boolean",
+            "type": [ "boolean", "null" ],
             "description": "A value indicating whether the configuration of a compose extension can be updated by the user.",
-            "default": false
+            "default": "null"
           },
           "commands": {
             "type": "array",
@@ -522,6 +568,29 @@
                   ],
                   "description": "Type of the command",
                   "default": "query"
+                },
+                "samplePrompts": {
+                  "type": "array",
+                  "maxItems": 5,
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "This string will hold the sample prompt",
+                        "maxLength": 128
+                      }
+                    },
+                    "required": [
+                      "text"
+                    ]
+                  }
+                },
+                "apiResponseRenderingTemplateFile": {
+                  "$ref": "#/definitions/relativePath",
+                  "description": "A relative file path for api response rendering template file."
                 },
                 "context": {
                   "type": "array",
@@ -558,6 +627,11 @@
                   "type": "boolean",
                   "description": "A boolean value that indicates if it should fetch task module dynamically",
                   "default": false
+                },
+                "semanticDescription": {
+                  "type": "string",
+                  "description": "Semantic description for the command.",
+                  "maxLength": 5000
                 },
                 "parameters": {
                   "type": "array",
@@ -600,6 +674,16 @@
                         "type": "string",
                         "description": "Initial value for the parameter",
                         "maxLength": 512
+                      },
+                      "isRequired": {
+                        "type": "boolean",
+                        "description": "The value indicates if this parameter is a required field.",
+                        "default": false
+                      },
+                      "semanticDescription": {
+                        "type": "string",
+                        "description": "Semantic description for the parameter.",
+                        "maxLength": 2000
                       },
                       "choices": {
                         "type": "array",
@@ -703,11 +787,7 @@
               "additionalProperties": false
             }
           }
-        },
-        "required": [
-          "botId",
-          "commands"
-        ]
+        }
       }
     },
     "permissions": {
@@ -1130,15 +1210,11 @@
         "scopes": {
           "type": "array",
           "description": "Identifies the scopes in which the add-in can run.",
-          "minItems": 1,
-          "maxItems": 4,
+          "maxItems": 1,
           "items": {
             "type": "string",
             "enum": [
-              "mail",
-              "workbook",
-              "document",
-              "presentation"
+              "mail"
             ]
           }
         },
