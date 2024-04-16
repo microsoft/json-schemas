@@ -34,7 +34,7 @@
         },
         "objects": {
             "description": "Defines the formatting for different objects on a page.",
-            "$ref": "#/definitions/TypedDataViewObjectDefinitions<{pageInformation:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{pageInformationName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};pageInformationQnaPodEnabled:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};pageInformationAltName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};pageInformationType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};pageSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{pageSizeTypes:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};pageSizeWidth:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};pageSizeHeight:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};displayArea:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};};};outspace:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};titleSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};searchTextSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};headerSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};checkboxAndApplyColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};};};};filterCard:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};textSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};};};pageRefresh:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};refreshType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};duration:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{duration:boolean;};};dialogLauncher:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{};};measure:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};checkEvery:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};};};personalizeVisual:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};perspectiveRef:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{perspective:boolean;};};};applyToAllPages:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{applyToAllPages:boolean;};};};};}>"
+            "$ref": "#/definitions/PageFormattingObjects"
         },
         "visibility": {
             "description": "Defines when this page should be visible - by default it is always visible.",
@@ -255,7 +255,7 @@
                 },
                 "objects": {
                     "description": "Formatting for different \"objects\" of a filter card",
-                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>"
+                    "$ref": "#/definitions/FilterContainerFormattingObjects"
                 }
             },
             "additionalProperties": false,
@@ -263,7 +263,7 @@
                 "name"
             ]
         },
-        "TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>": {
+        "FilterContainerFormattingObjects": {
             "type": "object",
             "properties": {
                 "general": {
@@ -276,7 +276,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>",
+                                "$ref": "#/definitions/FilterContainerFormattingObjectsProperties",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -289,7 +289,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>": {
+        "FilterContainerFormattingObjectsProperties": {
             "type": "object",
             "properties": {
                 "requireSingleSelect": {},
@@ -395,7 +395,7 @@
                 "name"
             ]
         },
-        "TypedDataViewObjectDefinitions<{pageInformation:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{pageInformationName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};pageInformationQnaPodEnabled:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};pageInformationAltName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};pageInformationType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};};};pageSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{pageSizeTypes:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};pageSizeWidth:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};pageSizeHeight:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};background:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};displayArea:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};};};outspace:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};};};outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};titleSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};searchTextSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};headerSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};checkboxAndApplyColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};};};};filterCard:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};textSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};};};pageRefresh:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};refreshType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};duration:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{duration:boolean;};};dialogLauncher:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{};};measure:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};checkEvery:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};};};personalizeVisual:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};perspectiveRef:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{perspective:boolean;};};};applyToAllPages:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{applyToAllPages:boolean;};};};};}>": {
+        "PageFormattingObjects": {
             "type": "object",
             "properties": {
                 "pageInformation": {
@@ -408,7 +408,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{pageInformationName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};pageInformationQnaPodEnabled:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};pageInformationAltName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};pageInformationType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>",
+                                "$ref": "#/definitions/PageInformation",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -428,7 +428,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{pageSizeTypes:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};pageSizeWidth:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};pageSizeHeight:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>",
+                                "$ref": "#/definitions/PageSize",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -448,7 +448,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>",
+                                "$ref": "#/definitions/Background",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -468,7 +468,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};}>",
+                                "$ref": "#/definitions/DisplayArea",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -488,7 +488,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>_1",
+                                "$ref": "#/definitions/Background",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -508,7 +508,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};titleSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};searchTextSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};headerSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};checkboxAndApplyColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};};}>",
+                                "$ref": "#/definitions/OutspacePane",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -528,7 +528,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};textSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};}>",
+                                "$ref": "#/definitions/FilterCard",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -548,7 +548,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};refreshType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};duration:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{duration:boolean;};};dialogLauncher:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{};};measure:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};checkEvery:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};}>",
+                                "$ref": "#/definitions/PageRefresh",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -568,7 +568,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};perspectiveRef:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{perspective:boolean;};};};applyToAllPages:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{applyToAllPages:boolean;};};}>",
+                                "$ref": "#/definitions/PersonalizeVisual",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -581,7 +581,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{pageInformationName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{text:boolean;};};pageInformationQnaPodEnabled:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};pageInformationAltName:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{altText:boolean;};};};pageInformationType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};}>": {
+        "PageInformation": {
             "type": "object",
             "properties": {
                 "pageInformationName": {},
@@ -591,7 +591,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{pageSizeTypes:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};pageSizeWidth:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};pageSizeHeight:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>": {
+        "PageSize": {
             "type": "object",
             "properties": {
                 "pageSizeTypes": {},
@@ -600,7 +600,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>": {
+        "Background": {
             "type": "object",
             "properties": {
                 "color": {},
@@ -609,23 +609,14 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};}>": {
+        "DisplayArea": {
             "type": "object",
             "properties": {
                 "verticalAlignment": {}
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{color:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};};image:{type:{image:{};};};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};};}>_1": {
-            "type": "object",
-            "properties": {
-                "color": {},
-                "image": {},
-                "transparency": {}
-            },
-            "additionalProperties": false
-        },
-        "TypedDataViewObjectPropertyDefinitions<{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{numeric:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};titleSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};searchTextSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};headerSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};checkboxAndApplyColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};width:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};};}>": {
+        "OutspacePane": {
             "type": "object",
             "properties": {
                 "backgroundColor": {},
@@ -643,7 +634,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{backgroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};transparency:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};border:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};borderColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};foregroundColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};textSize:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{integer:boolean;};description:(resourceProvider:IStringResourceProvider)=>string;};fontFamily:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{formatting:{fontFamily:boolean;};};description:(resourceProvider:IStringResourceProvider)=>string;};inputBoxColor:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{fill:{solid:{color:boolean;};};};description:(resourceProvider:IStringResourceProvider)=>string;};}>": {
+        "FilterCard": {
             "type": "object",
             "properties": {
                 "backgroundColor": {},
@@ -657,7 +648,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};refreshType:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{enumeration:IEnumType;};};duration:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{duration:boolean;};};dialogLauncher:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{};};measure:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};checkEvery:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{readOnlyText:boolean;};};}>": {
+        "PageRefresh": {
             "type": "object",
             "properties": {
                 "show": {},
@@ -669,7 +660,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{show:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{bool:boolean;};};perspectiveRef:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{reference:{perspective:boolean;};};};applyToAllPages:{displayName:(resourceProvider:IStringResourceProvider)=>string;type:{applyToAllPages:boolean;};};}>": {
+        "PersonalizeVisual": {
             "type": "object",
             "properties": {
                 "show": {},
