@@ -802,8 +802,7 @@
             "additionalProperties": false,
             "required": [
                 "Groupings",
-                "Measure",
-                "PointsPerSparkline"
+                "Measure"
             ]
         },
         "QueryTransformOutputRoleRefExpression": {
