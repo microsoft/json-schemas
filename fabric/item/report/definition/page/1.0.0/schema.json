@@ -241,7 +241,7 @@
                         },
                         {
                             "const": "Drillthrough",
-                            "description": "Created by drill context that is applied to the page when using drill-through\naction from another page."
+                            "description": "Created by drill context that is applied to the page when using drill-through\r\naction from another page."
                         }
                     ]
                 },
@@ -387,6 +387,10 @@
                 "qnaSingleSelectRequired": {
                     "description": "Exactly one instance value should be picked as a filter for this parameter.",
                     "type": "boolean"
+                },
+                "fieldExpr": {
+                    "description": "Field expression for page binding",
+                    "$ref": "../../semanticQuery/1.0.0/schema.json#/definitions/QueryExpressionContainer"
                 }
             },
             "additionalProperties": false,
