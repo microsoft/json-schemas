@@ -17,7 +17,7 @@
         },
         "objects": {
             "description": "Specifies the formatting to be set for different \"objects\" of a report.",
-            "$ref": "#/definitions/TypedDataViewObjectDefinitions<{outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{type:{enumeration:IEnumType;};};};};}>"
+            "$ref": "#/definitions/ReportFormattingObjects"
         },
         "reportSource": {
             "description": "Defines how the report was created.",
@@ -303,7 +303,7 @@
                 },
                 "objects": {
                     "description": "Formatting for different \"objects\" of a filter card",
-                    "$ref": "#/definitions/TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>"
+                    "$ref": "#/definitions/FilterContainerFormattingObjects"
                 }
             },
             "additionalProperties": false,
@@ -311,7 +311,7 @@
                 "name"
             ]
         },
-        "TypedDataViewObjectDefinitions<{general:{properties:{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};};};}>": {
+        "FilterContainerFormattingObjects": {
             "type": "object",
             "properties": {
                 "general": {
@@ -324,7 +324,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>",
+                                "$ref": "#/definitions/FilterContainerFormattingObjectsProperties",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -337,7 +337,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{requireSingleSelect:{type:{bool:boolean;};};isInvertedSelectionMode:{type:{bool:boolean;};};}>": {
+        "FilterContainerFormattingObjectsProperties": {
             "type": "object",
             "properties": {
                 "requireSingleSelect": {},
@@ -345,7 +345,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectDefinitions<{outspacePane:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};};};section:{displayName:(resourceProvider:IStringResourceProvider)=>string;properties:{verticalAlignment:{type:{enumeration:IEnumType;};};};};}>": {
+        "ReportFormattingObjects": {
             "type": "object",
             "properties": {
                 "outspacePane": {
@@ -358,7 +358,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>",
+                                "$ref": "#/definitions/OutspacePane",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -378,7 +378,7 @@
                                 "$ref": "../../formattingObjectDefinitions/1.0.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
-                                "$ref": "#/definitions/TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>",
+                                "$ref": "#/definitions/Section",
                                 "description": "Describes the properties of the object to apply formatting changes to."
                             }
                         },
@@ -391,7 +391,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{expanded:{type:{bool:boolean;};};visible:{type:{bool:boolean;};};}>": {
+        "OutspacePane": {
             "type": "object",
             "properties": {
                 "expanded": {},
@@ -399,7 +399,7 @@
             },
             "additionalProperties": false
         },
-        "TypedDataViewObjectPropertyDefinitions<{verticalAlignment:{type:{enumeration:IEnumType;};};}>": {
+        "Section": {
             "type": "object",
             "properties": {
                 "verticalAlignment": {}
