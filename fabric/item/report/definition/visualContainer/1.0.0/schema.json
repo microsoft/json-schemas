@@ -1295,7 +1295,7 @@
                         },
                         {
                             "const": "Drillthrough",
-                            "description": "Created by drill context that is applied to the page when using drill-through\naction from another page."
+                            "description": "Created by drill context that is applied to the page when using drill-through\r\naction from another page."
                         }
                     ]
                 },

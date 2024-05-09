@@ -129,7 +129,7 @@
                   "required": [
                     "defaultSupport"
                   ]
-                }
+                }    
             },
             "required": [
                 "name",
