@@ -1058,7 +1058,7 @@
           "additionalProperties": false,
           "properties": {
             "resourceSpecific": {
-              "description": "Permissions that guard data access on a resource instance level.",
+              "description": "Permissions that must be granted on a per resource instance basis.",
               "maxItems": 16,
               "type": "array",
               "uniqueItems": true,
@@ -1077,7 +1077,7 @@
                       "Application",
                       "Delegated"
                     ],
-                    "description": "The type of the resource-specific permission."
+                    "description": "The type of the resource-specific permission: delegated vs application."
                   }
                 },
                 "required": [
