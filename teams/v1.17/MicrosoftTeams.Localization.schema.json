@@ -61,6 +61,10 @@
       "type": "string",
       "maxLength": 128
     },
+    "^composeExtensions\\[0\\]\\.commands\\[[0-9]\\]\\.samplePrompts\\[[0-4]\\]\\.text$": {
+      "type": "string",
+      "maxLength": 128
+    },
     "^composeExtensions\\[0\\]\\.commands\\[[0-9]\\]\\.taskInfo\\.title$": {
       "type": "string",
       "maxLength": 64
