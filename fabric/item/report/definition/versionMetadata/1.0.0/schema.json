@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/versionMetadata/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Version metadata",
+    "description": "Defines version information about the report definition.",
     "type": "object",
     "properties": {
         "$schema": {
