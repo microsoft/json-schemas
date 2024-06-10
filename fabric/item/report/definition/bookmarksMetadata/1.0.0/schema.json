@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Bookmarks metadata",
+    "description": "Defines additional information about standalone bookmarks or groups of related bookmarks.",
     "type": "object",
     "properties": {
         "items": {

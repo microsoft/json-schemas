@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/semanticQuery/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Semantic Query",
+    "description": "Defines shared definitions for queries and filters.",
     "definitions": {
         "FilterDefinition": {
             "description": "Defines a filter element as a partial query structure",

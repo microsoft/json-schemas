@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Page",
+    "description": "Defines a single report page.",
     "type": "object",
     "properties": {
         "name": {

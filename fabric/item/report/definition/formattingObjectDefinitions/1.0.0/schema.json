@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/formattingObjectDefinitions/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Formatting Object Definitions",
+    "description": "Defines shared definitions for report object formatting.",
     "definitions": {
         "DataViewObjectDefinitions": {
             "type": "object",
