@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Visual container mobile state",
+    "description": "Defines information about a visual container's mobile layout.",
     "type": "object",
     "properties": {
         "objects": {
