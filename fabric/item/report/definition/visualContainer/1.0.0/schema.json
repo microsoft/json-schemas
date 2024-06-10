@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Visual container",
+    "description": "Defines a single visual or visual group on a report page.",
     "type": "object",
     "properties": {
         "name": {

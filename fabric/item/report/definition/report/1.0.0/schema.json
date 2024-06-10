@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Report",
+    "description": "Defines a report and its pages, visuals, settings, and additional information.",
     "type": "object",
     "properties": {
         "themeCollection": {

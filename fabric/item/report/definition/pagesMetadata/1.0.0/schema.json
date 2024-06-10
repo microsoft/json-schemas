@@ -1,6 +1,8 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Pages metadata",
+    "description": "Defines additional information about the report's pages.",
     "type": "object",
     "properties": {
         "pageOrder": {
