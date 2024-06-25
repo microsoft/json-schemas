@@ -1210,11 +1210,15 @@
         "scopes": {
           "type": "array",
           "description": "Identifies the scopes in which the add-in can run.",
-          "maxItems": 1,
+          "minItems": 1,
+          "maxItems": 4,
           "items": {
             "type": "string",
             "enum": [
-              "mail"
+              "mail",
+              "workbook",
+              "document",
+              "presentation"
             ]
           }
         },
