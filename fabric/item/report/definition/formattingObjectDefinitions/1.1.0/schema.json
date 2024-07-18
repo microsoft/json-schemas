@@ -1,0 +1,145 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/formattingObjectDefinitions/1.1.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Formatting Object Definitions",
+    "description": "Defines shared definitions for report object formatting.",
+    "definitions": {
+        "DataViewObjectDefinitions": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/DataViewObjectDefinition"
+                }
+            }
+        },
+        "DataViewObjectDefinition": {
+            "type": "object",
+            "properties": {
+                "selector": {
+                    "$ref": "#/definitions/Selector"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataViewObjectPropertyDefinitions"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "properties"
+            ]
+        },
+        "DataViewObjectPropertyDefinitions": {
+            "type": "object",
+            "additionalProperties": {}
+        },
+        "Selector": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "description": "Scope is defined by data bound to the visual.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataRepetitionSelector"
+                    }
+                },
+                "metadata": {
+                    "description": "Defines the scope to a specific field.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "User defined scope.",
+                    "type": "string"
+                },
+                "highlightMatching": {
+                    "description": "Describes how the Selector should behave towards Highlighted Values within the Scope matched by that Selector.",
+                    "default": "ValuesOnly",
+                    "type": "number",
+                    "anyOf": [
+                        {
+                            "const": 0,
+                            "description": "Only non-highlighted value will be selected, even if a highlighted value exists."
+                        },
+                        {
+                            "const": 1,
+                            "description": "Non-highlighted values are selected. If highlighted values exist, they are selected as well."
+                        },
+                        {
+                            "const": 2,
+                            "description": "If a highlighted value exists, it's selected. Otherwise, the non-highlighted value is selected."
+                        }
+                    ]
+                },
+                "order": {
+                    "description": "Specifies a user-defined ordering of identical properties.\nSelector constructors should strive to monitonically increase this number across identical properties differing by id.",
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DataRepetitionSelector": {
+            "type": "object",
+            "properties": {
+                "scopeId": {
+                    "description": "Defines the intersection of scopes. For example - product color = red.",
+                    "$ref": "../../semanticQuery/1.1.0/schema.json#/definitions/QueryExpressionContainer"
+                },
+                "wildcard": {
+                    "description": "Defines a match against all instances of a given DataView scope. Does not match Subtotals.\nDeprecated: - Use roles instead.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "../../semanticQuery/1.1.0/schema.json#/definitions/QueryExpressionContainer"
+                    }
+                },
+                "roles": {
+                    "description": "Matches against all fields in a role.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "total": {
+                    "description": "Matches against the totals and subtotals.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "../../semanticQuery/1.1.0/schema.json#/definitions/QueryExpressionContainer"
+                    }
+                },
+                "dataViewWildcard": {
+                    "description": "Matches all instances or all totals or both.",
+                    "$ref": "#/definitions/DataViewWildcard"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DataViewWildcard": {
+            "type": "object",
+            "properties": {
+                "matchingOption": {
+                    "$ref": "#/definitions/DataViewWildcardMatchingOption",
+                    "description": "Defines the matching option to use."
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "matchingOption"
+            ]
+        },
+        "DataViewWildcardMatchingOption": {
+            "type": "number",
+            "anyOf": [
+                {
+                    "const": 0,
+                    "description": "Match Identities and Totals (default)"
+                },
+                {
+                    "const": 1,
+                    "description": "Match Instances with Identities only"
+                },
+                {
+                    "const": 2,
+                    "description": "Match Totals only"
+                }
+            ]
+        }
+    }
+}
