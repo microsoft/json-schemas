@@ -1,4 +1,5 @@
 {
   "title": "Publishing test of the json files",
-  "description": "Used to validate the publishing process"
+  "description": "Used to validate the publishing process",
+  "priority": "high"
 }
