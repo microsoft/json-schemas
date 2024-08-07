@@ -1278,7 +1278,35 @@
                 }
             },
             "additionalProperties": false
-        }
+        },
+        "copilotExtensions": {
+            "type": "object",
+            "properties": {
+              "plugins": {
+                "type": "array",
+                "description": "An array of plugin elements references. Currently, only one plugin per application is supported.",
+                "items": {
+                  "$ref": "#/definitions/pluginRef"
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "declarativeCopilots": {
+                "type": "array",
+                "description": "An array of declarative copilot elements references. Currently, only one declaratie copilot per application is supported.",
+                "items": {
+                  "$ref": "#/definitions/declarativeCopilotRef"
+                },
+                "minItems": 1,
+                "maxItems": 1
+              }
+            },
+            "additionalProperties": false,
+            "anyOf": [
+              { "required": [ "plugins" ] },
+              { "required": [ "declarativeCopilots" ] }
+            ]
+          },
     },
     "required": [
         "manifestVersion",
@@ -1829,8 +1857,7 @@
                 "type",
                 "label",
                 "icons",
-                "supertip",
-                "actionId"
+                "supertip"
             ]
         },
         "extensionRibbonsCustomMobileGroupItem": {
