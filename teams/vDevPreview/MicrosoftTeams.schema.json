@@ -1839,8 +1839,7 @@
                 "type",
                 "label",
                 "icons",
-                "supertip",
-                "actionId"
+                "supertip"
             ]
         },
         "extensionRibbonsCustomMobileGroupItem": {
