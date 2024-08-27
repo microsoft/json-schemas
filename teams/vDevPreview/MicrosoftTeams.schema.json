@@ -1573,6 +1573,15 @@
                         "items": {
                             "$ref": "#/definitions/extensionRibbonsArrayTabsItem"
                         }
+                    },
+                    "fixedControls": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/extensionRibbonsArrayFixedControlItem"
+                        }
+                    },
+                    "spamPreProcessingDialog": {
+                        "$ref": "#/definitions/extensionRibbonsSpamPreProcessingDialog"
                     }
                 },
                 "additionalProperties": false,
@@ -1583,9 +1592,9 @@
         },
         "extensionContexts": {
             "type": "array",
-            "description": "Specifies the Office application windows in which the ribbon customization is available to the user. Each item in the array is a member of a string array. Possible values are: mailRead, mailCompose, meetingDetailsOrganizer, meetingDetailsAttendee.",
+            "description": "Specifies the Office application windows in which the ribbon customization is available to the user. Each item in the array is a member of a string array. Possible values are: mailRead, mailCompose, meetingDetailsOrganizer, meetingDetailsAttendee, onlineMeetingDetailsOrganizer, logEventMeetingDetailsAttendee, spamReportingOverride.",
             "minItems": 1,
-            "maxItems": 7,
+            "maxItems": 8,
             "items": {
                 "type": "string",
                 "enum": [
@@ -1595,7 +1604,8 @@
                     "meetingDetailsAttendee",
                     "onlineMeetingDetailsOrganizer",
                     "logEventMeetingDetailsAttendee",
-                    "default"
+                    "default",
+                    "spamReportingOverride"
                 ]
             }
         },
@@ -2431,6 +2441,128 @@
                 "controls"
               ]
             }
+          },
+          "extensionRibbonsArrayFixedControlItem": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for this control within the app. Maximum length is 64 characters. ",
+                "maxLength": 64
+              },
+              "type": {
+                "type": "string",
+                "description": "Defines the type of control.",
+                "enum": [
+                  "button"
+                ]
+              },
+              "label": {
+                "type": "string",
+                "description": "Displayed text for the control. Maximum length is 64 characters.",
+                "maxLength": 64
+              },
+              "icons": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 3,
+                "items": {
+                  "$ref": "#/definitions/extensionCommonIcon"
+                }
+              },
+              "supertip": {
+                "$ref": "#/definitions/extensionCommonSuperToolTip"
+              },
+              "actionId": {
+                "type": "string",
+                "description": "The ID of an execution-type action that handles this key combination. Maximum length is 64 characters.",
+                "maxLength": 64
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Whether the control is initially enabled.",
+                "default": true
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "label",
+              "icons",
+              "supertip",
+              "actionId",
+              "enabled"
+            ]
+          },
+          "extensionRibbonsSpamPreProcessingDialog": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Specifies the custom title of the preprocessing dialog.",
+                "maxLength": 128
+              },
+              "description": {
+                "type": "string",
+                "description": "Specifies the custom text that appears in the preprocessing dialog.",
+                "maxLength": 250
+              },
+              "spamReportingOptions": {
+                "type": "object",
+                "description": "Specifies whether the bot offers an experience in the context of a channel in a team, in a 1:1 or group chat, or in an experience scoped to an individual user alone. These options are non-exclusive.",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Specifies the title listed before the reporting options list.",
+                    "maxLength": 128
+                  },
+                  "options": {
+                    "type": "array",
+                    "description": "Specifies the custom options that a user can select from the preprocessing dialog to provide a reason for reporting a message.",
+                    "items": {
+                      "type": "string",
+                      "minItems": 1,
+                      "maxItems": 5
+                    }
+                  }
+                },
+                "required": [
+                  "title",
+                  "options"
+                ]
+              },
+              "spamFreeTextSectionTitle": {
+                "type": "string",
+                "description": "A text box to the preprocessing dialog to allow users to provide additional information on the message they're reporting. This value is the title of that text box.",
+                "maxLength": 128
+              },
+              "spamMoreInfo": {
+                "type": "object",
+                "description": "Specifies the custom text and URL to provide informational resources to the users.",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Specifies display content of the hyperlink pointing to the site containing informational resources in the preprocessing dialog of a spam-reporting add-in.",
+                    "maxLength": 128
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "Specifies the URL of the hyperlink pointing to the site containing informational resources in the preprocessing dialog of a spam-reporting add-in.",
+                    "maxLength": 2048
+                  }
+                },
+                "required": [
+                  "text",
+                  "url"
+                ]
+              }
+            },
+            "required": [
+              "title",
+              "description"
+            ]
           },
         "elementActions": {
             "type": "array",
