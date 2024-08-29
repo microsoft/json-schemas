@@ -1,6 +1,8 @@
-# Report Definition Schema Releases
+# Releases
 
 ## August 2024
+
+Added a new option to the query for Visual Calcs.
 
 - [bookmark 1.1.0](./definition/bookmark/versions.md#1.1.0)
 - [formattingObjectDefinitions 1.1.0](./definition/formattingObjectDefinitions/versions.md#1.1.0)
@@ -11,6 +13,8 @@
 - [visualContainerMobileState 1.1.0](./definition/visualContainerMobileState/versions.md#1.1.0)
 
 ## June 2024
+
+Initial preview release of PBIR.
 
 - [bookmark 1.0.0](./definition/bookmark/versions.md#1.0.0)
 - [bookmarksMetadata 1.0.0](./definition/bookmarksMetadata/versions.md#1.0.0)
