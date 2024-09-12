@@ -1278,7 +1278,79 @@
                 }
             },
             "additionalProperties": false
-        }
+        },
+        "copilotAgents": {
+            "type": "object",
+            "properties": {
+              "plugins": {
+                "type": "array",
+                "description": "An array of plugin elements references. Only one plugin per application is supported. Currently in Private Preview.",
+                "items": {
+                  "$ref": "#/definitions/pluginRef"
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "declarativeAgents": {
+                "type": "array",
+                "description": "An array of declarative agent elements references. Currently, only one declarative agent per application is supported.",
+                "items": {
+                  "$ref": "#/definitions/declarativeAgentRef"
+                },
+                "minItems": 1,
+                "maxItems": 1
+              },
+              "customEngineAgents": {
+                "type": "array",
+                "description": "An array of Custom Engine Agents. Currently only one Custom Engine Agent per application is supported.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "$ref": "#/definitions/guid",
+                      "description": "The id of the Custom Engine Agent. If it is of type bot, the id must match the id specified in a bot in the bots node and the referenced bot must have personal scope. The app short name and short description must also be defined."
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "bot"
+                      ],
+                      "description": "The type of the Custom Engine Agent. Currently only type bot is supported."
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 1,
+                "maxItems": 1
+              }
+            },
+            "additionalProperties": false,
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "required": [
+                      "declarativeAgents"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "customEngineAgents"
+                    ]
+                  }
+                ]
+              },
+              {
+                "required": [
+                  "plugins"
+                ]
+              }
+            ]
+          }
     },
     "required": [
         "manifestVersion",
@@ -2875,6 +2947,44 @@
                 }
             },
             "additionalProperties": false
-        }
+        },
+        "declarativeAgentRef": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for this declarative agent element."
+              },
+              "file": {
+                "$ref": "#/definitions/relativePath",
+                "description": "Relative file path to this declarative agent element file in the application package."
+              }
+            },
+            "description": "A reference to a declarative agent element. The element's definition is in a separate file.",
+            "required": [
+              "id",
+              "file"
+            ],
+            "additionalProperties": false
+          },
+          "pluginRef": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for this plugin element."
+              },
+              "file": {
+                "$ref": "#/definitions/relativePath",
+                "description": "Relative file path to this plugin element file in the application package."
+              }
+            },
+            "description": "A reference to a plugin element. The element's definition is in a separate file.",
+            "required": [
+              "id",
+              "file"
+            ],
+            "additionalProperties": false
+          }
     }
 }
