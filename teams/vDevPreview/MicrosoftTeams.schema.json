@@ -1282,15 +1282,6 @@
         "copilotExtensions": {
             "type": "object",
             "properties": {
-                "plugins": {
-                    "type": "array",
-                    "description": "An array of plugin elements references. Currently, only one plugin per application is supported.",
-                    "items": {
-                        "$ref": "#/definitions/pluginRef"
-                    },
-                    "minItems": 1,
-                    "maxItems": 1
-                },
                 "declarativeCopilots": {
                     "type": "array",
                     "description": "An array of declarative copilot elements references. Currently, only one declarative copilot per application is supported.",
@@ -1329,24 +1320,15 @@
                 }
             },
             "additionalProperties": false,
-            "anyOf": [
+            "oneOf": [
                 {
-                    "oneOf": [
-                        {
-                            "required": [
-                                "declarativeCopilots"
-                            ]
-                        },
-                        {
-                            "required": [
-                                "customEngineCopilots"
-                            ]
-                        }
+                    "required": [
+                        "declarativeCopilots"
                     ]
                 },
                 {
                     "required": [
-                    "plugins"
+                        "customEngineCopilots"
                     ]
                 }
             ]
@@ -2964,25 +2946,6 @@
             "required": [
               "id",
               "file"
-            ],
-            "additionalProperties": false
-        },
-        "pluginRef": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "A unique identifier for this plugin element."
-                },
-                "file": {
-                    "$ref": "#/definitions/relativePath",
-                    "description": "Relative file path to this plugin element file in the application package."
-                }
-            },
-            "description": "A reference to a plugin element. The element's definition is in a separate file.",
-            "required": [
-                "id",
-                "file"
             ],
             "additionalProperties": false
         }
