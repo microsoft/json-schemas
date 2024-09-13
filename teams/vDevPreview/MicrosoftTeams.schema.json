@@ -1290,47 +1290,11 @@
                     },
                     "minItems": 1,
                     "maxItems": 1
-                },
-                "customEngineCopilots": {
-                    "type": "array",
-                    "description": "An array of Custom Engine Copilots. Currently only one Custom Engine Copilot per application is supported.",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "$ref": "#/definitions/guid",
-                                "description": "The id of the Custom Engine Copilot. If it is of type bot, the id must match the id specified in a bot in the bots node and the referenced bot must have personal scope. The app short name and short description must also be defined."
-                            },
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "bot"
-                                ],
-                                "description": "The type of the Custom Engine Copilot. Currently only type bot is supported."
-                            }
-                        },
-                        "required": [
-                            "id",
-                            "type"
-                        ],
-                        "additionalProperties": false
-                    },
-                    "minItems": 1,
-                    "maxItems": 1
                 }
             },
             "additionalProperties": false,
-            "oneOf": [
-                {
-                    "required": [
-                        "declarativeCopilots"
-                    ]
-                },
-                {
-                    "required": [
-                        "customEngineCopilots"
-                    ]
-                }
+            "required": [
+                "declarativeCopilots"
             ]
         }
     },
