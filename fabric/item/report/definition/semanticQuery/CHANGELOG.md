@@ -1,5 +1,11 @@
 # Semantic Query Versions
 
+### 1.2.0
+
+<b>Released in: </b> September 2024 <br />
+<b>Notes: </b> 
+- Adds a new property called DataType for QueryNativeVisualCalc
+
 ### 1.1.0
 
 <b>Released in: </b> August 2024 <br />
