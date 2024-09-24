@@ -2,7 +2,7 @@
 
 ## September 2024
 
-- Added data type to QueryNativeVisualCalc which allows you to specify the data type of the visual calculation. It overwrites the default dataType of Double
+- Added data type to QueryNativeVisualCalc which allows users to specify the data type of the visual calculation. It overwrites the default dataType of Double
 - Enables users to assign unique images for each state of a button slicer
 
 - [bookmark 1.2.0](./definition/bookmark/CHANGELOG.md#1.2.0)
