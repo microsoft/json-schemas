@@ -4,7 +4,7 @@
 
 <b>Released in: </b> September 2024 <br />
 <b>Notes: </b> 
-- Adds a new property called DataType for QueryNativeVisualCalc
+- Added data type to QueryNativeVisualCalc which allows you to specify the data type of the visual calculation. It overwrites the default dataType of Double
 
 ### 1.1.0
 
