@@ -1,0 +1,614 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.2.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Bookmark",
+    "description": "Defines a bookmark that captures the state of a report.",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.2.0/schema.json"
+        },
+        "displayName": {
+            "description": "Display name for the bookmark.",
+            "type": "string"
+        },
+        "name": {
+            "description": "Unique identifier for the bookmark - unique across the report.",
+            "type": "string"
+        },
+        "options": {
+            "description": "Additional options for the bookmark",
+            "$ref": "#/definitions/BookmarkOptions"
+        },
+        "explorationState": {
+            "$ref": "#/definitions/ExplorationState",
+            "description": "Bookmark definition to use when applying this bookmark."
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "displayName",
+        "explorationState",
+        "name"
+    ],
+    "definitions": {
+        "BookmarkOptions": {
+            "type": "object",
+            "properties": {
+                "applyOnlyToTargetVisuals": {
+                    "description": "Only applies changes to selected visuals when the bookmark was captured.",
+                    "type": "boolean"
+                },
+                "targetVisualNames": {
+                    "description": "Specific visuals to which this bookmark applies.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "suppressActiveSection": {
+                    "description": "Don't apply changes to active section.",
+                    "type": "boolean"
+                },
+                "suppressData": {
+                    "description": "Don't apply data changes.",
+                    "type": "boolean"
+                },
+                "suppressDisplay": {
+                    "description": "Don't apply display property changes.",
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ExplorationState": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "description": "Version of bookmark.",
+                    "type": "string"
+                },
+                "activeSection": {
+                    "description": "Name of the page that was active when this bookmark was captured.",
+                    "type": "string"
+                },
+                "filters": {
+                    "description": "State of filters for the report when the bookmark was captured.",
+                    "$ref": "#/definitions/FiltersState"
+                },
+                "sections": {
+                    "description": "State of all pages when the bookmark was captured.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/SectionState"
+                    }
+                },
+                "objects": {
+                    "description": "Changes to formatting to apply in this bookmark.",
+                    "$ref": "#/definitions/DataViewObjectDefinitionUpdates"
+                },
+                "dataSourceVariables": {
+                    "description": "A string containing the state of any variables from the underlying direct query data source that should be overridden when rendering this content.\nData source variables do not supply values for M parameters in the semantic model. Instead, data source variables are applied when accessing the underlying direct query source.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "activeSection",
+                "sections",
+                "version"
+            ]
+        },
+        "FiltersState": {
+            "type": "object",
+            "properties": {
+                "byName": {
+                    "description": "Filter containers that will be identified by name.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/FilterContainerState"
+                    }
+                },
+                "byExpr": {
+                    "description": "Filter containers that will be identified by expression.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FilterContainerState"
+                    }
+                },
+                "byType": {
+                    "description": "Filter containers that will be identified by type.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FilterContainerState"
+                    }
+                },
+                "byTransientState": {
+                    "description": "Filter containers that are transient",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FilterContainerState"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "FilterContainerState": {
+            "description": "Meaning of properties is same as Filters defined outside the bookmark.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "filter": {
+                    "description": "Defines a filter element as a partial query structure",
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/FilterDefinition"
+                },
+                "expression": {
+                    "description": "Holds a single expression and associated metadata.\nName, NativeReferenceName, and Annotations may be specified for any expression.\nEach other property represents a specific type of expression and exactly one of these other properties must be specified.",
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                },
+                "restatement": {
+                    "type": "string"
+                },
+                "howCreated": {
+                    "type": "number",
+                    "anyOf": [
+                        {
+                            "const": 0
+                        },
+                        {
+                            "const": 1
+                        },
+                        {
+                            "const": 2
+                        },
+                        {
+                            "const": 3
+                        },
+                        {
+                            "const": 4
+                        },
+                        {
+                            "const": 5
+                        },
+                        {
+                            "const": 6
+                        },
+                        {
+                            "const": 7
+                        }
+                    ]
+                },
+                "precedence": {
+                    "description": "Precedence of the filter.  The higher the number, the higher the precedence of the filter.\n\nEach filter is evaluated in the presence of other filters which are strictly higher precedence,\nand in the absense of all filters which are equal or lower precedence.\n\nNote that not all precedence levels are encoded here yet.  For example, cross filters have higher\nprecedence than data filters, and data filters have higher precedence than drill filters.  Neither\ncross filters nor data filters have an entry in this enumeration yet, but instead have their\nprecedence enforced by explicit code in the FilterGenerator.  It is a future work item to encode\nall precendence levels here.\n\nNote also that when we add new precedence levels in this enumeration, we may have to change existing\nprecedence levels.  If that happens, we will need to add Upgrader code to translate the precedence\nlevels from one version to another.",
+                    "const": 0,
+                    "type": "number"
+                },
+                "isTransient": {
+                    "type": "boolean"
+                },
+                "cachedDisplayNames": {
+                    "type": "array",
+                    "items": {}
+                },
+                "filterExpressionMetadata": {}
+            },
+            "additionalProperties": false,
+            "required": [
+                "name"
+            ]
+        },
+        "SectionState": {
+            "type": "object",
+            "properties": {
+                "filters": {
+                    "description": "State of filters for this page when the bookmark was captured.",
+                    "$ref": "#/definitions/FiltersState"
+                },
+                "visualContainers": {
+                    "description": "Flat list of visual-container-specific state.\nDoes not include state of groups.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/VisualContainerState"
+                    }
+                },
+                "visualContainerGroups": {
+                    "description": "Flat list of group-specific state.\nDoes not include state of visual containers.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/VisualContainerGroupState"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "visualContainers"
+            ]
+        },
+        "VisualContainerState": {
+            "type": "object",
+            "properties": {
+                "filters": {
+                    "description": "State of filters for this page when the bookmark was captured.",
+                    "$ref": "#/definitions/FiltersState"
+                },
+                "singleVisual": {
+                    "description": "State of the configuration of the visual.",
+                    "$ref": "#/definitions/SingleVisualConfigState"
+                },
+                "highlight": {
+                    "description": "Cross-highlights captured in the bookmark.",
+                    "$ref": "#/definitions/HighlightState"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SingleVisualConfigState": {
+            "type": "object",
+            "properties": {
+                "visualType": {
+                    "description": "Name of visual",
+                    "type": "string"
+                },
+                "autoSelectVisualType": {
+                    "description": "Can the visual type change as data changes in the bookmark.",
+                    "type": "boolean"
+                },
+                "targetType": {
+                    "description": "Change visual to this type - if different from the original state. Used by personalize this visual on the web.",
+                    "type": "string"
+                },
+                "targetAutoSelectVisualType": {
+                    "description": "Change auto changing visual type.",
+                    "type": "boolean"
+                },
+                "objects": {
+                    "description": "Changes to formatting to apply in this bookmark.",
+                    "$ref": "#/definitions/DataViewObjectDefinitionUpdates"
+                },
+                "orderBy": {
+                    "description": "Updated ordering of data.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QuerySortClause"
+                    }
+                },
+                "activeProjections": {
+                    "description": "Updated projections that are used by the visual.",
+                    "$ref": "#/definitions/ProjectionState"
+                },
+                "projections": {
+                    "description": "Projections are stored only when presentation changes are applied (such as during personalize visuals)\nor if the projections are resolved projections of a field parameter. When projections are resolved\nprojections of a field parameter but presentation changes are not applied, nulls will be present in the\narray to indicate where non-parameter projections of the visual are.",
+                    "$ref": "#/definitions/ProjectionState"
+                },
+                "parameters": {
+                    "description": "Field parameters that were used as part of the query. We always capture parameter state when parameters\nare present regardless of the bookmark type.",
+                    "$ref": "#/definitions/ParameterStateByRole"
+                },
+                "display": {
+                    "description": "Optional changes to how the visual is displayed.",
+                    "$ref": "#/definitions/VisualContainerDisplayState"
+                },
+                "cachedFilterDisplayItems": {
+                    "type": "array",
+                    "items": {}
+                },
+                "expansionStates": {
+                    "description": "Changes to expansion state.",
+                    "type": "array",
+                    "items": {}
+                },
+                "filterExpressionMetadata": {},
+                "isDrillDisabled": {
+                    "description": "Indicates whether the drill feature is disabled",
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DataViewObjectDefinitionUpdates": {
+            "type": "object",
+            "properties": {
+                "merge": {
+                    "description": "ObjectDefinitions to be merged with the target.",
+                    "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/DataViewObjectDefinitions"
+                },
+                "remove": {
+                    "description": "ObjectDefinitions to be deleted from the existing instances.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataViewObjectPropertyIdWithSelector"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "DataViewObjectPropertyIdWithSelector": {
+            "type": "object",
+            "properties": {
+                "object": {
+                    "description": "Name of visual object.",
+                    "type": "string"
+                },
+                "property": {
+                    "description": "Name of property to change for the visual object.",
+                    "type": "string"
+                },
+                "selector": {
+                    "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/Selector",
+                    "description": "Scope at which to apply this change."
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "object",
+                "property",
+                "selector"
+            ]
+        },
+        "ProjectionState": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                }
+            }
+        },
+        "ParameterStateByRole": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/ParameterState"
+                }
+            }
+        },
+        "ParameterState": {
+            "type": "object",
+            "properties": {
+                "expr": {
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer",
+                    "description": "Parameter expression."
+                },
+                "index": {
+                    "description": "Index from which parameter starts in the visual projection.",
+                    "type": "number"
+                },
+                "length": {
+                    "description": "Number of fields created by the parameter.",
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "expr",
+                "index",
+                "length"
+            ]
+        },
+        "VisualContainerDisplayState": {
+            "type": "object",
+            "properties": {
+                "mode": {
+                    "$ref": "#/definitions/VisualContainerDisplayMode",
+                    "description": "How is this visual shown in the bookmark."
+                },
+                "maximizedOptions": {
+                    "description": "Options if maximized.",
+                    "type": "object",
+                    "properties": {
+                        "dataTable": {
+                            "description": "Type of table to show.",
+                            "enum": [
+                                "accessible",
+                                "normal"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "mode"
+            ]
+        },
+        "VisualContainerDisplayMode": {
+            "type": "string",
+            "anyOf": [
+                {
+                    "const": "maximize",
+                    "description": "Visual is shown full screen."
+                },
+                {
+                    "const": "spotlight",
+                    "description": "Visual is spotlighted and other visuals on the page are dimmed."
+                },
+                {
+                    "const": "elevation",
+                    "description": "Visual is shown with an elevation."
+                },
+                {
+                    "const": "hidden",
+                    "description": "Visual is hidden."
+                }
+            ]
+        },
+        "HighlightState": {
+            "type": "object",
+            "properties": {
+                "selection": {
+                    "description": "Data points selected for the highlights.",
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/DecomposedSelectors"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SelectorsByColumn"
+                            }
+                        }
+                    ]
+                },
+                "filterExpressionMetadata": {
+                    "description": "Additional metadata for the filter generated from highlights."
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "selection"
+            ]
+        },
+        "DecomposedSelectors": {
+            "type": "object",
+            "properties": {
+                "decomposedIdentities": {
+                    "$ref": "#/definitions/DecomposedIdentities"
+                },
+                "queryNameMap": {
+                    "description": "The `queryNameIndex` key is the index in the queryNames array;\nthe `number` value is the columnIndex properties in DecomposedScopeIdentity.\nThis map tracks the different queryName and their column shapes present in each dataMap",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "patternProperties": {
+                            "^[0-9]+$": {
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                },
+                "queryNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "metadata": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "DecomposedIdentities": {
+            "type": "object",
+            "properties": {
+                "values": {
+                    "description": "`values` have 3 levels\noutermost level:\n - for SelectorsByColumn[], it's the number of selectors in this array\n - for FilterExpressionMetadata, it's the number of cachedValueItems.\nsecond level:\n  - for SelectorsByColumn, it is the number of scopedIdentities in the particular SelectorsByColumn\n  - for FilterExpressionMetadata, it is the number of identities in a cachedValueItem\ninnermost level:\n  - the key is the index of the column structure of scopedIdentity in `columns` list;\n  - the the value is the expressions list in one identity",
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "patternProperties": {
+                                "^[0-9]+$": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "columns": {
+                    "description": "Defines the set of group-on key columns.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DecomposedTree<QueryExpressionContainer>"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "columns",
+                "values"
+            ]
+        },
+        "DecomposedTree<QueryExpressionContainer>": {
+            "type": "object",
+            "properties": {
+                "left": {
+                    "$ref": "#/definitions/DecomposedTree<QueryExpressionContainer>"
+                },
+                "right": {
+                    "$ref": "#/definitions/DecomposedTree<QueryExpressionContainer>"
+                },
+                "value": {
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SelectorsByColumn": {
+            "type": "object",
+            "properties": {
+                "dataMap": {
+                    "$ref": "#/definitions/SelectorsForColumn"
+                },
+                "metadata": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SelectorsForColumn": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/DataRepetitionSelector"
+                }
+            }
+        },
+        "VisualContainerGroupState": {
+            "type": "object",
+            "properties": {
+                "isHidden": {
+                    "description": "Is the group hidden in the bookmark.",
+                    "type": "boolean"
+                },
+                "children": {
+                    "description": "State of child groups.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/VisualContainerGroupState"
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
