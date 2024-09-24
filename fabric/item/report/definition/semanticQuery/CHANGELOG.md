@@ -1,5 +1,11 @@
 # Semantic Query Versions
 
+### 1.2.0
+
+<b>Released in: </b> September 2024 <br />
+<b>Notes: </b> 
+- Added data type to QueryNativeVisualCalc which allows users to specify the data type of the visual calculation. It overwrites the default dataType of Double
+
 ### 1.1.0
 
 <b>Released in: </b> August 2024 <br />
