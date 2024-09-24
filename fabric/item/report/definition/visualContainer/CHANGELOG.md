@@ -1,5 +1,12 @@
 # Visual Container Versions
 
+### 1.2.0
+
+<b>Released in: </b> September 2024 <br />
+<b>Notes: </b> 
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.1.0` to `1.2.0`
+- Updates the reference to the `semanticQuery` schema from `1.1.0` to `1.2.0`
+
 ### 1.1.0
 
 <b>Released in: </b> August 2024 <br />
