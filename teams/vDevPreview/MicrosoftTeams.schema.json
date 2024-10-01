@@ -38,6 +38,10 @@
                     "description": "The language tag of the strings in this top level manifest file.",
                     "default": "en-us"
                 },
+                "defaultLanguageFile": {
+                    "$ref": "#/definitions/relativePath",
+                    "description": "A relative file path to a the .json file containing strings in the default language."
+                },
                 "additionalLanguages": {
                     "type": "array",
                     "uniqueItems": true,
@@ -370,6 +374,10 @@
                                 "teamsMeetingDevices"
                             ]
                         }
+                    },
+                    "requirementSet": {
+                        "$ref": "#/definitions/elementRequirementSet",
+                        "description": "The set of requirements for the tab."
                     }
                 },
                 "required": [
@@ -518,6 +526,10 @@
                                 "commands"
                             ]
                         }
+                    },
+                    "requirementSet": {
+                        "$ref": "#/definitions/elementRequirementSet",
+                        "description": "The set of requirements for the bot."
                     }
                 },
                 "required": [
@@ -870,6 +882,10 @@
                             ],
                             "additionalProperties": false
                         }
+                    },
+                    "requirementSet": {
+                        "$ref": "#/definitions/elementRequirementSet",
+                        "description": "The set of requirements for the compose extension."
                     }
                 }
             }
@@ -1279,14 +1295,14 @@
             },
             "additionalProperties": false
         },
-        "copilotExtensions": {
+        "copilotAgents": {
             "type": "object",
             "properties": {
-                "declarativeCopilots": {
+                "declarativeAgents": {
                     "type": "array",
-                    "description": "An array of declarative copilot elements references. Currently, only one declarative copilot per application is supported.",
+                    "description": "An array of declarative agent elements references. Currently, only one declarative agent per application is supported.",
                     "items": {
-                        "$ref": "#/definitions/declarativeCopilotRef"
+                      "$ref": "#/definitions/declarativeAgentRef"
                     },
                     "minItems": 1,
                     "maxItems": 1
@@ -1296,6 +1312,40 @@
             "required": [
                 "declarativeCopilots"
             ]
+        },
+        "elementRelationshipSet": {
+            "type": "object",
+            "properties": {
+              "oneWayDependencies": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/oneWayDependency"
+                },
+                "minItems": 1,
+                "description": "An array containing multiple instances of unidirectional dependency relationships (each represented by a oneWayDependency object)."
+              },
+              "mutualDependencies": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/mutualDependency"
+                },
+                "minItems": 1,
+                "description": "An array containing multiple instances of mutual dependency relationships between elements (each represented by a mutualDependency object)."
+              }
+            },
+            "anyOf": [
+              {
+                "required": [
+                  "oneWayDependencies"
+                ]
+              },
+              {
+                "required": [
+                  "mutualDependencies"
+                ]
+              }
+            ],
+            "additionalProperties": false
         }
     },
     "required": [
@@ -2894,24 +2944,119 @@
             },
             "additionalProperties": false
         },
-        "declarativeCopilotRef": {
+        "declarativeAgentRef": {
             "type": "object",
             "properties": {
               "id": {
                 "type": "string",
-                "description": "A unique identifier for this declarative copilot element."
+                "description": "A unique identifier for this declarative agent element."
               },
               "file": {
                 "$ref": "#/definitions/relativePath",
-                "description": "Relative file path to this declarative copilot element file in the application package."
+                "description": "Relative file path to this declarative agent element file in the application package."
               }
             },
-            "description": "A reference to a declarative copilot element. The element's definition is in a separate file.",
+            "description": "A reference to a declarative agent element. The element's definition is in a separate file.",
             "required": [
               "id",
               "file"
             ],
             "additionalProperties": false
+        },
+        "elementReference": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "bots",
+                        "staticTabs",
+                        "composeExtensions",
+                        "configurableTabs"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "commandIds": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "id"
+            ],
+            "additionalProperties": false
+        },
+        "oneWayDependency": {
+            "type": "object",
+            "properties": {
+                "element": {
+                    "$ref": "#/definitions/elementReference"
+                },
+                "dependsOn": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/elementReference"
+                    }
+                }
+            },
+            "required": [
+                "element",
+                "dependsOn"
+            ],
+            "additionalProperties": false,
+            "description": "An object representing a unidirectional dependency relationship, where one specific element (referred to as the `element`) relies on an array of other elements (referred to as the `dependsOn`) in a single direction."
+        },
+        "mutualDependency": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+                "$ref": "#/definitions/elementReference"
+            },
+            "description": "A specific instance of mutual dependency between two or more elements, indicating that each element depends on the others in a bidirectional manner."
+        },
+        "elementRequirementSet": {
+            "type": "object",
+            "properties": {
+                "hostMustSupportFunctionalities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/hostFunctionality"
+                    },
+                    "minItems": 1
+                }
+            },
+            "required": [
+                "hostMustSupportFunctionalities"
+            ],
+            "additionalProperties": false,
+            "description": "An object representing a set of requirements that the host must support for the element."
+        },
+        "hostFunctionality": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "dialogUrl",
+                        "dialogUrlBot",
+                        "dialogAdaptivecard",
+                        "dialogAdaptivecardBot"
+                    ],
+                    "description": "The name of the functionality."
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "additionalProperties": false,
+            "description": "An object representing a specific functionality that a host must support."
         }
     }
 }
