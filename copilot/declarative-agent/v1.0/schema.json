@@ -1,5 +1,5 @@
 {
-    "$schema": "https://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "$comment": "This schema describes the constraints of a declarative agent for third party developers to be deployed to Microsoft 365 Copilot",
     "type": "object",
     "title": "Declarative agent manifest object",
