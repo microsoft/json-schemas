@@ -1,5 +1,11 @@
 # Releases
 
+## October 2024
+
+New properties and support for a handful of existing visuals.
+
+- [visualContainer 1.3.0](./definition/visualContainer/CHANGELOG.md#1.3.0)
+
 ## September 2024
 
 - Added data type to QueryNativeVisualCalc which allows users to specify the data type of the visual calculation. It overwrites the default dataType of Double
