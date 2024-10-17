@@ -1,5 +1,5 @@
 {
-    "$schema": "https://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "$comment": "This schema describes the constraints of a plugin manifest for third party developers to be deployed to Microsoft 365 Copilot",
     "type": "object",
     "title": "API Plugin manifest object",
@@ -15,8 +15,8 @@
             "description": "A short, human-readable name for the plugin. It MUST contain at least one nonwhitespace character. Characters beyond 20 MAY be ignored. This property is localizable."
         },
         "namespace": {
-            "deprecated": true,
-            "type": "string"
+            "type": "string",
+            "description": "A short, human-readable name for the plugin. It MUST contain at least one nonwhitespace character. Characters beyond 20 MAY be ignored. This property is localizable."
         },
         "description_for_model": {
             "type": "string",
@@ -148,33 +148,13 @@
                         "responding": {
                             "$ref": "#/$defs/function-state-config",
                             "description": "The state in which the model can generate text that is shown to the user. The model can't invoke functions in the responding state."
-                        },
-                        "disengaging": {
-                            "$ref": "#/$defs/function-state-config"
-                        },
-                        "Reasoning": {
-                            "$ref": "#/$defs/function-state-config",
-                            "description": "Equivalent to `reasoning`"
-                        },
-                        "Responding": {
-                            "$ref": "#/$defs/function-state-config",
-                            "description": "Equivalent to `responding`"
-                        },
-                        "Disengaging": {
-                            "$ref": "#/$defs/function-state-config",
-                            "description": "Equivalent to `disengaging`"
                         }
 
                     },
                     "propertyNames": {
                         "enum": [
                             "reasoning",
-                            "responding",
-                            "disengaging",
-                            "Reasoning",
-                            "Responding",
-                            "Disengaging"
-
+                            "responding"
                         ]
                     }
                 },
@@ -325,7 +305,8 @@
                 },
                 "run_for_functions": {
                     "type": "array",
-                    "description": "The names of the functions that are available in this runtime. If this property is omitted, all functions described by the runtime are available. Provided string values can contain wildcards. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly.",
+                    "required": true,
+                    "description": "The names of the functions that are available in this runtime. If this property is omitted, all functions described by the runtime are available. If a wildcard (\"*\") is specified as the only string, all functions are considered. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly.",
                     "items": {
                         "type": "string"
                     }
