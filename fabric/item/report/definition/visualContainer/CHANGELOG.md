@@ -1,5 +1,13 @@
 # Visual Container Versions
 
+### 1.3.0
+
+<b>Released in: </b> October 2024 <br />
+<b>Notes: </b> 
+- Added data-bound reference layer support for Azure Maps visual.
+- Added selection/expansion icon customization properties for listSlicer/advancedSlicerVisual.
+- Combo chart visuals now support Visual Calculations.
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />
