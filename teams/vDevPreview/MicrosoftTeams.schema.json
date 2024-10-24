@@ -3056,8 +3056,8 @@
                     "enum": [
                         "dialogUrl",
                         "dialogUrlBot",
-                        "dialogAdaptivecard",
-                        "dialogAdaptivecardBot"
+                        "dialogAdaptiveCard",
+                        "dialogAdaptiveCardBot"
                     ],
                     "description": "The name of the functionality."
                 }

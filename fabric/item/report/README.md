@@ -10,7 +10,6 @@ New properties and support for a handful of existing visuals.
 
 - Added data type to QueryNativeVisualCalc which allows users to specify the data type of the visual calculation. It overwrites the default dataType of Double
 - Enables users to assign unique images for each state of a button slicer
-
 - [bookmark 1.2.0](./definition/bookmark/CHANGELOG.md#1.2.0)
 - [formattingObjectDefinitions 1.2.0](./definition/formattingObjectDefinitions/CHANGELOG.md#1.2.0)
 - [page 1.2.0](./definition/page/CHANGELOG.md#1.2.0)
