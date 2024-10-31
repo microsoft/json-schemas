@@ -108,6 +108,17 @@
           "title": "ConnectedSPFXAppId",
           "description": "Id of the SPFx application that the ACE will redirect to when a “full page” experience is required",
           "type": "string"
+        },        
+        "personalizationScope": {
+          "description": "The scope of the personalization on how AdaptiveCardExtension can be personalized by an end user.The possible values are: 'Disallow', 'Allow'.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Disallow",
+              "Allow"
+            ]
+          }
         }
       },
       "additionalProperties": false
