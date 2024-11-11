@@ -1,0 +1,183 @@
+{
+  "$id": "https://aka.ms/teams-app-test-tool-config/0.1.0/config.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ConfigFile",
+  "type": "object",
+  "required": [
+    "version",
+    "tenantId",
+    "bot",
+    "currentUser",
+    "users",
+    "personalChat",
+    "groupChat",
+    "team"
+  ],
+  "additionalProperties": false,
+  "description": "The config file is for customization of Teams context information like chats, teams and users. All the data is mockup data only for testing various Bot Framework APIs (or botbuilder SDK methods like TeamsInfo.getTeamMembers())",
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["0.1.0"],
+      "description": "The config file version"
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "The tenant's ID. This only affects user information retrieved by Bot Framework APIs (for example, TeamsInfo.getTeamMembers())"
+    },
+    "bot": {
+      "type": "object",
+      "description": "The bot app information. Can be retrieved from activity payload sent to bot message endpoint",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The bot ID"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 42,
+          "description": "The bot display name"
+        }
+      }
+    },
+    "currentUser": {
+      "$ref": "#/$defs/User",
+      "description": "Current user"
+    },
+    "users": {
+      "type": "array",
+      "description": "Users in the tenant. By default, these users are all in the group chat and the team",
+      "items": {
+        "$ref": "#/$defs/User"
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "personalChat": {
+      "type": "object",
+      "description": "Personal chat with bot. This chat only contains current user and bot",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Personal chat conversation ID. Can be used to send custom activity to this personal chat"
+        }
+      }
+    },
+    "groupChat": {
+      "type": "object",
+      "description": "Group chat information. Currently only support one group chat and contains current user and all the users specified in \"users\" property",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Group chat conversation ID. Can be used to send custom activty to this group chat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Group chat display name",
+          "maxLength": 256
+        }
+      }
+    },
+    "team": {
+      "type": "object",
+      "description": "The team information. Currently only support a single team. Can be retrieved by TeamsInfo.getTeamDetails() in botbuilder SDK",
+      "required": ["id", "name", "aadGroupId", "channels"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Team conversation ID. Can be used to send custom activity to the General channel of this team"
+        },
+        "name": {
+          "type": "string",
+          "description": "Team display name",
+          "maxLength": 256
+        },
+        "aadGroupId": {
+          "type": "string",
+          "description": "Azure Active Directory (AAD) group ID for the team."
+        },
+        "channels": {
+          "type": "array",
+          "description": "Channels information in the Team. Currently only support one channel in addition to the General channel. Can be retrieved by TeamsInfo.getTeamChannels() in botbuilder SDK. A team always has a General channel. And the General channel conversation ID is the same as the Team ID",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/Channel"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "User": {
+      "type": "object",
+      "description": "User information. Affects the TeamsChannelAccount object returned from TeamsInfo.getMember(), TeamsInfo.getTeamMembers(), TeamsInfo.getPagedMembers(), etc. [asdf](https://www.google.com)",
+      "required": [
+        "id",
+        "name",
+        "userPrincipleName",
+        "aadObjectId",
+        "givenName",
+        "surname",
+        "email"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User ID. This is the channel id for the user or bot on this Bot Framework channel"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Display friendly name"
+        },
+        "userPrincipleName": {
+          "type": "string",
+          "description": "User principle name"
+        },
+        "aadObjectId": {
+          "type": "string",
+          "description": "This account's Azure Active Directory object ID"
+        },
+        "givenName": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Given name"
+        },
+        "surname": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Surname"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email"
+        }
+      }
+    },
+    "Channel": {
+      "type": "object",
+      "description": "Channel information",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Channel conversation ID. Can be used to send custom activity to this channel"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Channel display name"
+        }
+      }
+    }
+  }
+}
