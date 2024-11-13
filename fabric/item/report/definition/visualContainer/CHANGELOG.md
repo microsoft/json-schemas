@@ -1,5 +1,15 @@
 # Visual Container Versions
 
+### 1.4.0
+
+<b>Released in: </b> November 2024 <br />
+<b>Notes: </b> 
+- Documenting visual objects changes for Azure maps path layer.
+- Documenting visual objects changes for new text slicer.
+- Documenting visual objects changes for button slicer updates.
+- Documenting visual objects changes for list slicer updates.
+- Documenting visual objects changes for card visual small multiples.
+
 ### 1.3.0
 
 <b>Released in: </b> October 2024 <br />
