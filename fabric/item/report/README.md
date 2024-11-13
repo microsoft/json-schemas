@@ -1,5 +1,11 @@
 # Releases
 
+## November 2024
+
+Documenting visual objects changes for new visuals and visual updates.
+
+- [visualContainer 1.4.0](./definition/visualContainer/CHANGELOG.md#1.4.0)
+
 ## October 2024
 
 New properties and support for a handful of existing visuals.
