@@ -62,6 +62,11 @@
             "title": "Plugin capabilities object",
             "description": "Describes capabilities of the plugin.",
             "properties": {
+                "localization": {
+                    "deprecated": true,
+                    "description": "Provides mappings for strings in different languages and locales. Certain properties can be localized using a [Liquid][] filter called `localize`.",
+                    "$ref": "#/$defs/localization-object"
+                },
                 "conversation_starters": {
                     "type": "array",
                     "description": "Conversation starters that can be displayed to the user for suggestions on how to invoke the plugin.",
@@ -72,6 +77,7 @@
             },
             "propertyNames": {
                 "enum": [
+                    "localization",
                     "conversation_starters"
                 ]
             }
@@ -385,6 +391,46 @@
                     "Type",
                     "reference_id"
                 ]
+            }
+        },
+        "localization-object": {
+            "type": "object",
+            "deprecated": true,
+            "title": "Localization object",
+            "description": "Contains mappings for strings in different languages and locales.",
+            "patternProperties": {
+                "^[a-zA-Z]{2,3}(-[a-zA-Z]{2})?$": {
+                    "type": "object",
+                    "title": "Language-specific localized properties object",
+                    "description": "Contains translations of localizable properties for the language represented by the property's name, which is a [BCP47][] language tag.",
+                    "patternProperties": {
+                        "^[A-Za-z_][A-Za-z0-9_]*$": {
+                            "type": "object",
+                            "title": "Localized property object",
+                            "description": "Contains the localized value for the localizable property identified by this property's name.",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "A localized, human-readable string that is used for the localizable property's value."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "A localized description that can be displayed to the model."
+                                }
+                            },
+                            "required": [
+                                "message",
+                                "description"
+                            ],
+                            "propertyNames": {
+                                "enum": [
+                                    "message",
+                                    "description"
+                                ]
+                            }
+                        }
+                    }
+                }
             }
         },
         "function-parameters": {
