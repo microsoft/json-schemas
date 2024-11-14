@@ -39,11 +39,19 @@
         "capabilities": {
             "type": "array",
             "description": "Optional. Contains an array of objects that define capabilities of the declarative agent. There MUST NOT be more than three objects in the array.",
-            "minItems": 1,
             "items": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "$ref": "#/$defs/capabilities/base-capability"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/web-search"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/onedrive-and-sharepoint"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/graph-connectors"
                     }
                 ]
             }
@@ -94,59 +102,37 @@
             "base-capability": {
                 "type": "object",
                 "description": "Represents a base capability object.",
-                "oneOf": [
-                    {
-                      "$ref": "#/$defs/capabilities/code-interpreter"
-                    },
-                    {
-                      "$ref": "#/$defs/capabilities/graphic-art"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/web-search"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/onedrive-and-sharepoint"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/graph-connectors"
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, and GraphicArt.",
+                        "anyOf": [
+                            {
+                                "const": "WebSearch"
+                            },
+                            {
+                                "const": "CodeInterpreter"
+                            },
+                            {
+                                "const": "OneDriveAndSharePoint"
+                            },
+                            {
+                                "const": "GraphConnectors"
+                            },
+                            {
+                                "const": "GraphicArt"
+                            }
+                        ]
                     }
+                },
+              "propertyNames": {
+                "enum": [
+                  "name"
                 ]
-            },
-            "code-interpreter": {
-                "type": "object",
-                "description": "Indicates that the declarative agent can interpret code.",
-                "properties": {
-                    "name": {
-                        "const": "CodeInterpreter",
-                        "description": "Required. Must be set to CodeInterpreter."
-                    }
-                },
-                "required": [
-                    "name"
-                ],
-                "propertyNames": {
-                    "enum": [
-                        "name"
-                    ]
-                }
-            },
-            "graphic-art": {
-                "type": "object",
-                "description": "Indicates that the declarative agent can create graphic art.",
-                "properties": {
-                    "name": {
-                        "const": "GraphicArt",
-                        "description": "Required. Must be set to GraphicArt."
-                    }
-                },
-                "required": [
-                    "name"
-                ],
-                "propertyNames": {
-                    "enum": [
-                        "name"
-                    ]
-                }
+              },
+              "required": [
+                "name"
+              ]
             },
             "web-search": {
                 "type": "object",
