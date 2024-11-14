@@ -39,7 +39,6 @@
         "capabilities": {
             "type": "array",
             "description": "Optional. Contains an array of objects that define capabilities of the declarative agent. There MUST NOT be more than three objects in the array.",
-            "maxItems": 3,
             "minItems": 1,
             "items": {
                 "oneOf": [
@@ -95,29 +94,13 @@
             "base-capability": {
                 "type": "object",
                 "description": "Represents a base capability object.",
-                "properties": {
-                    "name": {
-                        "oneOf": [
-                            {
-                                "const": "WebSearch"
-                            },
-                            {
-                                "const": "OneDriveAndSharePoint"
-                            },
-                            {
-                                "const": "GraphConnectors"
-                            },
-                            {
-                                "const": "GraphicArt"
-                            },
-                            {
-                                "const": "CodeInterpreter"
-                            }
-                        ],
-                        "description": "Required. Must be WebSearch, OneDriveAndSharePoint, GraphConnectors, GraphicArt or CodeInterpreter."
-                    }
-                },
                 "oneOf": [
+                    {
+                      "$ref": "#/$defs/capabilities/code-interpreter"
+                    },
+                    {
+                      "$ref": "#/$defs/capabilities/graphic-art"
+                    },
                     {
                         "$ref": "#/$defs/capabilities/web-search"
                     },
@@ -127,10 +110,43 @@
                     {
                         "$ref": "#/$defs/capabilities/graph-connectors"
                     }
-                ],
+                ]
+            },
+            "code-interpreter": {
+                "type": "object",
+                "description": "Indicates that the declarative agent can interpret code.",
+                "properties": {
+                    "name": {
+                        "const": "CodeInterpreter",
+                        "description": "Required. Must be set to CodeInterpreter."
+                    }
+                },
                 "required": [
                     "name"
-                ]
+                ],
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                }
+            },
+            "graphic-art": {
+                "type": "object",
+                "description": "Indicates that the declarative agent can create graphic art.",
+                "properties": {
+                    "name": {
+                        "const": "GraphicArt",
+                        "description": "Required. Must be set to GraphicArt."
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                }
             },
             "web-search": {
                 "type": "object",
