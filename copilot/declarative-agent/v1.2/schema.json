@@ -39,20 +39,13 @@
         "capabilities": {
             "type": "array",
             "description": "Optional. Contains an array of objects that define capabilities of the declarative agent.",
+            "minItems": 1,
+            "maxItems": 5,
             "uniqueItems": true,
             "items": {
                 "anyOf": [
                     {
                         "$ref": "#/$defs/capabilities/base-capability"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/web-search"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/onedrive-and-sharepoint"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/graph-connectors"
                     }
                 ]
             }
@@ -126,14 +119,26 @@
                         ]
                     }
                 },
-              "propertyNames": {
-                "enum": [
-                  "name"
+                "oneOf": [
+                    {
+                        "$ref": "#/$defs/capabilities/web-search"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/onedrive-and-sharepoint"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/graph-connectors"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/code-interpreter"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/graphic-art"
+                    }
+                ],
+                "required": [
+                    "name"
                 ]
-              },
-              "required": [
-                "name"
-              ]
             },
             "web-search": {
                 "type": "object",
@@ -145,8 +150,9 @@
                     },
                     "sites": {
                         "type": "array",
+                        "minItems": 1,
                         "maxItems": 4,
-                        "description": "An array of sites used to constrain the content accessible to the DA to just the content identified via the items of array.",
+                        "description": "Optional. An array of sites used to constrain the content accessible to the DA to just the content identified via the items of array.",
                         "items": {
                             "$ref": "#/$defs/web-search-site"
                         }
@@ -159,6 +165,42 @@
                     "enum": [
                         "name",
                         "sites"
+                    ]
+                }
+            },
+            "code-interpreter": {
+                "type": "object",
+                "description": "Indicates that the declarative agent can generate and execute code.",
+                "properties": {
+                    "name": {
+                        "const": "CodeInterpreter",
+                        "description": "Required. Must be set to CodeInterpreter."
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                }
+            },
+            "graphic-art": {
+                "type": "object",
+                "description": "Indicates that the declarative agent can images and art based on the text input from the user.",
+                "properties": {
+                    "name": {
+                        "const": "GraphicArt",
+                        "description": "Required. Must be set to GraphicArt."
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "propertyNames": {
+                    "enum": [
+                        "name"
                     ]
                 }
             },
@@ -224,24 +266,6 @@
                         "connections"
                     ]
                 }
-            }
-        },
-        "channels-by-url": {
-            "type": "object",
-            "description": "An object that identifies a Teams Channel via a URL.",
-            "properties": {
-                "url": {
-                    "type": "string",
-                    "description": "A string that contains an absolute URL to a Teams Channel."
-                }
-            },
-            "required": [
-                "url"
-            ],
-            "propertyNames": {
-                "enum": [
-                    "url"
-                ]
             }
         },
         "web-search-site": {
