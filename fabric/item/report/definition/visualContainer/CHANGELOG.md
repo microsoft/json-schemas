@@ -4,11 +4,11 @@
 
 <b>Released in: </b> November 2024 <br />
 <b>Notes: </b> 
-- Documenting visual objects changes for Azure maps path layer.
-- Documenting visual objects changes for new text slicer.
-- Documenting visual objects changes for button slicer updates.
-- Documenting visual objects changes for list slicer updates.
-- Documenting visual objects changes for card visual small multiples.
+- Added formatting options for Azure maps path layer (azureMap).
+- Added formatting support for the new (preview) text slicer (textSlicer).
+- Added formatting support for the new (preview) list slicer visual (listSlicer).
+- Adding more formatting options for (preview) advanced slicer: outer margin and shape (advancedSlicerVisual).
+- Adding more formatting options for (preview) card visual small multiples: outer margin and shape, header position, border, background (cardVisual).
 
 ### 1.3.0
 

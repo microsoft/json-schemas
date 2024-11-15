@@ -7,17 +7,17 @@
     "properties": {
         "schema_version": {
             "type": "string",
-            "description": "The schema version. Previous versions are `v1` and `v2`.",
-            "const": "v2.1"
+            "description": "The schema version. Previous versions are `v1` and `v2`, `v2.1`.",
+            "const": "v2.2"
         },
         "name_for_human": {
             "type": "string",
             "description": "A short, human-readable name for the plugin. It MUST contain at least one nonwhitespace character. Characters beyond 20 MAY be ignored. This property is localizable."
         },
         "namespace": {
-          "type": "string",
-          "description": "An identifier used to prevent name conflicts between function names from different plugins that are used within the same execution context. The value MUST match the regex ^[A-Za-z0-9_]+ as defined by [RFC9485]. This is a required member.",
-          "pattern": "^[A-Za-z0-9_]+$"
+            "type": "string",
+            "description": "An identifier used to prevent name conflicts between function names from different plugins that are used within the same execution context. The value MUST match the regex ^[A-Za-z0-9_]+ as defined by [RFC9485]. This is a required member.",
+            "pattern": "^[A-Za-z0-9_]+$"
         },
         "description_for_model": {
             "type": "string",
@@ -32,7 +32,7 @@
             "description": "A URL used to fetch a logo that MAY be used by the orchestrator. Implementations MAY provide alternative methods to provide logos that meet their visual requirements. This property is localizable."
         },
         "contact_email": {
-            "format": "email",
+            "type": "string",
             "description": "An email address of a contact for safety/moderation, support, and deactivation."
         },
         "legal_info_url": {
@@ -62,10 +62,6 @@
             "title": "Plugin capabilities object",
             "description": "Describes capabilities of the plugin.",
             "properties": {
-                "localization": {
-                    "description": "Provides mappings for strings in different languages and locales. Certain properties can be localized using a [Liquid][] filter called `localize`.",
-                    "$ref": "#/$defs/localization-object"
-                },
                 "conversation_starters": {
                     "type": "array",
                     "description": "Conversation starters that can be displayed to the user for suggestions on how to invoke the plugin.",
@@ -76,7 +72,6 @@
             },
             "propertyNames": {
                 "enum": [
-                    "localization",
                     "conversation_starters"
                 ]
             }
@@ -84,7 +79,7 @@
     },
     "required": [
         "schema_version",
-        "name_for_human", 
+        "name_for_human",
         "namespace",
         "description_for_human"
     ],
@@ -172,12 +167,17 @@
                         "response_semantics": {
                             "$ref": "#/$defs/response-semantics-object",
                             "description": "Describes how the orchestrator can interpret the response payload and provide a visual rendering."
+                        },
+                        "security_info": {
+                          "$ref": "#/$defs/security-info-object",
+                          "description": "Describes the security information to be used to aid in determining the relative risk of invoking the function."
                         }
                     },
                     "propertyNames": {
                         "enum": [
                             "confirmation",
-                            "response_semantics"
+                            "response_semantics",
+                            "security_info"
                         ]
                     }
                 }
@@ -386,45 +386,6 @@
                     "Type",
                     "reference_id"
                 ]
-            }
-        },
-        "localization-object": {
-            "type": "object",
-            "title": "Localization object",
-            "description": "Contains mappings for strings in different languages and locales.",
-            "patternProperties": {
-                "^[a-zA-Z]{2,3}(-[a-zA-Z]{2})?$": {
-                    "type": "object",
-                    "title": "Language-specific localized properties object",
-                    "description": "Contains translations of localizable properties for the language represented by the property's name, which is a [BCP47][] language tag.",
-                    "patternProperties": {
-                        "^[A-Za-z_][A-Za-z0-9_]*$": {
-                            "type": "object",
-                            "title": "Localized property object",
-                            "description": "Contains the localized value for the localizable property identified by this property's name.",
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "description": "A localized, human-readable string that is used for the localizable property's value."
-                                },
-                                "description": {
-                                    "type": "string",
-                                    "description": "A localized description that can be displayed to the model."
-                                }
-                            },
-                            "required": [
-                                "message",
-                                "description"
-                            ],
-                            "propertyNames": {
-                                "enum": [
-                                    "message",
-                                    "description"
-                                ]
-                            }
-                        }
-                    }
-                }
             }
         },
         "function-parameters": {
@@ -677,6 +638,31 @@
                     "type",
                     "title",
                     "body"
+                ]
+            }
+        },
+        "security-info-object": {
+            "type": "object",
+            "title": "Security info object",
+            "description": "Describes the security information to be used to aid in determining the relative risk of invoking the function.",
+            "properties": {
+                "data_handling": {
+                    "type": "array",
+                    "description": "An array of strings that describe the data handling behavior of the plugin.",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "GetPublicData",
+                            "GetPrivateData",
+                            "DataTransform",
+                            "ResourceStateUpdate"
+                        ]
+                    }
+                }
+            },
+            "propertyNames": {
+                "enum": [
+                    "data_handling"
                 ]
             }
         }
