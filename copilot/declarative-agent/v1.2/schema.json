@@ -34,7 +34,7 @@
             "description": "Optional. Not localizable. The detailed instructions or guidelines on how the declarative agent should behave, its functions, and any behaviors to avoid. It MUST contain at least one nonwhitespace character and MUST be 8,000 characters or less.",
             "minLength": 1,
             "maxLength": 8000,
-            "pattern": "^(?!\\[\\[)((.|\\n)*?)(?<!\\]\\])$"
+            "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
         },
         "capabilities": {
             "type": "array",
