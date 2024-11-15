@@ -38,7 +38,8 @@
         },
         "capabilities": {
             "type": "array",
-            "description": "Optional. Contains an array of objects that define capabilities of the declarative agent. There MUST NOT be more than three objects in the array.",
+            "description": "Optional. Contains an array of objects that define capabilities of the declarative agent.",
+            "uniqueItems": true,
             "items": {
                 "anyOf": [
                     {
