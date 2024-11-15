@@ -176,7 +176,8 @@
                     "propertyNames": {
                         "enum": [
                             "confirmation",
-                            "response_semantics"
+                            "response_semantics",
+                            "security_info"
                         ]
                     }
                 }
