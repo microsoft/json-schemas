@@ -33,7 +33,6 @@
         },
         "contact_email": {
             "type": "string",
-            "format": "email",
             "description": "An email address of a contact for safety/moderation, support, and deactivation."
         },
         "legal_info_url": {
