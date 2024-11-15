@@ -32,7 +32,7 @@
             "description": "A URL used to fetch a logo that MAY be used by the orchestrator. Implementations MAY provide alternative methods to provide logos that meet their visual requirements. This property is localizable."
         },
         "contact_email": {
-            "format": "email",
+            "format": "string",
             "description": "An email address of a contact for safety/moderation, support, and deactivation."
         },
         "legal_info_url": {
