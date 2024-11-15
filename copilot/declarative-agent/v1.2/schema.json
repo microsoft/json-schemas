@@ -39,12 +39,19 @@
         "capabilities": {
             "type": "array",
             "description": "Optional. Contains an array of objects that define capabilities of the declarative agent. There MUST NOT be more than three objects in the array.",
-            "maxItems": 3,
-            "minItems": 1,
             "items": {
-                "oneOf": [
+                "anyOf": [
                     {
                         "$ref": "#/$defs/capabilities/base-capability"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/web-search"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/onedrive-and-sharepoint"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/graph-connectors"
                     }
                 ]
             }
@@ -97,9 +104,14 @@
                 "description": "Represents a base capability object.",
                 "properties": {
                     "name": {
-                        "oneOf": [
+                        "type": "string",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, and GraphicArt.",
+                        "anyOf": [
                             {
                                 "const": "WebSearch"
+                            },
+                            {
+                                "const": "CodeInterpreter"
                             },
                             {
                                 "const": "OneDriveAndSharePoint"
@@ -109,28 +121,18 @@
                             },
                             {
                                 "const": "GraphicArt"
-                            },
-                            {
-                                "const": "CodeInterpreter"
                             }
-                        ],
-                        "description": "Required. Must be WebSearch, OneDriveAndSharePoint, GraphConnectors, GraphicArt or CodeInterpreter."
+                        ]
                     }
                 },
-                "oneOf": [
-                    {
-                        "$ref": "#/$defs/capabilities/web-search"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/onedrive-and-sharepoint"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/graph-connectors"
-                    }
-                ],
-                "required": [
-                    "name"
+              "propertyNames": {
+                "enum": [
+                  "name"
                 ]
+              },
+              "required": [
+                "name"
+              ]
             },
             "web-search": {
                 "type": "object",
