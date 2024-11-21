@@ -1321,11 +1321,47 @@
                     },
                     "minItems": 1,
                     "maxItems": 1
+                },
+                "customEngineAgents": {
+                    "type": "array",
+                    "description": "An array of Custom Engine Agents. Currently only one Custom Engine Agent per application is supported.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "$ref": "#/definitions/guid",
+                          "description": "The id of the Custom Engine Agent. If it is of type bot, the id must match the id specified in a bot in the bots node and the referenced bot must have personal scope. The app short name and short description must also be defined."
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "bot"
+                          ],
+                          "description": "The type of the Custom Engine Agent. Currently only type bot is supported."
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1,
+                    "maxItems": 1
                 }
             },
             "additionalProperties": false,
-            "required": [
-                "declarativeAgents"
+            "oneOf": [
+                {
+                  "required": [
+                    "declarativeAgents"
+                  ]
+                },
+                {
+                  "required": [
+                    "customEngineAgents"
+                  ]
+                }
             ]
         },
         "elementRelationshipSet": {
