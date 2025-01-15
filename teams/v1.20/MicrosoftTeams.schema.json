@@ -837,46 +837,6 @@
           }
         }
       },
-      "scopeConstraints": {
-        "type": "object",
-        "properties": {
-          "teams": {
-            "type": "array",
-            "description": "A list of team thread ids to which your app is restricted to",
-            "maxItems": 128,
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "Team's thread Id",
-                  "type": "string",
-                  "maxLength": 64
-                }
-              },
-              "required": [ "id" ],
-              "additionalProperties": false
-            }
-          },
-          "groupChats": {
-            "type": "array",
-            "description": "A list of chat thread ids to which your app is restricted to",
-            "maxItems": 128,
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "Chat's thread Id",
-                  "type": "string",
-                  "maxLength": 64
-                }
-              },
-              "required": [ "id" ],
-              "additionalProperties": false
-            }
-          }
-        },
-        "additionalProperties": false
-      },
       "permissions": {
         "type": "array",
         "description": "Specifies the permissions the app requests from users.",
@@ -1032,8 +992,7 @@
           "personal",
           "team",
           "groupChat",
-          "meetings",
-          null
+          "meetings"
         ],
         "description": "The install scope defined for this app by default. This will be the option displayed on the button when a user tries to add the app"
       },
@@ -1045,8 +1004,7 @@
             "enum": [
               "tab",
               "bot",
-              "connector",
-              null
+              "connector"
             ],
             "description": "When the install scope selected is Team, this field specifies the default capability available"
           },
@@ -1055,8 +1013,7 @@
             "enum": [
               "tab",
               "bot",
-              "connector",
-              null
+              "connector"
             ],
             "description": "When the install scope selected is GroupChat, this field specifies the default capability available"
           },
@@ -1065,8 +1022,7 @@
             "enum": [
               "tab",
               "bot",
-              "connector",
-              null
+              "connector"
             ],
             "description": "When the install scope selected is Meetings, this field specifies the default capability available"
           }
@@ -1148,37 +1104,8 @@
             "description": "List of permissions that the app needs to function.",
             "additionalProperties": false,
             "properties": {
-              "orgWide": {
-                "description": "App's organization wide classic permissions provided by user.",
-                "maxItems": 16,
-                "type": "array",
-                "uniqueItems": true,
-                "items": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "The Permission name of app's permission node.",
-                      "maxLength": 128
-                    },
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "Application",
-                        "Delegated"
-                      ],
-                      "description": "The Permission type of app's permission node."
-                    }
-                  },
-                  "required": [
-                    "name",
-                    "type"
-                  ]
-                }
-              },
               "resourceSpecific": {
-                "description": "App's resource specific permissions provided by user.",
+                "description": "Permissions that must be granted on a per resource instance basis.",
                 "maxItems": 16,
                 "type": "array",
                 "uniqueItems": true,
@@ -1188,7 +1115,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "description": "The Permission name of app's permission node.",
+                      "description": "The name of the resource-specific permission.",
                       "maxLength": 128
                     },
                     "type": {
@@ -1197,7 +1124,7 @@
                         "Application",
                         "Delegated"
                       ],
-                      "description": "The Permission type of app's permission node."
+                      "description": "The type of the resource-specific permission: delegated vs application."
                     }
                   },
                   "required": [
