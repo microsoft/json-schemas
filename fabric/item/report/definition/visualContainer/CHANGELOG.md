@@ -1,5 +1,11 @@
 # Visual Container Versions
 
+### 1.5.0
+
+<b>Released in: </b> December 2024 <br />
+<b>Notes: </b> 
+- TODO
+
 ### 1.4.0
 
 <b>Released in: </b> November 2024 <br />

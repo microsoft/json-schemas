@@ -1,5 +1,11 @@
 # Page Versions
 
+### 1.3.0
+
+<b>Released in: </b> December 2024 <br />
+<b>Notes: </b> 
+- TODO
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />
