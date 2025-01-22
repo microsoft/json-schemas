@@ -4,7 +4,8 @@
 
 <b>Released in: </b> December 2024 <br />
 <b>Notes: </b> 
-- TODO
+- Added an optional `type` property to address a bug where page type formatting was not persisting
+- Now references separated `filterConfiguration` schema
 
 ### 1.2.0
 

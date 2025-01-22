@@ -5,4 +5,3 @@
 <b>Released in: </b> December 2024 <br />
 <b>Notes: </b> 
 - Initial release of the separated filter configuration schema
-- TODO

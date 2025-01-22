@@ -4,7 +4,8 @@
 
 <b>Released in: </b> December 2024 <br />
 <b>Notes: </b> 
-- TODO
+- Now references separated `filterConfiguration` schema
+- Now references separated `visualConfiguration` schema
 
 ### 1.4.0
 
