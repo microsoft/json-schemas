@@ -1,0 +1,309 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Visual container",
+    "description": "Defines a single visual or visual group on a report page.",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json"
+        },
+        "name": {
+            "description": "A unique identifier for the visual across the whole page.",
+            "maxLength": 50,
+            "type": "string"
+        },
+        "position": {
+            "$ref": "#/definitions/VisualContainerPosition",
+            "description": "Defines where the visual is position on the page and how big it should be, along\nwith z-index (stacking) for that visual.\nAlso defines the order in which visuals are navigated when using just keyboard (tabOrder)."
+        },
+        "visual": {
+            "description": "Defines a chart to be shown inside of this container.",
+            "$ref": "../../visualConfiguration/1.5.0/schema-embedded.json"
+        },
+        "visualGroup": {
+            "description": "Defines that this container should be used as a grouping container.",
+            "$ref": "#/definitions/VisualGroupConfig"
+        },
+        "parentGroupName": {
+            "description": "Name of the parent group (visual container), if it is part of one.",
+            "type": "string"
+        },
+        "filterConfig": {
+            "description": "Filters that apply to all this visual - on top of the filters defined for the report and page.",
+            "$ref": "../../filterConfiguration/1.0.0/schema-embedded.json"
+        },
+        "isHidden": {
+            "description": "Marks the visual as hidden.",
+            "type": "boolean"
+        },
+        "annotations": {
+            "description": "Additional information to be saved (for example comments, readme, etc) for this visual.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Annotation"
+            }
+        },
+        "howCreated": {
+            "description": "Source of creation of this visual.",
+            "type": "string",
+            "anyOf": [
+                {
+                    "const": "Default",
+                    "description": "Used when it doesn't fall in any of the buckets below."
+                },
+                {
+                    "const": "Copilot",
+                    "description": "Created by copilot."
+                },
+                {
+                    "const": "CheckboxTickedInFieldList",
+                    "description": "Selecting data from field list."
+                },
+                {
+                    "const": "DraggedToCanvas",
+                    "description": "Dragging data from field list to the canvas."
+                },
+                {
+                    "const": "VisualTypeIconClicked",
+                    "description": "Clicking a specific visual icon in visualizations list."
+                },
+                {
+                    "const": "DraggedToFieldWell",
+                    "description": "Dragging data from field list to field wells."
+                },
+                {
+                    "const": "InsertVisualButton",
+                    "description": "Clicking the \"Insert visual\" button in ribbon."
+                },
+                {
+                    "const": "WhatIfParameterControl",
+                    "description": "Automatically by what-if parameter."
+                },
+                {
+                    "const": "QnaAppBar",
+                    "description": "Ask a question in app bar."
+                },
+                {
+                    "const": "QnaDoubleClick",
+                    "description": "Double clicking on the canvas to generate a Q&A visual."
+                },
+                {
+                    "const": "QnaKeyboardShortcut",
+                    "description": "Use keyboard shortcut for Q&A visual."
+                },
+                {
+                    "const": "FieldParameterControl",
+                    "description": "Automatically by field parameters."
+                },
+                {
+                    "const": "CanvasBackgroundContextMenu",
+                    "description": "Using on-object context menu for the canvas."
+                },
+                {
+                    "const": "ContextMenuPaste",
+                    "description": "By using paste from context manu."
+                },
+                {
+                    "const": "CopyPaste",
+                    "description": "By using copy paste."
+                },
+                {
+                    "const": "SummarizeVisualContainer",
+                    "description": "By using context menu Summarize."
+                }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "name",
+        "position"
+    ],
+    "definitions": {
+        "VisualContainerPosition": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "description": "Horizontal position of the left edge of the visual.\nShould be between 0 and width of the containing page.",
+                    "type": "number"
+                },
+                "y": {
+                    "description": "Vertical position of the top edge of the visual.\nShould be between 0 and height of the containing page.",
+                    "type": "number"
+                },
+                "z": {
+                    "description": "Defines the stacking order for the visual.\nHigher z-index visuals are shown on top of the lower ones.",
+                    "type": "number"
+                },
+                "height": {
+                    "description": "Height of the visual.\ny + height should be less than the height of the containing page.",
+                    "type": "number"
+                },
+                "width": {
+                    "description": "Width of the visual.\nx + width should be less than the width of the containing page.",
+                    "type": "number"
+                },
+                "tabOrder": {
+                    "description": "Defines the selection order for this visual when using keyboard (tab key)\nto navigate the visuals on the containing page.",
+                    "type": "number"
+                },
+                "angle": {
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "height",
+                "width",
+                "x",
+                "y"
+            ]
+        },
+        "VisualGroupConfig": {
+            "type": "object",
+            "properties": {
+                "displayName": {
+                    "description": "Display name for the group.",
+                    "type": "string"
+                },
+                "groupMode": {
+                    "$ref": "#/definitions/GroupLayoutMode",
+                    "description": "Defines how the visuals are organized inside this group."
+                },
+                "objects": {
+                    "description": "Specifies the formatting to be set for different \"objects\" of this group.",
+                    "$ref": "#/definitions/VisualGroupFormattingObjects"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "displayName",
+                "groupMode"
+            ]
+        },
+        "GroupLayoutMode": {
+            "type": "string",
+            "anyOf": [
+                {
+                    "const": "ScaleMode",
+                    "description": "Visuals are scaled as group resizes to preserve the aspect ratio and avoid scrolling."
+                },
+                {
+                    "const": "ScrollMode",
+                    "description": "Visuals are not resized, if the containing box for group is smaller than the space\nneeded for visuals, then scrollbar is added."
+                }
+            ]
+        },
+        "VisualGroupFormattingObjects": {
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "selector": {
+                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
+                                "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/Selector"
+                            },
+                            "properties": {
+                                "$ref": "../../visualConfiguration/1.5.0/schema-embedded.json#/definitions/Background",
+                                "description": "Describes the properties of the object to apply formatting changes to."
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "properties"
+                        ]
+                    }
+                },
+                "lockAspect": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "selector": {
+                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
+                                "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/Selector"
+                            },
+                            "properties": {
+                                "$ref": "../../visualConfiguration/1.5.0/schema-embedded.json#/definitions/LockAspect",
+                                "description": "Describes the properties of the object to apply formatting changes to."
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "properties"
+                        ]
+                    }
+                },
+                "general": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "selector": {
+                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
+                                "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/Selector"
+                            },
+                            "properties": {
+                                "$ref": "#/definitions/VisualGroupGeneralFormattingObjects",
+                                "description": "Describes the properties of the object to apply formatting changes to."
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "properties"
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "VisualGroupGeneralFormattingObjects": {
+            "type": "object",
+            "properties": {
+                "x": {},
+                "y": {},
+                "width": {},
+                "height": {},
+                "altText": {}
+            },
+            "additionalProperties": false
+        },
+        "Annotation": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Unique name for the annotation.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "A value for this annotation.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "value"
+            ]
+        }
+    },
+    "oneOf": [
+        {
+            "required": [
+                "visual"
+            ]
+        },
+        {
+            "required": [
+                "visualGroup"
+            ]
+        }
+    ]
+}
