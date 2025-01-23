@@ -155,6 +155,11 @@
                     "type": "string",
                     "description": "The full name of the app, used if the full app name exceeds 30 characters.",
                     "maxLength": 100
+                },
+                "abbreviated": {
+                    "type": "string",
+                    "description": "An abbreviated name for the app.",
+                    "maxLength": 15
                 }
             },
             "required": [
@@ -1316,11 +1321,47 @@
                     },
                     "minItems": 1,
                     "maxItems": 1
+                },
+                "customEngineAgents": {
+                    "type": "array",
+                    "description": "An array of Custom Engine Agents. Currently only one Custom Engine Agent per application is supported.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "$ref": "#/definitions/guid",
+                          "description": "The id of the Custom Engine Agent. If it is of type bot, the id must match the id specified in a bot in the bots node and the referenced bot must have personal scope. The app short name and short description must also be defined."
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "bot"
+                          ],
+                          "description": "The type of the Custom Engine Agent. Currently only type bot is supported."
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 1,
+                    "maxItems": 1
                 }
             },
             "additionalProperties": false,
-            "required": [
-                "declarativeAgents"
+            "oneOf": [
+                {
+                  "required": [
+                    "declarativeAgents"
+                  ]
+                },
+                {
+                  "required": [
+                    "customEngineAgents"
+                  ]
+                }
             ]
         },
         "elementRelationshipSet": {
@@ -1435,7 +1476,8 @@
                         "$ref": "#/definitions/requirementsExtensionElement"
                     },
                     "runtimes": {
-                        "$ref": "#/definitions/extensionRuntimesArray"
+                        "$ref": "#/definitions/extensionRuntimesArray",
+                        "description": "General runtime for \"MailApp\" or \"TaskpaneApp\". Configures the set of runtimes and actions that can be used by each extension point. Min size 1."
                     },
                     "ribbons": {
                         "$ref": "#/definitions/extensionRibbonsArray"
@@ -1460,7 +1502,8 @@
                         "$ref": "#/definitions/extensionGetStartedMessageArray"
                     },
                     "contextMenus": {
-                        "$ref": "#/definitions/extensionContextMenuArray"
+                        "$ref": "#/definitions/extensionContextMenuArray",
+                        "description": "Specifies the context menus for your extension. A context menu is a shortcut menu that appears when a user right-clicks (selects and holds) in the Office UI. Min size 1."
                     }
                 },
                 "additionalProperties": false
@@ -1534,7 +1577,6 @@
             "maxItems": 20,
             "items": {
                 "type": "object",
-                "description": "A runtime environment for a page or script",
                 "properties": {
                     "requirements": {
                         "$ref": "#/definitions/requirementsExtensionElement"
@@ -2470,7 +2512,6 @@
           },
           "extensionContextMenuArray": {
             "type": "array",
-            "description": "A shortcut menu that appears when you right-click in the Office UI.",
             "minItems": 1,
             "items": {
               "type": "object",
@@ -2480,7 +2521,8 @@
                   "$ref": "#/definitions/requirementsExtensionElement"
                 },
                 "menus": {
-                  "$ref": "#/definitions/extensionMenuItem"
+                  "$ref": "#/definitions/extensionMenuItem",
+                  "description": "Configures the context menus. Minimum size is 1."
                 }
               },
               "additionalProperties": false,
@@ -2498,7 +2540,7 @@
               "properties": {
                 "entryPoint": {
                   "type": "string",
-                  "description": "Use text or cell here for Office context menu. Use text if the context menu should open when a user right-clicks on the selected text. Use cell if the context menu should open when the user right-clicks on a cell on an Excel spreadsheet.",
+                  "description": "Use 'text' or 'cell' here for Office context menu. Use text if the context menu should open when a user right-clicks (selects and holds) on the selected text. Use cell if the context menu should open when the user right-clicks (selects and holds) on a cell in an Excel spreadsheet.",
                   "enum": [
                     "text",
                     "cell"
