@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "$schema": {
-      "description": "Defines the schema to use for an org app artifact.",
+      "description": "Defines the schema to use for an org app item.",
       "type": "string",
       "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgapp/definition/orgAppDefinition/1.0.0/schema.json"
     },
@@ -143,7 +143,7 @@
       ],
       "properties": {
         "report": {
-          "description": "Defines the default settings for report elements in the org app.",
+          "description": "Defines the settings for report elements in the org app.",
           "$ref": "#/definitions/ReportSettings"
         }
       },
@@ -279,7 +279,7 @@
           "type": "object",
           "properties": {
             "elementType": {
-              "description": "Defines the type of the artifact element.",
+              "description": "Defines the type of the item element.",
               "type": "string",
               "const": "item"
             },
