@@ -284,23 +284,23 @@
               "const": "item"
             },
             "elementId": {
-              "description": "Defines the artifact element's unique identifier.",
+              "description": "Defines the item element's unique identifier.",
               "$ref": "#/definitions/ElementId"
             },
             "itemId": {
-              "description": "Defines the artifact's internal unique identifier.",
+              "description": "Defines the item's internal unique identifier.",
               "$ref": "#/definitions/Guid"
             },
             "folderObjectId": {
-              "description": "Defines the internal unique identifier of the folder in which the artifact is located.",
+              "description": "Defines the internal unique identifier of the folder in which the item is located.",
               "$ref": "#/definitions/Guid"
             },
             "itemLogicalId": {
-              "description": "Defines the artifact's logical unique identifier in Git repository.",
+              "description": "Defines the item's logical unique identifier in Git repository.",
               "$ref": "#/definitions/Guid"
             },
             "itemType": {
-              "description": "Defines the artifact's type.",
+              "description": "Defines the item's type.",
               "type": [
                 "string"
               ],
@@ -308,11 +308,11 @@
               "maxLength": 256
             },
             "isHidden": {
-              "description": "Indicates whether the artifact element is visible in consumption.",
+              "description": "Indicates whether the item element is visible in consumption.",
               "type": "boolean"
             },
             "displayName": {
-              "description": "Defines the display name of the artifact element.",
+              "description": "Defines the display name of the item element.",
               "$ref": "#/definitions/DisplayName"
             }
           },
