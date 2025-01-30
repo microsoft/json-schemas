@@ -148,7 +148,7 @@
             },
             "teams-messages": {
                 "type": "object",
-                "description": "An object whose presence indicates that the DA will be able to search within Teams Messages that are either in 1:1 chats, group chats or channels.",
+                "description": "Indicates that the declarative agent can search through Teams channels, teams, meetings, 1:1 chats and group chats.",
                 "properties": {
                     "name": {
                         "const": "TeamsMessages",
@@ -156,7 +156,7 @@
                     },
                     "channels_by_url": {
                         "type": "array",
-                        "minItems": 1,
+                        "maxItems": 5,
                         "description": "This member can be used to constrain the content accessible to the DA to just the content identified via the members of each Teams channels_by_url",
                         "items": {
                             "$ref": "#/$defs/capabilities/teams-channel-url"
@@ -172,11 +172,11 @@
             },
             "teams-channel-url": {
                 "type": "object",
-                "description": "An object that identifies a Teams channel via a URL.",
+                "description": "Identifies a Teams channel, team or meeting chat",
                 "properties": {
                     "url": {
                         "type": "string",
-                        "description": "A string that contains an absolute URL to a Teams Channel."
+                        "description": "A string that contains a well formed, Teams url to a Teams channel, team or meeting chat (join url)"
                     }
                 },
                 "required": [
