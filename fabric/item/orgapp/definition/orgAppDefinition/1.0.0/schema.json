@@ -18,7 +18,20 @@
         "array"
       ],
       "items": {
-        "$ref": "#/definitions/OrgAppElement"
+        "oneOf": [
+          {
+            "$ref": "#/definitions/OrgAppOverviewElement"
+          },
+          {
+            "$ref": "#/definitions/OrgAppLinkElement"
+          },
+          {
+            "$ref": "#/definitions/OrgAppSectionElement"
+          },
+          {
+            "$ref": "#/definitions/OrgAppItemElement"
+          }
+        ]
       },
       "maxItems": 1000
     }
@@ -162,182 +175,188 @@
       },
       "additionalProperties": false
     },
-    "OrgAppElement": {
+    "OrgAppOverviewElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the overview element.",
+          "type": "string",
+          "const": "overview"
+        },
+        "header": {
+          "$ref": "#/definitions/OverviewHeader"
+        },
+        "isHidden": {
+          "description": "Indicates whether the overview element is visible in consumption.",
+          "type": "boolean"
+        },
+        "elementId": {
+          "description": "Defines the overview element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "displayName": {
+          "description": "Defines the display name of the overview element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "required": [
+        "elementType",
+        "elementId",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "OrgAppLinkElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the link element.",
+          "type": "string",
+          "const": "link"
+        },
+        "url": {
+          "description": "Defines the URL that should be opened by the org app.",
+          "type": [
+            "string"
+          ],
+          "maxLength": 2048,
+          "pattern": "(?i)^https://[a-zA-Z0-9-._~:/?#[\\]@!$&'()*+,;=]+$"
+        },
+        "linkType": {
+          "description": "Defines how the URL should be opened",
+          "type": "string",
+          "enum": [
+            "embedded",
+            "newtab"
+          ]
+        },
+        "isHidden": {
+          "description": "Indicates whether the link element is visible in consumption.",
+          "type": "boolean"
+        },
+        "elementId": {
+          "description": "Defines the link element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "displayName": {
+          "description": "Defines the display name of the link element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "required": [
+        "elementType",
+        "url",
+        "linkType",
+        "elementId",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "OrgAppSectionElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the section element.",
+          "type": "string",
+          "const": "section"
+        },
+        "elements": {
+          "description": "Defines the list of elements within the section.",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/OrgAppOverviewElement"
+              },
+              {
+                "$ref": "#/definitions/OrgAppLinkElement"
+              },
+              {
+                "$ref": "#/definitions/OrgAppItemElement"
+              }
+            ]
+          }
+        },
+        "elementId": {
+          "description": "Defines the link section element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "displayName": {
+          "description": "Defines the display name of the section element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "required": [
+        "elementType",
+        "elements",
+        "elementId",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "OrgAppItemElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the item element.",
+          "type": "string",
+          "const": "item"
+        },
+        "elementId": {
+          "description": "Defines the item element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "itemId": {
+          "description": "Defines the item's internal unique identifier.",
+          "$ref": "#/definitions/Guid"
+        },
+        "folderObjectId": {
+          "description": "Defines the internal unique identifier of the folder in which the item is located.",
+          "$ref": "#/definitions/Guid"
+        },
+        "itemLogicalId": {
+          "description": "Defines the item's logical unique identifier in Git repository.",
+          "$ref": "#/definitions/Guid"
+        },
+        "itemType": {
+          "description": "Defines the item's type.",
+          "type": [
+            "string"
+          ],
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "isHidden": {
+          "description": "Indicates whether the item element is visible in consumption.",
+          "type": "boolean"
+        },
+        "displayName": {
+          "description": "Defines the display name of the item element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "elementType": {
-              "description": "Defines the type of the overview element.",
-              "type": "string",
-              "const": "overview"
-            },
-            "header": {
-              "$ref": "#/definitions/OverviewHeader"
-            },
-            "isHidden": {
-              "description": "Indicates whether the overview element is visible in consumption.",
-              "type": "boolean"
-            },
-            "elementId": {
-              "description": "Defines the overview element's unique identifier.",
-              "$ref": "#/definitions/ElementId"
-            },
-            "displayName": {
-              "description": "Defines the display name of the overview element.",
-              "$ref": "#/definitions/DisplayName"
-            }
-          },
           "required": [
-            "elementType",
-            "elementId",
-            "displayName"
-          ],
-          "additionalProperties": false
+            "itemId",
+            "folderObjectId"
+          ]
         },
         {
-          "type": "object",
-          "properties": {
-            "elementType": {
-              "description": "Defines the type of the link element.",
-              "type": "string",
-              "const": "link"
-            },
-            "url": {
-              "description": "Defines the URL that should be opened by the org app.",
-              "type": [
-                "string"
-              ],
-              "maxLength": 2048,
-              "pattern": "(?i)^https://[a-zA-Z0-9-._~:/?#[\\]@!$&'()*+,;=]+$"
-            },
-            "linkType": {
-              "description": "Defines how the URL should be opened",
-              "type": "string",
-              "enum": [
-                "embedded",
-                "newtab"
-              ]
-            },
-            "isHidden": {
-              "description": "Indicates whether the link element is visible in consumption.",
-              "type": "boolean"
-            },
-            "elementId": {
-              "description": "Defines the link element's unique identifier.",
-              "$ref": "#/definitions/ElementId"
-            },
-            "displayName": {
-              "description": "Defines the display name of the link element.",
-              "$ref": "#/definitions/DisplayName"
-            }
-          },
           "required": [
-            "elementType",
-            "url",
-            "linkType",
-            "elementId",
-            "displayName"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "elementType": {
-              "description": "Defines the type of the section element.",
-              "type": "string",
-              "const": "section"
-            },
-            "elements": {
-              "description": "Defines the list of elements within the section.",
-              "type": [
-                "array"
-              ],
-              "items": {
-                "$ref": "#/definitions/OrgAppElement"
-              }
-            },
-            "elementId": {
-              "description": "Defines the link section element's unique identifier.",
-              "$ref": "#/definitions/ElementId"
-            },
-            "displayName": {
-              "description": "Defines the display name of the section element.",
-              "$ref": "#/definitions/DisplayName"
-            }
-          },
-          "required": [
-            "elementType",
-            "elements",
-            "elementId",
-            "displayName"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "elementType": {
-              "description": "Defines the type of the item element.",
-              "type": "string",
-              "const": "item"
-            },
-            "elementId": {
-              "description": "Defines the artifact element's unique identifier.",
-              "$ref": "#/definitions/ElementId"
-            },
-            "itemId": {
-              "description": "Defines the artifact's internal unique identifier.",
-              "$ref": "#/definitions/Guid"
-            },
-            "folderObjectId": {
-              "description": "Defines the internal unique identifier of the folder in which the artifact is located.",
-              "$ref": "#/definitions/Guid"
-            },
-            "itemLogicalId": {
-              "description": "Defines the artifact's logical unique identifier in Git repository.",
-              "$ref": "#/definitions/Guid"
-            },
-            "itemType": {
-              "description": "Defines the artifact's type.",
-              "type": [
-                "string"
-              ],
-              "minLength": 1,
-              "maxLength": 256
-            },
-            "isHidden": {
-              "description": "Indicates whether the artifact element is visible in consumption.",
-              "type": "boolean"
-            },
-            "displayName": {
-              "description": "Defines the display name of the artifact element.",
-              "$ref": "#/definitions/DisplayName"
-            }
-          },
-          "oneOf": [
-            {
-              "required": [
-                "itemId",
-                "folderObjectId"
-              ]
-            },
-            {
-              "required": [
-                "itemLogicalId"
-              ]
-            }
-          ],
-          "required": [
-            "elementType",
-            "elementId",
-            "itemType",
-            "displayName"
-          ],
-          "additionalProperties": false
+            "itemLogicalId"
+          ]
         }
-      ]
+      ],
+      "required": [
+        "elementType",
+        "elementId",
+        "itemType",
+        "displayName"
+      ],
+      "additionalProperties": false
     },
     "DisplayName": {
       "type": [
