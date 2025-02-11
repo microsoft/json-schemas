@@ -392,7 +392,6 @@
           "type": [
             "string"
           ],
-          "minLength": 1,
           "maxLength": 2500
         },
         "showTheme": {
