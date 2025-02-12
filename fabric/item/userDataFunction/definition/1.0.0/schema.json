@@ -1,5 +1,3 @@
-CSC : warning CS1668: Invalid search path 'C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.43.34604\ATLMFC\lib\x86' specified in 'LIB environment variable' -- 'directory does not exist' [C:\src\personal\mwade\Tools\AlmSchemaGeneration\schema.csproj::TargetFramework=net9.0]
-CSC : warning CS1668: Invalid search path 'C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.43.34604\lib\x86' specified in 'LIB environment variable' -- 'directory does not exist' [C:\src\personal\mwade\Tools\AlmSchemaGeneration\schema.csproj::TargetFramework=net9.0]
 {
   "type": [
     "object",
