@@ -1,8 +1,8 @@
 {
-  "type": [
-    "object",
-    "null"
-  ],
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/userDataFunction/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User data functions",
+  "type": "object",
   "properties": {
     "$schema": {
       "type": [
@@ -23,10 +23,7 @@
         "null"
       ],
       "items": {
-        "type": [
-          "object",
-          "null"
-        ],
+        "type": "object",
         "properties": {
           "alias": {
             "type": [
@@ -61,10 +58,7 @@
         "null"
       ],
       "items": {
-        "type": [
-          "object",
-          "null"
-        ],
+        "type": "object",
         "properties": {
           "name": {
             "type": [
@@ -93,10 +87,7 @@
         "null"
       ],
       "items": {
-        "type": [
-          "object",
-          "null"
-        ],
+        "type": "object",
         "properties": {
           "name": {
             "type": [
