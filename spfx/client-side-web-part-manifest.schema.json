@@ -1,7 +1,7 @@
 {
   "id": "client-side-web-part-manifest.schema.json",
   "title": "Client-side webpart manifest",
-  "description": "A client-side webpart is a drop-in control that is part of the end user page authoring experience.",
+  "description": "A client-side webpart is a control that is part of the end user page authoring experience or exposed in Teams as an app.",
 
   "definitions": {
     "propertyNamesArray": {
