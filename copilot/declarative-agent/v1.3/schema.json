@@ -154,23 +154,23 @@
                         "const": "TeamsMessages",
                         "description": "Required. Must be set to TeamsMessages."
                     },
-                    "channels_by_url": {
+                    "urls": {
                         "type": "array",
                         "maxItems": 5,
                         "description": "This member can be used to constrain the content accessible to the DA to just the content identified via the members of each Teams channels_by_url",
                         "items": {
-                            "$ref": "#/$defs/capabilities/teams-channel-url"
+                            "$ref": "#/$defs/capabilities/teams-url"
                         }
                     }
                 },
                 "propertyNames": {
                    "enum": [
                         "name",
-                        "channels_by_url"
+                        "urls"
                     ]
                 }
             },
-            "teams-channel-url": {
+            "teams-url": {
                 "type": "object",
                 "description": "Identifies a Teams channel, team or meeting chat",
                 "properties": {
