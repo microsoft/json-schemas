@@ -1257,6 +1257,64 @@
       "pattern": "^((([0-9]*\\.)?[0-9]+)|[lL][aA][rR][gG][eE]|[mM][eE][dD][iI][uU][mM]|[sS][mM][aA][lL][lL])$",
       "maxLength": 16
     },
+    "elementReference": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "bots",
+            "staticTabs",
+            "composeExtensions",
+            "configurableTabs"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "commandIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "oneWayDependency": {
+      "type": "object",
+      "properties": {
+        "element": {
+          "$ref": "#/definitions/elementReference"
+        },
+        "dependsOn": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/elementReference"
+          }
+        }
+      },
+      "required": [
+        "element",
+        "dependsOn"
+      ],
+      "additionalProperties": false,
+      "description": "An object representing a unidirectional dependency relationship, where one specific element (referred to as the `element`) relies on an array of other elements (referred to as the `dependsOn`) in a single direction."
+    },
+    "mutualDependency": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/definitions/elementReference"
+      },
+      "description": "A specific instance of mutual dependency between two or more elements, indicating that each element depends on the others in a bidirectional manner."
+    },
     "elementRequirementSet": {
       "type": "object",
       "properties": {
