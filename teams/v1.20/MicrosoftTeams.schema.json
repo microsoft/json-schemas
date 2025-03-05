@@ -1128,7 +1128,7 @@
         },
         "customEngineAgents": {
           "type": "array",
-          "description": "An array of Custom Engine Agents. Currently only one Custom Engine Agent per application is supported.",
+          "description": "An array of Custom Engine Agents. Currently only one Custom Engine Agent per application is supported. Support is currently in public preview.",
           "items": {
             "type": "object",
             "properties": {
