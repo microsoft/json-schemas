@@ -99,7 +99,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, People, MeetingTranscript, EmbeddedKnowledge and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -121,6 +121,18 @@
                             },
                             {
                                 "const": "Dataverse"
+                            },
+                            {
+                                "const": "Email"
+                            },
+                            {
+                                "const": "People"
+                            },
+                            {
+                                "const": "MeetingTranscript"
+                            },
+                            {
+                                "const": "EmbeddedKnowledge"
                             }
                         ]
                     }
@@ -149,11 +161,123 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/email"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/people"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/meeting-transcript"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/embedded-knowledge"
                     }
                 ],
                 "required": [
                     "name"
                 ]
+            },
+            "meeting-transcript": {
+                "type": "object",
+                "description": "Indicates that the DA will be able to search meeting transcripts.",
+                "properties": {
+                    "name": {
+                        "const": "MeetingTranscript",
+                        "description": "Required. Must be set to MeetingTranscript."
+                    },
+                    "teams_meetings": {
+                        "type": "array",
+                        "description": "This member can be used to constrain the DA to just the Teams meeting transcripts identified by the members of each TeamsMeeting object.",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/teams-meeting"
+                        }
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "teams_meetings"
+                    ]
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "teams-meeting": {
+                "type": "object",
+                "description": "Identifies a Teams meeting.",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "Contains an absolute URL to a Teams meeting."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "url"
+                    ]
+                },
+                "required": [
+                    "url"
+                ]
+            },
+            "embedded-knowledge": {
+                "type": "object",
+                "description": "Indicates that the DA will be able to use files locally in the app package as knowledge. The object MUST contain either a files member or a embedded_resource_snapshot_id member, but not both",
+                "properties": {
+                    "name": {
+                        "const": "EmbeddedKnowledge",
+                        "description": "String that MUST contain the literal value EmbeddedKnowledge."
+                    },
+                    "files": {
+                        "type": "array",
+                        "description": "List of objects identifying files that contain knowledge the Agent can use for grounding.",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/embedded-knowledge-file"
+                        }
+                    },
+                    "embedded_resource_snapshot_id": {
+                        "type": "string",
+                        "description": "String identifier provisioned by a an external file container storage service that can be used to locate the embedded knowledge files."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                }
+            },
+            "embedded-knowledge-file": {
+                "type": "object",
+                "description": "An object that identifies a file via the relative path.",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "string that contains the file relative path for the embedded file. It is a required member."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "file"
+                    ]
+                },
+                "required": [
+                    "file"
+                ]
+            },
+            "people": {
+                "type": "object",
+                "description": "Indicates that the DA will be able to search people data in the organization.",
+                "properties": {
+                    "name": {
+                        "const": "People",
+                        "description": "Required. Must be set to People."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                }
             },
             "email": {
                 "type": "object",
@@ -531,6 +655,10 @@
                     "type": "string",
                     "description": "Optional. Not localizable. The GUID identifier of a SharePoint or OneDrive item.",
                     "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
+                },
+                "search_associated_sites": {
+                    "type": "boolean",
+                    "description": "Boolean value indicating whether to enable searching associated sites. This value is only applicable when the site_id value references a SharePoint HubSite."
                 }
             },
             "propertyNames": {
@@ -538,7 +666,8 @@
                     "site_id",
                     "web_id",
                     "list_id",
-                    "unique_id"
+                    "unique_id",
+                    "search_associated_sites"
                 ]
             },
             "additionalProperties": false
