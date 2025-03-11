@@ -2393,6 +2393,17 @@
                 ]
             }
         },
+        "extensionXllCustomFunctions": {
+            "type": "object",
+            "properties": {
+              "fileName": {
+                "type": "string",
+                "pattern": "^(?!.*[\\r\\n\\f\\b\\v\\u0007\\t])[\\S]*\\.xll$",
+                "minLength": 1,
+                "maxLength": 64
+              }
+            }
+        },
         "extensionAppDeeplinksArray": {
             "type": "array",
             "description": "Represents the copilot extension point",
