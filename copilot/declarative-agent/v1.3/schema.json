@@ -99,7 +99,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -146,10 +146,62 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/dataverse"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/email"
                     }
                 ],
                 "required": [
                     "name"
+                ]
+            },
+            "email": {
+                "type": "object",
+                "description": "A JSON object whose presence indicates that the DA will be able to search within Email Messages in the mailboxes user has access to.",
+                "properties": {
+                    "name": {
+                        "const": "Email",
+                        "description": "Required: Must be set to Email"
+                    },
+                    "folders": {
+                        "type": "array",
+                        "description": "A JSON array of Folder Object. This member can be used to constrain the content accessible to the DA to just the emails present in the folders identified by members of each Folder Object.",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/email-folder"
+                        }
+                    },
+                    "shared_mailbox": {
+                        "type": "string",
+                        "description": "A JSON string that contains SMTP address of the shared mailbox. The presence of this field indicates that the DA constrain its search for relevant emails only to that mailbox. Emails from user's primary mailbox is not searched when this field is present."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "folders",
+                        "shared_mailbox"
+                    ]
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "email-folder": {
+                "type": "object",
+                "properties": {
+                    "folder_id": {
+                        "type": "string",
+                        "description": "A JSON string that identifies an email folder. This can either be id of the folder or one of the well known names.",
+                        "minlength": 1
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "folder_id"
+                    ]
+                },
+                "required": [
+                    "folder_id"
                 ]
             },
             "dataverse": {
