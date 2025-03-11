@@ -121,6 +121,9 @@
                             },
                             {
                                 "const": "Dataverse"
+                            },
+                            {
+                                "const": "Email"
                             }
                         ]
                     }
