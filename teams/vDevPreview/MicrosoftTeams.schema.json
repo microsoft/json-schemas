@@ -1397,6 +1397,25 @@
               }
             ],
             "additionalProperties": false
+        },
+        "backgroundLoadConfiguration": {
+          "type": "object",
+          "description": "Optional property containing background loading configuration. By opting in to this performance enhancement, your app is eligible to be loaded in the background in any Microsoft 365 application host that supports this feature.",
+          "properties": {
+            "tabConfiguration": {
+              "type": "object",
+              "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading.",
+              "properties": {
+                "contentUrl": {
+                  "$ref": "#/definitions/httpsUrl",
+                  "description": "Required URL for background loading. This can be the same contentUrl from the staticTabs section or an alternative endpoint used for background loading."
+                }
+              },
+              "required": [ "contentUrl" ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
         }
     },
     "required": [
