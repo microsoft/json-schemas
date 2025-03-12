@@ -99,7 +99,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -118,6 +118,9 @@
                             },
                             {
                                 "const": "TeamsMessages"
+                            },
+                            {
+                                "const": "Dataverse"
                             }
                         ]
                     }
@@ -140,11 +143,78 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/teams-messages"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/dataverse"
                     }
                 ],
                 "required": [
                     "name"
                 ]
+            },
+            "dataverse": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "const": "Dataverse",
+                        "description": "Required: Must be set to Dataverse"
+                    },
+                    "knowledge_sources": {
+                        "type": "array",
+                        "description": "An array of Objects that represent the knowledge sources for the Dataverse in the Declarative Agent",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/dataverse-knowledge-source"
+                        }
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "knowledge_sources"
+                    ]
+                }
+            },
+            "dataverse-knowledge-source": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                    "host_name": {
+                        "type": "string",
+                        "description": "Unique identifier for the host in Dataverse."
+                    },
+                    "skill": {
+                        "type": "string",
+                        "description": "Unique identifier for the information returned from DataVerse tables."
+                    },
+                    "tables": {
+                        "type": "array",
+                        "description": "An array of table_name objects which contain table names in DataVerse to scope the knowledge of the Declarative Agent",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/dataverse-knowledge-source-table"
+                        }
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "host_name",
+                        "skill",
+                        "tables"
+                    ]
+                }
+            },
+            "dataverse-knowledge-source-table": {
+                "type": "object",
+                "properties": {
+                    "table_name": {
+                        "type": "string",
+                        "description": "A string to represent the table name."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "table_name"
+                    ]
+                }
             },
             "teams-messages": {
                 "type": "object",
