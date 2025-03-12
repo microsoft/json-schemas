@@ -1,0 +1,72 @@
+{
+  "id": "prefab-app-manifest.schema.json",
+  "title": "PREFAB application manifest",
+  "description": "A PREFAB application is the architectural component that allows developers to declaratively specify behavior of a full page application.",
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+
+      "properties": {
+        "$schema": { "type": "string" },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" },
+        "title": { "$ref": "any-value.schema.json" },
+        "description": { "$ref": "any-value.schema.json" },
+        "isConfigured": { "$ref": "any-value.schema.json" },
+        "appInstallationTypes": {
+          "description": "Describes how the PREFAB app can be installed: NewSite or ExistingSite. If omitted the app supports both.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["NewSite", "ExistingSite"]
+          }
+        },
+        "actions": {
+          "$ref": "https://developer.microsoft.com/json-schemas/sp/site-design-script-actions.schema.json#/properties/actions"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "type": "object",
+      "required": ["componentType", "title", "description", "isConfigured"],
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "enum": ["Prefab"]
+        },
+
+        "title": {
+          "title": "Title",
+          "description": "Title of the application as a dictionary of locale keys to title values. This value will be displayed to the user in the (page creation) interface. A dictionary must contain a \"default\" key.",
+          "$ref": "localized-string.schema.json"
+        },
+
+        "description": {
+          "title": "Description",
+          "description": "Description of the application represented as a dictionary of locale keys to description values. This value will be displayed to the user in the (page creation) interface. A dictionary must contain a \"default\" key.",
+          "$ref": "localized-string.schema.json"
+        },
+
+        "isConfigured": {
+          "title": "Is configured",
+          "description": "True if the application is configured and not need a FRC (First Run Configuration) step.",
+          "type": "boolean"
+        }
+      },
+
+      "additionalProperties": true
+    }
+  ]
+}
