@@ -1406,16 +1406,12 @@
               "type": "object",
               "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading.",
               "properties": {
-                "supportsBackgroundLoad": {
-                  "type": "boolean",
-                  "description": "Required boolean property indicating that app supports background loading of tabs. This property must be set to true to enable the background loading feature. Note that setting this property to true gives the host client permission to load the app in the background but does not guarantee the app will be preloaded at runtime. Whether an app is preloaded in the background will be dynamically determined based on usage and other criteria."
-                },
                 "contentUrl": {
                   "$ref": "#/definitions/httpsUrl",
                   "description": "Required URL for background loading. This can be the same contentUrl from the staticTabs section or an alternative endpoint used for background loading."
                 }
               },
-              "required": [ "supportsBackgroundLoad", "contentUrl" ],
+              "required": [ "contentUrl" ],
               "additionalProperties": false
             }
           },
