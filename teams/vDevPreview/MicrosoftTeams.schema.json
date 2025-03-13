@@ -1406,6 +1406,13 @@
               "type": "object",
               "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading. Setting tabConfiguration indicates that the app supports background loading of tabs.",
               "properties": {
+=======
+          "description": "Optional property containing background loading configuration. By opting in to this performance enhancement, your app is eligible to be loaded in the background in any Microsoft 365 application host that supports this feature.",
+          "properties": {
+            "tabConfiguration": {
+              "type": "object",
+              "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading.",
+              "properties": {
                 "contentUrl": {
                   "$ref": "#/definitions/httpsUrl",
                   "description": "Required URL for background loading. This can be the same contentUrl from the staticTabs section or an alternative endpoint used for background loading."
@@ -1523,6 +1530,15 @@
                     "contextMenus": {
                         "$ref": "#/definitions/extensionContextMenuArray",
                         "description": "Specifies the context menus for your extension. A context menu is a shortcut menu that appears when a user right-clicks (selects and holds) in the Office UI. Min size 1."
+                    },
+                    "keyboardShortcuts": {
+                        "type": "array",
+                        "description": " Keyboard shortcuts, also known as key combinations, enable your add-in's users to work more efficiently. Keyboard shortcuts also improve the add-in's accessibility for users with disabilities by providing an alternative to the mouse.",
+                        "items": {
+                          "$ref": "#/definitions/extensionKeyboardShortcut"
+                        },
+                        "minItems": 1,
+                        "maxItems": 10
                     }
                 },
                 "additionalProperties": false
@@ -1531,6 +1547,7 @@
         },
         "requirementsExtensionElement": {
             "type": "object",
+            "description": "Specifies limitations on which clients the add-in can be installed on, including limitations on the Office host application, the form factors, and the requirement sets that the client must support.",
             "minProperties": 1,
             "properties": {
                 "capabilities": {
@@ -1592,6 +1609,7 @@
         },
         "extensionRuntimesArray": {
             "type": "array",
+            "description": "A runtime environment for a page or script.",
             "minItems": 1,
             "maxItems": 20,
             "items": {
@@ -1627,6 +1645,9 @@
                     },
                     "actions": {
                         "$ref": "#/definitions/extensionRuntimesActions"
+                    },
+                    "customFunctions": {
+                        "$ref": "#/definitions/extensionCustomFunctions"
                     }
                 },
                 "additionalProperties": false,
@@ -1729,6 +1750,208 @@
                 ]
             }
         },
+        "extensionCustomFunctions": {
+            "type": "object",
+            "description": "Custom function enable developers to add new functions to Excel by defining those functions in JavaScript as part of an add-in. Users within Excel can access custom functions just as they would any native function in Excel, such as SUM().",
+            "properties": {
+              "functions": {
+                "description": "Array of function object which defines function metadata.",
+                "items": {
+                  "$ref": "#/definitions/extensionFunction"
+                },
+                "maxItems": 20000,
+                "minItems": 1,
+                "type": "array"
+              },
+              "namespace": {
+                "$ref": "#/definitions/extensionCustomFunctionsNamespace"
+              },
+              "allowCustomDataForDataTypeAny": {
+                "type": "boolean",
+                "description": "Allows a custom function to accept Excel data types as parameters and return values.",
+                "default": false
+              }
+            },
+            "required": [
+              "functions",
+              "namespace"
+            ]
+        },
+        "extensionCustomFunctionsNamespace": {
+            "type": "object",
+            "description": "Defines the namespace for your custom functions. A namespace prepends itself to your custom functions to help customers identify your functions as part of your add-in.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Non-localizeable version of the namespace.",
+                "pattern": "^[A-Za-z][A-Za-z0-9._]*$",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "name": {
+                "type": "string",
+                "description": "Localizeable version of the namespace.",
+                "pattern": "^[A-Za-z][A-Za-z0-9._]*$",
+                "minLength": 1,
+                "maxLength": 32
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+        },
+        "extensionFunction": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z][a-zA-Z0-9._]*$",
+                "description": "A unique ID for the function.",
+                "minLength": 3,
+                "maxLength": 64
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^[\\p{L}][\\p{L}0-9._]*$",
+                "description": "The name of the function that end users see in Excel. In Excel, this function name is prefixed by the custom functions namespace that's specified in the manifest file.",
+                "minLength": 3,
+                "maxLength": 64
+              },
+              "description": {
+                "type": "string",
+                "description": "The description of the function that end users see in Excel.",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "helpUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL that provides information about the function. (It is displayed in a task pane.)",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "parameters": {
+                "type": "array",
+                "description": "Array that defines the input parameters for the function.",
+                "items": {
+                  "$ref": "#/definitions/extensionFunctionParameter"
+                },
+                "minItems": 0,
+                "maxItems": 128
+              },
+              "result": {
+                "$ref": "#/definitions/extensionResult"
+              },
+              "stream": {
+                "type": "boolean",
+                "description": "If true, the function can output repeatedly to the cell even when invoked only once. This option is useful for rapidly-changing data sources, such as a stock price. The function should have no return statement. Instead, the result value is passed as the argument of the StreamingInvocation.setResult callback function.",
+                "default": false
+              },
+              "volatile": {
+                "type": "boolean",
+                "description": "If true, the function recalculates each time Excel recalculates, instead of only when the formula's dependent values have changed. A function can't use both the stream and volatile properties. If the stream and volatile properties are both set to true, the volatile property will be ignored.",
+                "default": false
+              },
+              "cancelable": {
+                "type": "boolean",
+                "description": "If true, Excel calls the CancelableInvocation handler whenever the user takes an action that has the effect of canceling the function; for example, manually triggering recalculation or editing a cell that is referenced by the function. Cancelable functions are typically only used for asynchronous functions that return a single result and need to handle the cancellation of a request for data. A function can't use both the stream and cancelable properties.",
+                "default": false
+              },
+              "requiresAddress": {
+                "type": "boolean",
+                "description": "If true, your custom function can access the address of the cell that invoked it. The address property of the invocation parameter contains the address of the cell that invoked your custom function. A function can't use both the stream and requiresAddress properties.",
+                "default": false
+              },
+              "requiresParameterAddress": {
+                "type": "boolean",
+                "description": "If true, your custom function can access the addresses of the function's input parameters. This property must be used in combination with the dimensionality property of the result object, and dimensionality must be set to matrix.",
+                "default": false
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "parameters",
+              "result"
+            ]
+        },
+        "extensionFunctionParameter": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the parameter. This name is displayed in Excel's IntelliSense.",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of the parameter. This is displayed in Excel's IntelliSense.",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "description": "The data type of the parameter. It can only be boolean, number, string, any, CustomFunctions.Invocation, CustomFunctions.StreamingInvocation or CustomFunctions.CancelableInvocation, any allows you to use any of other types.",
+                "default": "any"
+              },
+              "cellValueType": {
+                "type": "string",
+                "enum": [
+                  "cellvalue",
+                  "booleancellvalue",
+                  "doublecellvalue",
+                  "entitycellvalue",
+                  "errorcellvalue",
+                  "formattednumbercellvalue",
+                  "linkedentitycellvalue",
+                  "localimagecellvalue",
+                  "stringcellvalue",
+                  "webimagecellvalue",
+                  null
+                ],
+                "description": "A subfield of the type property. Specifies the Excel data types accepted by the custom function. Accepts the values cellvalue, booleancellvalue, doublecellvalue, entitycellvalue, errorcellvalue, formattednumbercellvalue, linkedentitycellvalue, localimagecellvalue, stringcellvalue, webimagecellvalue"
+              },
+              "dimensionality": {
+                "type": "string",
+                "enum": [
+                  "scalar",
+                  "matrix"
+                ],
+                "default": "scalar",
+                "description": "Must be either scalar (a non-array value) or matrix (a 2-dimensional array)."
+              },
+              "optional": {
+                "type": "boolean",
+                "default": false,
+                "description": "If true, the parameter is optional."
+              },
+              "repeating": {
+                "type": "boolean",
+                "default": false,
+                "description": "If true, parameters populate from a specified array. Note that functions all repeating parameters are considered optional parameters by definition."
+              }
+            },
+            "required": [ "name" ]
+        },
+        "extensionResult": {
+            "type": "object",
+            "description": "Object that defines the type of information that is returned by the function.",
+            "properties": {
+              "dimensionality": {
+                "type": "string",
+                "enum": [
+                  "scalar",
+                  "matrix"
+                ],
+                "default": "scalar",
+                "description": "Must be either scalar (a non-array value) or matrix (a 2-dimensional array). Default: scalar."
+              }
+            }
+        },
         "extensionContexts": {
             "type": "array",
             "description": "Specifies the Office application windows in which the ribbon customization is available to the user. Each item in the array is a member of a string array. Possible values are: mailRead, mailCompose, meetingDetailsOrganizer, meetingDetailsAttendee, onlineMeetingDetailsOrganizer, logEventMeetingDetailsAttendee, spamReportingOverride.",
@@ -1747,6 +1970,79 @@
                     "spamReportingOverride"
                 ]
             }
+        },
+        "extensionKeyboardShortcut": {
+            "type": "object",
+            "properties": {
+              "requirements": {
+                "description": "Specifies the Office requirement sets.",
+                "$ref": "#/definitions/requirementsExtensionElement"
+              },
+              "shortcuts": {
+                "type": "array",
+                "description": "Array of mappings from actions to the key combinations that invoke the actions.",
+                "items": {
+                  "$ref": "#/definitions/extensionShortcut"
+                },
+                "minItems": 1,
+                "maxItems": 20000
+              }
+            },
+            "required": [ "shortcuts" ]
+        },
+        "extensionShortcut": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "object",
+                "$ref": "#/definitions/extensionKeyCombination"
+              },
+              "actionId": {
+                "type": "string",
+                "description": "The ID of an execution-type action that handles this key combination.",
+                "minLength": 1,
+                "maxLength": 64
+              }
+            },
+            "required": [
+              "key",
+              "actionId"
+            ]
+        },
+        "extensionKeyCombination": {
+            "type": "object",
+            "description": "Key combinations in different platform (i.e. default, windows, web and mac).",
+            "properties": {
+              "default": {
+                "type": "string",
+                "description": "Fallback key for any platform that isn't specified.",
+                "pattern": "^[A-Za-z0-9-_+]+$",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "mac": {
+                "type": "string",
+                "description": "key for mac platform. Alt is mapped to the Option key.",
+                "pattern": "^[A-Za-z0-9-_+]+$",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "web": {
+                "type": "string",
+                "description": "key for web platform.",
+                "pattern": "^[A-Za-z0-9-_+]+$",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "windows": {
+                "type": "string",
+                "description": "key for windows platform. Command is mapped to the Ctrl key.",
+                "pattern": "^[A-Za-z0-9-_+]+$",
+                "minLength": 1,
+                "maxLength": 32
+              }
+            },
+            "required": [ "default" ]
         },
         "extensionRibbonsArrayTabsItem": {
             "type": "object",
@@ -1825,10 +2121,21 @@
                     ]
                 },
                 "id": {
-                    "required": [
-                        "id",
-                        "label",
-                        "groups"
+                    "anyOf": [
+                      {
+                        "required": [
+                          "id",
+                          "label",
+                          "groups"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "id",
+                          "label",
+                          "customMobileRibbonGroups"
+                        ]
+                      }
                     ]
                 }
             },
@@ -1867,6 +2174,11 @@
                     "type": "string",
                     "description": "Id of a built-in Group. Maximum length is 64 characters.",
                     "maxLength": 64
+                },
+                "overriddenByRibbonApi": {
+                    "type": "boolean",
+                    "description": "Specifies whether a group will be hidden on application and platform combinations that support the API (Office.ribbon.requestCreateControls) that installs custom contextual tabs on the ribbon. Default is false.",
+                    "default": "false"
                 }
             },
             "additionalProperties": false
@@ -1929,7 +2241,7 @@
                 },
                 "builtInControlId": {
                     "type": "string",
-                    "description": "Id of the existing office control. Maximum length is 64 characters.",
+                    "description": "Id of an existing office control. Maximum length is 64 characters.",
                     "maxLength": 64
                 },
                 "label": {
@@ -1938,11 +2250,12 @@
                     "maxLength": 64
                 },
                 "icons": {
+                    "description": "Configures the icons for the custom control.",
                     "type": "array",
                     "minItems": 1,
                     "maxItems": 3,
                     "items": {
-                        "$ref": "#/definitions/extensionCommonIcon"
+                      "$ref": "#/definitions/extensionCommonIcon"
                     }
                 },
                 "supertip": {
@@ -2007,60 +2320,6 @@
                 "id",
                 "label",
                 "controls"
-            ]
-        },
-        "extensionCommonCustomControlMenu": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "A unique identifier for this control within the app. Maximum length is 64 characters. ",
-                    "maxLength": 64
-                },
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "menu"
-                    ]
-                },
-                "label": {
-                    "type": "string",
-                    "description": "Displayed text for the control. Maximum length is 64 characters.",
-                    "maxLength": 64
-                },
-                "icons": {
-                    "type": "array",
-                    "minItems": 1,
-                    "maxItems": 3,
-                    "items": {
-                        "$ref": "#/definitions/extensionCommonIcon"
-                    }
-                },
-                "supertip": {
-                    "$ref": "#/definitions/extensionCommonSuperToolTip"
-                },
-                "items": {
-                    "type": "array",
-                    "minItems": 1,
-                    "maxItems": 20,
-                    "items": {
-                        "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
-                    }
-                },
-                "overriddenByRibbonApi": {
-                    "type": "boolean",
-                    "description": "Specifies whether a group, button, menu, or menu item will be hidden on application and platform combinations that support the API (Office.ribbon.requestCreateControls) that installs custom contextual tabs on the ribbon. Default is false.",
-                    "default": "false"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "id",
-                "type",
-                "label",
-                "icons",
-                "supertip",
-                "items"
             ]
         },
         "extensionCommonCustomControlMenuItem": {
@@ -2384,6 +2643,9 @@
                             "icon",
                             "highResolutionIcon"
                         ]
+                    },
+                    "xllCustomFunctions": {
+                        "$ref": "#/definitions/extensionXllCustomFunctions"
                     }
                 },
                 "minProperties": 1,

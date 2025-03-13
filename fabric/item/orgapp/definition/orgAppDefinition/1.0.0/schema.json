@@ -1,0 +1,410 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/orgapp/definition/orgAppDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Defines the schema to use for an org app item.",
+      "type": "string",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgapp/definition/orgAppDefinition/1.0.0/schema.json"
+    },
+    "settings": {
+      "description": "Defines the settings for the org app.",
+      "$ref": "#/definitions/Settings"
+    },
+    "elements": {
+      "description": "Defines the list of content elements.",
+      "type": [
+        "array"
+      ],
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/OrgAppOverviewElement"
+          },
+          {
+            "$ref": "#/definitions/OrgAppLinkElement"
+          },
+          {
+            "$ref": "#/definitions/OrgAppSectionElement"
+          },
+          {
+            "$ref": "#/definitions/OrgAppItemElement"
+          }
+        ]
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "$schema",
+    "settings",
+    "elements"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Settings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "logo": {
+          "description": "Defines the image logo as a base64 encoded string.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60032,
+          "pattern": "^(data:image/png;base64,|data:image/jpeg;base64,).*"
+        },
+        "theme": {
+          "description": "Defines the theme for the org app.",
+          "$ref": "#/definitions/AppTheme"
+        },
+        "experienceSettings": {
+          "description": "Defines the experience settings for the org app.",
+          "$ref": "#/definitions/ExperienceSettings"
+        },
+        "itemTypeSettings": {
+          "description": "Defines the default item type level settings for elements in the org app.",
+          "$ref": "#/definitions/ItemTypeSettings"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AppTheme": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "background": {
+          "description": "Defines the main theme color for the arg app.",
+          "$ref": "#/definitions/HexColor"
+        },
+        "foreground": {
+          "description": "Defines the font color for the org app.",
+          "$ref": "#/definitions/HexColor"
+        },
+        "backgroundHover": {
+          "description": "Defines the background color for the hover state.",
+          "$ref": "#/definitions/HexColor"
+        },
+        "backgroundSelected": {
+          "description": "Defines the background color for the selected state.",
+          "$ref": "#/definitions/HexColor"
+        },
+        "backgroundPressed": {
+          "description": "Defines the background color for the pressed state.",
+          "$ref": "#/definitions/HexColor"
+        }
+      },
+      "required": [
+        "background",
+        "foreground",
+        "backgroundHover",
+        "backgroundSelected",
+        "backgroundPressed"
+      ],
+      "additionalProperties": false
+    },
+    "HexColor": {
+      "type": [
+        "string"
+      ],
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "ExperienceSettings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "navigationPane": {
+          "description": "Defines the settings for the navigation pane.",
+          "$ref": "#/definitions/NavigationPaneSettings"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NavigationPaneSettings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "isHidden": {
+          "description": "Indicates whether the org app navigation pane is visible in consumption.",
+          "type": "boolean"
+        },
+        "isCollapsed": {
+          "description": "Indicates whether the org app navigation pane is expanded or collapsed in consumption.",
+          "type": "boolean"
+        },
+        "independentPageNavigation": {
+          "description": "Indicates whether to list the report pages independently or as part of the navigation pane.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ItemTypeSettings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "report": {
+          "description": "Defines the settings for report elements in the org app.",
+          "$ref": "#/definitions/ReportSettings"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReportSettings": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "hidePagePane": {
+          "description": "Indicates whether the report pages pane should be hidden or not.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OrgAppOverviewElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the overview element.",
+          "type": "string",
+          "const": "overview"
+        },
+        "header": {
+          "$ref": "#/definitions/OverviewHeader"
+        },
+        "isHidden": {
+          "description": "Indicates whether the overview element is visible in consumption.",
+          "type": "boolean"
+        },
+        "elementId": {
+          "description": "Defines the overview element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "displayName": {
+          "description": "Defines the display name of the overview element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "required": [
+        "elementType",
+        "elementId",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "OrgAppLinkElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the link element.",
+          "type": "string",
+          "const": "link"
+        },
+        "url": {
+          "description": "Defines the URL that should be opened by the org app.",
+          "type": [
+            "string"
+          ],
+          "maxLength": 2048,
+          "pattern": "(?i)^https://[a-zA-Z0-9-._~:/?#[\\]@!$&'()*+,;=]+$"
+        },
+        "linkType": {
+          "description": "Defines how the URL should be opened",
+          "type": "string",
+          "enum": [
+            "embedded",
+            "newtab"
+          ]
+        },
+        "isHidden": {
+          "description": "Indicates whether the link element is visible in consumption.",
+          "type": "boolean"
+        },
+        "elementId": {
+          "description": "Defines the link element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "displayName": {
+          "description": "Defines the display name of the link element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "required": [
+        "elementType",
+        "url",
+        "linkType",
+        "elementId",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "OrgAppSectionElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the section element.",
+          "type": "string",
+          "const": "section"
+        },
+        "elements": {
+          "description": "Defines the list of elements within the section.",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/OrgAppOverviewElement"
+              },
+              {
+                "$ref": "#/definitions/OrgAppLinkElement"
+              },
+              {
+                "$ref": "#/definitions/OrgAppItemElement"
+              }
+            ]
+          }
+        },
+        "elementId": {
+          "description": "Defines the link section element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "displayName": {
+          "description": "Defines the display name of the section element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "required": [
+        "elementType",
+        "elements",
+        "elementId",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "OrgAppItemElement": {
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "description": "Defines the type of the item element.",
+          "type": "string",
+          "const": "item"
+        },
+        "elementId": {
+          "description": "Defines the item element's unique identifier.",
+          "$ref": "#/definitions/ElementId"
+        },
+        "itemId": {
+          "description": "Defines the item's internal unique identifier.",
+          "$ref": "#/definitions/Guid"
+        },
+        "folderObjectId": {
+          "description": "Defines the internal unique identifier of the folder in which the item is located.",
+          "$ref": "#/definitions/Guid"
+        },
+        "itemLogicalId": {
+          "description": "Defines the item's logical unique identifier in Git repository.",
+          "$ref": "#/definitions/Guid"
+        },
+        "itemType": {
+          "description": "Defines the item's type.",
+          "type": [
+            "string"
+          ],
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "isHidden": {
+          "description": "Indicates whether the item element is visible in consumption.",
+          "type": "boolean"
+        },
+        "displayName": {
+          "description": "Defines the display name of the item element.",
+          "$ref": "#/definitions/DisplayName"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "itemId",
+            "folderObjectId"
+          ]
+        },
+        {
+          "required": [
+            "itemLogicalId"
+          ]
+        }
+      ],
+      "required": [
+        "elementType",
+        "elementId",
+        "itemType",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "DisplayName": {
+      "type": [
+        "string"
+      ],
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "ElementId": {
+      "type": "string",
+      "pattern": "^(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "Guid": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "OverviewHeader": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "title": {
+          "description": "Defines the title of the overview element's header.",
+          "type": [
+            "string"
+          ],
+          "maxLength": 2500,
+          "pattern": "^(?!\\s*$).+"
+        },
+        "body": {
+          "description": "Defines the body of the overview element's header.",
+          "type": [
+            "string"
+          ],
+          "maxLength": 2500
+        },
+        "showTheme": {
+          "description": "Indicates whether a theme is shown for the overview header.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "title",
+        "body",
+        "showTheme"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

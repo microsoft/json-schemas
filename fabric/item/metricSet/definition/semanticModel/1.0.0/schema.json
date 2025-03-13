@@ -1,0 +1,116 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/metricSet/definition/semanticModel/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SemanticMetricContract",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metricSetId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ownerAadAppId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "lastModifiedByAadAppId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "isFollowed": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "ownerUser": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "givenName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "familyName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "emailAddress": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aadAppId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        },
+        "userPrincipalName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "definition": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  }
+}

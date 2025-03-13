@@ -46,8 +46,8 @@
             "componentType": {
               "type": "string",
               "title": "Component Type",
-              "description": "Type of client side component (\"Application\", \"Extension\", \"Library\", \"WebPart\", or \"AdaptiveCardExtension\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
-              "enum": ["Application", "WebPart", "Library", "Extension", "AdaptiveCardExtension"]
+              "description": "Type of client side component (\"Application\", \"Prefab\", \"Extension\", \"Library\", \"WebPart\", or \"AdaptiveCardExtension\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
+              "enum": ["Application", "WebPart", "Library", "Extension", "AdaptiveCardExtension", "Prefab"]
             },
 
             "loadLegacyFabricCss": {
@@ -123,6 +123,9 @@
     },
     {
       "$ref": "client-side-assembly-manifest.schema.json"
+    },
+    {
+      "$ref": "prefab-app-manifest.schema.json"
     }
   ]
 }
