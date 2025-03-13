@@ -1404,13 +1404,6 @@
           "properties": {
             "tabConfiguration": {
               "type": "object",
-              "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading. Setting tabConfiguration indicates that the app supports background loading of tabs.",
-              "properties": {
-=======
-          "description": "Optional property containing background loading configuration. By opting in to this performance enhancement, your app is eligible to be loaded in the background in any Microsoft 365 application host that supports this feature.",
-          "properties": {
-            "tabConfiguration": {
-              "type": "object",
               "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading.",
               "properties": {
                 "contentUrl": {
