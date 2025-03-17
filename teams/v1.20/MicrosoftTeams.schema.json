@@ -797,7 +797,8 @@
                       "description": "A boolean that indicates whether the app's link message handler supports anonymous invoke flow.",
                       "default": false
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
               },
               "required": [
