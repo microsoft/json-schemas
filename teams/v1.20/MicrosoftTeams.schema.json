@@ -164,6 +164,11 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the tab. This id must be unique within the app manifest.",
+            "maxLength": 64
+          },
           "configurationUrl": {
             "$ref": "#/definitions/httpsUrl",
             "description": "The url to use when configuring the tab."
@@ -496,6 +501,11 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the compose extension.",
+            "maxLength": 64
+          },
           "botId": {
             "$ref": "#/definitions/guid",
             "description": "The Microsoft App ID specified for the bot powering the compose extension in the Bot Framework portal (https://dev.botframework.com/bots)"
