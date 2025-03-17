@@ -111,8 +111,7 @@
         }
       },
       "required": [
-        "short",
-        "full"
+        "short"
       ]
     },
     "description": {
