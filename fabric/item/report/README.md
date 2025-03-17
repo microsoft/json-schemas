@@ -1,5 +1,14 @@
 # Releases
 
+## December 2024
+
+Documenting visual objects changes for new visuals and visual updates.
+
+- [filterConfiguration 1.0.0](./definition/filterConfiguration/CHANGELOG.md#1.0.0)
+- [page 1.3.0](./definition/page/CHANGELOG.md#1.3.0)
+- [visualConfiguration 1.5.0](./definition/visualConfiguration/CHANGELOG.md#1.5.0)
+- [visualContainer 1.5.0](./definition/visualContainer/CHANGELOG.md#1.5.0)
+
 ## November 2024
 
 Documenting visual objects changes for new visuals and visual updates.

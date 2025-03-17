@@ -1,7 +1,7 @@
 {
   "id": "client-side-web-part-manifest.schema.json",
   "title": "Client-side webpart manifest",
-  "description": "A client-side webpart is a drop-in control that is part of the end user page authoring experience.",
+  "description": "A client-side webpart is a control that is part of the end user page authoring experience or exposed in Teams as an app.",
 
   "definitions": {
     "propertyNamesArray": {
@@ -143,6 +143,29 @@
           "type": "boolean",
           "title": "Allow to iframe pages from the same SharePoint tenant (domain)",
           "description": "If set to \"true\", this web part can have iframed pages from the same tenant (domain). The flag is only applicable to web parts that are hosted as Teams applications."
+        },
+        "flexibleLayoutSizing": {
+          "type": "object",
+          "title": "Flexible Layout Sizing Data",
+          "description": "Defines the default column width, row height, and dynamic resize support for the webpart when in a flexible layout.",
+          "properties": {
+            "supportsDynamicResizing": {
+              "type": "boolean",
+              "title": "Supports Dynamic Resizing",
+              "description": "If set to \"true\", this web part can resize to any width between minimum and total number of columns. Otherwise, it follows slot sizing logic."
+            },
+            "defaultColumnWidth": {
+              "type": "number",
+              "title": "Default Column Width",
+              "description": "The default width for the web part measured in number of flexible layout columns"
+            },
+            "defaultRowHeight": {
+              "type": "number",
+              "title": "Default Row Height",
+              "description": "The default height for the web part measured in number of flexible layout rows."
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false

@@ -1,0 +1,193 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/filterConfiguration/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Filter configuration",
+    "description": "Defines the configuration of filters.",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/filterConfiguration/1.0.0/schema.json"
+        },
+        "filters": {
+            "description": "Defines the definitions and metadata for the filters.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/FilterContainer"
+            }
+        },
+        "filterSortOrder": {
+            "description": "Defines how the filters sorted - by name or custom sorting\nIf custom sorting, then ordinal property of every filter is used as the sort order,\nfilters where ordinal is skipped will be shown at the end; ordering will fallback to display name of the field.",
+            "type": "string",
+            "anyOf": [
+                {
+                    "const": "Ascending",
+                    "description": "Sorted ascending by display name of the filter field."
+                },
+                {
+                    "const": "Descending",
+                    "description": "Sorted descending by display name of the filter field."
+                },
+                {
+                    "const": "Custom",
+                    "description": "Sorted ascending by ordinal property of filters."
+                }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema"
+    ],
+    "definitions": {
+        "FilterContainer": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "A unique name (across the whole report definition) defined for this filter.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "An alternate name to use when displaying this filter - by default the display name of the field will be used, if there is no field or display name,\nthen restatement of the filter will be shown. Only applies to certain filter types.",
+                    "type": "string"
+                },
+                "ordinal": {
+                    "description": "Defines the ordering of this filter w.r.t. other filters - only applies when Custom sort order is set.",
+                    "type": "number"
+                },
+                "field": {
+                    "description": "Defines the field from your data that is filtered.",
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                },
+                "type": {
+                    "description": "The type of a filter.",
+                    "type": "string",
+                    "anyOf": [
+                        {
+                            "const": "Categorical"
+                        },
+                        {
+                            "const": "Range"
+                        },
+                        {
+                            "const": "Advanced"
+                        },
+                        {
+                            "const": "Passthrough"
+                        },
+                        {
+                            "const": "TopN"
+                        },
+                        {
+                            "const": "Include"
+                        },
+                        {
+                            "const": "Exclude"
+                        },
+                        {
+                            "const": "RelativeDate"
+                        },
+                        {
+                            "const": "Tuple"
+                        },
+                        {
+                            "const": "RelativeTime"
+                        },
+                        {
+                            "const": "VisualTopN"
+                        }
+                    ]
+                },
+                "filter": {
+                    "description": "Defines the actual filter definition - it is dependent on the type of filter.",
+                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/FilterDefinition"
+                },
+                "restatement": {
+                    "description": "A custom restatement to show for the filter - only applies to Passthrough filter type. For all other filters, a restatement is generated based on the filter definition.",
+                    "type": "string"
+                },
+                "howCreated": {
+                    "description": "Specifies how this filter was first created.",
+                    "type": "string",
+                    "anyOf": [
+                        {
+                            "const": "Auto",
+                            "description": "Created automatically when a field is used in the visual."
+                        },
+                        {
+                            "const": "User",
+                            "description": "Filters created from fields not used in a visual by the user."
+                        },
+                        {
+                            "const": "Drill",
+                            "description": "Created when drilling down on a data point in a visual."
+                        },
+                        {
+                            "const": "Include",
+                            "description": "Created by including a data point in a visual."
+                        },
+                        {
+                            "const": "Exclude",
+                            "description": "Created by excluding a data point from a visual."
+                        },
+                        {
+                            "const": "Drillthrough",
+                            "description": "Created by drill context that is applied to the page when using drill-through\naction from another page."
+                        }
+                    ]
+                },
+                "isHiddenInViewMode": {
+                    "description": "Defines whether to hide this filter when viewing the report.",
+                    "type": "boolean"
+                },
+                "isLockedInViewMode": {
+                    "description": "Defines whether the filter value can be changed when viewing the report.",
+                    "type": "boolean"
+                },
+                "objects": {
+                    "description": "Formatting for different \"objects\" of a filter card",
+                    "$ref": "#/definitions/FilterContainerFormattingObjects"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name"
+            ]
+        },
+        "FilterContainerFormattingObjects": {
+            "type": "object",
+            "properties": {
+                "general": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "selector": {
+                                "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
+                                "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/Selector"
+                            },
+                            "properties": {
+                                "$ref": "#/definitions/FilterContainerFormattingObjectsProperties",
+                                "description": "Describes the properties of the object to apply formatting changes to."
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "properties"
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "FilterContainerFormattingObjectsProperties": {
+            "type": "object",
+            "properties": {
+                "requireSingleSelect": {},
+                "isInvertedSelectionMode": {}
+            },
+            "additionalProperties": false
+        }
+    }
+}

@@ -1,0 +1,57 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/metricSet/definition/metricSet/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetricSet",
+  "type": "object",
+  "properties": {
+    "objectId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "displayName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metrics": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "../../semanticModel/1.0.0/schema.json"
+      }
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "folderObjectId": {
+      "type": "string",
+      "format": "uuid"
+    }
+  }
+}
