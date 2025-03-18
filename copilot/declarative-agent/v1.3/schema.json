@@ -97,7 +97,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, People and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -122,6 +122,9 @@
                             },
                             {
                                 "const": "Email"
+                            }, 
+                            {
+                                "const": "People"
                             }
                         ]
                     }
@@ -150,11 +153,29 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/email"
+                    }, 
+                    {
+                        "$ref": "#/$defs/capabilities/people"
                     }
                 ],
                 "required": [
                     "name"
                 ]
+            },
+            "people": {
+                "type": "object",
+                "description": "Indicates that the DA will be able to search people data in the organization.",
+                "properties": {
+                    "name": {
+                        "const": "People",
+                        "description": "Required. Must be set to People."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                }
             },
             "email": {
                 "type": "object",
