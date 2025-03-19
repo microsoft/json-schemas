@@ -18,5 +18,8 @@
       "maxItems": 1000
     }
   },
-  "required": [ "$schema", "variables" ]
+  "required": [
+    "$schema",
+    "variables"
+  ]
 }

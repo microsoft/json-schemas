@@ -5,39 +5,45 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
-      "$schema": {
-        "type": "string",
-        "format": "uri",
-        "const": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json"
-      },
-      "name": {
-        "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/ContainerName"
-      },
-      "description": {
-        "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/Description"
-      },
-      "variableOverrides": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/VariableOverride"
+        "$schema": {
+            "type": "string",
+            "format": "uri",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json"
         },
-        "maxItems": 1000
-      }
+        "name": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/ContainerName"
+        },
+        "description": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/Description"
+        },
+        "variableOverrides": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/VariableOverride"
+            },
+            "maxItems": 1000
+        }
     },
-    "required": [ "$schema", "variableOverrides" ],
+    "required": [
+        "$schema",
+        "variableOverrides"
+    ],
     "definitions": {
-      "VariableOverride": {
-        "description": "Defines a variable override",
-        "$anchor": "VariableOverride",
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/VariableName"
-          },
-          "value": true
-        },
-        "required": [ "name", "value" ]
-      }
+        "VariableOverride": {
+            "description": "Defines a variable override",
+            "$anchor": "VariableOverride",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/VariableName"
+                },
+                "value": true
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        }
     }
-  }
+}
