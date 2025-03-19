@@ -254,11 +254,11 @@
                 "properties": {
                     "host_name": {
                         "type": "string",
-                        "description": "Unique identifier for the host in Dataverse."
+                        "description": "A unique identifier for the host in Dataverse."
                     },
                     "skill": {
                         "type": "string",
-                        "description": "Unique identifier for the information returned from DataVerse tables."
+                        "description": "A unique identifier that defines the configuration for how the copilot agent interacts with Dataverse knowledge."
                     },
                     "tables": {
                         "type": "array",
@@ -301,7 +301,7 @@
                     "urls": {
                         "type": "array",
                         "maxItems": 5,
-                        "description": "This member can be used to constrain the content accessible to the DA to just the content identified via the members of each Teams channels_by_url",
+                        "description": "This member can be used to constrain the content accessible to the DA to just the content identified via the members of each Teams url",
                         "items": {
                             "$ref": "#/$defs/capabilities/teams-url"
                         }
