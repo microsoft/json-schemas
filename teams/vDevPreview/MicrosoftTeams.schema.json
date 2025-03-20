@@ -476,14 +476,15 @@
                     },
                     "scopes": {
                         "type": "array",
-                        "description": "Specifies whether the bot offers an experience in the context of a channel in a team, in a 1:1 or group chat, or in an experience scoped to an individual user alone. These options are non-exclusive.",
-                        "maxItems": 3,
+                        "description": "Specifies whether the bot offers an experience in the context of a channel in a team, in a group chat (groupChat), an experience scoped to an individual user alone (personal) OR within Copilot surfaces. These options are non-exclusive.",
+                        "maxItems": 4,
                         "items": {
-                            "enum": [
-                                "team",
-                                "personal",
-                                "groupChat"
-                            ]
+                          "enum": [
+                            "team",
+                            "personal",
+                            "groupChat",
+                            "copilot"
+                          ]
                         }
                     },
                     "commandLists": {
@@ -496,14 +497,15 @@
                             "properties": {
                                 "scopes": {
                                     "type": "array",
-                                    "description": "Specifies the scopes for which the command list is valid",
-                                    "maxItems": 3,
+                                    "description": "Specifies whether the bot offers an experience in the context of a channel in a team, in a group chat (groupChat), an experience scoped to an individual user alone (personal) OR within Copilot surfaces. These options are non-exclusive.",
+                                    "maxItems": 4,
                                     "items": {
-                                        "enum": [
-                                            "team",
-                                            "personal",
-                                            "groupChat"
-                                        ]
+                                      "enum": [
+                                        "team",
+                                        "personal",
+                                        "groupChat",
+                                        "copilot"
+                                      ]
                                     }
                                 },
                                 "commands": {
@@ -631,7 +633,8 @@
                                 "enum": [
                                     "none",
                                     "apiSecretServiceAuth",
-                                    "microsoftEntra"
+                                    "microsoftEntra",
+                                    "oAuth2.0"
                                 ],
                                 "description": "Enum of possible authorization types."
                             },
@@ -658,6 +661,18 @@
                                     }
                                 },
                                 "additionalProperties": false
+                            },
+                            "oAuthConfiguration": {
+                              "type": "object",
+                              "description": "Object capturing details needed to match the application's OAuth configuration for the app. This should be and must be populated only when authType is set to oAuth2.0r",
+                              "properties": {
+                                "oAuthConfigurationId": {
+                                  "type": "string",
+                                  "description": "The oAuth configuration id obtained by the Developer when registering their configuration in Developer Portal.",
+                                  "maxLength": 128
+                                }
+                              },
+                              "additionalProperties": false
                             }
                         },
                         "additionalProperties": false
@@ -1104,7 +1119,8 @@
                 "personal",
                 "team",
                 "groupChat",
-                "meetings"
+                "meetings",
+                "copilot"
             ],
             "description": "The install scope defined for this app by default. This will be the option displayed on the button when a user tries to add the app"
         },
@@ -1191,6 +1207,11 @@
                     "maxItems": 5,
                     "type": "array",
                     "uniqueItems": true
+                },
+                "supportsCustomShareToStage": {
+                    "description": "Represents if the app has added support for sharing to stage.",
+                    "type": "boolean",
+                    "default": false
                 },
                 "videoFilters": {
                     "description": "Meeting supported video filters.",
@@ -1671,10 +1692,11 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "executeFunction",
-                        "openPage"
+                      "executeFunction",
+                      "openPage",
+                      "executeDataFunction"
                     ],
-                    "description": "executeFunction: Run a script function without waiting for it to finish. openPate: Open a page in a view."
+                    "description": "executeFunction: Run a script function without waiting for it to finish. openPage: Open a page in a view. executeDataFunction: invoke command and retrieve data."
                 },
                 "displayName": {
                     "type": "string",
