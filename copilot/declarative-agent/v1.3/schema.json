@@ -214,7 +214,7 @@
                     "folder_id": {
                         "type": "string",
                         "description": "A JSON string that identifies an email folder. This can either be id of the folder or one of the well known names.",
-                        "minlength": 1
+                        "minLength": 1
                     }
                 },
                 "propertyNames": {
