@@ -1,0 +1,72 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/1.3.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Visual container mobile state",
+    "description": "Defines information about a visual container's mobile layout.",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/1.3.0/schema.json"
+        },
+        "objects": {
+            "description": "Specifies the mobile specific formatting changes for different \"objects\" of a visual.",
+            "$ref": "../../formattingObjectDefinitions/1.2.0/schema.json#/definitions/DataViewObjectDefinitions"
+        },
+        "visualContainerObjects": {
+            "description": "Specifies the mobile specific formatting changes for different \"objects\" of the visual container.",
+            "$ref": "../../visualConfiguration/1.6.0/schema-embedded.json#/definitions/VisualContainerFormattingObjects"
+        },
+        "position": {
+            "$ref": "#/definitions/VisualContainerPosition",
+            "description": "Describes a mobile specific position for this visuals."
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "position"
+    ],
+    "definitions": {
+        "VisualContainerPosition": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "description": "Horizontal position of the left edge of the visual.\nShould be between 0 and width of the containing page.",
+                    "type": "number"
+                },
+                "y": {
+                    "description": "Vertical position of the top edge of the visual.\nShould be between 0 and height of the containing page.",
+                    "type": "number"
+                },
+                "z": {
+                    "description": "Defines the stacking order for the visual.\nHigher z-index visuals are shown on top of the lower ones.",
+                    "type": "number"
+                },
+                "height": {
+                    "description": "Height of the visual.\ny + height should be less than the height of the containing page.",
+                    "type": "number"
+                },
+                "width": {
+                    "description": "Width of the visual.\nx + width should be less than the width of the containing page.",
+                    "type": "number"
+                },
+                "tabOrder": {
+                    "description": "Defines the selection order for this visual when using keyboard (tab key)\nto navigate the visuals on the containing page.",
+                    "type": "number"
+                },
+                "angle": {
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "height",
+                "width",
+                "x",
+                "y"
+            ]
+        }
+    }
+}
