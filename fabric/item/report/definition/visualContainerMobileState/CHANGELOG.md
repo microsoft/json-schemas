@@ -1,5 +1,12 @@
 # Visual Container Mobile State Versions
 
+### 1.3.0
+
+<b>Released in: </b> March 2025 <br />
+<b>Notes: </b> 
+- Reference line improvements: Shade area, etc.
+- Button slicer improvements: Images and expansion states, etc.
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />
