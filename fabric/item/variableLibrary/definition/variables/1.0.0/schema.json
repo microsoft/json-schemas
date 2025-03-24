@@ -1,7 +1,7 @@
 {
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/variables/1.0.0/schema.json",
   "$schema": "https://json-schema.org/draft-07/schema",
-  "description": "Defines the schema for 'variables' part of VariableLibrary item definition",
+  "description": "Defines the schema for the variables part of the VariableLibrary item definition.",
   "type": "object",
   "additionalProperties": false,
   "properties": {

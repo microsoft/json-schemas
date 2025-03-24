@@ -1,7 +1,7 @@
 {
     "$id": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json",
     "$schema": "https://json-schema.org/draft-07/schema",
-    "description": "Defines the schema for 'valueSet' part of VariableLibrary item definition",
+    "description": "Defines the schema for the valueSet part of the VariableLibrary item definition.",
     "type": "object",
     "additionalProperties": false,
     "properties": {
@@ -30,7 +30,7 @@
     ],
     "definitions": {
         "VariableOverride": {
-            "description": "Defines a variable override",
+            "description": "Defines a variable override.",
             "$anchor": "VariableOverride",
             "type": "object",
             "additionalProperties": false,

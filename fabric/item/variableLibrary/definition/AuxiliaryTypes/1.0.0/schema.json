@@ -3,12 +3,12 @@
     "$schema": "https://json-schema.org/draft-07/schema",
     "definitions": {
         "Guid": {
-            "description": "A string representing a GUID",
+            "description": "A string representing a Globally Unique Identifier (GUID).",
             "type": "string",
             "format": "uuid"
         },
         "DateTime": {
-            "description": "A string representing date and time together, for example 2024-11-25T08:30:10Z",
+            "description": "A string representing date and time. For example 2024-11-25T08:30:10Z.",
             "type": "string",
             "format": "date-time"
         }
