@@ -1,5 +1,13 @@
 # Releases
 
+## March 2025
+
+Documenting visual objects changes for new visuals and visual updates.
+
+- [visualConfiguration 1.6.0](./definition/visualConfiguration/CHANGELOG.md#1.6.0)
+- [visualContainer 1.6.0](./definition/visualContainer/CHANGELOG.md#1.6.0)
+- [visualContainerMobileState 1.3.0](./definition/visualContainerMobileState/CHANGELOG.md#1.3.0)
+
 ## December 2024
 
 Documenting visual objects changes for new visuals and visual updates.
