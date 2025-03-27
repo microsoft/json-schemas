@@ -1,5 +1,13 @@
 # Releases
 
+## April 2025
+
+"Includes Reference Layer" for "Auto Zoom" now set to false for Azure Maps Visuals.
+
+- [visualConfiguration 1.7.0](./definition/visualConfiguration/CHANGELOG.md#1.7.0)
+- [visualContainer 1.7.0](./definition/visualContainer/CHANGELOG.md#1.7.0)
+- [visualContainerMobileState 1.4.0](./definition/visualContainerMobileState/CHANGELOG.md#1.4.0)
+
 ## March 2025
 
 Documenting visual objects changes for new visuals and visual updates.
