@@ -1,0 +1,100 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphInstance/definition/graphDefinition/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "GraphDefinition",
+    "type": "object",
+    "properties": {
+      "schemaVersion": {
+        "type": "string",
+        "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      },
+      "nodeTables": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "nodeTypeAlias": {
+              "type": "string"
+            },
+            "dataSourceName": {
+              "type": "string"
+            },
+            "nodeIdMapping": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "propertyMappings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "propertyName": {
+                    "type": "string"
+                  },
+                  "sourceColumn": {
+                    "type": "string"
+                  },
+                  "filter": {
+                    "type": "string"
+                  }
+                },
+                "required": ["propertyName", "sourceColumn"]
+              }
+            }
+          },
+          "required": ["id", "nodeTypeAlias", "dataSourceName", "propertyMappings"]
+        }
+      },
+      "edgeTables": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "edgeTypeAlias": {
+              "type": "string"
+            },
+            "dataSourceName": {
+              "type": "string"
+            },
+            "sourceNodeKeyColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "targetNodeKeyColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "propertyMappings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "propertyName": {
+                    "type": "string"
+                  },
+                  "sourceColumn": {
+                    "type": "string"
+                  }
+                },
+                "required": ["propertyName", "sourceColumn"]
+              }
+            }
+          },
+          "required": ["id", "edgeTypeAlias", "dataSourceName", "sourceNodeKeyColumns", "targetNodeKeyColumns", "propertyMappings"]
+        }
+      }
+    },
+    "required": ["schemaVersion", "nodeTables", "edgeTables"]
+  }
