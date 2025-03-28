@@ -90,7 +90,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "enum": ["STRING", "INT", "FLOAT", "DATETIME"]
+                    "enum": ["STRING", "INT", "FLOAT", "DATETIME", "BOOLEAN"]
                   }
                 },
                 "required": ["name", "type"]
