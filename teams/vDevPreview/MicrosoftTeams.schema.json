@@ -444,6 +444,11 @@
                             }
                         }
                     },
+                    "allowBotMessageDeleteByUser": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Optional Boolean property that enables users to delete messages sent by bot when set to true. The default value is false, ensuring bot messages cannot be deleted by users unless explicitly opted in."
+                    },
                     "needsChannelSelector": {
                         "type": "boolean",
                         "description": "This value describes whether or not the bot utilizes a user hint to add the bot to a specific channel.",
@@ -518,12 +523,12 @@
                                             "title": {
                                                 "type": "string",
                                                 "description": "The bot command name",
-                                                "maxLength": 32
+                                                "maxLength": 128
                                             },
                                             "description": {
                                                 "type": "string",
                                                 "description": "A simple text description or an example of the command syntax and its arguments.",
-                                                "maxLength": 128
+                                                "maxLength": 4000
                                             }
                                         },
                                         "required": [
@@ -1062,6 +1067,15 @@
                             "templateText": {
                                 "type": "string",
                                 "maxLength": 128
+                            },
+                            "allowedIconIds": {
+                                "type": "array",
+                                "description": "An array containing valid icon's ID per activity type.",
+                                "maxItems": 50,
+                                "items": {
+                                "type": "string",
+                                "description": "A relative file path to a PNG icon for the given activity type. Size 32x32."
+                                }
                             }
                         },
                         "required": [
@@ -1070,6 +1084,29 @@
                             "templateText"
                         ],
                         "additionalProperties": false
+                    }
+                },
+                "activityIcons": {
+                    "type": "array",
+                    "description": "Specify the customized icons that your app can post to a users activity feed",
+                    "maxItems": 50,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "maxLength": 64
+                        },
+                        "iconFile": {
+                          "type": "string",
+                          "maxLength": 128
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "iconFile"
+                      ],
+                      "additionalProperties": false
                     }
                 }
             },
