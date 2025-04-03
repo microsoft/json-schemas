@@ -1,0 +1,60 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "definitions": {
+        "ContainerName": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z\\d_\\- ]{0,254}(?<! )$"
+        },
+        "VariableName": {
+            "description": "Defines the pattern for variable names.",
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z\\d_\\-]{0,254}$"
+        },
+        "VariableValueType": {
+            "description": "Defines possible types for variable values.",
+            "oneOf": [
+                {
+                    "$comment": "Built-in primitive types.",
+                    "enum": [
+                        "boolean",
+                        "integer",
+                        "number",
+                        "string"
+                    ]
+                },
+                {
+                    "$comment": "A registered short friendly name.",
+                    "type": "string",
+                    "pattern": "[A-Za-z][A-Za-z0-9]{0,63}"
+                }
+            ]
+        },
+        "Description": {
+            "type": "string",
+            "maxLength": 2048
+        },
+        "Variable": {
+            "description": "Defines a common schema for all variables.",
+            "$anchor": "Variable",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/VariableName"
+                },
+                "note": {
+                    "$ref": "#/definitions/Description"
+                },
+                "type": {
+                    "$ref": "#/definitions/VariableValueType"
+                },
+                "value": true
+            },
+            "required": [
+                "name",
+                "type"
+            ]
+        }
+    }
+}
