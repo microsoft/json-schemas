@@ -1070,7 +1070,7 @@
                             },
                             "allowedIconIds": {
                                 "type": "array",
-                                "description": "An array containing valid icon's ID per activity type.",
+                                "description": "An array containing valid icon IDs per activity type.",
                                 "maxItems": 50,
                                 "items": {
                                 "type": "string"
@@ -1095,12 +1095,12 @@
                         "id": {
                           "type": "string",
                           "maxLength": 64,
-                          "description": "Represents the unique icon Id."
+                          "description": "Represents the unique icon ID."
                         },
                         "iconFile": {
                           "type": "string",
                           "maxLength": 128,
-                          "description": "Represents the icon image."
+                          "description": "Represents the relative path to the icon image. Image should be size 32x32."
                         }
                       },
                       "required": [
