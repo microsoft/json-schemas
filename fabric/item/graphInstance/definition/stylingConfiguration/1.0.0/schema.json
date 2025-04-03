@@ -1,0 +1,64 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphInstance/definition/stylingConfiguration/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "StylingConfiguration",
+    "type": "object",
+    "properties": {
+      "schemaVersion": {
+        "type": "string",
+        "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      },
+      "modelLayout": {
+        "type": "object",
+        "properties": {
+          "positions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                }
+              },
+              "required": ["x", "y"]
+            }
+          },
+          "styles": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "number"
+                }
+              },
+              "required": ["size"]
+            }
+          },
+          "pan": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            },
+            "required": ["x", "y"]
+          },
+          "zoomLevel": {
+            "type": "number"
+          }
+        },
+        "required": ["positions", "styles", "pan", "zoomLevel"]
+      },
+      "visualFormat": {
+        "type": "object"
+      }
+    },
+    "required": ["schemaVersion", "modelLayout", "visualFormat"]
+  }
