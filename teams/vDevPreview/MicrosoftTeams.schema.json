@@ -1073,8 +1073,7 @@
                                 "description": "An array containing valid icon's ID per activity type.",
                                 "maxItems": 50,
                                 "items": {
-                                "type": "string",
-                                "description": "A relative file path to a PNG icon for the given activity type. Size 32x32."
+                                "type": "string"
                                 }
                             }
                         },
@@ -1095,11 +1094,13 @@
                       "properties": {
                         "id": {
                           "type": "string",
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Represents the unique icon Id."
                         },
                         "iconFile": {
                           "type": "string",
-                          "maxLength": 128
+                          "maxLength": 128,
+                          "description": "Represents the icon image."
                         }
                       },
                       "required": [
