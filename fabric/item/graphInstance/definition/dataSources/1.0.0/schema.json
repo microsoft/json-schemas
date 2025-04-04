@@ -1,0 +1,39 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphInstance/definition/dataSources/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DataSources",
+    "type": "object",
+    "properties": {
+      "schemaVersion": {
+        "type": "string",
+        "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      },
+      "dataSources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": ["DeltaTable"]
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": ["path"]
+            }
+          },
+          "required": ["name", "type", "properties"]
+        }
+      }
+    },
+    "required": ["schemaVersion", "dataSources"]
+  }

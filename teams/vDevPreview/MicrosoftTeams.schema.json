@@ -1463,7 +1463,7 @@
           "properties": {
             "tabConfiguration": {
               "type": "object",
-              "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading.",
+              "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading. Setting tabConfiguration indicates that the app supports background loading of tabs.",
               "properties": {
                 "contentUrl": {
                   "$ref": "#/definitions/httpsUrl",

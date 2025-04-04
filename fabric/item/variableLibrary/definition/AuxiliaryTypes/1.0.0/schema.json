@@ -1,0 +1,17 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/auxiliaryTypes/1.0.0/schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "definitions": {
+        "Guid": {
+            "description": "A string representing a Globally Unique Identifier (GUID).",
+            "type": "string",
+            "format": "uuid"
+        },
+        "DateTime": {
+            "description": "A string representing date and time in UTC format. For example 2024-11-25T08:30:10Z.",
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^.*Z$"
+        }
+    }
+}

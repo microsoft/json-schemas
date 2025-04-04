@@ -1,0 +1,49 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "description": "Defines the schema for the valueSet part of the VariableLibrary item definition.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "format": "uri",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json"
+        },
+        "name": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/ContainerName"
+        },
+        "description": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/Description"
+        },
+        "variableOverrides": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/VariableOverride"
+            },
+            "maxItems": 1000
+        }
+    },
+    "required": [
+        "$schema",
+        "name"
+    ],
+    "definitions": {
+        "VariableOverride": {
+            "description": "Defines a variable override.",
+            "$anchor": "VariableOverride",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/common/1.0.0/schema.json#/definitions/VariableName"
+                },
+                "value": true
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        }
+    }
+}
