@@ -181,6 +181,38 @@
         "type": "string",
         "maxLength": 2048
       },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.icons\\[[0-2]\\]\\.url": {
+        "type": "string",
+        "maxLength": 2048
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.label": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.supertip\\.title": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.supertip\\.description": {
+        "type": "string",
+        "maxLength": 250
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.icons\\[[0-2]\\]\\.url": {
+        "type": "string",
+        "maxLength": 2048
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.label": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.supertip\\.title": {
+        "type": "string",
+        "maxLength": 64
+      },
+      "^extensions\\[[0]\\]\\.contextMenus\\[[0-9]\\]\\.menus\\[[0-9]\\]\\.controls\\[[1]?[0-9]\\]\\.items\\[[1]?[0-9]\\]\\.supertip\\.description": {
+        "type": "string",
+        "maxLength": 250
+      },
       "^extensions\\[[0-9]\\]\\.runtimes\\[[1]?[0-9]\\]\\.customFunctions\\.functions\\[[0-9]\\]\\.name$": {
         "type": "string",
         "maxLength": 64
