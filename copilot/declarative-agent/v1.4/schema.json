@@ -29,6 +29,12 @@
             "maxLength": 1000,
             "pattern": "^(\\[\\[)[a-zA-Z_][a-zA-Z0-9_]*(\\]\\])$|^(?!(.*?\\[\\[.*?|.*?\\]\\].*?)).*$"
         },
+        "disclaimer": {
+            "$ref": "#/$defs/disclaimer"
+        },
+        "sensitivity_label": {
+            "$ref": "#/$defs/sensitivity_label"
+        },
         "instructions": {
             "type": "string",
             "description": "Optional. Not localizable. The detailed instructions or guidelines on how the declarative agent should behave, its functions, and any behaviors to avoid. It MUST contain at least one nonwhitespace character and MUST be 8,000 characters or less.",
@@ -82,6 +88,8 @@
             "version",
             "name",
             "description",
+            "disclaimer",
+            "sensitivity_label",
             "instructions",
             "capabilities",
             "conversation_starters",
@@ -90,6 +98,24 @@
         ]
     },
     "$defs": {
+        "disclaimer": {
+            
+        },
+        "sensitivity_label": {
+            "type": "object",
+            "description": "",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The GUID of the sensitivity_label that is pulled from Purview API"
+                }
+            },
+            "propertyNames": {
+                "enum": [
+                    "id"
+                ]
+            }
+        },
         "capabilities": {
             "base-capability": {
                 "type": "object",
