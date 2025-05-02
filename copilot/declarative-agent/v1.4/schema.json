@@ -723,6 +723,31 @@
                     "type": "string",
                     "description": "Required. Not localizable The unique identifier of the Microsoft Graph connector.",
                     "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
+                },
+                "additional_search_terms": {
+                    "type": "string",
+                    "description": "KQL based string containing the query filter"
+                },
+                "items_by_external_url": {
+                    "type": "array",
+                    "description": "A list of objects to store urls for external items.",
+                    "items": {
+                        "$ref": "#/$defs/item-by-external-url"
+                    }
+                },
+                "items_by_external_id": {
+                    "type": "array",
+                    "description": "A list of objects to store identifiers for external items",
+                    "items": {
+                        "$ref": "#/$defs/item-by-external-id"
+                    }
+                },
+                "items_by_path": {
+                    "type": "array",
+                    "description": "A list of objects to store the container paths to items within a connection",
+                    "items": {
+                        "$ref": "#/$defs/item-by-path"
+                    }
                 }
             },
             "required": [
@@ -730,7 +755,65 @@
             ],
             "propertyNames": {
                 "enum": [
-                    "connection_id"
+                    "connection_id",
+                    "additional_search_terms",
+                    "items_by_external_url",
+                    "items_by_external_id",
+                    "items_by_path"
+                ]
+            }
+        },
+        "item-by-external-url": {
+            "type": "object",
+            "description": "Identifies an item by its external URL.",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "Url for external graph connector item."
+                }
+            },
+            "required": [
+                "url"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "url"
+                ]
+            }
+        },
+        "item-by-external-id": {
+            "type": "object",
+            "description": "Identifies an item by its external ID.",
+            "properties": {
+                "item_id": {
+                    "type": "string",
+                    "description": "\tunique identifier for an external item."
+                }
+            },
+            "required": [
+                "item_id"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "item_id"
+                ]
+            }
+        },
+        "item-by-path": {
+            "type": "object",
+            "description": "Identifies an item by its path.",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "A container path to an external item"
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "path"
                 ]
             }
         }
