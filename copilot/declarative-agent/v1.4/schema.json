@@ -33,6 +33,7 @@
             "$ref": "#/$defs/disclaimer"
         },
         "sensitivity_label": {
+            "description": "This member is an object that specifies the sensitivity label for the DA. It is an optional member.",
             "$ref": "#/$defs/sensitivity_label"
         },
         "instructions": {
@@ -99,11 +100,20 @@
     },
     "$defs": {
         "disclaimer": {
-            
+            "type": "object",
+            "description":  "An optional JSON object containing a disclaimer message which, if provided, will be displayed users at the start of a conversation to satisfy legal or compliance requirements. The object has a required `text` string property which MUST NOT be null and MUST contain at least 1 non-whitespace character. Characters beyond 500 MAY be ignored.",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "",
+                    "minLength": 1,
+                    "maxLength": 500
+                }
+            }
         },
         "sensitivity_label": {
             "type": "object",
-            "description": "",
+            "description": "A JSON object, when specified should match one of the GUIDs of the published sensitivity labels within the tenant to which it is being published. This label should be at least as restrictive as the most restrictive label on any knowledge files included in the agent. See https://learn.microsoft.com/en-us/purview/create-sensitivity-labels  for more information on sensitivity labels.",
             "properties": {
                 "id": {
                     "type": "string",
@@ -123,7 +133,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, People and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, Meetings, EmbeddedKnowledge, People and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -151,6 +161,12 @@
                             }, 
                             {
                                 "const": "People"
+                            },
+                            {
+                                "const": "Meetings"
+                            },
+                            {
+                                "const": "EmbeddedKnowledge"
                             }
                         ]
                     }
@@ -182,6 +198,12 @@
                     }, 
                     {
                         "$ref": "#/$defs/capabilities/people"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/embedded-knowledge"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/meetings"
                     }
                 ],
                 "required": [
@@ -250,6 +272,73 @@
                 },
                 "required": [
                     "folder_id"
+                ]
+            },
+            "meetings": {
+                "type": "object",
+                "description": "A JSON object whose presence indicates that the DA will be able to search meeting content. Currently this consists of meeting transcripts. Additional content may be included in the future.",
+                "properties": {
+                    "name": {
+                        "const": "Meetings",
+                        "description": "A JSON string that MUST contain the literal value Meetings."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name"
+                    ]
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "embedded-knowledge": {
+                "type": "object",
+                "description": "A JSON object whose presence indicates that the DA will be able to use files locally in the app package as knowledge. The object MUST contain either a files member or a embedded_resource_snapshot_id member, but not both.",
+                "properties": {
+                    "name": {
+                        "const": "EmbeddedKnowledge",
+                        "description": "A JSON string that MUST contain the literal value EmbeddedKnowledge."
+                    },
+                    "files": {
+                        "type": "array",
+                        "description": "A JSON array of File Object.  List of objects identifying files that contain knowledge the Agent can use for grounding.",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/embedded-knowledge-file"
+                        }
+                    },
+                    "embedded_resource_snapshot_id": {
+                        "type": "string",
+                        "description": "A JSON string identifier provisioned by a an external file container storage service that can be used to locate the embedded knowledge files."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "files",
+                        "embedded_resource_snapshot_id"
+                    ]
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "embedded-knowledge-file": {
+                "type": "object",
+                "description": "A JSON object that identifies a file via the relative path.",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "A JSON string that contains the file relative path for the embedded file. It is a required member."
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "file"
+                    ]
+                },
+                "required": [
+                    "file"
                 ]
             },
             "dataverse": {
@@ -580,6 +669,17 @@
                     "description": "Optional. Not localizable. The GUID identifier of a SharePoint or OneDrive item.",
                     "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
                 },
+               "part_id": {
+                    "type": "string",
+                    "description": "A JSON String that uniquely identifies a part of a SharePoint item. e.g a OneNote page."
+                }, 
+               "part_type": {
+                    "type": "string",
+                    "description": "A String that qualifies the kind of part that the \"part_id\" refers to. Currently this value can only be equal to the string literal: \"OneNotePart\".",
+                    "enum": [
+                        "OneNotePart"
+                    ]
+                },
                 "search_associated_sites": {
                     "type": "boolean",
                     "description": "Boolean value indicating whether to enable searching associated sites. This value is only applicable when the site_id value references a SharePoint HubSite."
@@ -591,6 +691,8 @@
                     "web_id",
                     "list_id",
                     "unique_id",
+                    "part_id",
+                    "part_type",
                     "search_associated_sites"
                 ]
             },
