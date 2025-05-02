@@ -133,7 +133,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, Meetings, EmbeddedKnowledge, People and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, Meetings, ScenarioModels, EmbeddedKnowledge, People and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -167,6 +167,9 @@
                             },
                             {
                                 "const": "EmbeddedKnowledge"
+                            },
+                            {
+                                "const": "ScenarioModels"
                             }
                         ]
                     }
@@ -204,6 +207,9 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/meetings"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/scenario-models"
                     }
                 ],
                 "required": [
@@ -224,6 +230,51 @@
                         "name"
                     ]
                 }
+            },
+            "scenario-models": {
+                "type": "object",
+                "description": "",
+                "properties": {
+                    "name": {
+                        "const": "ScenarioModels",
+                        "description": "Required. Must be set to the string literal `ScenarioModels`"
+                    },
+                    "models": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "description": "A list of Scenario Model objects denoting supported models",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/scenario-model"
+                        }
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "models"
+                    ]
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "scenario-model": {
+                "type": "object",
+                "description": "An Object representing a scenario model.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "A unique ID used to identify a Scenario Model"
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "id"
+                    ]
+                },
+                "required": [
+                    "id"
+                ]
             },
             "email": {
                 "type": "object",
