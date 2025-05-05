@@ -174,7 +174,7 @@
                         ]
                     }
                 },
-                "oneOf": [
+                "anyOf": [
                     {
                         "$ref": "#/$defs/capabilities/web-search"
                     },
@@ -799,6 +799,22 @@
                     "items": {
                         "$ref": "#/$defs/item-by-path"
                     }
+                },
+                "items_by_container_name": {
+                    "type": "array",
+                    "description": "A list of objects to store containers names",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/$defs/item-by-container-name"
+                    }
+                },
+                "items_by_container_url": {
+                    "type": "array",
+                    "description": "A list of objects to store urls of containers",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/$defs/item-by-container-url"
+                    }
                 }
             },
             "required": [
@@ -810,7 +826,9 @@
                     "additional_search_terms",
                     "items_by_external_url",
                     "items_by_external_id",
-                    "items_by_path"
+                    "items_by_path",
+                    "items_by_container_name",
+                    "items_by_container_url"
                 ]
             }
         },
@@ -838,7 +856,7 @@
             "properties": {
                 "item_id": {
                     "type": "string",
-                    "description": "\tunique identifier for an external item."
+                    "description": "A unique identifier for an external item."
                 }
             },
             "required": [
@@ -865,6 +883,42 @@
             "propertyNames": {
                 "enum": [
                     "path"
+                ]
+            }
+        },
+        "item-by-container-name": {
+            "type": "object",
+            "description": "Identifies an item by its container name.",
+            "properties": {
+                "container_name": {
+                    "type": "string",
+                    "description": "A unique identifier for a container name"
+                }
+            },
+            "required": [
+                "container_name"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "container_name"
+                ]
+            }
+        },
+        "item-by-container-url": {
+            "type": "object",
+            "description": "Identifies an item by its container URL.",
+            "properties": {
+                "container_url": {
+                    "type": "string",
+                    "description": "Url for external graph connector item container"
+                }
+            },
+            "required": [
+                "container_url"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "container_url"
                 ]
             }
         }
