@@ -138,7 +138,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, Meetings, ScenarioModels, EmbeddedKnowledge, People and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, Meetings, ScenarioModels, People and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -169,9 +169,6 @@
                             },
                             {
                                 "const": "Meetings"
-                            },
-                            {
-                                "const": "EmbeddedKnowledge"
                             },
                             {
                                 "const": "ScenarioModels"
@@ -206,9 +203,6 @@
                     }, 
                     {
                         "$ref": "#/$defs/capabilities/people"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/embedded-knowledge"
                     },
                     {
                         "$ref": "#/$defs/capabilities/meetings"
