@@ -1,5 +1,11 @@
 # Formatting Object Definitions Versions
 
+### 1.3.0
+
+<b>Released in: </b> May 2025 <br />
+<b>Notes: </b> 
+- Added `hierarchyMatching` property to `Selector` definition
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />
