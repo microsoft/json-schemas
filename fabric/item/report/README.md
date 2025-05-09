@@ -1,5 +1,21 @@
 # Releases
 
+## May 2025
+
+Hierarchy matching, sort direction, and updates IDs for some advanced slicer objects.
+
+- [bookmark 1.3.0](./definition/bookmark/CHANGELOG.md#1.3.0)
+- [filterConfiguration 1.1.0](./definition/filterConfiguration/CHANGELOG.md#1.1.0)
+- [formattingObjectDefinitions 1.3.0](./definition/formattingObjectDefinitions/CHANGELOG.md#1.3.0)
+- [page 1.4.0](./definition/page/CHANGELOG.md#1.4.0)
+- [report 1.3.0](./definition/report/CHANGELOG.md#1.3.0)
+- [visualConfiguration 1.8.0](./definition/visualConfiguration/CHANGELOG.md#1.8.0)
+- [visualConfiguration 2.0.0](./definition/visualConfiguration/CHANGELOG.md#2.0.0)
+- [visualContainer 1.8.0](./definition/visualContainer/CHANGELOG.md#1.8.0)
+- [visualContainer 2.0.0](./definition/visualContainer/CHANGELOG.md#2.0.0)
+- [visualContainerMobileState 1.5.0](./definition/visualContainerMobileState/CHANGELOG.md#1.5.0)
+- [visualContainerMobileState 2.0.0](./definition/visualContainerMobileState/CHANGELOG.md#2.0.0)
+
 ## April 2025
 
 "Includes Reference Layer" for "Auto Zoom" now set to false for Azure Maps Visuals.
@@ -39,8 +55,8 @@ New properties and support for a handful of existing visuals.
 
 ## September 2024
 
-- Added data type to QueryNativeVisualCalc which allows users to specify the data type of the visual calculation. It overwrites the default dataType of Double
-- Enables users to assign unique images for each state of a button slicer
+Added data type to QueryNativeVisualCalc which allows users to specify the data type of the visual calculation. It overwrites the default dataType of Double. Enables users to assign unique images for each state of a button slicer.
+
 - [bookmark 1.2.0](./definition/bookmark/CHANGELOG.md#1.2.0)
 - [formattingObjectDefinitions 1.2.0](./definition/formattingObjectDefinitions/CHANGELOG.md#1.2.0)
 - [page 1.2.0](./definition/page/CHANGELOG.md#1.2.0)
@@ -48,7 +64,6 @@ New properties and support for a handful of existing visuals.
 - [semanticQuery 1.2.0](./definition/semanticQuery/CHANGELOG.md#1.2.0)
 - [visualContainer 1.2.0](./definition/visualContainer/CHANGELOG.md#1.2.0)
 - [visualContainerMobileState 1.2.0](./definition/visualContainerMobileState/CHANGELOG.md#1.2.0)
-
 
 ## August 2024
 
