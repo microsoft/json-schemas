@@ -1,5 +1,18 @@
 # Visual Configuration Versions
 
+### 2.0.0
+
+<b>Released in: </b> May 2025 <br />
+<b>Notes: </b> 
+- Updates IDs for some advanced slicer objects.
+
+### 1.8.0
+
+<b>Released in: </b> May 2025 <br />
+<b>Notes: </b> 
+- Added `sortDirection` property to `RoleFieldParameter` definition
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.2.0` to `1.3.0`
+
 ### 1.7.0
 
 <b>Released in: </b> April 2025 <br />

@@ -1,5 +1,12 @@
 # Bookmark Versions
 
+### 1.3.0
+
+<b>Released in: </b> May 2025 <br />
+<b>Notes: </b> 
+- Added `sortDirection` property to `ParameterState` definition
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.2.0` to `1.3.0`
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />

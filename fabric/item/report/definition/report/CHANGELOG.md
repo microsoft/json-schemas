@@ -1,5 +1,12 @@
 # Report Versions
 
+### 1.3.0
+
+<b>Released in: </b> May 2025 <br />
+<b>Notes: </b> 
+- Now references separated `filterConfiguration` schema (`1.1.0`)
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.2.0` to `1.3.0`
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />
