@@ -1,4 +1,6 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/unappliedChanges/1.0.0/schema.json",
   "title": "UnappliedChanges",
   "description": "Holds information about changes that have not yet been applied to the data model. This includes M queries and associated metadata. This file is optional.",
   "definitions": {

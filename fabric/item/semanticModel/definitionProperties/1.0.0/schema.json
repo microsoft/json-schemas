@@ -1,4 +1,6 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/definitionProperties/1.0.0/schema.json",
   "title": "DatasetDefinition",
   "description": "The DatasetDefinition stored as definition.pbism holds information about the overall semantic model definition. This file is required.",
   "definitions": {

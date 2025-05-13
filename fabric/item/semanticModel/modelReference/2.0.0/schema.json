@@ -1,4 +1,6 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/modelReference/2.0.0/schema.json",
   "title": "DatasetModelReference",
   "description": "The DatasetModelReference stored as modelReference.json holds a reference to a data model hosted outside Power BI. This file is optional.",
   "type": "object",

@@ -1,4 +1,6 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/pbip/pbipProperties/1.0.0/schema.json",
   "title": "ItemShortcut",
   "description": "The ItemShortcut is a file that ends in a .pbip extension. It is the default shortcut for opening up pbip based items and holds a link to the report path as well as other settings. This file is optional.",
   "definitions": {

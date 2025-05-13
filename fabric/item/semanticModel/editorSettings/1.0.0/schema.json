@@ -1,4 +1,6 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/editorSettings/1.0.0/schema.json",
   "title": "EditorSettings",
   "description": "The EditorSettings stored as editorSettings.json holds semantic model editor settings that are saved as part of the semantic model definition for use across users or environments. This file is optional.",
   "type": "object",
