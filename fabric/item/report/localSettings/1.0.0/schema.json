@@ -1,0 +1,53 @@
+{
+  "title": "ReportLocalSettings",
+  "description": "The ReportLocalSettings stored as localSettings.json holds report settings that only apply for the current user/machine. This file is optional.",
+  "definitions": {
+    "ReportRemoteArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reportId": {
+          "title": "ReportId",
+          "description": "The ID of a published report created from this definition.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "reportId"
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "^https://developer.microsoft.com/json-schemas/fabric/item/report/localSettings/1.[0-9]+.[0-9]+/schema.json$"
+    },
+    "remoteArtifacts": {
+      "title": "RemoteArtifacts",
+      "description": "Describes the published Power BI artifacts associated with this definition.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ReportRemoteArtifact"
+      }
+    },
+    "securityBindingsSignature": {
+      "title": "SecurityBindingsSignature",
+      "description": "A base64 encoded signature which when absent or invalid will reset saved properties which require user review or consent.",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "$schema"
+  ]
+}
