@@ -1,4 +1,4 @@
-name: validate report schemas
+name: validate schemas
 
 on:
   pull_request:
