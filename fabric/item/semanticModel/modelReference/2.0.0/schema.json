@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/modelReference/2.0.0/schema.json",
+  "title": "DatasetModelReference",
+  "description": "The DatasetModelReference stored as modelReference.json holds a reference to a data model hosted outside Power BI. This file is optional.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "pattern": "^https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/modelReference/2.[0-9]+.[0-9]+/schema.json$"
+    },
+    "connectionString": {
+      "title": "ConnectionString",
+      "description": "The Analysis Services connection string for the target data model.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "isMultiDimentional": {
+      "title": "IsMultiDimentional",
+      "description": "Whether the target data model is an Analysis Services multidimensional cube.  False if the target data model is a tabular model.",
+      "type": "boolean"
+    },
+    "connectionType": {
+      "title": "ConnectionType",
+      "description": "The type of connection. This is for any connection type that is hosted outside of Power BI.",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "$schema",
+    "connectionType"
+  ]
+}
