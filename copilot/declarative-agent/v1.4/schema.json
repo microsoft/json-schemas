@@ -44,7 +44,7 @@
             "pattern": "^(?!\\[\\[)((.|\\n|\\r)*?)(?<!\\]\\])$"
         },
         "behavior_overrides": {
-           "description": "Optional. Not localizable. The behavior overrides for the declarative agent. It is an object that contains the behavior overrides for the declarative agent.",
+           "description": "Optional. A JSON object that contains configuration settings that modify the behavior of the DA orchestration.",
            "$ref": "#/$defs/behavior-overrides"
         },
         "capabilities": {
@@ -554,7 +554,7 @@
         },
         "behavior-overrides": {
             "type": "object",
-            "description": "An object that contains the behavior overrides for the declarative agent.",
+            "description": "A JSON object that contains configuration settings that modify the behaviour of the DA orchestration.",
             "properties": {
                 "special_instructions": {
                     "description": "An object that contains special instructions for the declarative agent.",
@@ -574,11 +574,11 @@
         },
        "special-instructions": {
             "type": "object",
-            "description": "An object that contains special instructions for the declarative agent.",
+            "description": "A JSON object that contains members used for injecting special instructions into the prompt. The object has a discourage_model_knowledge boolean property. If this property is set to true, the DA will be discouraged from using model knowledge when generating responses. The default value is false",
             "properties": {
                 "discourage_model_knowledge": {
                   "type": "boolean",
-                  "description": "A boolean value that indicates whether the declarative agent should avoid using model knowledge."
+                  "description": "A boolean value that indicates whether the declarative agent should be discouraged from using model knowledge when generating responses."
                 }
             },
             "propertyNames": {
@@ -589,11 +589,11 @@
         },
         "suggestions": {
             "type": "object",
-            "description": "An object that contains suggestions for behavior overrides for the declarative agent.",
+            "description": "A JSON object that contains configuration settings for the suggestions feature. The object has a required disabled boolean property. If this property is set to true, the suggestions feature will be disabled. The default value is false.",
             "properties": {
                 "disabled": {
                   "type": "boolean",
-                  "description": "A boolean value that indicates whether turn-N suggestions should be disabled or not."
+                  "description": "A boolean value that indicates whether the suggestions feature is disabled. If this property is set to true, the suggestions feature will be disabled. The default value is false."
                 }
             },
             "propertyNames": {
