@@ -33,10 +33,6 @@
           }
         ]
       },
-      "audienceSettings": {
-      "description": "Defines the settings for the org app audiences.",
-      "$ref": "#/definitions/AudienceSettings"
-    },
       "maxItems": 1000
     }
   },
@@ -73,6 +69,10 @@
         "itemTypeSettings": {
           "description": "Defines the default item type level settings for elements in the org app.",
           "$ref": "#/definitions/ItemTypeSettings"
+        },
+        "audienceSettings": {
+          "description": "Defines the settings for the org app audiences.",
+          "$ref": "#/definitions/AudienceSettings"
         }
       },
       "additionalProperties": false
