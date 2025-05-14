@@ -20,7 +20,7 @@
         },
         "filterConfig": {
             "description": "Filters that apply to the entire report (all pages and all visuals).",
-            "$ref": "../filterConfigurationEmbedded/1.1.0/schema.json"
+            "$ref": "../../filterConfiguration/1.1.0/schema-embedded.json"
         },
         "objects": {
             "description": "Specifies the formatting to be set for different \"objects\" of a report.",
@@ -181,7 +181,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../formattingObjectDefinitions/1.3.0/schema.json#/definitions/Selector"
+                                "$ref": "../../formattingObjectDefinitions/1.3.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
                                 "$ref": "#/definitions/OutspacePane",
@@ -201,7 +201,7 @@
                         "properties": {
                             "selector": {
                                 "description": "Defines the scope at which to apply the formatting for this object.\nCan also define rules for matching highlighted values and how multiple definitions for the same property should be ordered.",
-                                "$ref": "../formattingObjectDefinitions/1.3.0/schema.json#/definitions/Selector"
+                                "$ref": "../../formattingObjectDefinitions/1.3.0/schema.json#/definitions/Selector"
                             },
                             "properties": {
                                 "$ref": "#/definitions/Section",
