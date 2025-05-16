@@ -106,7 +106,7 @@
     "$defs": {
         "disclaimer": {
             "type": "object",
-            "description":  "An optional JSON object containing a disclaimer message which, if provided, will be displayed users at the start of a conversation to satisfy legal or compliance requirements. The object has a required `text` string property which MUST NOT be null and MUST contain at least 1 non-whitespace character. Characters beyond 500 MAY be ignored.",
+            "description":  "An optional JSON object containing a disclaimer message which, if provided, will be displayed users at the start of a conversation to satisfy legal or compliance requirements. The object has a required text string property which MUST NOT be null and MUST contain at least 1 non-whitespace character. Characters beyond 500 MAY be ignored.",
             "properties": {
                 "text": {
                     "type": "string",
@@ -225,7 +225,7 @@
             },
             "scenario-models": {
                 "type": "object",
-                "description": "",
+                "description": "A JSON object whose presence indicates that the DA will be using tenant/task specific models.",
                 "properties": {
                     "name": {
                         "const": "ScenarioModels",
