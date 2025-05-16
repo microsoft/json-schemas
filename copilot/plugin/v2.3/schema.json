@@ -462,7 +462,7 @@
                         "Microsoft.Office.Addin"
                     ]
                 },
-                "allowed_hosts": {
+                "allowed_host": {
                     "type": "string",
                     "description": "An optional JSON array of enumerated strings that can take values as mail, workbook, document or presentation. The value represent the host apps this LocalPlugin can run-in.",
                     "enum": [
