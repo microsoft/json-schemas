@@ -353,7 +353,7 @@
                 },
                 "reference_id": {
                     "type": "string",
-                    "description": "An external reference to authentication credentials, used with OAuthPluginVault or ApiKeyPluginVault."
+                    "description": "A value used when `type` is `OAuthPluginVault` or `ApiKeyPluginVault`. The `reference_id` value is acquired independently when providing the necessary authentication configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
                 }
             },
             "allOf": [
