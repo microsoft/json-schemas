@@ -455,7 +455,10 @@
             "properties": {
                 "local_endpoint": {
                     "type": "string",
-                    "description": "A JSON string that represents a local runtime identifier that links to a specific function to invoke locally (e.g. in the case of Windows it will link to a particular app). In the case of an Office Addin that is implementing the function, the value MUST be the string Microsoft.Office.Addin."
+                    "description": "A JSON string that represents a local runtime identifier that links to a specific function to invoke locally (e.g. in the case of Windows it will link to a particular app). In the case of an Office Addin that is implementing the function, the value MUST be the string Microsoft.Office.Addin.",
+                    "enum": [
+                        "Microsoft.Office.Addin"
+                    ]
                 },
                 "allowed_hosts": {
                     "type": "string",
