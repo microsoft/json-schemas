@@ -380,12 +380,79 @@
                     "description": "A value used when `type` is `OAuthPluginVault` or `ApiKeyPluginVault`. The `reference_id` value is acquired independently when providing the necessary authentication configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
                 }
             },
-            "propertyNames": {
-                "enum": [
-                    "type",
-                    "Type",
-                    "reference_id"
-                ]
+            "allOf": [
+                {
+                    "if": {
+                        "properties": { "type": { "const": "OAuthPluginVault" } }
+                    },
+                    "then": {
+                        "required": ["reference_id"]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": { "type": { "const": "ApiKeyPluginVault" } }
+                    },
+                    "then": {
+                        "required": ["reference_id"]
+                    }
+                }
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
+            }
+        },
+        "open-api-spec": {
+            "type": "object",
+            "description": "Configuration for invoking an OpenAPI-based runtime.",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL to the OpenAPI specification (ignored if api_description is present)."
+                },
+                "api_description": {
+                    "type": "string",
+                    "description": "A string that contains an OpenAPI description. If this member is present, `url` isn't required and is ignored if present."
+                },
+                "progress_style": {
+                    "type": "string",
+                    "description": "The progress style that is used to display the progress of the function.",
+                    "enum": [
+                        "None",
+                        "ShowUsage",
+                        "ShowUsageWithInput",
+                        "ShowUsageWithInputAndOutput"
+                    ]
+                }
+            },
+            "anyOf": [
+                {
+                    "required": ["url"]
+                },
+                {
+                    "required": ["api_description"]
+                }
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
+            }
+        },
+        "local-plugin-spec": {
+            "type": "object",
+            "description": "Configuration for invoking a local plugin runtime.",
+            "required": ["local_endpoint"],
+            "properties": {
+                "local_endpoint": {
+                    "type": "string",
+                    "description": "Local runtime identifier for executing a specific function (e.g., a local app)."
+                }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
             }
         },
         "function-parameters": {
