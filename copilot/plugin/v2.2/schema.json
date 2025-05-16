@@ -306,7 +306,7 @@
                 },
                 "run_for_functions": {
                     "type": "array",
-                    "description": "List of function names this runtime supports. Supports wildcards.",
+                    "description": "The names of the functions that are available in this runtime. If this property is omitted, all functions described by the runtime are available. If a wildcard (\\\"*\\\") is specified as the only string, all functions are considered. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly",
                     "items": {
                         "type": "string"
                     }
@@ -330,7 +330,8 @@
         },
         "auth-object": {
             "type": "object",
-            "description": "Authentication configuration required to invoke the runtime.",
+            "title": "Runtime authentication object",
+            "description": "Contains information used by the plugin to authenticate to the runtime.",
             "required": ["type"],
             "properties": {
                 "type": {
@@ -353,7 +354,7 @@
                 },
                 "reference_id": {
                     "type": "string",
-                    "description": "An external reference to authentication credentials, used with OAuthPluginVault or ApiKeyPluginVault."
+                    "description": "A value used when `type` is `OAuthPluginVault` or `ApiKeyPluginVault`. The `reference_id` value is acquired independently when providing the necessary authentication configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
                 }
             },
             "allOf": [
@@ -390,11 +391,11 @@
                 },
                 "api_description": {
                     "type": "string",
-                    "description": "Inline OpenAPI description string (used instead of fetching from a URL)."
+                    "description": "A string that contains an OpenAPI description. If this member is present, `url` isn't required and is ignored if present."
                 },
                 "progress_style": {
                     "type": "string",
-                    "description": "Specifies how function progress is shown.",
+                    "description": "The progress style that is used to display the progress of the function.",
                     "enum": [
                         "None",
                         "ShowUsage",
