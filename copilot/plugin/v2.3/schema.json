@@ -146,7 +146,6 @@
                             "$ref": "#/$defs/function-state-config",
                             "description": "The state in which the model can generate text that is shown to the user. The model can't invoke functions in the responding state."
                         }
-
                     },
                     "propertyNames": {
                         "enum": [
@@ -267,7 +266,6 @@
                     "oauth_card_path"
                 ]
             }
-
         },
         "conversation-starter": {
             "type": "object",
