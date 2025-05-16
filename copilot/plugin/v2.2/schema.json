@@ -52,7 +52,7 @@
         },
         "runtimes": {
             "type": "array",
-            "description": "A list of runtime configurations that determine how functions are invoked.",
+            "description": "A set of runtime objects describing the runtimes used by the plugin.",
             "items": {
                 "$ref": "#/$defs/runtime"
             }
@@ -293,7 +293,7 @@
         },
         "runtime": {
             "type": "object",
-            "description": "Defines how a specific runtime invokes functions, including auth and spec details.",
+            "description": "A JSON object that describes the mechanics of how a function will be invoked. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly using `run_for_functions`.",
             "required": ["type", "auth", "spec"],
             "properties": {
                 "type": {
@@ -385,8 +385,7 @@
             "properties": {
                 "url": {
                     "type": "string",
-                    "format": "uri",
-                    "description": "The URL to the OpenAPI specification (ignored if api_description is present)."
+                    "description": "The URL to fetch the OpenAPI specification, called with a GET request. This member is required unless `api_description` is present"
                 },
                 "api_description": {
                     "type": "string",
