@@ -29,12 +29,23 @@
             "maxLength": 1000,
             "pattern": "^(\\[\\[)[a-zA-Z_][a-zA-Z0-9_]*(\\]\\])$|^(?!(.*?\\[\\[.*?|.*?\\]\\].*?)).*$"
         },
+        "disclaimer": {
+            "$ref": "#/$defs/disclaimer"
+        },
+        "sensitivity_label": {
+            "description": "This member is an object that specifies the sensitivity label for the DA. It is an optional member.",
+            "$ref": "#/$defs/sensitivity_label"
+        },
         "instructions": {
             "type": "string",
             "description": "Optional. Not localizable. The detailed instructions or guidelines on how the declarative agent should behave, its functions, and any behaviors to avoid. It MUST contain at least one nonwhitespace character and MUST be 8,000 characters or less.",
             "minLength": 1,
             "maxLength": 8000,
             "pattern": "^(?!\\[\\[)((.|\\n|\\r)*?)(?<!\\]\\])$"
+        },
+        "behavior_overrides": {
+           "description": "Optional. A JSON object that contains configuration settings that modify the behavior of the DA orchestration.",
+           "$ref": "#/$defs/behavior-overrides"
         },
         "capabilities": {
             "type": "array",
@@ -82,14 +93,43 @@
             "version",
             "name",
             "description",
+            "disclaimer",
+            "sensitivity_label",
             "instructions",
             "capabilities",
+            "behavior_overrides",
             "conversation_starters",
             "actions",
             "$schema"
         ]
     },
     "$defs": {
+        "disclaimer": {
+            "type": "object",
+            "description":  "An optional JSON object containing a disclaimer message which, if provided, will be displayed users at the start of a conversation to satisfy legal or compliance requirements. The object has a required text string property which MUST NOT be null and MUST contain at least 1 non-whitespace character. Characters beyond 500 MAY be ignored.",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "",
+                    "minLength": 1
+                }
+            }
+        },
+        "sensitivity_label": {
+            "type": "object",
+            "description": "A JSON object, when specified should match one of the GUIDs of the published sensitivity labels within the tenant to which it is being published. This label should be at least as restrictive as the most restrictive label on any knowledge files included in the agent. See https://learn.microsoft.com/en-us/purview/create-sensitivity-labels  for more information on sensitivity labels.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The GUID of the sensitivity_label that is pulled from Purview API"
+                }
+            },
+            "propertyNames": {
+                "enum": [
+                    "id"
+                ]
+            }
+        },
         "capabilities": {
             "base-capability": {
                 "type": "object",
@@ -97,7 +137,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, People and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, ScenarioModels, People and GraphicArt.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -125,11 +165,14 @@
                             }, 
                             {
                                 "const": "People"
+                            },
+                            {
+                                "const": "ScenarioModels"
                             }
                         ]
                     }
                 },
-                "oneOf": [
+                "anyOf": [
                     {
                         "$ref": "#/$defs/capabilities/web-search"
                     },
@@ -156,6 +199,9 @@
                     }, 
                     {
                         "$ref": "#/$defs/capabilities/people"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/scenario-models"
                     }
                 ],
                 "required": [
@@ -176,6 +222,51 @@
                         "name"
                     ]
                 }
+            },
+            "scenario-models": {
+                "type": "object",
+                "description": "A JSON object whose presence indicates that the DA will be using tenant/task specific models.",
+                "properties": {
+                    "name": {
+                        "const": "ScenarioModels",
+                        "description": "Required. Must be set to the string literal `ScenarioModels`"
+                    },
+                    "models": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "description": "A list of Scenario Model objects denoting supported models",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/scenario-model"
+                        }
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "models"
+                    ]
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "scenario-model": {
+                "type": "object",
+                "description": "An Object representing a scenario model.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "A unique ID used to identify a Scenario Model"
+                    }
+                },
+                "propertyNames": {
+                    "enum": [
+                        "id"
+                    ]
+                },
+                "required": [
+                    "id"
+                ]
             },
             "email": {
                 "type": "object",
@@ -460,6 +551,56 @@
                 }
             }
         },
+        "behavior-overrides": {
+            "type": "object",
+            "description": "A JSON object that contains configuration settings that modify the behaviour of the DA orchestration.",
+            "properties": {
+                "special_instructions": {
+                    "description": "An object that contains special instructions for the declarative agent.",
+                    "$ref": "#/$defs/special-instructions"
+                },
+              "suggestions": {
+                 "description": "An object that contains suggestions for behavior overrides for the declarative agent.",
+                 "$ref": "#/$defs/suggestions"
+              }
+            },
+            "propertyNames": {
+                "enum": [
+                    "special_instructions",
+                    "suggestions"
+                ]
+            }
+        },
+       "special-instructions": {
+            "type": "object",
+            "description": "A JSON object that contains members used for injecting special instructions into the prompt. The object has a discourage_model_knowledge boolean property. If this property is set to true, the DA will be discouraged from using model knowledge when generating responses. The default value is false",
+            "properties": {
+                "discourage_model_knowledge": {
+                  "type": "boolean",
+                  "description": "A boolean value that indicates whether the declarative agent should be discouraged from using model knowledge when generating responses."
+                }
+            },
+            "propertyNames": {
+                "enum": [
+                    "discourage_model_knowledge"
+                ]
+            }
+        },
+        "suggestions": {
+            "type": "object",
+            "description": "A JSON object that contains configuration settings for the suggestions feature. The object has a required disabled boolean property. If this property is set to true, the suggestions feature will be disabled. The default value is false.",
+            "properties": {
+                "disabled": {
+                  "type": "boolean",
+                  "description": "A boolean value that indicates whether the suggestions feature is disabled. If this property is set to true, the suggestions feature will be disabled. The default value is false."
+                }
+            },
+            "propertyNames": {
+                "enum": [
+                    "disabled"
+                ]
+            }
+        },
         "web-search-site": {
             "type": "object",
             "description": "An object that identifies a site used to constrain the content accessible to the declarative agent.",
@@ -554,6 +695,17 @@
                     "description": "Optional. Not localizable. The GUID identifier of a SharePoint or OneDrive item.",
                     "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
                 },
+               "part_id": {
+                    "type": "string",
+                    "description": "A JSON String that uniquely identifies a part of a SharePoint item. e.g a OneNote page."
+                }, 
+               "part_type": {
+                    "type": "string",
+                    "description": "A String that qualifies the kind of part that the \"part_id\" refers to. Currently this value can only be equal to the string literal: \"OneNotePart\".",
+                    "enum": [
+                        "OneNotePart"
+                    ]
+                },
                 "search_associated_sites": {
                     "type": "boolean",
                     "description": "Boolean value indicating whether to enable searching associated sites. This value is only applicable when the site_id value references a SharePoint HubSite."
@@ -565,6 +717,8 @@
                     "web_id",
                     "list_id",
                     "unique_id",
+                    "part_id",
+                    "part_type",
                     "search_associated_sites"
                 ]
             },
@@ -595,6 +749,47 @@
                     "type": "string",
                     "description": "Required. Not localizable The unique identifier of the Microsoft Graph connector.",
                     "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
+                },
+                "additional_search_terms": {
+                    "type": "string",
+                    "description": "KQL based string containing the query filter"
+                },
+                "items_by_external_url": {
+                    "type": "array",
+                    "description": "A list of objects to store urls for external items.",
+                    "items": {
+                        "$ref": "#/$defs/item-by-external-url"
+                    }
+                },
+                "items_by_external_id": {
+                    "type": "array",
+                    "description": "A list of objects to store identifiers for external items",
+                    "items": {
+                        "$ref": "#/$defs/item-by-external-id"
+                    }
+                },
+                "items_by_path": {
+                    "type": "array",
+                    "description": "A list of objects to store the container paths to items within a connection",
+                    "items": {
+                        "$ref": "#/$defs/item-by-path"
+                    }
+                },
+                "items_by_container_name": {
+                    "type": "array",
+                    "description": "A list of objects to store containers names",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/$defs/item-by-container-name"
+                    }
+                },
+                "items_by_container_url": {
+                    "type": "array",
+                    "description": "A list of objects to store urls of containers",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/$defs/item-by-container-url"
+                    }
                 }
             },
             "required": [
@@ -602,7 +797,103 @@
             ],
             "propertyNames": {
                 "enum": [
-                    "connection_id"
+                    "connection_id",
+                    "additional_search_terms",
+                    "items_by_external_url",
+                    "items_by_external_id",
+                    "items_by_path",
+                    "items_by_container_name",
+                    "items_by_container_url"
+                ]
+            }
+        },
+        "item-by-external-url": {
+            "type": "object",
+            "description": "Identifies an item by its external URL.",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "Url for external graph connector item."
+                }
+            },
+            "required": [
+                "url"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "url"
+                ]
+            }
+        },
+        "item-by-external-id": {
+            "type": "object",
+            "description": "Identifies an item by its external ID.",
+            "properties": {
+                "item_id": {
+                    "type": "string",
+                    "description": "A unique identifier for an external item."
+                }
+            },
+            "required": [
+                "item_id"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "item_id"
+                ]
+            }
+        },
+        "item-by-path": {
+            "type": "object",
+            "description": "Identifies an item by its path.",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "A container path to an external item"
+                }
+            },
+            "required": [
+                "path"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "path"
+                ]
+            }
+        },
+        "item-by-container-name": {
+            "type": "object",
+            "description": "Identifies an item by its container name.",
+            "properties": {
+                "container_name": {
+                    "type": "string",
+                    "description": "A unique identifier for a container name"
+                }
+            },
+            "required": [
+                "container_name"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "container_name"
+                ]
+            }
+        },
+        "item-by-container-url": {
+            "type": "object",
+            "description": "Identifies an item by its container URL.",
+            "properties": {
+                "container_url": {
+                    "type": "string",
+                    "description": "Url for external graph connector item container"
+                }
+            },
+            "required": [
+                "container_url"
+            ],
+            "propertyNames": {
+                "enum": [
+                    "container_url"
                 ]
             }
         }
