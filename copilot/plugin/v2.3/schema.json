@@ -169,7 +169,7 @@
                             "description": "Describes how the orchestrator can interpret the response payload and provide a visual rendering."
                         },
                         "security_info": {
-                            "$ref": "#/$defs/security-info-object", 
+                            "$ref": "#/$defs/security-info-object",
                             "description": "Describes the security information to be used to aid in determining the relative risk of invoking the function."
                         }
                     },
@@ -257,7 +257,7 @@
                 }
             },
             "required": [
-                "data_path" 
+                "data_path"
             ],
             "propertyNames": {
                 "enum": [
@@ -389,7 +389,7 @@
                 },
                 {
                     "if": {
-                        "properties": { 
+                        "properties": {
                             "type": {
                                 "const": "ApiKeyPluginVault"
                             }
