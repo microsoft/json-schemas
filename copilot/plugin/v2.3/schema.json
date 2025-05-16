@@ -7,8 +7,8 @@
     "properties": {
         "schema_version": {
             "type": "string",
-            "description": "The schema version. Previous versions are `v1` and `v2`, `v2.1`.",
-            "const": "v2.2"
+            "description": "The schema version. Previous versions are `v1`, `v2`, `v2.1`, and `v2.2`.",
+            "const": "v2.3"
         },
         "name_for_human": {
             "type": "string",
@@ -52,7 +52,7 @@
         },
         "runtimes": {
             "type": "array",
-            "description": "A set of runtime objects describing the runtimes used by the plugin.",
+            "description": "A list of runtime configurations that determine how functions are invoked.",
             "items": {
                 "$ref": "#/$defs/runtime"
             }
@@ -146,7 +146,6 @@
                             "$ref": "#/$defs/function-state-config",
                             "description": "The state in which the model can generate text that is shown to the user. The model can't invoke functions in the responding state."
                         }
-
                     },
                     "propertyNames": {
                         "enum": [
@@ -169,8 +168,8 @@
                             "description": "Describes how the orchestrator can interpret the response payload and provide a visual rendering."
                         },
                         "security_info": {
-                          "$ref": "#/$defs/security-info-object",
-                          "description": "Describes the security information to be used to aid in determining the relative risk of invoking the function."
+                            "$ref": "#/$defs/security-info-object",
+                            "description": "Describes the security information to be used to aid in determining the relative risk of invoking the function."
                         }
                     },
                     "propertyNames": {
@@ -210,7 +209,7 @@
                     "type": "object",
                     "title": "Response semantics properties object",
                     "description": "Allows mapping of JSONPath queries to well-known data elements. Each JSONPath query is relative to a result value.",
-                    "properties":{
+                    "properties": {
                         "title": {
                             "type": "string",
                             "description": "Title of a citation for the result."
@@ -256,7 +255,9 @@
                     "description": "A JSON string containing a JSONPath query that when applied to the response payload will return an [Adaptive Card Template](https://learn.microsoft.com/adaptive-cards/templating/language) that will be used to authenticate the user."
                 }
             },
-            "required": [ "data_path" ],
+            "required": [
+                "data_path"
+            ],
             "propertyNames": {
                 "enum": [
                     "data_path",
@@ -265,7 +266,6 @@
                     "oauth_card_path"
                 ]
             }
-
         },
         "conversation-starter": {
             "type": "object",
@@ -293,12 +293,19 @@
         },
         "runtime": {
             "type": "object",
-            "description": "A JSON object that describes the mechanics of how a function will be invoked. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly using `run_for_functions`.",
-            "required": ["type", "auth", "spec"],
+            "description": "Defines how a specific runtime invokes functions, including auth and spec details.",
+            "required": [
+                "type",
+                "auth",
+                "spec"
+            ],
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["OpenApi", "LocalPlugin"],
+                    "enum": [
+                        "OpenApi",
+                        "LocalPlugin"
+                    ],
                     "description": "The type of runtime. Must be 'OpenApi' or 'LocalPlugin'."
                 },
                 "auth": {
@@ -314,8 +321,12 @@
                 "spec": {
                     "description": "Runtime-specific configuration object.",
                     "oneOf": [
-                        { "$ref": "#/$defs/open-api-spec" },
-                        { "$ref": "#/$defs/local-plugin-spec" }
+                        {
+                            "$ref": "#/$defs/open-api-spec"
+                        },
+                        {
+                            "$ref": "#/$defs/local-plugin-spec"
+                        }
                     ]
                 },
                 "output_template": {
@@ -332,7 +343,9 @@
             "type": "object",
             "title": "Runtime authentication object",
             "description": "Contains information used by the plugin to authenticate to the runtime.",
-            "required": ["type"],
+            "required": [
+                "type"
+            ],
             "properties": {
                 "type": {
                     "type": "string",
@@ -360,18 +373,30 @@
             "allOf": [
                 {
                     "if": {
-                        "properties": { "type": { "const": "OAuthPluginVault" } }
+                        "properties": {
+                            "type": {
+                                "const": "OAuthPluginVault"
+                            }
+                        }
                     },
                     "then": {
-                        "required": ["reference_id"]
+                        "required": [
+                            "reference_id"
+                        ]
                     }
                 },
                 {
                     "if": {
-                        "properties": { "type": { "const": "ApiKeyPluginVault" } }
+                        "properties": {
+                            "type": {
+                                "const": "ApiKeyPluginVault"
+                            }
+                        }
                     },
                     "then": {
-                        "required": ["reference_id"]
+                        "required": [
+                            "reference_id"
+                        ]
                     }
                 }
             ],
@@ -386,7 +411,8 @@
             "properties": {
                 "url": {
                     "type": "string",
-                    "description": "The URL to fetch the OpenAPI specification, called with a GET request. This member is required unless `api_description` is present"
+                    "format": "uri",
+                    "description": "The URL to the OpenAPI specification (ignored if api_description is present)."
                 },
                 "api_description": {
                     "type": "string",
@@ -405,10 +431,14 @@
             },
             "anyOf": [
                 {
-                    "required": ["url"]
+                    "required": [
+                        "url"
+                    ]
                 },
                 {
-                    "required": ["api_description"]
+                    "required": [
+                        "api_description"
+                    ]
                 }
             ],
             "additionalProperties": false,
@@ -419,11 +449,26 @@
         "local-plugin-spec": {
             "type": "object",
             "description": "Configuration for invoking a local plugin runtime.",
-            "required": ["local_endpoint"],
+            "required": [
+                "local_endpoint"
+            ],
             "properties": {
                 "local_endpoint": {
                     "type": "string",
-                    "description": "Local runtime identifier for executing a specific function (e.g., a local app)."
+                    "description": "A JSON string that represents a local runtime identifier that links to a specific function to invoke locally (e.g. in the case of Windows it will link to a particular app). In the case of an Office Addin that is implementing the function, the value MUST be the string Microsoft.Office.Addin.",
+                    "enum": [
+                        "Microsoft.Office.Addin"
+                    ]
+                },
+                "allowed_hosts": {
+                    "type": "string",
+                    "description": "An optional JSON array of enumerated strings that can take values as mail, workbook, document or presentation. The value represent the host apps this LocalPlugin can run-in.",
+                    "enum": [
+                        "mail",
+                        "workbook",
+                        "document",
+                        "presentation"
+                    ]
                 }
             },
             "additionalProperties": false,
@@ -503,7 +548,13 @@
                     "description": "A description of the parameter."
                 },
                 "default": {
-                    "type": ["string","boolean","integer","number","array"],
+                    "type": [
+                        "string",
+                        "boolean",
+                        "integer",
+                        "number",
+                        "array"
+                    ],
                     "description": "A value of the type specified by the `type` property that indicates the value the API uses when a value for an optional parameter isn't provided."
                 }
             },
@@ -547,7 +598,13 @@
                     "description": "A description of the parameter."
                 },
                 "default": {
-                    "type": ["string","boolean","integer","number","array"],
+                    "type": [
+                        "string",
+                        "boolean",
+                        "integer",
+                        "number",
+                        "array"
+                    ],
                     "description": "A value of the type specified by the `type` property that indicates the value the API uses when a value for an optional parameter isn't provided."
                 }
             },
