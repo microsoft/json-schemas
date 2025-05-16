@@ -146,7 +146,6 @@
                             "$ref": "#/$defs/function-state-config",
                             "description": "The state in which the model can generate text that is shown to the user. The model can't invoke functions in the responding state."
                         }
-
                     },
                     "propertyNames": {
                         "enum": [
@@ -267,7 +266,6 @@
                     "oauth_card_path"
                 ]
             }
-
         },
         "conversation-starter": {
             "type": "object",
@@ -457,7 +455,20 @@
             "properties": {
                 "local_endpoint": {
                     "type": "string",
-                    "description": "Local runtime identifier for executing a specific function (e.g., a local app)."
+                    "description": "A JSON string that represents a local runtime identifier that links to a specific function to invoke locally (e.g. in the case of Windows it will link to a particular app). In the case of an Office Addin that is implementing the function, the value MUST be the string Microsoft.Office.Addin.",
+                    "enum": [
+                        "Microsoft.Office.Addin"
+                    ]
+                },
+                "allowed_hosts": {
+                    "type": "string",
+                    "description": "An optional JSON array of enumerated strings that can take values as mail, workbook, document or presentation. The value represent the host apps this LocalPlugin can run-in.",
+                    "enum": [
+                        "mail",
+                        "workbook",
+                        "document",
+                        "presentation"
+                    ]
                 }
             },
             "additionalProperties": false,
