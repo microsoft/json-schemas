@@ -393,7 +393,7 @@
                 },
                 "progress_style": {
                     "type": "string",
-                    "description": "The progress style that is used to display the progress of the function.",
+                    "description": "A JSON string that contains the progress style that will be used to display the progress of the function. The value MUST be one of the following values: None, ShowUsage, ShowUsageWithInput, ShowUsageWithInputAndOutput.",
                     "enum": [
                         "None",
                         "ShowUsage",
