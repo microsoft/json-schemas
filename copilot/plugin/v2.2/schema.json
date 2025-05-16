@@ -52,9 +52,9 @@
         },
         "runtimes": {
             "type": "array",
-            "description": "A set of runtime objects describing the runtimes used by the plugin.",
+            "description": "A list of runtime configurations that determine how functions are invoked.",
             "items": {
-                "$ref": "#/$defs/runtime-object-openapi"
+                "$ref": "#/$defs/runtime"
             }
         },
         "capabilities": {
@@ -291,71 +291,47 @@
                 ]
             }
         },
-        "runtime-object-openapi": {
+        "runtime": {
             "type": "object",
-            "title": "OpenAPI runtime object",
-            "description": "Describes how the plugin invokes OpenAPI functions.",
+            "description": "Defines how a specific runtime invokes functions, including auth and spec details.",
+            "required": ["type", "auth", "spec"],
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "Identifies this runtime as an OpenAPI runtime.",
-                    "const": "OpenApi"
+                    "enum": ["OpenApi", "LocalPlugin"],
+                    "description": "The type of runtime. Must be 'OpenApi' or 'LocalPlugin'."
                 },
                 "auth": {
-                    "$ref": "#/$defs/auth-object",
-                    "description": "Authentication information required to invoke the runtime."
+                    "$ref": "#/$defs/auth-object"
                 },
                 "run_for_functions": {
                     "type": "array",
-                    "description": "The names of the functions that are available in this runtime. If this property is omitted, all functions described by the runtime are available. If a wildcard (\"*\") is specified as the only string, all functions are considered. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly.",
+                    "description": "List of function names this runtime supports. Supports wildcards.",
                     "items": {
                         "type": "string"
                     }
                 },
                 "spec": {
-                    "title": "OpenAPI specification object",
-                    "description": "Contains the OpenAPI information required to invoke the runtime.",
-                    "type": "object",
-                    "properties": {
-                        "url": {
-                            "type": "string",
-                            "description": "The URL to fetch the OpenAPI specification, called with a GET request. This member is required unless `api_description` is present."
-                        },
-                        "api_description": {
-                            "type": ["string"],
-                            "description": "A string that contains an OpenAPI description. If this member is present, `url` isn't required and is ignored if present."
-                        },
-                        "progress_style": {
-                            "type": "string",
-                            "description": "The progress style that is used to display the progress of the function.",
-                            "enum": [
-                                "None",
-                                "ShowUsage",
-                                "ShowUsageWithInput",
-                                "ShowUsageWithInputAndOutput"
-                            ]
-                        }
-                    }
+                    "description": "Runtime-specific configuration object.",
+                    "oneOf": [
+                        { "$ref": "#/$defs/open-api-spec" },
+                        { "$ref": "#/$defs/local-plugin-spec" }
+                    ]
+                },
+                "output_template": {
+                    "type": "string",
+                    "description": "A Liquid template used to transform the plugin response payload."
                 }
             },
-            "required": [
-                "type",
-                "spec",
-                "auth"
-            ],
-            "propertyNames": {
-                "enum": [
-                    "type",
-                    "auth",
-                    "run_for_functions",
-                    "spec"
-                ]
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
             }
         },
         "auth-object": {
             "type": "object",
-            "title": "Runtime authentication object",
-            "description": "Contains information used by the plugin to authenticate to the runtime.",
+            "description": "Authentication configuration required to invoke the runtime.",
+            "required": ["type"],
             "properties": {
                 "type": {
                     "type": "string",
@@ -377,15 +353,82 @@
                 },
                 "reference_id": {
                     "type": "string",
-                    "description": "A value used when `type` is `OAuthPluginVault` or `ApiKeyPluginVault`. The `reference_id` value is acquired independently when providing the necessary authentication configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
+                    "description": "An external reference to authentication credentials, used with OAuthPluginVault or ApiKeyPluginVault."
                 }
             },
-            "propertyNames": {
-                "enum": [
-                    "type",
-                    "Type",
-                    "reference_id"
-                ]
+            "allOf": [
+                {
+                    "if": {
+                        "properties": { "type": { "const": "OAuthPluginVault" } }
+                    },
+                    "then": {
+                        "required": ["reference_id"]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": { "type": { "const": "ApiKeyPluginVault" } }
+                    },
+                    "then": {
+                        "required": ["reference_id"]
+                    }
+                }
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
+            }
+        },
+        "open-api-spec": {
+            "type": "object",
+            "description": "Configuration for invoking an OpenAPI-based runtime.",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL to the OpenAPI specification (ignored if api_description is present)."
+                },
+                "api_description": {
+                    "type": "string",
+                    "description": "Inline OpenAPI description string (used instead of fetching from a URL)."
+                },
+                "progress_style": {
+                    "type": "string",
+                    "description": "Specifies how function progress is shown.",
+                    "enum": [
+                        "None",
+                        "ShowUsage",
+                        "ShowUsageWithInput",
+                        "ShowUsageWithInputAndOutput"
+                    ]
+                }
+            },
+            "anyOf": [
+                {
+                    "required": ["url"]
+                },
+                {
+                    "required": ["api_description"]
+                }
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
+            }
+        },
+        "local-plugin-spec": {
+            "type": "object",
+            "description": "Configuration for invoking a local plugin runtime.",
+            "required": ["local_endpoint"],
+            "properties": {
+                "local_endpoint": {
+                    "type": "string",
+                    "description": "Local runtime identifier for executing a specific function (e.g., a local app)."
+                }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+                "^x-": {}
             }
         },
         "function-parameters": {
