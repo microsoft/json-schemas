@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json",
+  "title": "Org App Audience Artifact",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json"
+    },
+    "settings": {
+      "$ref": "#/definitions/AudienceSettings"
+    },
+    "parentAppId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "elementReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ElementReference"
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "settings",
+    "parentAppId",
+    "elementReferences"
+  ],
+  "definitions": {
+    "AudienceSettings": {
+      "type": "object",
+      "properties": {
+        "hasAccessToHiddenContent": { "type": "boolean" },
+        "tabOrder": { "type": "integer" }
+      },
+      "required": [ "hasAccessToHiddenContent", "tabOrder" ]
+    },
+    "ElementReference": {
+      "type": "object",
+      "properties": {
+        "elementId": { "type": "string", "format": "uuid" },
+        "isElementHidden": { "type": "boolean" },
+        "itemType": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "itemId": { "type": "string", "format": "uuid" },
+        "folderObjectId": { "type": "string", "format": "uuid" }
+      },
+      "required": [
+        "elementId",
+        "itemId",
+      ]
+    }
+  }
+}
