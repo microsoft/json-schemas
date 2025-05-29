@@ -1,58 +1,76 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json",
-  "title": "Org App Audience Artifact",
-  "type": "object",
-  "properties": {
-    "$schema": {
-      "type": "string",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json"
-    },
-    "settings": {
-      "$ref": "#/definitions/AudienceSettings"
-    },
-    "parentAppId": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "elementReferences": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ElementReference"
-      }
-    }
-  },
-  "required": [
-    "$schema",
-    "settings",
-    "parentAppId",
-    "elementReferences"
-  ],
-  "definitions": {
-    "AudienceSettings": {
-      "type": "object",
-      "properties": {
-        "hasAccessToHiddenContent": { "type": "boolean" },
-        "tabOrder": { "type": "integer" }
-      },
-      "required": [ "hasAccessToHiddenContent", "tabOrder" ]
-    },
-    "ElementReference": {
-      "type": "object",
-      "properties": {
-        "elementId": { "type": "string", "format": "uuid" },
-        "isElementHidden": { "type": "boolean" },
-        "itemType": {
-          "type": "string",
-          "maxLength": 256
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json",
+    "title": "Org App Audience Artifact",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json"
         },
-        "itemId": { "type": "string", "format": "uuid" },
-        "folderObjectId": { "type": "string", "format": "uuid" }
-      },
-      "required": [
-        "elementId",
-        "itemId",
-      ]
+        "settings": {
+            "$ref": "#/definitions/AudienceSettings"
+        },
+        "parentAppId": {
+            "description": "The parent organizational app id.",
+            "$ref": "#/definitions/Guid"
+        },
+        "elementReferences": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/ElementReference"
+            }
+        }
+    },
+    "required": [
+        "$schema",
+        "parentAppId",
+        "elementReferences"
+    ],
+    "definitions": {
+        "AudienceSettings": {
+            "type": "object",
+            "properties": {
+                "hasAccessToHiddenContent": {
+                    "description": "Indicates whether the audience has access to hidden content.",
+                    "type": "boolean"
+                },
+                "tabOrder": {
+                    "description": "The order in which audiences will appear in the app.",
+                    "type": "integer"
+                }
+            }
+        },
+        "ElementReference": {
+            "type": "object",
+            "properties": {
+                "elementId": {
+                    "description": "This elements unique id.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "isElementHidden": {
+                    "description": "Indicates whether the element is hidden in the audience.",
+                    "type": "boolean"
+                },
+                "itemType": {
+                    "description": "The type of artifact the element references.",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                },
+                "itemId": {
+                    "description": "The parent item id.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "folderObjectId": {
+                    "description": "The folder id where the underlying element item is located.",
+                    "$ref": "#/definitions/Guid"
+                }
+            }
+        },
+        "Guid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        }
     }
-  }
 }
