@@ -45,7 +45,7 @@
             "type": "object",
             "properties": {
                 "elementId": {
-                    "description": "This elements unique id.",
+                    "description": "The elements unique id.",
                     "$ref": "#/definitions/Guid"
                 },
                 "isElementHidden": {
@@ -59,11 +59,15 @@
                     "maxLength": 256
                 },
                 "itemId": {
-                    "description": "The parent item id.",
+                    "description": "Defines the item's internal unique identifier.",
                     "$ref": "#/definitions/Guid"
                 },
                 "folderObjectId": {
-                    "description": "The folder id where the underlying element item is located.",
+                    "description": "Defines the internal unique identifier of the folder in which the item is located.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "itemLogicalId": {
+                    "description": "Defines the item's logical unique identifier in Git repository.",
                     "$ref": "#/definitions/Guid"
                 }
             }
