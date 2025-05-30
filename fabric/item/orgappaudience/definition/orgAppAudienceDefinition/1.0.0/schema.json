@@ -82,7 +82,7 @@
                 "itemLogicalId"
               ]
             }
-          ],
+          ]
         },
         "Guid": {
             "type": "string",
