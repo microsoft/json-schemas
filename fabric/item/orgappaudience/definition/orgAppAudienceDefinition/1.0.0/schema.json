@@ -70,7 +70,7 @@
                     "description": "Defines the item's logical unique identifier in Git repository.",
                     "$ref": "#/definitions/Guid"
                 }
-            }
+            },
             "oneOf": [
             {
               "required": [
