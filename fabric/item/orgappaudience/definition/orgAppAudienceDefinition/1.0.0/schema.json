@@ -5,10 +5,12 @@
     "type": "object",
     "properties": {
         "$schema": {
+            "description": "Defines the schema to use for an org app audience.",
             "type": "string",
             "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json"
         },
         "settings": {
+            "description": "The settings for the audience.",
             "$ref": "#/definitions/AudienceSettings"
         },
         "parentAppId": {
@@ -16,10 +18,21 @@
             "$ref": "#/definitions/Guid"
         },
         "elementReferences": {
-            "type": "array",
+            "description": "Defines the list of element references for the audience.",
+            "type": [
+                "array"
+            ],
             "items": {
-                "$ref": "#/definitions/ElementReference"
-            }
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/AudienceContentItemElementReference"
+                    },
+                    {
+                        "$ref": "#/definitions/AudienceAppItemElementReference"
+                    }
+                ]                
+            },
+            "maxItems": 1000
         }
     },
     "required": [
@@ -27,6 +40,7 @@
         "parentAppId",
         "elementReferences"
     ],
+    "additionalProperties": false,
     "definitions": {
         "AudienceSettings": {
             "type": "object",
@@ -39,9 +53,11 @@
                     "description": "The order in which audiences will appear in the app.",
                     "type": "integer"
                 }
-            }
+            },
+            "additionalProperties": false
         },
-        "ElementReference": {
+        "AudienceContentItemElementReference": {
+            "description": "Defines items that are workspace content, eg. reports, notebooks, etc...",
             "type": "object",
             "properties": {
                 "elementId": {
@@ -74,7 +90,10 @@
             "oneOf": [
             {
               "required": [
-                "itemId"
+                "itemId",
+                "folderObjectId",
+                "elementId",
+                "itemType"
               ]
             },
             {
@@ -82,7 +101,44 @@
                 "itemLogicalId"
               ]
             }
-          ]
+          ],
+          "additionalProperties": false
+        },
+        "AudienceAppItemElementReference": {
+            "description": "Defines items that are only in the app, eg. links, overview, etc...",
+            "type": "object",
+            "properties": {
+                "elementId": {
+                    "description": "Defines the item element's unique identifier.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "isElementHidden": {
+                    "description": "Indicates whether the element is hidden in the audience.",
+                    "type": "boolean"
+                },
+                "itemId": {
+                    "description": "Defines the item's internal unique identifier.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "itemLogicalId": {
+                    "description": "Defines the item's logical unique identifier in Git repository.",
+                    "$ref": "#/definitions/Guid"
+                }
+            },
+            "oneOf": [
+            {
+              "required": [
+                "itemId",
+                "elementId"
+              ]
+            },
+            {
+              "required": [
+                "itemLogicalId"
+              ]
+            }
+          ],
+          "additionalProperties": false
         },
         "Guid": {
             "type": "string",
