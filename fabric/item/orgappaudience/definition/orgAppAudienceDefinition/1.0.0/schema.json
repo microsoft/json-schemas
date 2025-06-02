@@ -30,7 +30,7 @@
                     {
                         "$ref": "#/definitions/AudienceAppItemElementReference"
                     }
-                ]                
+                ]
             },
             "maxItems": 1000
         }
@@ -88,21 +88,21 @@
                 }
             },
             "oneOf": [
-            {
-              "required": [
-                "itemId",
-                "folderObjectId",
-                "elementId",
-                "itemType"
-              ]
-            },
-            {
-              "required": [
-                "itemLogicalId"
-              ]
-            }
-          ],
-          "additionalProperties": false
+                {
+                    "required": [
+                        "itemId",
+                        "folderObjectId",
+                        "elementId",
+                        "itemType"
+                    ]
+                },
+                {
+                    "required": [
+                        "itemLogicalId"
+                    ]
+                }
+            ],
+            "additionalProperties": false
         },
         "AudienceAppItemElementReference": {
             "description": "Defines items that are only in the app, eg. links, overview, etc...",
@@ -115,30 +115,12 @@
                 "isElementHidden": {
                     "description": "Indicates whether the element is hidden in the audience.",
                     "type": "boolean"
-                },
-                "itemId": {
-                    "description": "Defines the item's internal unique identifier.",
-                    "$ref": "#/definitions/Guid"
-                },
-                "itemLogicalId": {
-                    "description": "Defines the item's logical unique identifier in Git repository.",
-                    "$ref": "#/definitions/Guid"
                 }
             },
-            "oneOf": [
-            {
-              "required": [
-                "itemId",
+            "required": [
                 "elementId"
-              ]
-            },
-            {
-              "required": [
-                "itemLogicalId"
-              ]
-            }
-          ],
-          "additionalProperties": false
+            ],
+            "additionalProperties": false
         },
         "Guid": {
             "type": "string",
