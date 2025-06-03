@@ -91,9 +91,7 @@
                 {
                     "required": [
                         "itemId",
-                        "folderObjectId",
-                        "elementId",
-                        "itemType"
+                        "folderObjectId"
                     ]
                 },
                 {
@@ -101,6 +99,10 @@
                         "itemLogicalId"
                     ]
                 }
+            ],
+            "required": [
+                "elementId",
+                "itemType"
             ],
             "additionalProperties": false
         },
