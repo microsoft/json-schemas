@@ -1,5 +1,19 @@
 # Releases
 
+## Jun 2025
+
+Sparkline calculation groups.
+
+- [bookmark 1.4.0](./definition/bookmark/CHANGELOG.md#1.4.0)
+- [filterConfiguration 1.2.0](./definition/filterConfiguration/CHANGELOG.md#1.2.0)
+- [formattingObjectDefinitions 1.4.0](./definition/formattingObjectDefinitions/CHANGELOG.md#1.4.0)
+- [page 2.0.0](./definition/page/CHANGELOG.md#2.0.0)
+- [report 2.0.0](./definition/report/CHANGELOG.md#2.0.0)
+- [report 2.1.0](./definition/report/CHANGELOG.md#2.1.0)
+- [visualConfiguration 2.1.0](./definition/visualConfiguration/CHANGELOG.md#2.1.0)
+- [visualContainer 2.1.0](./definition/visualContainer/CHANGELOG.md#2.1.0)
+- [visualContainerMobileState 2.1.0](./definition/visualContainerMobileState/CHANGELOG.md#2.1.0)
+
 ## May 2025
 
 Hierarchy matching, sort direction, and updates IDs for some advanced slicer objects.

@@ -1,5 +1,12 @@
 # Visual Container Mobile State Versions
 
+### 2.1.0
+
+<b>Released in: </b> June 2025 <br />
+<b>Notes: </b>
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.3.0` to `1.4.0`
+- Updates the reference to the `visualConfiguration` schema from `2.0.0` to `2.1.0`
+
 ### 2.0.0
 
 <b>Released in: </b> May 2025 <br />
