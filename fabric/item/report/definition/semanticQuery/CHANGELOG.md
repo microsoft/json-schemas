@@ -1,5 +1,11 @@
 # Semantic Query Versions
 
+### 1.3.0
+
+<b>Released in: </b> June 2025 <br />
+<b>Notes: </b> 
+- Added support for sparkline calculation groups
+
 ### 1.2.0
 
 <b>Released in: </b> September 2024 <br />
