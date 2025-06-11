@@ -2676,6 +2676,9 @@
                                 "required": [
                                     "progId"
                                 ]
+                            },
+                            "xllCustomFunctions": {
+                                "$ref": "#/definitions/extensionXllCustomFunctions"
                             }
                         },
                         "minProperties": 1
@@ -2735,9 +2738,6 @@
                             "icon",
                             "highResolutionIcon"
                         ]
-                    },
-                    "xllCustomFunctions": {
-                        "$ref": "#/definitions/extensionXllCustomFunctions"
                     }
                 },
                 "minProperties": 1,
