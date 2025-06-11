@@ -1,15 +1,10 @@
 {
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.1.0/schema.json",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.1.0/schema.embedded.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Visual configuration",
     "description": "Defines the configuration of visuals.",
     "type": "object",
     "properties": {
-        "$schema": {
-            "description": "Defines the schema to use for an item.",
-            "type": "string",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.1.0/schema.json"
-        },
         "visualType": {
             "description": "Name of the visual.",
             "type": "string"
@@ -48,7 +43,6 @@
     },
     "additionalProperties": false,
     "required": [
-        "$schema",
         "visualType"
     ],
     "definitions": {
