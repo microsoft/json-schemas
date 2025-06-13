@@ -32,10 +32,6 @@
         "disclaimer": {
             "$ref": "#/$defs/disclaimer"
         },
-        "sensitivity_label": {
-            "description": "This member is an object that specifies the sensitivity label for the DA. It is an optional member.",
-            "$ref": "#/$defs/sensitivity_label"
-        },
         "instructions": {
             "type": "string",
             "description": "Optional. Not localizable. The detailed instructions or guidelines on how the declarative agent should behave, its functions, and any behaviors to avoid. It MUST contain at least one nonwhitespace character and MUST be 8,000 characters or less.",
@@ -94,7 +90,6 @@
             "name",
             "description",
             "disclaimer",
-            "sensitivity_label",
             "instructions",
             "capabilities",
             "behavior_overrides",
@@ -113,21 +108,6 @@
                     "description": "",
                     "minLength": 1
                 }
-            }
-        },
-        "sensitivity_label": {
-            "type": "object",
-            "description": "A JSON object, when specified should match one of the GUIDs of the published sensitivity labels within the tenant to which it is being published. This label should be at least as restrictive as the most restrictive label on any knowledge files included in the agent. See https://learn.microsoft.com/en-us/purview/create-sensitivity-labels  for more information on sensitivity labels.",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The GUID of the sensitivity_label that is pulled from Purview API"
-                }
-            },
-            "propertyNames": {
-                "enum": [
-                    "id"
-                ]
             }
         },
         "capabilities": {
