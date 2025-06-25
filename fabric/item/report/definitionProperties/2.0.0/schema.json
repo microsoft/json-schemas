@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
   "title": "ReportDefinition",
   "description": "The ReportDefinition is stored as definition.pbir. It contains metadata about the overall file structure, holds core settings, and holds a reference to the semantic model used by this report. This file is required.",
   "definitions": {
-    "DatasetReferenceV1": {
+    "DatasetReference": {
       "title": "DatasetReference",
       "description": "The DatasetReference defines the semantic model that is bound to this report. It is required to have exactly one of either the byPath or byConnection properties. The byConnection property would typically be used for LiveConnect scenarios whereas byPath would point at a local semantic model.",
       "type": "object",
@@ -14,11 +14,11 @@
           "$ref": "#/definitions/ReportDatasetReferenceByPath"
         },
         "byConnection": {
-          "$ref": "#/definitions/ReportDatasetReferenceByConnectionV1"
+          "$ref": "#/definitions/ReportDatasetReferenceByConnection"
         }
       }
     },
-    "ReportDatasetReferenceByConnectionV1": {
+    "ReportDatasetReferenceByConnection": {
       "title": "ByConnection",
       "description": "Provides a reference to a remote semantic model using a connection string. The connection string must point to a semantic model hosted in the Microsoft Fabric service.  Connections to other Analysis Services semantic models must use a byPath reference to a semantic model definition containing a modelReference.json file.",
       "type": [
@@ -30,59 +30,11 @@
         "connectionString": {
           "title": "ConnectionString",
           "description": "The connection string referring to the remote semantic model.",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "pbiServiceModelId": {
-          "title": "PbiServiceModelId",
-          "description": "The unique identifier for the target semantic model in the Microsoft Fabric service.",
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pbiModelVirtualServerName": {
-          "title": "PbiModelVirtualServerName",
-          "description": "The virtual server name for the target semantic model in the Microsoft Fabric service.",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "pbiModelDatabaseName": {
-          "title": "PbiModelDatabaseName",
-          "description": "The database name for the target semantic model in the Microsoft Fabric service.",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "name": {
-          "title": "Name",
-          "description": "The name of the connection. The value of this property must be 'EntityDataSource'. This property will be removed in a future release.",
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "connectionType": {
-          "title": "ConnectionType",
-          "description": "The type of connection.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         }
       },
       "required": [
-        "connectionString",
-        "pbiServiceModelId",
-        "pbiModelVirtualServerName",
-        "pbiModelDatabaseName",
-        "name",
-        "connectionType"
+        "connectionString"
       ]
     },
     "ReportDatasetReferenceByPath": {
@@ -110,7 +62,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "pattern": "^https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/1.[0-9]+.[0-9]+/schema.json$"
+      "pattern": "^https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.[0-9]+.[0-9]+/schema.json$"
     },
     "version": {
       "title": "Version",
@@ -118,7 +70,7 @@
       "type": "string"
     },
     "datasetReference": {
-      "$ref": "#/definitions/DatasetReferenceV1"
+      "$ref": "#/definitions/DatasetReference"
     }
   },
   "required": [
