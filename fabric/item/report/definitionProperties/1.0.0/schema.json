@@ -4,7 +4,7 @@
   "title": "ReportDefinition",
   "description": "The ReportDefinition is stored as definition.pbir. It contains metadata about the overall file structure, holds core settings, and holds a reference to the semantic model used by this report. This file is required.",
   "definitions": {
-    "DatasetReferenceV1": {
+    "DatasetReference": {
       "title": "DatasetReference",
       "description": "The DatasetReference defines the semantic model that is bound to this report. It is required to have exactly one of either the byPath or byConnection properties. The byConnection property would typically be used for LiveConnect scenarios whereas byPath would point at a local semantic model.",
       "type": "object",
@@ -14,11 +14,11 @@
           "$ref": "#/definitions/ReportDatasetReferenceByPath"
         },
         "byConnection": {
-          "$ref": "#/definitions/ReportDatasetReferenceByConnectionV1"
+          "$ref": "#/definitions/ReportDatasetReferenceByConnection"
         }
       }
     },
-    "ReportDatasetReferenceByConnectionV1": {
+    "ReportDatasetReferenceByConnection": {
       "title": "ByConnection",
       "description": "Provides a reference to a remote semantic model using a connection string. The connection string must point to a semantic model hosted in the Microsoft Fabric service.  Connections to other Analysis Services semantic models must use a byPath reference to a semantic model definition containing a modelReference.json file.",
       "type": [
@@ -118,7 +118,7 @@
       "type": "string"
     },
     "datasetReference": {
-      "$ref": "#/definitions/DatasetReferenceV1"
+      "$ref": "#/definitions/DatasetReference"
     }
   },
   "required": [
