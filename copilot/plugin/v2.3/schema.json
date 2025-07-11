@@ -463,14 +463,17 @@
                     ]
                 },
                 "allowed_host": {
-                    "type": "string",
+                    "type": "array",
                     "description": "An optional JSON array of enumerated strings that can take values as mail, workbook, document or presentation. The value represent the host apps this LocalPlugin can run-in.",
-                    "enum": [
-                        "mail",
-                        "workbook",
-                        "document",
-                        "presentation"
-                    ]
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "mail",
+                            "workbook",
+                            "document",
+                            "presentation"
+                        ]
+                    }
                 }
             },
             "additionalProperties": false,
