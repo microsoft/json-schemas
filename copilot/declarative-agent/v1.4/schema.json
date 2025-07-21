@@ -108,7 +108,10 @@
                     "description": "A JSON string that contains the disclaimer message. Characters beyond 500 MAY be ignored.",
                     "minLength": 1
                 }
-            }
+            },
+            "required": [
+                "text"
+            ]
         },
         "capabilities": {
             "base-capability": {
