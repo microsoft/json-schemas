@@ -550,21 +550,21 @@
                         "source": {
                             "type": "string",
                             "enum": [ "standard", "microsoftCopilotStudio", "onedriveSharepoint" ],
-                            "description": "The partner source through which the bot is registered."
+                            "description": "The partner source through which the bot is registered. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually."
                         },
                         "environment": {
                             "type": "string",
-                            "description": "A Power Platform environment that serves as a container for building apps under a Microsoft 365 tenant and can only be accessed by users within that tenant.",
+                            "description": "A Power Platform environment that serves as a container for building apps under a Microsoft 365 tenant and can only be accessed by users within that tenant. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
                             "maxLength": 128
                         },
                         "schemaName": {
                             "type": "string",
-                            "description": "The Copilot Studio copilot schema name.",
+                            "description": "The Copilot Studio copilot schema name. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
                             "maxLength": 128
                         },
                         "clusterCategory": {
                             "type": "string",
-                            "description": "The core services cluster category for Copilot Studio copilots.",
+                            "description": "The core services cluster category for Copilot Studio copilots. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
                             "maxLength": 128
                         }
                         },
