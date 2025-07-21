@@ -29,6 +29,9 @@
             "maxLength": 1000,
             "pattern": "^(\\[\\[)[a-zA-Z_][a-zA-Z0-9_]*(\\]\\])$|^(?!(.*?\\[\\[.*?|.*?\\]\\].*?)).*$"
         },
+        "disclaimer": {
+          "$ref": "#/$defs/disclaimer"
+        },
         "instructions": {
             "type": "string",
             "description": "Optional. Not localizable. The detailed instructions or guidelines on how the declarative agent should behave, its functions, and any behaviors to avoid. It MUST contain at least one nonwhitespace character and MUST be 8,000 characters or less.",
@@ -86,6 +89,7 @@
             "version",
             "name",
             "description",
+            "disclaimer",
             "instructions",
             "capabilities",
             "behavior_overrides",
@@ -95,6 +99,17 @@
         ]
     },
     "$defs": {
+        "disclaimer": {
+            "type": "object",
+            "description":  "An optional JSON object containing a disclaimer message that, if provided, will be displayed to users at the start of a conversation to satisfy legal or compliance requirements. The object contains a required 'text' string property that MUST NOT be null and MUST contain at least 1 non-whitespace character.",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "A JSON string that contains the disclaimer message. Characters beyond 500 MAY be ignored.",
+                    "minLength": 1
+                }
+            }
+        },
         "capabilities": {
             "base-capability": {
                 "type": "object",
@@ -518,7 +533,7 @@
         },
         "behavior-overrides": {
             "type": "object",
-            "description": "A JSON object that contains configuration settings that modify the behaviour of the DA orchestration.",
+            "description": "A JSON object that contains configuration settings that modify the behavior of the DA orchestration.",
             "properties": {
                 "special_instructions": {
                     "description": "An object that contains special instructions for the declarative agent.",
