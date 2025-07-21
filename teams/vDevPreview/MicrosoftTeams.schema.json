@@ -544,7 +544,7 @@
                         "description": "The set of requirements for the bot."
                     },
                     "registrationInfo": {
-                        "description": "Information about the registration of the bot, including partner source.",
+                        "description": "System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
                         "type": "object",
                         "properties": {
                         "source": {
