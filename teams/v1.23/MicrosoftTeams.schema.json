@@ -442,6 +442,34 @@
           },
           "requirementSet": {
             "$ref": "#/definitions/elementRequirementSet"
+          },
+          "registrationInfo": {
+            "description": "Information about the registration of the bot, including partner source.",
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [ "standard", "microsoftCopilotStudio", "onedriveSharepoint" ],
+                "description": "The partner source through which the bot is registered."
+              },
+              "environment": {
+                "type": "string",
+                "description": "A Power Platform environment that serves as a container for building apps under a Microsoft 365 tenant and can only be accessed by users within that tenant.",
+                "maxLength": 128
+              },
+              "schemaName": {
+                "type": "string",
+                "description": "The Copilot Studio copilot schema name.",
+                "maxLength": 128
+              },
+              "clusterCategory": {
+                "type": "string",
+                "description": "The core services cluster category for Copilot Studio copilots.",
+                "maxLength": 128
+              }
+            },
+            "required": [ "source" ],
+            "additionalProperties": false
           }
         },
         "required": [
