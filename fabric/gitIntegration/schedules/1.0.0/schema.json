@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Fabric item schedules Git integration configuration ",
+  "title": "Fabric item schedules Git integration configuration",
   "description": "Configuration file used by fabric Git integration on item schedules in Git repositories",
   "type": "object",
   "properties": {
@@ -20,7 +20,7 @@
         "properties": {
             "enabled": {
                 "type": "boolean",
-                "description": "Whether this schedule is enabled. True - Enabled, False - Disabled."
+                "description": "Whether this schedule is enabled. True - Enabled, False - Disabled"
             },
             "jobType": {
                 "type": "string",
@@ -28,7 +28,7 @@
             },
             "configuration": {
                 "$ref": "#/definitions/scheduleConfiguration",
-                "description": "The actual data contains the time/weekdays of this schedule."
+                "description": "The actual data contains the time/weekdays of this schedule"
             }
         },
         "required": ["enabled", "jobType", "configuration"]
@@ -37,37 +37,37 @@
         "type": "object",
         "properties": {
             "type": {
-                "description": "A string represents the type of the schedule.",
+                "description": "A string represents the type of the schedule",
                 "type": "string",
                 "enum": [ "Cron", "Daily", "Weekly", "Monthly" ]
             },
             "startDateTime": {
-                "description": "The start time for this schedule.",
+                "description": "The start time for this schedule",
                 "type": "string",
                 "format": "date-time"
             },
             "endDateTime": {
-                "description": "The end time for this schedule.",
+                "description": "The end time for this schedule",
                 "type": "string",
                 "format": "date-time"
             },
             "localTimeZoneId": {
-                "description": "The time zone identifier registry on local computer for windows.",
+                "description": "The time zone identifier registry on local computer for windows",
                 "type": "string"
             },
             "interval": {
-                "description": "The time interval in minutes.",
+                "description": "The time interval in minutes",
                 "type": "number"
             },
             "times": {
-                "description": "A list of time slots in hh:mm format, at most 100 elements are allowed.",
+                "description": "A list of time slots in hh:mm format, at most 100 elements are allowed",
                 "type": "array",
                 "items": {
                     "type": "string"
                 }
             },
             "weekdays": {
-                "description": "A list of weekdays, at most seven elements are allowed.",
+                "description": "A list of weekdays, at most seven elements are allowed",
                 "type": "array",
                 "items": {
                     "$ref": "#/definitions/dayOfWeek"
@@ -81,7 +81,7 @@
                 }
             },
             "recurrence": {
-                "description": "Specifies the monthly job repeat interval. For example, when set to 1 the job is triggered every month.",
+                "description": "Specifies the monthly job repeat interval. For example, when set to 1 the job is triggered every month",
                 "type": "number"
             },
             "occurrence": {
