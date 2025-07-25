@@ -110,7 +110,7 @@
             },
             "value": {
                 "description": "Parameter value",
-                "type": "object"
+                "type": "string"
             }
         },
         "required": ["name", "type", "value"]
