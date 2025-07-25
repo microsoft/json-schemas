@@ -137,7 +137,7 @@
                 "$ref": "#/definitions/dayOfWeek"
             }
         },
-        "required": ["type"]
+        "required": ["occurrenceType"]
     }
   }
 }
