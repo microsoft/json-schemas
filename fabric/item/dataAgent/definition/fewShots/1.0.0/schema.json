@@ -1,0 +1,48 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/fewShots/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Agent Few Shot Examples",
+  "description": "The few shot examples associated with a data source.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the fewshots file (e.g., \"1.0.0\")."
+    },
+    "fewShots": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The list of few shots.",
+      "items": {
+        "type": "object",
+        "title": "Data Agent Few Shot Example Metadata",
+        "description": "Represents the properties of a single few shot example.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the example, which is a GUID.",
+            "format": "uuid"
+          },
+          "question": {
+            "type": "string",
+            "description": "The question related to the few shot example."
+          },
+          "query": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The example query."
+          }
+        },
+        "required": [ "id", "question" ]
+      }
+    }
+  },
+  "required": [ "$schema" ]
+}
