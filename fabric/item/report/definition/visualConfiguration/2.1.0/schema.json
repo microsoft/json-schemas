@@ -101,7 +101,7 @@
             "type": "object",
             "properties": {
                 "field": {
-                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer",
+                    "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer",
                     "description": "Field to sort by"
                 },
                 "direction": {
@@ -173,7 +173,7 @@
             "type": "object",
             "properties": {
                 "field": {
-                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer",
+                    "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer",
                     "description": "The data field from the semantic model."
                 },
                 "queryRef": {
@@ -212,7 +212,7 @@
             "type": "object",
             "properties": {
                 "parameterExpr": {
-                    "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer",
+                    "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer",
                     "description": "Defines the parameter field."
                 },
                 "index": {
@@ -278,7 +278,7 @@
                     "description": "Describes the instances that are expanded.\nOptional for the root expansion state.\nMust by Literal expressions.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                        "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer"
                     }
                 },
                 "isToggled": {
@@ -303,7 +303,7 @@
                     "description": "Describes the instances that are expanded.\nMust by Literal expressions.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                        "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer"
                     }
                 },
                 "isToggled": {
@@ -331,7 +331,7 @@
                     "description": "Describes the fields in the visual.",
                     "type": "array",
                     "items": {
-                        "$ref": "../../semanticQuery/1.2.0/schema.json#/definitions/QueryExpressionContainer"
+                        "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer"
                     }
                 },
                 "isCollapsed": {
