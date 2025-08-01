@@ -1,0 +1,31 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/stageConfiguration/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Agent Stage Configuration",
+  "description": "The top-level configuration for a data agent, version 2.1. As stored. This is per stage, so sandbox and production each have their own.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the configuration file (e.g., \"1.0.0\")."
+    },
+    "aiInstructions": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The AI instructions for the Data Agent."
+    },
+    "experimental": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The experimental properties of the configuration."
+    }
+  },
+  "required": [ "$schema" ]
+}

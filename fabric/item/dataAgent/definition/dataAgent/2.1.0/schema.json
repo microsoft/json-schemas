@@ -1,0 +1,17 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataAgent/2.1.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Agent Definition",
+  "description": "The top-level configuration for a data agent. Specifies the schema version.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the overall data agent configuration (e.g., \"2.1.0\")."
+    }
+  },
+  "required": [ "$schema" ]
+}
