@@ -1,0 +1,205 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/1.0.0/schema.json",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Map Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "The schema version for the map definition"
+    },
+    "basemap": {
+      "type": "object",
+      "description": "Configuration for the base map settings",
+      "additionalProperties": false,
+      "properties": {
+        "options": {
+          "type": ["string", "null"],
+          "description": "Options for the map"
+        },
+        "controls": {
+          "type": "object",
+          "description": "Map control settings",
+          "additionalProperties": false,
+          "properties": {
+            "zoom": {
+              "type": ["boolean", "null"],
+              "description": "Enable zoom control"
+            },
+            "pitch": {
+              "type": ["boolean", "null"],
+              "description": "Enable pitch control"
+            },
+            "compass": {
+              "type": ["boolean", "null"],
+              "description": "Enable compass control"
+            },
+            "fullscreen": {
+              "type": ["boolean", "null"],
+              "description": "Enable fullscreen control"
+            },
+            "scale": {
+              "type": ["boolean", "null"],
+              "description": "Enable scale control"
+            },
+            "traffic": {
+              "type": ["boolean", "null"],
+              "description": "Enable traffic control"
+            }
+          }
+        },
+        "backgroundColor": {
+          "type": ["string", "null"],
+          "description": "Background color of the map"
+        },
+        "theme": {
+          "type": ["string", "null"],
+          "description": "Theme for the map"
+        }
+      }
+    },
+    "dataSources": {
+      "type": "object",
+      "description": "Data sources for the map",
+      "additionalProperties": false,
+      "properties": {
+        "lakehouses": {
+          "type": "array",
+          "description": "Array of lakehouse data sources",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "workspaceId": {
+                "type": "string",
+                "description": "The workspace ID of the lakehouse",
+                "format": "uuid"
+              },
+              "artifactId": {
+                "type": "string",
+                "description": "The artifact ID of the lakehouse",
+                "format": "uuid"
+              }
+            },
+            "required": ["workspaceId", "artifactId"]
+          }
+        },
+        "kqlDataBases": {
+          "type": "array",
+          "description": "Array of KQL database data sources",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "workspaceId": {
+                "type": "string",
+                "description": "The workspace ID of the KQL database",
+                "format": "uuid"
+              },
+              "artifactId": {
+                "type": "string",
+                "description": "The artifact ID of the KQL database",
+                "format": "uuid"
+              }
+            },
+            "required": ["workspaceId", "artifactId"]
+          }
+        }
+      }
+    },
+    "layerSources": {
+      "type": "array",
+      "description": "Array of layer sources for the map",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the layer source",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the layer source"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the layer source"
+          },
+          "options": {
+            "type": ["string", "null"],
+            "description": "Options for the layer source"
+          },
+          "parentArtifactId": {
+            "type": "string",
+            "description": "ID of the parent artifact",
+            "format": "uuid"
+          },
+          "relativePath": {
+            "type": ["string", "null"],
+            "description": "Relative path to the data source"
+          },
+          "querysetTabId": {
+            "type": ["string", "null"],
+            "description": "ID of the queryset and tab in format 'querysetId_tabId'",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}_[0-9a-zA-Z]+$"
+          },
+          "latitudeColumnName": {
+            "type": ["string", "null"],
+            "description": "Name of the latitude column"
+          },
+          "longitudeColumnName": {
+            "type": ["string", "null"],
+            "description": "Name of the longitude column"
+          },
+          "geometryColumnName": {
+            "type": ["string", "null"],
+            "description": "Name of the geometry column"
+          },
+          "refreshIntervalMs": {
+            "type": "integer",
+            "description": "Refresh interval in milliseconds",
+            "minimum": 0
+          }
+        },
+        "required": ["id", "name", "type", "parentArtifactId", "refreshIntervalMs"]
+      }
+    },
+    "layerSettings": {
+      "type": "array",
+      "description": "Array of layer settings for the map",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the layer",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the layer"
+          },
+          "sourceId": {
+            "type": "string",
+            "description": "ID of the associated layer source",
+            "format": "uuid"
+          },
+          "sourceLayerId": {
+            "type": ["string", "null"],
+            "description": "ID of the specific layer within the source"
+          },
+          "options": {
+            "type": "string",
+            "description": "Options for the layer rendering"
+          }
+        },
+        "required": ["id", "name", "sourceId", "options"]
+      }
+    }
+  },
+  "required": ["schemaVersion"]
+}
