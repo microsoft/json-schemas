@@ -35,10 +35,6 @@
               "type": ["boolean", "null"],
               "description": "Enable compass control"
             },
-            "fullscreen": {
-              "type": ["boolean", "null"],
-              "description": "Enable fullscreen control"
-            },
             "scale": {
               "type": ["boolean", "null"],
               "description": "Enable scale control"
@@ -164,7 +160,7 @@
             "minimum": 0
           }
         },
-        "required": ["id", "name", "type", "parentArtifactId", "refreshIntervalMs"]
+        "required": ["id", "name", "type", "parentArtifactId"]
       }
     },
     "layerSettings": {
@@ -197,9 +193,9 @@
             "description": "Options for the layer rendering"
           }
         },
-        "required": ["id", "name", "sourceId", "options"]
+        "required": ["id", "name", "sourceId"]
       }
     }
   },
-  "required": ["schemaVersion"]
+  "required": ["schema"]
 }
