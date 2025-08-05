@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "schema": {
+    "$schema": {
       "type": "string",
       "description": "The schema version for the map definition"
     },
