@@ -197,5 +197,5 @@
       }
     }
   },
-  "required": ["schema"]
+  "required": ["$schema"]
 }
