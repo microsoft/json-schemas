@@ -4,7 +4,7 @@
 
 <b>Released in: </b> August 2025 <br />
 <b>Notes: </b> 
-- Support for Translytical Apps
+- Updates the reference to the `visualConfiguration` schema from `2.1.0` to `2.2.0`
 
 ### 2.1.0
 
