@@ -52,7 +52,7 @@
                 },
                 "highlightMatching": {
                     "description": "Describes how the Selector should behave towards Highlighted Values within the Scope matched by that Selector.",
-                    "default": "ValuesOnly",
+                    "default": 0,
                     "type": "number",
                     "anyOf": [
                         {
