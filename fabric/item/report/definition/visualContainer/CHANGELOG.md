@@ -1,5 +1,11 @@
 # Visual Container Versions
 
+### 2.2.0
+
+<b>Released in: </b> August 2025 <br />
+<b>Notes: </b> 
+- Support for Translytical Apps
+
 ### 2.1.0
 
 <b>Released in: </b> June 2025 <br />
