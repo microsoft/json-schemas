@@ -1,5 +1,11 @@
 # Visual Container Mobile State Versions
 
+### 2.2.0
+
+<b>Released in: </b> August 2025 <br />
+<b>Notes: </b> 
+- Updates the reference to the `visualConfiguration` schema from `2.1.0` to `2.2.0`
+
 ### 2.1.0
 
 <b>Released in: </b> June 2025 <br />

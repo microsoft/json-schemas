@@ -1,15 +1,10 @@
 {
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.1.0/schema.json",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.2.0/schema.embedded.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Visual configuration",
     "description": "Defines the configuration of visuals.",
     "type": "object",
     "properties": {
-        "$schema": {
-            "description": "Defines the schema to use for an item.",
-            "type": "string",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.1.0/schema.json"
-        },
         "visualType": {
             "description": "Name of the visual.",
             "type": "string"
@@ -48,7 +43,6 @@
     },
     "additionalProperties": false,
     "required": [
-        "$schema",
         "visualType"
     ],
     "definitions": {
@@ -213,14 +207,15 @@
             "properties": {
                 "parameterExpr": {
                     "$ref": "../../semanticQuery/1.3.0/schema.json#/definitions/QueryExpressionContainer",
-                    "description": "Defines the parameter field."
+                    "description": "Defines the parameter field.\nThis contains the DAX expression (in semantic model) that defines what fields will be projected in the field well from the parameter."
                 },
                 "index": {
-                    "description": "Index at which parameter fields begin in the projections list.",
+                    "description": "Index at which parameter fields begin in the projections list.\nThis represents the position in the field well where the field parameter is located.\nA field well can contain either projections or field parameters.\nWhen this index is changed, it affects where the field parameter's projected fields will be inserted\nin the projections list.",
                     "type": "number"
                 },
                 "length": {
-                    "description": "Number of fields replaced by the parameter in the projections list.",
+                    "description": "Number of projections that will be populated starting from the field parameter's index position.\nThis indicates how many fields the parameter will project into when evaluated.\n\nThis value will be re-computed when the parameter is evaluated, which is when the visual is rendered.",
+                    "minLength": 0,
                     "type": "number"
                 },
                 "sortDirection": {
@@ -831,7 +826,8 @@
                 "navigationSection": {},
                 "tooltip": {},
                 "tooltipPlaceholderText": {},
-                "webUrl": {}
+                "webUrl": {},
+                "dataFunction": {}
             },
             "additionalProperties": false
         },

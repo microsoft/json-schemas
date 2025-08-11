@@ -1,5 +1,13 @@
 # Releases
 
+## August 2025
+
+Support for Translytical Apps
+
+- [visualConfiguration 2.2.0](./definition/visualConfiguration/CHANGELOG.md#2.2.0)
+- [visualContainer 2.2.0](./definition/visualContainer/CHANGELOG.md#2.2.0)
+- [visualContainerMobileState 2.2.0](./definition/visualContainerMobileState/CHANGELOG.md#2.2.0)
+
 ## Jun 2025
 
 Sparkline calculation groups.
