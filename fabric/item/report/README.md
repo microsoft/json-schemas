@@ -2,8 +2,9 @@
 
 ## August 2025
 
-Support for Translytical Apps
+A new PBIR-aligned ThemeVersion definition for ThemeMetadata. Support for Translytical Apps.
 
+- [report 3.0.0](./definition/report/CHANGELOG.md#3.0.0)
 - [visualConfiguration 2.2.0](./definition/visualConfiguration/CHANGELOG.md#2.2.0)
 - [visualContainer 2.2.0](./definition/visualContainer/CHANGELOG.md#2.2.0)
 - [visualContainerMobileState 2.2.0](./definition/visualContainerMobileState/CHANGELOG.md#2.2.0)
