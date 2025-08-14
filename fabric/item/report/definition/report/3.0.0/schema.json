@@ -1,5 +1,5 @@
 {
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/2.1.0/schema.json",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Report",
     "description": "Defines a report and its pages, visuals, settings, and additional information.",
@@ -8,7 +8,7 @@
         "$schema": {
             "description": "Defines the schema to use for an item.",
             "type": "string",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/2.1.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json"
         },
         "themeCollection": {
             "$ref": "#/definitions/ThemeCollection",
@@ -125,8 +125,8 @@
                     "type": "string"
                 },
                 "reportVersionAtImport": {
-                    "description": "Version when the theme was added to the report.",
-                    "type": "string"
+                    "$ref": "#/definitions/ThemeVersion",
+                    "description": "Versions when the theme was added to the report."
                 },
                 "type": {
                     "$ref": "#/definitions/ThemeResourcePackageType",
@@ -138,6 +138,32 @@
                 "name",
                 "reportVersionAtImport",
                 "type"
+            ]
+        },
+        "ThemeVersion": {
+            "type": "object",
+            "properties": {
+                "visual": {
+                    "description": "The max visual container version at import.",
+                    "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+                    "type": "string"
+                },
+                "page": {
+                    "description": "The max page version at import.",
+                    "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+                    "type": "string"
+                },
+                "report": {
+                    "description": "The max report version at import.",
+                    "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "page",
+                "report",
+                "visual"
             ]
         },
         "ThemeResourcePackageType": {
