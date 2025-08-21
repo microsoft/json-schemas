@@ -32,6 +32,10 @@
         "disclaimer": {
             "$ref": "#/$defs/disclaimer"
         },
+        "sensitivity_label": {
+            "description": "This member is an object that specifies the sensitivity label for the DA. It is an optional member.",
+            "$ref": "#/$defs/sensitivity_label"
+        },
         "instructions": {
             "type": "string",
             "description": "Optional. Not localizable. The detailed instructions or guidelines on how the declarative agent should behave, its functions, and any behaviors to avoid. It MUST contain at least one nonwhitespace character and MUST be 8,000 characters or less.",
@@ -90,6 +94,7 @@
             "name",
             "description",
             "disclaimer",
+            "sensitivity_label",
             "instructions",
             "capabilities",
             "behavior_overrides",
@@ -113,6 +118,22 @@
                 "text"
             ]
         },
+        "sensitivity_label": {
+            "type": "object",
+            "description": "A JSON object, when specified should match one of the GUIDs of the published sensitivity labels within the tenant to which it is being published. This label should be at least as restrictive as the most restrictive label on any knowledge files included in the agent. See https://learn.microsoft.com/en-us/purview/create-sensitivity-labels  for more information on sensitivity labels.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The GUID of the sensitivity_label that is pulled from Purview API",
+                    "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
+                }
+            },
+            "propertyNames": {
+                "enum": [
+                    "id"
+                ]
+            }
+        },
         "capabilities": {
             "base-capability": {
                 "type": "object",
@@ -120,7 +141,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, ScenarioModels, People and GraphicArt.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, ScenarioModels, People, GraphicArt, Meetings and EmbeddedKnowledge.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -154,6 +175,9 @@
                             },
                             {
                                 "const": "Meetings"
+                            },
+                            {
+                                "const": "EmbeddedKnowledge"
                             }
                         ]
                     }
@@ -191,11 +215,88 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/meetings"
+                    },
+                    {
+                        "$ref": "#/$defs/capabilities/embedded-knowledge"
                     }
                 ],
                 "required": [
                     "name"
                 ]
+            },
+            "embedded-knowledge": {
+                "type": "object",
+                "description": "A JSON object whose presence indicates that the DA will be able to use files locally in the app package as knowledge. The object MUST contain either a files member or a embedded_resource_snapshot_id member, but not both.",
+                "properties": {
+                    "name": {
+                        "const": "EmbeddedKnowledge",
+                        "description": "Required. Must be set to EmbeddedKnowledge."
+                    },
+                    "embedded_resource_snapshot_id": {
+                        "type": "string",
+                        "description": "A JSON string identifier provisioned by a an external file container storage service that can be used to locate the embedded knowledge files.",
+                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\\\]\\\\])$"
+                    },
+                    "files": {
+                        "type": "array",
+                        "description": "A JSON array of File Object. List of objects identifying files that contain knowledge the Agent can use for grounding.",
+                        "items": {
+                            "$ref": "#/$defs/capabilities/embedded-knowledge-file"
+                        }
+                    }
+                },
+                "oneOf": [
+                    {
+                        "required": [
+                            "embedded_resource_snapshot_id"
+                        ],
+                        "not": {
+                            "required": [
+                                "files"
+                            ]
+                        }
+                    },
+                    {
+                        "required": [
+                            "files"
+                        ],
+                        "not": {
+                            "required": [
+                                "embedded_resource_snapshot_id"
+                            ]
+                        }
+                    }
+                ],
+                "required": [
+                    "name"
+                ],
+                "propertyNames": {
+                    "enum": [
+                        "name",
+                        "embedded_resource_snapshot_id",
+                        "files"
+                    ]
+                }
+            },
+            "embedded-knowledge-file": {
+                "type": "object",
+                "description": "A JSON object that identifies a file via the relative path.",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "A JSON string that contains the file relative path for the embedded file. It is a required member.",
+                        "minLength": 1,
+                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\\\]\\\\])$"
+                    }
+                },
+                "required": [
+                    "file"
+                ],
+                "propertyNames": {
+                    "enum": [
+                        "file"
+                    ]
+                }
             },
             "people": {
                 "type": "object",
