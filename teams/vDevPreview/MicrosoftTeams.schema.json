@@ -510,7 +510,7 @@
                                 },
                                 "commands": {
                                     "type": "array",
-                                    "maxItems": 1,
+                                    "maxItems": 12,
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
