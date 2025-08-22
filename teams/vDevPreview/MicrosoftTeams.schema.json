@@ -510,7 +510,7 @@
                                 },
                                 "commands": {
                                     "type": "array",
-                                    "maxItems": 10,
+                                    "maxItems": 1,
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
@@ -2746,6 +2746,104 @@
                                 "additionalProperties": false,
                                 "required": [
                                     "officeAddinId"
+                                ]
+                            },
+                            "windowsExtensions": {
+                                "type": "object",
+                                "description": "Configures how to hide windows native extensions",
+                                "properties": {
+                                "effect": {
+                                    "type": "string",
+                                    "description": "Specifies the effect to take while installing the web add-in if the equivalent add-in is installed.",
+                                    "enum": [
+                                    "userOptionToDisable",
+                                    "disableWithNotification"
+                                    ]
+                                },
+                                "comAddin": {
+                                    "type": "object",
+                                    "description": "Specifies the equivalent COM add-ins",
+                                    "properties": {
+                                    "progIds": {
+                                        "type": "array",
+                                        "description": "Specifies the program Ids of the equivalent COM add-ins",
+                                        "minItems": 1,
+                                        "maxItems": 5,
+                                        "items": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 64
+                                        }
+                                    }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                    "progIds"
+                                    ]
+                                },
+                                "automationAddin": {
+                                    "type": "object",
+                                    "description": "Specifies the equivalent automation add-ins",
+                                    "properties": {
+                                    "progIds": {
+                                        "type": "array",
+                                        "description": "Specifies the program Ids of the equivalent automation add-ins",
+                                        "minItems": 1,
+                                        "maxItems": 5,
+                                        "items": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 64
+                                        }
+                                    }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                    "progIds"
+                                    ]
+                                },
+                                "xllCustomFunctions": {
+                                    "type": "object",
+                                    "description": "Specifies the XLL-based add-ins custom function",
+                                    "properties": {
+                                    "fileNames": {
+                                        "type": "array",
+                                        "description": "Specifies the file names of the XLL-based add-ins custom function",
+                                        "minItems": 1,
+                                        "maxItems": 5,
+                                        "items": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 64
+                                        }
+                                    }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                    "fileNames"
+                                    ]
+                                }
+                                },
+                                "additionalProperties": false,
+                                "anyOf": [
+                                {
+                                    "required": [
+                                    "effect",
+                                    "comAddin"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                    "effect",
+                                    "automationAddin"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                    "effect",
+                                    "xllCustomFunctions"
+                                    ]
+                                }
                                 ]
                             }
                         },
