@@ -2762,11 +2762,11 @@
                                 },
                                 "comAddin": {
                                     "type": "object",
-                                    "description": "Specifies the equivalent COM add-ins",
+                                    "description": "Specifies the equivalent COM or VSTO add-ins",
                                     "properties": {
                                     "progIds": {
                                         "type": "array",
-                                        "description": "Specifies the program Ids of the equivalent COM add-ins",
+                                        "description": "Specifies the program Ids of the equivalent COM add-ins and the names of equivalent VSTO add-ins",
                                         "minItems": 1,
                                         "maxItems": 5,
                                         "items": {
