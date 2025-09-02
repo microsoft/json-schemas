@@ -1,0 +1,29 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/mlExperiment/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dependencies",
+  "type": "object",
+  "properties": {
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ArtifactType": {
+            "type": "string",
+            "description": "Type of the artifact, e.g., 'SynapseNotebook'."
+          },
+          "ArtifactObjectId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier of the artifact."
+          }
+        },
+        "required": ["ArtifactType", "ArtifactObjectId"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["dependencies"],
+  "additionalProperties": false
+}
