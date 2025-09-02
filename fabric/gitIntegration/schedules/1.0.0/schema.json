@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Fabric item schedules Git integration configuration",
+  "description": "Configuration file used by fabric Git integration on item schedules in Git repositories",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Link to json schema in json repository"
+    },
+    "schedules": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/schedule" }
+    }
+  },
+  "required": ["$schema", "schedules"],
+  "definitions": {
+    "schedule": {
+        "type": "object",
+        "properties": {
+            "enabled": {
+                "type": "boolean",
+                "description": "Whether this schedule is enabled. True - Enabled, False - Disabled"
+            },
+            "jobType": {
+                "type": "string",
+                "description": "The job type."
+            },
+            "configuration": {
+                "$ref": "#/definitions/scheduleConfiguration",
+                "description": "The actual data contains the time/weekdays of this schedule"
+            }
+        },
+        "required": ["enabled", "jobType", "configuration"]
+    },
+    "scheduleConfiguration": {
+        "type": "object",
+        "properties": {
+            "type": {
+                "description": "A string represents the type of the schedule",
+                "type": "string",
+                "enum": [ "Cron", "Daily", "Weekly", "Monthly" ]
+            },
+            "startDateTime": {
+                "description": "The start time for this schedule",
+                "type": "string",
+                "format": "date-time"
+            },
+            "endDateTime": {
+                "description": "The end time for this schedule",
+                "type": "string",
+                "format": "date-time"
+            },
+            "localTimeZoneId": {
+                "description": "The time zone identifier registry on local computer for windows",
+                "type": "string"
+            },
+            "interval": {
+                "description": "The time interval in minutes",
+                "type": "number"
+            },
+            "times": {
+                "description": "A list of time slots in hh:mm format, at most 100 elements are allowed",
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "weekdays": {
+                "description": "A list of weekdays, at most seven elements are allowed",
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/dayOfWeek"
+                }
+            },
+            "parameters": {
+                "description": "A list of parameters",
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/parameter"
+                }
+            },
+            "recurrence": {
+                "description": "Specifies the monthly job repeat interval. For example, when set to 1 the job is triggered every month",
+                "type": "number"
+            },
+            "occurrence": {
+                "description": "Specifies the day for triggering jobs",
+                "$ref": "#/definitions/monthlyOccurrence"
+            }
+        },
+        "required": ["type"]
+    },
+    "dayOfWeek":{
+        "type": "string",
+        "enum": [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",  "Friday", "Saturday" ]
+    },
+    "parameter": {
+        "type": "object",
+        "description": "Job parameter.",
+        "properties": {
+            "name": {
+                "description": "Parameter name",
+                "type": "string"
+            },
+            "type": {
+                "description": "Parameter type",
+                "type": "string",
+                "enum": [ "VariableReference"]
+            },
+            "value": {
+                "description": "Parameter value",
+                "type": "string"
+            }
+        },
+        "required": ["name", "type", "value"]
+    },
+    "monthlyOccurrence": {
+        "type": "object",
+        "properties": {
+            "occurrenceType": {
+                "description": "Occurrence type",
+                "type": "string",
+                "enum": [ "DayOfMonth", "OrdinalWeekday"]
+            },
+            "dayOfMonth": {
+                "description": "Specifies a date to trigger the job, using a value between 1 and 31",
+                "type": "number"
+            },
+            "weekIndex": {
+                "description": "The week of the month",
+                "type": "string",
+                "enum": [ "First", "Second", "Third", "Fourth", "Fifth" ]
+            },
+            "WeekDay": {
+                "description": "Week day for triggering jobs",
+                "$ref": "#/definitions/dayOfWeek"
+            }
+        },
+        "required": ["occurrenceType"]
+    }
+  }
+}
