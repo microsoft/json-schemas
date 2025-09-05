@@ -181,6 +181,10 @@
         "type": "string",
         "maxLength": 2048
       },
+      "^extensions\\[[0-9]\\]\\.runtimes\\[[1]?[0-9]\\]\\.customFunctions\\.metadataUrl$": {
+        "type": "string",
+        "maxLength": 2048
+      },
       "^extensions\\[[0-9]\\]\\.runtimes\\[[1]?[0-9]\\]\\.customFunctions\\.functions\\[[0-9]\\]\\.name$": {
         "type": "string",
         "maxLength": 64
