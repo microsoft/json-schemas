@@ -1778,7 +1778,7 @@
             "type": "array",
             "description": "Specifies the set of actions supported by this runtime. An action is either running a JavaScript function or opening a view such as a task pane.",
             "minItems": 1,
-            "maxItems": 20,
+            "maxItems": 150,
             "items": {
                 "$ref": "#/definitions/extensionRuntimesActionsItem"
             },
@@ -1890,12 +1890,13 @@
                 "type": "boolean",
                 "description": "Allows a custom function to accept Excel data types as parameters and return values.",
                 "default": false
+              },
+              "metadataUrl": {
+                "$ref": "#/definitions/httpsUrl",
+                "description": "The full URL of a metadata json file with default locale."
               }
             },
-            "required": [
-              "functions",
-              "namespace"
-            ]
+            "additionalProperties": false
         },
         "extensionCustomFunctionsNamespace": {
             "type": "object",
@@ -2045,7 +2046,7 @@
                 "description": "Must be either scalar (a non-array value) or matrix (a 2-dimensional array)."
               },
               "optional": {
-                "type": "boolean",
+                "type": ["boolean", "null"],
                 "default": false,
                 "description": "If true, the parameter is optional."
               },
@@ -2106,9 +2107,28 @@
                 },
                 "minItems": 1,
                 "maxItems": 20000
+              },
+              "keyMappingFiles": {
+                "description": "Specifies the full URLs for shortcuts mapping and localization resource files that don't directly support the unified manifest.",
+                "$ref": "#/definitions/keyboardShortcutsMappingFiles"
               }
             },
             "required": [ "shortcuts" ]
+        },
+        "keyboardShortcutsMappingFiles": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "shortcutsUrl": {
+                    "$ref": "#/definitions/httpsUrl",
+                    "description": "The full URL of the JSON file that will contain the keyboard combination configuration on Office application and platform combinations that don't directly support the unified manifest."
+                },
+                "localizationResourceUrl": {
+                    "$ref": "#/definitions/httpsUrl",
+                    "description": "The full URL of a file that provides supplemental resource, such as localized strings, for the file specified in the shortcutsUrl attribute."
+                }
+            },
+            "required": [ "shortcutsUrl" ]
         },
         "extensionShortcut": {
             "type": "object",
@@ -2400,7 +2420,7 @@
                     "type": "array",
                     "description": "Configures the items for a menu control.",
                     "minItems": 1,
-                    "maxItems": 20,
+                    "maxItems": 30,
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
                     }
@@ -2879,8 +2899,8 @@
               "fileName": {
                 "type": "string",
                 "pattern": "^(?!.*[\\r\\n\\f\\b\\v\\u0007\\t])[\\S]*\\.xll$",
-                "minLength": 1,
-                "maxLength": 64
+                "minLength": 4,
+                "maxLength": 254
               }
             }
         },
