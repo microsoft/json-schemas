@@ -22,12 +22,6 @@
             "dataSourceName": {
               "type": "string"
             },
-            "nodeIdMapping": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
             "propertyMappings": {
               "type": "array",
               "items": {
@@ -71,6 +65,12 @@
               }
             },
             "targetNodeKeyColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "edgeIdMapping": {
               "type": "array",
               "items": {
                 "type": "string"

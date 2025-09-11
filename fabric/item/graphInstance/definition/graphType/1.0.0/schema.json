@@ -38,7 +38,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "enum": ["STRING", "INT", "FLOAT", "DATETIME", "BOOLEAN"]
+                    "enum": ["STRING", "INT", "FLOAT", "ZONED DATETIME", "BOOLEAN"]
                   }
                 },
                 "required": ["name", "type"]
@@ -90,7 +90,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "enum": ["STRING", "INT", "FLOAT", "DATETIME", "BOOLEAN"]
+                    "enum": ["STRING", "INT", "FLOAT", "ZONED DATETIME", "BOOLEAN"]
                   }
                 },
                 "required": ["name", "type"]
