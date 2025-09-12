@@ -61,8 +61,8 @@
         },
         "conversation_starters": {
             "type": "array",
-            "description": "Optional. A list of examples of questions that the declarative agent can answer. There MUST NOT be more than six objects in the array.",
-            "maxItems": 6,
+            "description": "Optional. A list of examples of questions that the declarative agent can answer. There MUST NOT be more than twelve objects in the array.",
+            "maxItems": 12,
             "minItems": 1,
             "items": {
                 "$ref": "#/$defs/conversation-starter"
@@ -235,7 +235,7 @@
                     "embedded_resource_snapshot_id": {
                         "type": "string",
                         "description": "A JSON string identifier provisioned by a an external file container storage service that can be used to locate the embedded knowledge files.",
-                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\\\]\\\\])$"
+                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
                     },
                     "files": {
                         "type": "array",
@@ -286,7 +286,7 @@
                         "type": "string",
                         "description": "A JSON string that contains the file relative path for the embedded file. It is a required member.",
                         "minLength": 1,
-                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\\\]\\\\])$"
+                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
                     }
                 },
                 "required": [
