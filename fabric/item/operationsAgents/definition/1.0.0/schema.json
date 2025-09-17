@@ -48,7 +48,8 @@
   },
   "required": [
     "configuration",
-    "playbook"
+    "playbook",
+    "shouldRun"
   ],
   "additionalProperties": false,
   "definitions": {
