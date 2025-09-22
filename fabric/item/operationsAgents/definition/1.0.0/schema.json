@@ -1,0 +1,155 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/operationsAgents/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Operations Agent",
+  "description": "Artifact definition of Operations Agent.",
+  "type": "object",
+  "properties": {
+    "configuration": {
+      "type": "object",
+      "title": "Operations Agent Configuration",
+      "description": "User specified configuration containing goals, instructions, data sources, and actions of the agent.",
+      "properties": {
+        "goals": {
+          "type": "string",
+          "description": "Business goals for the agent to accomplish."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Explicit instructions or procedures for the agent to follow."
+        },
+        "dataSources": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/dataSource"
+          }
+        },
+        "actions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/action"
+          }
+        },
+        "recipient": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "goals",
+        "instructions",
+        "dataSources",
+        "actions"
+      ]
+    },
+    "playbook": {
+      "type": "object"
+    },
+    "shouldRun": {
+      "type": "boolean",
+      "description": "Whether the agent should be running."
+    }
+  },
+  "required": [
+    "configuration",
+    "playbook",
+    "shouldRun"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "dataSource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "KustoDatabase"
+          ]
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "workspaceId"
+      ]
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "PowerAutomateAction"
+          ]
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/parameter"
+          }
+        },
+        "connection": {
+          "$ref": "#/definitions/connection"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "connection"
+      ]
+    },
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "connection": {
+      "type": "object",
+      "properties": {
+        "flowActionUid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "activatorWorkspaceId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "activatorArtifactId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "flowActionUid",
+        "activatorWorkspaceId",
+        "activatorArtifactId"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
