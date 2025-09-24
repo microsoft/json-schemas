@@ -112,7 +112,7 @@
       "required": [
         "id",
         "displayName",
-        "description"
+        "description",
         "kind",
         "connection"
       ]
