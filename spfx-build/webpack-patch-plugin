@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Webpack Patch Plugin Configuration (config/webpack-patch.json)",
+  "description": "Defines parameters for the Webpack Patch Plugin that applies custom patches to the base webpack configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The JSON schema reference for this configuration file"
+    },
+    "patchFiles": {
+      "title": "Patch Files",
+      "description": "A list of file paths (relative to the project root) that are webpack config patches. These patches will be applied in order after the base webpack config is generated. Each patch file must export a function with the signature: (config: WebpackConfiguration) => WebpackConfiguration | Promise<WebpackConfiguration>",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Relative path to a webpack config patch file"
+      },
+      "uniqueItems": true,
+      "default": []
+    }
+  }
+}
