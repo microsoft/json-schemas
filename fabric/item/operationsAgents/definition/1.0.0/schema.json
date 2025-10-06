@@ -87,15 +87,17 @@
           "type": "string",
           "format": "uuid"
         },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
         "kind": {
           "type": "string",
           "enum": [
             "PowerAutomateAction"
           ]
-        },
-        "workspaceId": {
-          "type": "string",
-          "format": "uuid"
         },
         "parameters": {
           "type": "array",
@@ -109,6 +111,8 @@
       },
       "required": [
         "id",
+        "displayName",
+        "description",
         "kind",
         "connection"
       ]
