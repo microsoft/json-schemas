@@ -104,17 +104,13 @@
           "items": {
             "$ref": "#/definitions/parameter"
           }
-        },
-        "connection": {
-          "$ref": "#/definitions/connection"
         }
       },
       "required": [
         "id",
         "displayName",
         "description",
-        "kind",
-        "connection"
+        "kind"
       ]
     },
     "parameter": {
@@ -129,29 +125,6 @@
       },
       "required": [
         "name"
-      ],
-      "additionalProperties": false
-    },
-    "connection": {
-      "type": "object",
-      "properties": {
-        "flowActionUid": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "activatorWorkspaceId": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "activatorArtifactId": {
-          "type": "string",
-          "format": "uuid"
-        }
-      },
-      "required": [
-        "flowActionUid",
-        "activatorWorkspaceId",
-        "activatorArtifactId"
       ],
       "additionalProperties": false
     }
