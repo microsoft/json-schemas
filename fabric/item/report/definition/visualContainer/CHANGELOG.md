@@ -1,5 +1,13 @@
 # Visual Container Versions
 
+### 2.3.0
+
+<b>Released in: </b> October 2025 <br />
+<b>Notes: </b> 
+- Table "Grow to fit"
+- Button slicer GA
+- Card visual GA
+
 ### 2.2.0
 
 <b>Released in: </b> August 2025 <br />

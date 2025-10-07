@@ -1,5 +1,11 @@
 # Releases
 
+## October 2025
+
+Documenting visual objects changes for new visuals and visual updates.
+
+- [visualContainer 2.3.0](./definition/visualContainer/CHANGELOG.md#2.3.0)
+
 ## August 2025
 
 A new PBIR-aligned ThemeVersion definition for ThemeMetadata. Support for Translytical Apps.
