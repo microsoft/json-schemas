@@ -1,0 +1,319 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/CosmosDB/definition/CosmosDB/1.0.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CosmosDB Containers Schema",
+    "type": "object",
+    "properties": {
+        "type": "object",
+        "properties": {
+            "containers": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "computedProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "query": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "query"
+                                ]
+                            }
+                        },
+                        "conflictResolutionPolicy": {
+                            "type": "object",
+                            "properties": {
+                                "mode": {
+                                    "type": "string"
+                                },
+                                "conflictResolutionPath": {
+                                    "type": "string"
+                                },
+                                "conflictResolutionProcedure": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "mode",
+                                "conflictResolutionPath"
+                            ]
+                        },
+                        "defaultTtl": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "fullTextPolicy": {
+                            "type": "object",
+                            "properties": {
+                                "defaultLanguage": {
+                                    "type": "string"
+                                },
+                                "fullTextPaths": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "language": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "path",
+                                            "language"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "defaultLanguage"
+                            ]
+                        },
+                        "geospatialConfig": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "type"
+                            ]
+                        },
+                        "indexingPolicy": {
+                            "type": "object",
+                            "properties": {
+                                "indexingMode": {
+                                    "type": "string"
+                                },
+                                "automatic": {
+                                    "type": "boolean"
+                                },
+                                "includedPaths": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "indexes": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "kind": {
+                                                            "type": "string"
+                                                        },
+                                                        "dataType": {
+                                                            "type": "string"
+                                                        },
+                                                        "precision": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "kind",
+                                                        "dataType",
+                                                        "precision"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "path",
+                                            "indexes"
+                                        ]
+                                    }
+                                },
+                                "excludedPaths": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "path"
+                                        ]
+                                    }
+                                },
+                                "vectorIndexes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "path",
+                                            "type"
+                                        ]
+                                    }
+                                },
+                                "spatialIndexes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "types": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "path",
+                                            "types"
+                                        ]
+                                    }
+                                },
+                                "compositeIndexes": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "order": {
+                                                    "type": "string"
+                                                },
+                                                "path": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "order",
+                                                "path"
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "indexingMode",
+                                "automatic",
+                                "includedPaths",
+                                "excludedPaths"
+                            ]
+                        },
+                        "partitionKey": {
+                            "type": "object",
+                            "properties": {
+                                "paths": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "kind": {
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "paths",
+                                "kind",
+                                "version"
+                            ]
+                        },
+                        "uniqueKeyPolicy": {
+                            "type": "object",
+                            "properties": {
+                                "uniqueKeys": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "paths": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "paths"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "uniqueKeys"
+                            ]
+                        },
+                        "vectorEmbeddingPolicy": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "properties": {
+                                "vectorEmbeddings": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "dataType": {
+                                                "type": "string"
+                                            },
+                                            "dimensions": {
+                                                "type": "integer"
+                                            },
+                                            "distanceFunction": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "path",
+                                            "dataType",
+                                            "dimensions",
+                                            "distanceFunction"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "vectorEmbeddings"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ]
+                }
+            }
+        }
+    }
+}
