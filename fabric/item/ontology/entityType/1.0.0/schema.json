@@ -1,0 +1,110 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/entityType/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "entity type definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique ID of the entity type"
+    },
+    "namespace": {
+      "type": "string",
+      "const": "usertypes",
+      "description": "Namespace of the entity type should always be usertypes"
+    },
+    "baseEntityTypeId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Unique ID of the base entity type"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,127}$",
+      "description": "Name of the entity type"
+    },
+    "entityIdParts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The properties (by ID) that together uniquely identify an entity"
+    },
+    "displayNamePropertyId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The ID of the property that should be used as the display name for the entity"
+    },
+    "namespaceType": {
+      "type": "string",
+      "const": "Custom",
+      "description": "NamespaceType of the entity type should always be Custom"
+    },
+    "visibility": {
+      "type": "string",
+      "const": "Visible",
+      "description": "Visibility of the entity type should always be Visible"
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityTypeProperty"
+      },
+      "description": "List of entity type properties"
+    },
+    "timeseriesProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityTypeProperty"
+      },
+      "description": "List of entity type timeseries properties"
+    }
+  },
+  "required": ["id", "namespace", "name", "namespaceType"],
+  "definitions": {
+    "EntityTypeProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of the entity type property"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,127}$",
+          "description": "Name of the entity type property. Must follow the regex pattern ^[a-zA-Z][a-zA-Z0-9_-]{0,127}$"
+        },
+        "redefines": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Pointer to property inherited from base type that this property redefines"
+        },
+        "baseTypeNamespaceType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The namespace of the base entity type"
+        },
+        "valueType": {
+          "type": "string",
+          "enum": ["String", "Boolean", "DateTime", "Object", "BigInt", "Double"],
+          "description": "Describes the value type of the entity type property"
+        }
+      },
+      "required": ["id", "name", "valueType"]
+    }
+  }
+}
