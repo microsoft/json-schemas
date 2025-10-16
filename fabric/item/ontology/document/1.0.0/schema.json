@@ -1,0 +1,23 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/document/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "document definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "displayText": {
+      "type": "string",
+      "description": "The display text for the document"
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL pointing to the document"
+    }
+  },
+  "required": ["url"]
+}
