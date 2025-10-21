@@ -1,0 +1,143 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/overviews/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "overviews definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "widgets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DashboardWidget"
+      },
+      "description": "The widgets on the dashboard"
+    },
+    "settings": {
+      "$ref": "#/definitions/DashboardSettings",
+      "description": "The settings of the dashboard"
+    }
+  },
+  "definitions": {
+    "DashboardWidget": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique id of the widget"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["lineChart", "barChart", "file", "graph", "liveMap"],
+          "description": "Type of widget"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the widget"
+        },
+        "yAxisPropertyId": {
+          "type": "string",
+          "description": "The property to display on the y-axis. Include this field only if type is lineChart or barChart"
+        }
+      },
+      "required": ["id", "type"],
+      "if": {
+        "properties": {
+          "type": {
+            "enum": ["lineChart", "barChart"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "yAxisPropertyId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DashboardSettings": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["fixedTime", "customTime"],
+          "description": "Type of DashboardSettings"
+        },
+        "interval": {
+          "type": "string",
+          "enum": ["OneMinute", "FiveMinutes", "FifteenMinutes", "ThirtyMinutes", "OneHour", "SixHours", "TwelveHours", "OneDay"],
+          "description": "Sample window values in seconds for the dashboard data"
+        },
+        "aggregation": {
+          "type": "string",
+          "enum": ["Average", "Count", "Maximum", "Minimum", "Sum", "LastKnownValue"],
+          "description": "Aggregation function for the dashboard data"
+        },
+        "fixedTimeRange": {
+          "type": "string",
+          "enum": ["Last30Minutes", "Last1Hour", "Last4Hours", "Last12Hours", "Last24Hours", "Last48Hours", "Last3Days", "Last7Days", "Last30Days"],
+          "description": "The fixed time range for the dashboard data. Include this field only if type is fixedTime"
+        },
+        "timeRange": {
+          "$ref": "#/definitions/DashboardTimeRange",
+          "description": "Time range for the dashboard data. Include this field only if type is customTime"
+        }
+      },
+      "required": ["type", "interval", "aggregation"],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "fixedTime"
+              }
+            }
+          },
+          "then": {
+            "required": ["fixedTimeRange"],
+            "not": {
+              "required": ["timeRange"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "customTime"
+              }
+            }
+          },
+          "then": {
+            "required": ["timeRange"],
+            "not": {
+              "required": ["fixedTimeRange"]
+            }
+          }
+        }
+      ]
+    },
+    "DashboardTimeRange": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time for the custom time range"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time for the custom time range"
+        }
+      },
+      "required": ["startTime", "endTime"]
+    }
+  }
+}
