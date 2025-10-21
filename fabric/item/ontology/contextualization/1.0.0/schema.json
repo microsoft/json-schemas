@@ -45,7 +45,7 @@
         "workspaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "The ID of the workspace where the customer's lakehouse table is located"
+          "description": "The id of the workspace where the customer's lakehouse table is located"
         },
         "itemId": {
           "type": "string",

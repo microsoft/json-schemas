@@ -13,7 +13,7 @@
     "id": {
       "type": "string",
       "format": "uuid",
-      "description": "Unique ID of the data binding"
+      "description": "Unique id of the data binding"
     },
     "dataBindingConfiguration": {
       "$ref": "#/definitions/DataBindingConfiguration",
@@ -98,7 +98,7 @@
         },
         "targetPropertyId": {
           "type": "string",
-          "description": "The target property ID in the entity type"
+          "description": "The target property id in the entity type"
         }
       },
       "required": ["sourceColumnName", "targetPropertyId"]
@@ -114,7 +114,7 @@
         "workspaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "The ID of the workspace where the customer's lakehouse table is located"
+          "description": "The id of the workspace where the customer's lakehouse table is located"
         },
         "itemId": {
           "type": "string",
@@ -143,7 +143,7 @@
         "workspaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "The ID of the workspace where the customer's eventhouse is located"
+          "description": "The id of the workspace where the customer's eventhouse is located"
         },
         "itemId": {
           "type": "string",

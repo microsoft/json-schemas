@@ -29,7 +29,7 @@
         "id": {
           "type": "string",
           "format": "uuid",
-          "description": "Unique ID of the widget"
+          "description": "Unique id of the widget"
         },
         "type": {
           "type": "string",

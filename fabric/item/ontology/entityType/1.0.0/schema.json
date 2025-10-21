@@ -12,7 +12,7 @@
     },
     "id": {
       "type": "string",
-      "description": "Unique ID of the entity type"
+      "description": "Unique id of the entity type"
     },
     "namespace": {
       "type": "string",
@@ -24,7 +24,7 @@
         "string",
         "null"
       ],
-      "description": "Unique ID of the base entity type"
+      "description": "Unique id of the base entity type"
     },
     "name": {
       "type": "string",
@@ -36,14 +36,14 @@
       "items": {
         "type": "string"
       },
-      "description": "The properties (by ID) that together uniquely identify an entity"
+      "description": "The properties (by id) that together uniquely identify an entity"
     },
     "displayNamePropertyId": {
       "type": [
         "string",
         "null"
       ],
-      "description": "The ID of the property that should be used as the display name for the entity"
+      "description": "The id of the property that should be used as the display name for the entity"
     },
     "namespaceType": {
       "type": "string",
@@ -77,7 +77,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique ID of the entity type property"
+          "description": "Unique id of the entity type property"
         },
         "name": {
           "type": "string",

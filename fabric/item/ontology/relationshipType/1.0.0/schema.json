@@ -12,7 +12,7 @@
     },
     "id": {
       "type": "string",
-      "description": "Unique ID of the relationship type"
+      "description": "Unique id of the relationship type"
     },
     "namespace": {
       "type": "string",
