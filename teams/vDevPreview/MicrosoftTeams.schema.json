@@ -180,6 +180,32 @@
                     "type": "string",
                     "description": "The full description of the app. Maximum length is 4000 characters.",
                     "maxLength": 4000
+                },
+                "features": {
+                    "type": "array",
+                    "description": "Array of features sections describing what the app can do.",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "maxLength": 45,
+                                "description": "Title of the feature the app provides."
+                            },
+                            "description": {
+                                "type": "string",
+                                "maxLength": 120,
+                                "description": "Detailed description of the specific feature."
+                            }
+                        },
+                        "required": [
+                        "title",
+                        "description"
+                        ]
+                    }
                 }
             },
             "required": [
