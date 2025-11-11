@@ -1,0 +1,169 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/dataBinding/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "data binding definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique id of the data binding"
+    },
+    "dataBindingConfiguration": {
+      "$ref": "#/definitions/DataBindingConfiguration",
+      "description": "Configuration specific to the kind of data binding"
+    }
+  },
+  "required": ["id", "dataBindingConfiguration"],
+  "definitions": {
+    "DataBindingConfiguration": {
+      "type": "object",
+      "properties": {
+        "dataBindingType": {
+          "type": "string",
+          "enum": ["TimeSeries", "NonTimeSeries"],
+          "description": "The type of data binding"
+        },
+        "timestampColumnName": {
+          "type": "string",
+          "description": "Only required if dataBindingType is TimeSeries. This is the name of the timestamp column from the data table"
+        },
+        "propertyBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityTypePropertyBinding"
+          },
+          "description": "The bindings from source columns to entity type properties"
+        },
+        "sourceTableProperties": {
+          "description": "Data source table properties"
+        }
+      },
+      "required": ["dataBindingType", "sourceTableProperties"],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "dataBindingType": {
+                "const": "TimeSeries"
+              }
+            }
+          },
+          "then": {
+            "required": ["timestampColumnName"],
+            "properties": {
+              "sourceTableProperties": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/LakehouseTableDataBindingProperties"
+                  },
+                  {
+                    "$ref": "#/definitions/EventhouseTableDataBindingProperties"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dataBindingType": {
+                "const": "NonTimeSeries"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sourceTableProperties": {
+                "$ref": "#/definitions/LakehouseTableDataBindingProperties"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "EntityTypePropertyBinding": {
+      "type": "object",
+      "properties": {
+        "sourceColumnName": {
+          "type": "string",
+          "description": "The name of the source column in the data table"
+        },
+        "targetPropertyId": {
+          "type": "string",
+          "description": "The target property id in the entity type"
+        }
+      },
+      "required": ["sourceColumnName", "targetPropertyId"]
+    },
+    "LakehouseTableDataBindingProperties": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "const": "LakehouseTable",
+          "description": "The sourceType of the Data Binding"
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The id of the workspace where the customer's lakehouse table is located"
+        },
+        "itemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ArtifactId of the customer's lakehouse"
+        },
+        "sourceTableName": {
+          "type": "string",
+          "description": "The name of the data table from the lakehouse"
+        },
+        "sourceSchema": {
+          "type": "string",
+          "description": "The schema of the data table"
+        }
+      },
+      "required": ["sourceType", "workspaceId", "itemId", "sourceTableName"]
+    },
+    "EventhouseTableDataBindingProperties": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "const": "KustoTable",
+          "description": "The sourceType of the Data Binding"
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The id of the workspace where the customer's eventhouse is located"
+        },
+        "itemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ArtifactId of the customer's eventhouse"
+        },
+        "clusterUri": {
+          "type": "string",
+          "description": "The URL to the Kusto cluster"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database in the Kusto cluster"
+        },
+        "sourceTableName": {
+          "type": "string",
+          "description": "The name of the source table in the Kusto cluster"
+        }
+      },
+      "required": ["sourceType", "workspaceId", "itemId", "clusterUri", "databaseName", "sourceTableName"]
+    }
+  }
+}

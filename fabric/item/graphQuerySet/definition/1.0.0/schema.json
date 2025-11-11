@@ -1,0 +1,168 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphQuerySet/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "graphQuerySet item definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "graphInstanceObjectId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The object id referring to the graph to query"
+    },
+    "graphInstanceFolderObjectId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The folder id containing the graph to query"
+    },
+    "queries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Query"
+      },
+      "description": "List of queries to run"
+    }
+  },
+  "required": ["graphInstanceObjectId", "graphInstanceFolderObjectId", "queries"],
+  "definitions": {
+    "Query": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the query as shown in UX"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique id of the query"
+        },
+        "queryMode": {
+          "type": "string",
+          "enum": ["GQLCode", "VisualDiagram"],
+          "description": "Whether the query is custom gql, or a low-code diagram"
+        },
+        "GqlQueryText": {
+          "type": "string",
+          "description": "The custom gql query to run (only for GQLCode mode)"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "description": "Graph nodes to include in the query (empty for GQLCode mode)"
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Edge"
+          },
+          "description": "Graph edges to include in the query (empty for GQLCode mode)"
+        }
+      },
+      "required": ["displayName", "id", "queryMode"]
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "alias": {
+          "type": "string",
+          "description": "Alias of the node as defined in graph"
+        },
+        "posX": {
+          "type": "number",
+          "description": "The x-coordinate of position in query diagram"
+        },
+        "posY": {
+          "type": "number",
+          "description": "The y-coordinate of position in query diagram"
+        },
+        "format": {
+          "$ref": "#/definitions/NodeFormat",
+          "description": "Formatting definition for this node"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "description": "Filters applied to this node in query"
+        },
+        "displayPropertyKey": {
+          "type": "string",
+          "description": "The name of the property to display on the result"
+        }
+      },
+      "required": ["alias", "posX", "posY"]
+    },
+    "Edge": {
+      "type": "object",
+      "properties": {
+        "alias": {
+          "type": "string",
+          "description": "Alias of the edge as defined in graph"
+        },
+        "sourceNodeAlias": {
+          "type": "string",
+          "description": "Alias of the node this edge is coming from"
+        },
+        "destinationNodeAlias": {
+          "type": "string",
+          "description": "Alias of the node this edge is going to"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "description": "Filters applied to this edge in query"
+        },
+        "displayPropertyKey": {
+          "type": "string",
+          "description": "The name of the property to display on the result"
+        }
+      },
+      "required": ["alias", "sourceNodeAlias", "destinationNodeAlias"]
+    },
+    "NodeFormat": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "Hex code of color (e.g. #15C6F4)"
+        },
+        "shape": {
+          "type": "string",
+          "enum": ["square", "circle"],
+          "description": "Shape of the node (default is circle)"
+        }
+      },
+      "required": ["color"]
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "description": "The property name to filter"
+        },
+        "operator": {
+          "type": "string",
+          "enum": ["=", "starts with", "ends with", "contains", ">", ">=", "<", "<="],
+          "description": "The filter operator"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to filter the property against"
+        }
+      },
+      "required": ["propertyName", "operator", "value"]
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/contextualization/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "contextualization definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique id of the contextualization"
+    },
+    "dataBindingTable": {
+      "$ref": "#/definitions/LakehouseTableDataBindingProperties"
+    },
+    "sourceKeyRefBindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/KeyRefBinding"
+      },
+      "description": "Bindings from source columns to target properties"
+    },
+    "targetKeyRefBindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/KeyRefBinding"
+      },
+      "description": "Bindings from target columns to target properties"
+    }
+  },
+  "definitions": {
+    "LakehouseTableDataBindingProperties": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "const": "LakehouseTable",
+          "description": "The sourceType of the Data Binding"
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The id of the workspace where the customer's lakehouse table is located"
+        },
+        "itemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ArtifactId of the customer's lakehouse"
+        },
+        "sourceTableName": {
+          "type": "string",
+          "description": "The name of the data table from the lakehouse"
+        },
+        "sourceSchema": {
+          "type": "string",
+          "description": "The schema of the data table"
+        }
+      },
+      "required": ["sourceType", "workspaceId", "itemId", "sourceTableName"]
+    },
+    "KeyRefBinding": {
+      "type": "object",
+      "properties": {
+        "sourceColumnName": {
+          "type": "string",
+          "description": "The name of the source column"
+        },
+        "targetPropertyId": {
+          "type": "string",
+          "description": "The target property identifier"
+        }
+      },
+      "required": ["sourceColumnName", "targetPropertyId"]
+    }
+  }
+}

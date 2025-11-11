@@ -16,7 +16,7 @@
         },
         "filterConfig": {
             "description": "Filters that apply to the entire report (all pages and all visuals).",
-            "$ref": "../../filterConfiguration/1.1.0/schema-embedded.json"
+            "$ref": "../../filterConfiguration/1.2.0/schema-embedded.json"
         },
         "objects": {
             "description": "Specifies the formatting to be set for different \"objects\" of a report.",

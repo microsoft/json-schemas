@@ -1,5 +1,11 @@
 # Report Versions
 
+### 3.0.0
+
+<b>Released in: </b> August 2025 <br />
+<b>Notes: </b> 
+- Use a new PBIR-aligned `ThemeVersion` definition for the `reportVersionAtImport` property in `ThemeMetadata`.
+
 ### 2.1.0
 
 <b>Released in: </b> June 2025 <br />

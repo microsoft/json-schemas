@@ -1,0 +1,160 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Source Configuration",
+  "description": "The basic configuration for a Data Agent data source.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the datasource file (e.g., \"1.0.0\")."
+    },
+    "artifactId": {
+      "type": "string",
+      "description": "The artifact id of the data source."
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "The workspace id of the data source."
+    },
+    "dataSourceInstructions": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The additional instructions."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the data source."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the data source (ex: lakehouse-tables, datawarehouse, kusto).",
+      "enum": [
+        "unknown",
+        "lakehouse_tables",
+        "lakehouse",
+        "data_warehouse",
+        "kusto",
+        "semantic_model",
+        "graph",
+        "mirrored_database",
+        "mirrored_azure_databricks"
+      ]
+    },
+    "userDescription": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The data source description."
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The metadata (property bag for passing parameters that are not in the schema yet).",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "elements": {
+      "type": "array",
+      "description": "The children elements of the data source.",
+      "items": {
+        "$ref": "#/definitions/DataSourceElement"
+      },
+      "default": []
+    }
+  },
+  "required": [ "$schema", "artifactId", "workspaceId", "displayName", "type" ],
+  "definitions": {
+    "DataSourceElement": {
+      "type": "object",
+      "title": "Data Source Element",
+      "description": "The basic information about a data source element.",
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The id of the data source element."
+        },
+        "is_selected": {
+          "type": "boolean",
+          "description": "Whether the element is selected.",
+          "default": false
+        },
+        "display_name": {
+          "type": "string",
+          "description": "The display name of the data source element."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the element (ex: table, column, measure, folder).",
+          "enum": [
+            "lakehouse_tables",
+            "lakehouse_tables.schema",
+            "lakehouse_files",
+            "lakehouse_files.directory",
+            "warehouse_tables",
+            "warehouse_tables.schema",
+            "kusto",
+            "semantic_model",
+            "lakehouse_tables.table",
+            "warehouse_tables.table",
+            "kusto.table",
+            "semantic_model.table",
+            "lakehouse_tables.column",
+            "warehouse_tables.column",
+            "kusto.column",
+            "kusto.functions",
+            "semantic_model.column",
+            "semantic_model.measure",
+            "graph.nodeType",
+            "graph.edgeType",
+            "mirrored_database.schema",
+            "mirrored_database.table",
+            "mirrored_database.column"
+          ]
+        },
+        "data_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The type of the data source element (ex: string, int, double). This property's value is dependent on the datatype conventions of the system. This only applies to elements that are not containers (ex: column, measure), so is optional."
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The element description."
+        },
+        "children": {
+          "type": "array",
+          "description": "The children of the element.",
+          "items": {
+            "$ref": "#/definitions/DataSourceElement"
+          },
+          "default": []
+        },
+        "index_state": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Whether the directory is indexed."
+        }
+      },
+      "required": [ "display_name" ]
+    }
+  }
+}

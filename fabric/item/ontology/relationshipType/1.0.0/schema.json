@@ -1,0 +1,54 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/relationshipType/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "relationship type definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique id of the relationship type"
+    },
+    "namespace": {
+      "type": "string",
+      "const": "usertypes",
+      "description": "Namespace of the relationship type should always be usertypes"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,127}$",
+      "description": "Name of the relationship type"
+    },
+    "namespaceType": {
+      "type": "string",
+      "const": "Custom",
+      "description": "NamespaceType of the relationship type should always be Custom"
+    },
+    "source": {
+      "$ref": "#/definitions/RelationshipEnd",
+      "description": "The relationship end that denotes the source"
+    },
+    "target": {
+      "$ref": "#/definitions/RelationshipEnd",
+      "description": "The relationship end that denotes the target"
+    }
+  },
+  "required": ["id", "namespace", "name", "namespaceType", "source", "target"],
+  "definitions": {
+    "RelationshipEnd": {
+      "type": "object",
+      "properties": {
+        "entityTypeId": {
+          "type": "string",
+          "description": "The entity type id of the relationship end that exists in the workspace"
+        }
+      },
+      "required": ["entityTypeId"]
+    }
+  }
+}

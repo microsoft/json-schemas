@@ -180,6 +180,32 @@
                     "type": "string",
                     "description": "The full description of the app. Maximum length is 4000 characters.",
                     "maxLength": 4000
+                },
+                "features": {
+                    "type": "array",
+                    "description": "Array of features sections describing what the app can do.",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "maxLength": 45,
+                                "description": "Title of the feature the app provides."
+                            },
+                            "description": {
+                                "type": "string",
+                                "maxLength": 120,
+                                "description": "Detailed description of the specific feature."
+                            }
+                        },
+                        "required": [
+                        "title",
+                        "description"
+                        ]
+                    }
                 }
             },
             "required": [
@@ -510,7 +536,7 @@
                                 },
                                 "commands": {
                                     "type": "array",
-                                    "maxItems": 10,
+                                    "maxItems": 12,
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
@@ -542,6 +568,34 @@
                     "requirementSet": {
                         "$ref": "#/definitions/elementRequirementSet",
                         "description": "The set of requirements for the bot."
+                    },
+                    "registrationInfo": {
+                        "description": "System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
+                        "type": "object",
+                        "properties": {
+                        "source": {
+                            "type": "string",
+                            "enum": [ "standard", "microsoftCopilotStudio", "onedriveSharepoint" ],
+                            "description": "The partner source through which the bot is registered. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually."
+                        },
+                        "environment": {
+                            "type": "string",
+                            "description": "A Power Platform environment that serves as a container for building apps under a Microsoft 365 tenant and can only be accessed by users within that tenant. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
+                            "maxLength": 128
+                        },
+                        "schemaName": {
+                            "type": "string",
+                            "description": "The Copilot Studio copilot schema name. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
+                            "maxLength": 128
+                        },
+                        "clusterCategory": {
+                            "type": "string",
+                            "description": "The core services cluster category for Copilot Studio copilots. System‑generated metadata. This information is maintained by Microsoft services and must not be modified manually.",
+                            "maxLength": 128
+                        }
+                        },
+                        "required": [ "source" ],
+                        "additionalProperties": false
                     }
                 },
                 "required": [
@@ -1148,6 +1202,15 @@
                 ]
             }
         },
+        "supportsChannelFeatures": {
+          "type": "string",
+          "enum": [
+            "tier1",
+            "tier2",
+            null
+          ],
+          "description": "A property in the app manifest that declares support for all channel features, categorized by tiers."
+        },
         "configurableProperties": {
             "type": "array",
             "description": "A list of tenant configured properties for an app",
@@ -1750,7 +1813,7 @@
             "type": "array",
             "description": "Specifies the set of actions supported by this runtime. An action is either running a JavaScript function or opening a view such as a task pane.",
             "minItems": 1,
-            "maxItems": 20,
+            "maxItems": 150,
             "items": {
                 "$ref": "#/definitions/extensionRuntimesActionsItem"
             },
@@ -1862,12 +1925,13 @@
                 "type": "boolean",
                 "description": "Allows a custom function to accept Excel data types as parameters and return values.",
                 "default": false
+              },
+              "metadataUrl": {
+                "$ref": "#/definitions/httpsUrl",
+                "description": "The full URL of a metadata json file with default locale."
               }
             },
-            "required": [
-              "functions",
-              "namespace"
-            ]
+            "additionalProperties": false
         },
         "extensionCustomFunctionsNamespace": {
             "type": "object",
@@ -2017,7 +2081,7 @@
                 "description": "Must be either scalar (a non-array value) or matrix (a 2-dimensional array)."
               },
               "optional": {
-                "type": "boolean",
+                "type": ["boolean", "null"],
                 "default": false,
                 "description": "If true, the parameter is optional."
               },
@@ -2078,9 +2142,28 @@
                 },
                 "minItems": 1,
                 "maxItems": 20000
+              },
+              "keyMappingFiles": {
+                "description": "Specifies the full URLs for shortcuts mapping and localization resource files that don't directly support the unified manifest.",
+                "$ref": "#/definitions/keyboardShortcutsMappingFiles"
               }
             },
             "required": [ "shortcuts" ]
+        },
+        "keyboardShortcutsMappingFiles": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "shortcutsUrl": {
+                    "$ref": "#/definitions/httpsUrl",
+                    "description": "The full URL of the JSON file that will contain the keyboard combination configuration on Office application and platform combinations that don't directly support the unified manifest."
+                },
+                "localizationResourceUrl": {
+                    "$ref": "#/definitions/httpsUrl",
+                    "description": "The full URL of a file that provides supplemental resource, such as localized strings, for the file specified in the shortcutsUrl attribute."
+                }
+            },
+            "required": [ "shortcutsUrl" ]
         },
         "extensionShortcut": {
             "type": "object",
@@ -2372,7 +2455,7 @@
                     "type": "array",
                     "description": "Configures the items for a menu control.",
                     "minItems": 1,
-                    "maxItems": 20,
+                    "maxItems": 30,
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
                     }
@@ -2719,6 +2802,104 @@
                                 "required": [
                                     "officeAddinId"
                                 ]
+                            },
+                            "windowsExtensions": {
+                                "type": "object",
+                                "description": "Configures how to hide windows native extensions",
+                                "properties": {
+                                "effect": {
+                                    "type": "string",
+                                    "description": "Specifies the effect to take while installing the web add-in if the equivalent add-in is installed.",
+                                    "enum": [
+                                    "userOptionToDisable",
+                                    "disableWithNotification"
+                                    ]
+                                },
+                                "comAddin": {
+                                    "type": "object",
+                                    "description": "Specifies the equivalent COM or VSTO add-ins",
+                                    "properties": {
+                                    "progIds": {
+                                        "type": "array",
+                                        "description": "Specifies the program Ids of the equivalent COM add-ins and the names of equivalent VSTO add-ins",
+                                        "minItems": 1,
+                                        "maxItems": 5,
+                                        "items": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 64
+                                        }
+                                    }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                    "progIds"
+                                    ]
+                                },
+                                "automationAddin": {
+                                    "type": "object",
+                                    "description": "Specifies the equivalent automation add-ins",
+                                    "properties": {
+                                    "progIds": {
+                                        "type": "array",
+                                        "description": "Specifies the program Ids of the equivalent automation add-ins",
+                                        "minItems": 1,
+                                        "maxItems": 5,
+                                        "items": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 64
+                                        }
+                                    }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                    "progIds"
+                                    ]
+                                },
+                                "xllCustomFunctions": {
+                                    "type": "object",
+                                    "description": "Specifies the XLL-based add-ins custom function",
+                                    "properties": {
+                                    "fileNames": {
+                                        "type": "array",
+                                        "description": "Specifies the file names of the XLL-based add-ins custom function",
+                                        "minItems": 1,
+                                        "maxItems": 5,
+                                        "items": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 64
+                                        }
+                                    }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                    "fileNames"
+                                    ]
+                                }
+                                },
+                                "additionalProperties": false,
+                                "anyOf": [
+                                {
+                                    "required": [
+                                    "effect",
+                                    "comAddin"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                    "effect",
+                                    "automationAddin"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                    "effect",
+                                    "xllCustomFunctions"
+                                    ]
+                                }
+                                ]
                             }
                         },
                         "minProperties": 1
@@ -2753,8 +2934,8 @@
               "fileName": {
                 "type": "string",
                 "pattern": "^(?!.*[\\r\\n\\f\\b\\v\\u0007\\t])[\\S]*\\.xll$",
-                "minLength": 1,
-                "maxLength": 64
+                "minLength": 4,
+                "maxLength": 254
               }
             }
         },
@@ -3019,7 +3200,7 @@
               },
               "spamReportingOptions": {
                 "type": "object",
-                "description": "Specifies whether the bot offers an experience in the context of a channel in a team, in a 1:1 or group chat, or in an experience scoped to an individual user alone. These options are non-exclusive.",
+                "description": "Specifies up to five options that a user can select from the preprocessing dialog to provide a reason for reporting a message.",
                 "properties": {
                   "title": {
                     "type": "string",

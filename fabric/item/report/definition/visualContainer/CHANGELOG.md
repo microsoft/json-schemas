@@ -1,5 +1,26 @@
 # Visual Container Versions
 
+### 2.4.0
+
+<b>Released in: </b> November 2025 <br />
+<b>Notes: </b> 
+- Image visual improvements
+- Azure maps custom markers
+
+### 2.3.0
+
+<b>Released in: </b> October 2025 <br />
+<b>Notes: </b> 
+- Table "Grow to fit"
+- Button slicer GA
+- Card visual GA
+
+### 2.2.0
+
+<b>Released in: </b> August 2025 <br />
+<b>Notes: </b> 
+- Updates the reference to the `visualConfiguration` schema from `2.1.0` to `2.2.0`
+
 ### 2.1.0
 
 <b>Released in: </b> June 2025 <br />

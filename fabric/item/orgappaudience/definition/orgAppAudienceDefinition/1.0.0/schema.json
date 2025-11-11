@@ -1,0 +1,132 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json",
+    "title": "Org App Audience Artifact",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Defines the schema to use for an org app audience.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/orgappaudience/definition/orgAppAudienceDefinition/1.0.0/schema.json"
+        },
+        "settings": {
+            "description": "The settings for the audience.",
+            "$ref": "#/definitions/AudienceSettings"
+        },
+        "parentAppId": {
+            "description": "The parent organizational app id.",
+            "$ref": "#/definitions/Guid"
+        },
+        "elementReferences": {
+            "description": "Defines the list of element references for the audience.",
+            "type": [
+                "array"
+            ],
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/AudienceContentItemElementReference"
+                    },
+                    {
+                        "$ref": "#/definitions/AudienceAppItemElementReference"
+                    }
+                ]
+            },
+            "maxItems": 1000
+        }
+    },
+    "required": [
+        "$schema",
+        "parentAppId",
+        "elementReferences"
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "AudienceSettings": {
+            "type": "object",
+            "properties": {
+                "hasAccessToHiddenContent": {
+                    "description": "Indicates whether the audience has access to hidden content.",
+                    "type": "boolean"
+                },
+                "tabOrder": {
+                    "description": "The order in which audiences will appear in the app.",
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AudienceContentItemElementReference": {
+            "description": "Defines items that are workspace content, eg. reports, notebooks, etc...",
+            "type": "object",
+            "properties": {
+                "elementId": {
+                    "description": "Defines the item element's unique identifier.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "isElementHidden": {
+                    "description": "Indicates whether the element is hidden in the audience.",
+                    "type": "boolean"
+                },
+                "itemType": {
+                    "description": "The type of artifact the element references.",
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                },
+                "itemId": {
+                    "description": "Defines the item's internal unique identifier.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "folderObjectId": {
+                    "description": "Defines the internal unique identifier of the folder in which the item is located.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "itemLogicalId": {
+                    "description": "Defines the item's logical unique identifier in Git repository.",
+                    "$ref": "#/definitions/Guid"
+                }
+            },
+            "oneOf": [
+                {
+                    "required": [
+                        "itemId",
+                        "folderObjectId"
+                    ]
+                },
+                {
+                    "required": [
+                        "itemLogicalId"
+                    ]
+                }
+            ],
+            "required": [
+                "elementId",
+                "itemType"
+            ],
+            "additionalProperties": false
+        },
+        "AudienceAppItemElementReference": {
+            "description": "Defines items that are only in the app, eg. links, overview, etc...",
+            "type": "object",
+            "properties": {
+                "elementId": {
+                    "description": "Defines the item element's unique identifier.",
+                    "$ref": "#/definitions/Guid"
+                },
+                "isElementHidden": {
+                    "description": "Indicates whether the element is hidden in the audience.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "elementId"
+            ],
+            "additionalProperties": false
+        },
+        "Guid": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        }
+    }
+}

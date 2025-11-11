@@ -1,0 +1,24 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/publishInfo/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Agent Publish Info",
+  "description": "The publishing information for a data agent configuration.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the publish information file (e.g., \"1.0.0\")."
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The Data Agent description at publishing time."
+    }
+  },
+  "required": [ "$schema" ]
+}
