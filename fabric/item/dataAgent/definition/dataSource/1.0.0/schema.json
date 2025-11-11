@@ -46,6 +46,13 @@
         "mirrored_azure_databricks"
       ]
     },
+    "userDescription": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The data source description."
+    },
     "metadata": {
       "type": [
         "object",
