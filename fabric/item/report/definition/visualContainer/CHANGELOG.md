@@ -1,5 +1,12 @@
 # Visual Container Versions
 
+### 2.4.0
+
+<b>Released in: </b> November 2025 <br />
+<b>Notes: </b> 
+- Image visual improvements
+- Azure maps custom markers
+
 ### 2.3.0
 
 <b>Released in: </b> October 2025 <br />

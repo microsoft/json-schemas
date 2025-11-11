@@ -1,5 +1,11 @@
 # Releases
 
+## November 2025
+
+Documenting visual objects changes for new visuals and visual updates.
+
+- [visualContainer 2.4.0](./definition/visualContainer/CHANGELOG.md#2.4.0)
+
 ## October 2025
 
 Documenting visual objects changes for new visuals and visual updates.
