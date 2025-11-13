@@ -248,7 +248,28 @@
                 },
                 "static_template": {
                     "type": "object",
-                    "description": "A JSON object that conforms with the [Adaptive Card Schema](https://adaptivecards.io/schemas/adaptive-card.json) and templating language. This Adaptive Card instance is used to render a result from the plugin response. This value is used if the `template_selector` isn't present or fails to resolve to an adaptive card."
+                    "description": "A JSON object that either: conforms with the [Adaptive Card Schema](https://adaptivecards.io/schemas/adaptive-card.json) and templating language, or contains a `file` property that references a file containing the Adaptive Card Schema. This Adaptive Card instance is used to render a result from the plugin response. This value is used if the `template_selector` isn't present or fails to resolve to an adaptive card. If using the file reference option, the value of `file` MUST be a relative path to a JSON file containing a valid Adaptive Card Schema. The path is relative to the location of the manifest document.",
+                    "oneOf": [
+                        {
+                            "description": "An inline Adaptive Card definition that conforms with the Adaptive Card Schema and templating language.",
+                            "type": "object",
+                            "not": {
+                                "required": ["file"]
+                            }
+                        },
+                        {
+                            "description": "A file reference to an Adaptive Card definition. The file property MUST contain a relative path to a JSON file containing a valid Adaptive Card Schema.",
+                            "type": "object",
+                            "properties": {
+                                "file": {
+                                    "type": "string",
+                                    "description": "A relative path to a JSON file containing a valid Adaptive Card Schema. The path is relative to the location of the manifest document."
+                                }
+                            },
+                            "required": ["file"],
+                            "additionalProperties": false
+                        }
+                    ]
                 },
                 "oauth_card_path": {
                     "type": "string",
@@ -314,7 +335,7 @@
                 },
                 "run_for_functions": {
                     "type": "array",
-                    "description": "The names of the functions that are available in this runtime. If this property is omitted, all functions described by the runtime are available. If a wildcard (\"*\") is specified as the only string, all functions are considered. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly",
+                    "description": "The names of the functions that are available in this runtime. A single wildcard (\"*\") value can be provided to enable all functions in the OpenAPI description. More than one runtime MUST NOT declare support for the same function either implicitly or explicitly.",
                     "items": {
                         "type": "string"
                     }
