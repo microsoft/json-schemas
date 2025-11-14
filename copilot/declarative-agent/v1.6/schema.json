@@ -252,16 +252,11 @@
             },
             "embedded-knowledge": {
                 "type": "object",
-                "description": "A JSON object whose presence indicates that the DA will be able to use files locally in the app package as knowledge. The object MUST contain either a files member or a embedded_resource_snapshot_id member, but not both.",
+                "description": "A JSON object whose presence indicates that the DA will be able to use files locally in the app package as knowledge.",
                 "properties": {
                     "name": {
                         "const": "EmbeddedKnowledge",
                         "description": "Required. Must be set to EmbeddedKnowledge."
-                    },
-                    "embedded_resource_snapshot_id": {
-                        "type": "string",
-                        "description": "A JSON string identifier provisioned by a an external file container storage service that can be used to locate the embedded knowledge files.",
-                        "pattern": "^(?!\\[\\[)(.*?)(?<!\\]\\])$"
                     },
                     "files": {
                         "type": "array",
@@ -271,35 +266,13 @@
                         }
                     }
                 },
-                "oneOf": [
-                    {
-                        "required": [
-                            "embedded_resource_snapshot_id"
-                        ],
-                        "not": {
-                            "required": [
-                                "files"
-                            ]
-                        }
-                    },
-                    {
-                        "required": [
-                            "files"
-                        ],
-                        "not": {
-                            "required": [
-                                "embedded_resource_snapshot_id"
-                            ]
-                        }
-                    }
-                ],
                 "required": [
-                    "name"
+                    "name",
+                    "files"
                 ],
                 "propertyNames": {
                     "enum": [
                         "name",
-                        "embedded_resource_snapshot_id",
                         "files"
                     ]
                 }
