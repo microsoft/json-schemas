@@ -1,0 +1,299 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/copilot/schema/1.0.0/schema.json",
+  "definitions": {
+    "CopilotSchemaColumn": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Visible",
+            "Hidden"
+          ]
+        },
+        "index": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "All",
+            "None"
+          ]
+        },
+        "synonyms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1024
+          },
+          "maxItems": 1024
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CopilotSchemaHierarchy": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Visible",
+            "Hidden"
+          ]
+        },
+        "levels": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/CopilotSchemaLevel"
+          },
+          "maxItems": 15999
+        },
+        "synonyms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1024
+          },
+          "maxItems": 1024
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CopilotSchemaLevel": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Visible",
+            "Hidden"
+          ]
+        },
+        "synonyms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1024
+          },
+          "maxItems": 1024
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CopilotSchemaMeasure": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Visible",
+            "Hidden"
+          ]
+        },
+        "synonyms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1024
+          },
+          "maxItems": 1024
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CopilotSchemaTable": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Visible",
+            "Hidden"
+          ]
+        },
+        "columns": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/CopilotSchemaColumn"
+          },
+          "maxItems": 15999
+        },
+        "measures": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/CopilotSchemaMeasure"
+          },
+          "maxItems": 15999
+        },
+        "hierarchies": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/CopilotSchemaHierarchy"
+          },
+          "maxItems": 15999
+        },
+        "synonyms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1024
+          },
+          "maxItems": 1024
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "tables": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/CopilotSchemaTable"
+      },
+      "maxItems": 16000
+    }
+  },
+  "required": [
+    "$schema"
+  ]
+}
