@@ -24,4 +24,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest .\tests\validate-fabric-schemas_test.py
+          pytest ./tests/validate-fabric-schemas_test.py
