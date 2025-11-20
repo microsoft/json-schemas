@@ -1,9 +1,9 @@
-name: validate schemas
+name: validate Fabric schemas
 
 on:
   pull_request:
     paths:
-      - 'fabric/item/**/*.json'
+      - 'fabric/**/*.json'
 
 jobs:
   test:
@@ -24,4 +24,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest
+          pytest .\tests\validate-schemas_test.py
