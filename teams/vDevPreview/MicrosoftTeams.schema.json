@@ -500,6 +500,11 @@
                         "description": "A value indicating whether the bot supports video calling.",
                         "default": false
                     },
+                    "supportsSessions": {
+                        "type": "boolean",
+                        "description": "A property set by developers to opt-in to sessions.",
+                        "default": false
+                    },
                     "scopes": {
                         "type": "array",
                         "description": "Specifies whether the bot offers an experience in the context of a channel in a team, in a group chat (groupChat), an experience scoped to an individual user alone (personal) OR within Copilot surfaces. These options are non-exclusive.",
@@ -1497,6 +1502,20 @@
                           "required": [
                             "text"
                           ]
+                        },
+                        "functionsAs": {
+                            "type": "string",
+                            "enum": [
+                            "agentOnly",
+                            "agenticUserOnly",
+                            "agentOrAgenticUser"
+                            ],
+                            "default": "agentOnly",
+                            "description": "Possible values: 'agenticUserOnly', 'agentOnly', or 'agentOrAgenticUser'. 'agenticUserOnly' means the customEngineAgent must be hired and cannot be installed as a regular agent. 'agentOrAgenticUser' means the customEngineAgent supports both being installed as a regular agent and being hired. 'agentOnly' means it supports being installed as a regular agent only (default)."
+                        },
+                        "agenticUserTemplateId": {
+                            "type": "string",
+                            "description": "Unique identifier for the agentic user template. This id must match the id specified in an agentic user template in the agenticUserTemplates node"
                         }
                       },
                       "required": [
@@ -1522,6 +1541,15 @@
                   ]
                 }
             ]
+        },
+        "agenticUserTemplates": {
+            "type": "array",
+            "description": "An array of agentic user templates references.",
+            "items": {
+                "$ref": "#/definitions/agenticUserTemplateRef"
+            },
+            "minimum": 1,
+            "maxItems": 1
         },
         "elementRelationshipSet": {
             "type": "object",
@@ -1575,6 +1603,175 @@
             }
           },
           "additionalProperties": false
+        },
+        "agentConnectors": {
+            "type": "array",
+            "description": "A list of agent connector objects to included in the Unified App Manifest.",
+            "maxItems": 10,
+            "items": {
+                "type": "object",
+                "description": "An agent connector represents a mechanism to enable agents to access information from systems outside of Microsoft 365, often via an MCP Server. Other mechanisms include using OpenAPI descriptions for calling external HTTP APIs. The role of the agent connector is to provide the necessary configuration information to agents or other M365 applications to connect to these external systems. An agent connector can be provided for use by other elements described within the same Unified App Manifest, or as a standalone resource that can be referenced in the Unified App Manifest of other M365 applications.",
+                "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier for the agent connector",
+                    "maxLength": 64
+                },
+                "reusable": {
+                    "type": "boolean",
+                    "description": "Indicates whether this connector can be reused by other applications.",
+                    "default": false
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "A user-friendly name for the connector, which can be displayed in UIs.",
+                    "maxLength": 128
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A brief description of the connector's purpose and functionality.",
+                    "maxLength": 4000
+                },
+                "toolSource": {
+                    "type": "object",
+                    "description": "Configuration details for connectors that provide tools for agents, either via a plugin, a remote MCP server or a local MCP server. One and only one of the above properties MUST be defined within a tool source object.",
+                    "properties": {
+                    "plugin": {
+                        "type": "object",
+                        "description": "Configuration details for connectors that leverage a Plugin Manifest. Either both id and file properties must be provided (for external plugin reference), or only the description property must be provided (for inline plugin manifest).",
+                        "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "The unique identifier of the plugin that provides the tools.",
+                            "maxLength": 64
+                        },
+                        "file": {
+                            "$ref": "#/definitions/relativePath",
+                            "description": "The relative path to the plugin manifest file within the app package."
+                        },
+                        "description": {
+                            "type": "object",
+                            "description": "An inlined Plugin Manifest object for simple plugins that do not require a separate file. It should conform to the Plugin Manifest schema https://spec-hub.azurewebsites.net/specifications/PluginManifest-2.3.html ."
+                        }
+                        },
+                        "additionalProperties": false
+                    },
+                    "remoteMcpServer": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                        "mcpServerUrl": {
+                            "$ref": "#/definitions/secureHttpUrl",
+                            "description": "The URL of the remote MCP Server."
+                        },
+                        "mcpToolDescription": {
+                            "type": "object",
+                            "description": "Configuration for MCP tool descriptions, either by file reference or inline content (but not both). When this property is present it indicates that dynamic discovery will not be used.",
+                            "properties": {
+                            "file": {
+                                "$ref": "#/definitions/relativePath",
+                                "description": "The relative path to the MCP tool description file within the app package."
+                            },
+                            "description": {
+                                "type": "object",
+                                "description": "An inline JSON object containing the tool descriptions directly. The contents match the results of calling the 'tools/list' method on the MCP Server."
+                            }
+                            },
+                            "additionalProperties": false
+                        },
+                        "authorization": {
+                            "type": "object",
+                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://spec-hub.azurewebsites.net/specifications/PluginManifest-2.3.html",
+                            "additionalProperties": false,
+                            "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [ "None", "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ],
+                                "description": "The type of authorization required to invoke the MCP server. Supported values are: 'None' (anonymous access), 'OAuthPluginVault' (OAuth flow with referenceId), 'ApiKeyPluginVault' (API Key with referenceId), 'DynamicClientRegistration' (dynamic client registration with referenceId)."
+                            },
+                            "referenceId": {
+                                "type": "string",
+                                "maxLength": 128,
+                                "description": "A reference identifier used when type is OAuthPluginVault, ApiKeyPluginVault, or DynamicClientRegistration. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
+                            }
+                            },
+                            "required": [ "type" ],
+                            "if": {
+                            "properties": {
+                                "type": {
+                                "enum": [ "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ]
+                                }
+                            }
+                            },
+                            "then": {
+                            "required": [ "referenceId" ]
+                            }
+                        }
+                        },
+                        "required": [ "mcpServerUrl" ]
+                    },
+                    "localMcpServer": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                        "mcpServerIdentifier": {
+                            "type": "string",
+                            "maxLength": 128,
+                            "description": "The unique identifier of the local MCP Server deployed via some secure mechanism to the user's desktop."
+                        },
+                        "mcpToolDescription": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Configuration for MCP tool descriptions, either by file reference or inline content (but not both). When this property is present it indicates that dynamic discovery will not be used.",
+                            "properties": {
+                            "file": {
+                                "$ref": "#/definitions/relativePath",
+                                "description": "The relative path to the MCP tool description file within the app package."
+                            },
+                            "description": {
+                                "type": "object",
+                                "description": "An inline JSON object containing the tool descriptions directly. The contents match the results of calling the 'tools/list' method on the MCP Server."
+                            }
+                            }
+                        },
+                        "authorization": {
+                            "type": "object",
+                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://spec-hub.azurewebsites.net/specifications/PluginManifest-2.3.html",
+                            "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [ "None", "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ],
+                                "description": "The type of authorization required to invoke the MCP server. Supported values are: 'None' (anonymous access), 'OAuthPluginVault' (OAuth flow with referenceId), 'ApiKeyPluginVault' (API Key with referenceId), 'DynamicClientRegistration' (dynamic client registration with referenceId)."
+                            },
+                            "referenceId": {
+                                "type": "string",
+                                "maxLength": 128,
+                                "description": " (maxLength: 128)\tA reference identifier used when type is OAuthPluginVault, ApiKeyPluginVault, or DynamicClientRegistration. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
+                            }
+                            },
+                            "additionalProperties": false,
+                            "required": [ "type" ],
+                            "if": {
+                            "properties": {
+                                "type": {
+                                "enum": [ "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ]
+                                }
+                            }
+                            },
+                            "then": {
+                            "required": [ "referenceId" ]
+                            }
+                        }
+                        },
+                        "required": [ "mcpServerIdentifier" ]
+                    }
+                    },
+                    "additionalProperties": false
+                }
+                },
+                "required": [ "id", "displayName" ],
+                "additionalProperties": false
+            }
         }
     },
     "required": [
@@ -1929,8 +2126,68 @@
               "metadataUrl": {
                 "$ref": "#/definitions/httpsUrl",
                 "description": "The full URL of a metadata json file with default locale."
+              },
+              "enums": {
+                "type": "array",
+                "description": "Array of custom defined enum objects.",
+                "items": {
+                    "$ref": "#/definitions/enum"
+                },
+                "maxItems": 20000
               }
             },
+            "additionalProperties": false
+        },
+        "enum": {
+            "type": "object",
+            "properties": {
+                "id": {
+                "type": "string",
+                "description": "A unique ID for the enum.",
+                "maxLength": 64,
+                "minLength": 3,
+                "pattern": "^[A-Za-z][A-Za-z0-9._]*$"
+                },
+                "type": {
+                "type": "string",
+                "description": "The type of the values in this enum.",
+                "enum": [ "number", "string" ]
+                },
+                "values": {
+                "type": "array",
+                "description": "Array that defines the constants for the enum.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "A brief description of the constant.",
+                        "maxLength": 256
+                    },
+                    "numberValue": {
+                        "type": ["number", "null"],
+                        "description": "When enum type is number, the actual number value of the constant."
+                    },
+                    "stringValue": {
+                        "type": "string",
+                        "description": "When enum type is string, the actual string value of the constant."
+                    },
+                    "tooltip": {
+                        "type": "string",
+                        "description": "Additional information about the constant, intended to provide more context or details.",
+                        "maxLength": 256
+                    }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "name" ]
+                }
+                }
+            },
+            "required": [
+                "id",
+                "type",
+                "values"
+            ],
             "additionalProperties": false
         },
         "extensionCustomFunctionsNamespace": {
@@ -2023,6 +2280,31 @@
                 "type": "boolean",
                 "description": "If true, your custom function can access the addresses of the function's input parameters. This property must be used in combination with the dimensionality property of the result object, and dimensionality must be set to matrix.",
                 "default": false
+              },
+              "requiresStreamAddress": {
+                "type": "boolean",
+                "default": false,
+                "description": "If `true`, the function can access the address of the cell calling the streaming function. The `address` property of the invocation parameter contains the address of the cell that invoked your streaming function. "
+              },
+              "requiresStreamParameterAddresses": {
+                "type": "boolean",
+                "description": "If `true`, the function can access the parameter addresses of the cell calling the streaming function. The `parameterAddresses` property of the invocation parameter contains the parameter addresses for your streaming function.",
+                "default": false
+              },
+              "capturesCallingObject": {
+                "type": "boolean",
+                "description": "If `true`, the data type being referenced by the custom function is passed as the first argument to the custom function.",
+                "default": false
+              },
+              "excludeFromAutoComplete": {
+                "type": "boolean",
+                "description": "If `true`, the custom function will not appear in the formula AutoComplete menu in Excel.",
+                "default": false
+              },
+              "linkedEntityLoadService": {
+                "type": "boolean",
+                "description": "If `true`, it designates that the function is a linked entity load service that returns linked entity cell values for linked entity IDs requested by Excel.",
+                "default": false
               }
             },
             "required": [
@@ -2062,14 +2344,13 @@
                   "doublecellvalue",
                   "entitycellvalue",
                   "errorcellvalue",
-                  "formattednumbercellvalue",
                   "linkedentitycellvalue",
                   "localimagecellvalue",
                   "stringcellvalue",
                   "webimagecellvalue",
                   null
                 ],
-                "description": "A subfield of the type property. Specifies the Excel data types accepted by the custom function. Accepts the values cellvalue, booleancellvalue, doublecellvalue, entitycellvalue, errorcellvalue, formattednumbercellvalue, linkedentitycellvalue, localimagecellvalue, stringcellvalue, webimagecellvalue"
+                "description": "A subfield of the type property. Specifies the Excel data types accepted by the custom function. Accepts the values cellvalue, booleancellvalue, doublecellvalue, entitycellvalue, errorcellvalue, linkedentitycellvalue, localimagecellvalue, stringcellvalue, webimagecellvalue"
               },
               "dimensionality": {
                 "type": "string",
@@ -2089,6 +2370,11 @@
                 "type": "boolean",
                 "default": false,
                 "description": "If true, parameters populate from a specified array. Note that functions all repeating parameters are considered optional parameters by definition."
+              },
+              "customEnumId": {
+                "type": "string",
+                "description": "|The `id` of the enum in the `enums` array. This associates the custom enum with the function and enables Excel to display the enum members in the formula AutoComplete menu.",
+                "maxLength": 64
               }
             },
             "required": [ "name" ]
@@ -3588,6 +3874,27 @@
             "required": [
               "id",
               "file"
+            ],
+            "additionalProperties": false
+        },
+        "agenticUserTemplateRef": {
+            "type": "object",
+            "properties": {
+                "id": {
+                "type": "string",
+                "description": "Unique identifier for the agentic user template. Must contain only alphanumeric characters, dots, underscores, and hyphens.",
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "minLength": 1,
+                "maxLength": 64
+                },
+                "file": {
+                "$ref": "#/definitions/relativePath",
+                "description": "Relative file path to this agentic user template element file in the application package."
+                }
+            },
+            "required": [
+                "id",
+                "file"
             ],
             "additionalProperties": false
         },
