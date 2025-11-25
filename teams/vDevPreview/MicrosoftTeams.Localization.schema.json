@@ -201,6 +201,14 @@
         "type": "string",
         "maxLength": 32
       },
+      "^extensions\\[[0-9]\\]\\.runtimes\\[[1]?[0-9]\\]\\.customFunctions\\.enums\\[[0-9]\\]\\.values\\[[0-9]\\]\\.name$": {
+        "type": "string",
+        "maxLength": 256
+      },
+      "^extensions\\[[0-9]\\]\\.runtimes\\[[1]?[0-9]\\]\\.customFunctions\\.enums\\[[0-9]\\]\\.values\\[[0-9]\\]\\.tooltip$": {
+        "type": "string",
+        "maxLength": 256
+      },
       "^extensions\\[[0]\\]\\.keyboardShortcuts\\[[0-9]\\]\\.shortcuts\\[[0-9]\\]\\.key\\.default$": {
         "type": "string",
         "maxLength": 32
