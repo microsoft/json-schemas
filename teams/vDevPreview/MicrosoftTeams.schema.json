@@ -1651,7 +1651,7 @@
                         },
                         "description": {
                             "type": "object",
-                            "description": "An inlined Plugin Manifest object for simple plugins that do not require a separate file. It should conform to the Plugin Manifest schema https://spec-hub.azurewebsites.net/specifications/PluginManifest-2.3.html ."
+                            "description": "An inlined Plugin Manifest object for simple plugins that do not require a separate file. It should conform to the Plugin Manifest schema https://learn.microsoft.com/microsoft-365-copilot/extensibility/api-plugin-manifest-2.3."
                         }
                         },
                         "additionalProperties": false
@@ -1681,7 +1681,7 @@
                         },
                         "authorization": {
                             "type": "object",
-                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://spec-hub.azurewebsites.net/specifications/PluginManifest-2.3.html",
+                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://learn.microsoft.com/microsoft-365-copilot/extensibility/api-plugin-manifest-2.3",
                             "additionalProperties": false,
                             "properties": {
                             "type": {
@@ -1736,7 +1736,7 @@
                         },
                         "authorization": {
                             "type": "object",
-                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://spec-hub.azurewebsites.net/specifications/PluginManifest-2.3.html",
+                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://learn.microsoft.com/microsoft-365-copilot/extensibility/api-plugin-manifest-2.3",
                             "properties": {
                             "type": {
                                 "type": "string",
