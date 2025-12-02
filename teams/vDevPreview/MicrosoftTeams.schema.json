@@ -1661,7 +1661,7 @@
                         "additionalProperties": false,
                         "properties": {
                         "mcpServerUrl": {
-                            "$ref": "#/definitions/secureHttpUrl",
+                            "$ref": "#/definitions/httpsUrl",
                             "description": "The URL of the remote MCP Server."
                         },
                         "mcpToolDescription": {
@@ -2362,7 +2362,7 @@
                 "description": "Must be either scalar (a non-array value) or matrix (a 2-dimensional array)."
               },
               "optional": {
-                "type": ["boolean", "null"],
+                "type": "boolean",
                 "default": false,
                 "description": "If true, the parameter is optional."
               },
