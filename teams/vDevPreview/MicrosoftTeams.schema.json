@@ -2362,7 +2362,7 @@
                 "description": "Must be either scalar (a non-array value) or matrix (a 2-dimensional array)."
               },
               "optional": {
-                "type": "boolean",
+                "type": ["boolean", "null"],
                 "default": false,
                 "description": "If true, the parameter is optional."
               },
