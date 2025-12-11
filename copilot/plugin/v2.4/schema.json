@@ -16,8 +16,8 @@
         },
         "namespace": {
             "type": "string",
-            "description": "An identifier used to prevent name conflicts between function names from different plugins that are used within the same execution context. The value MUST match the regex ^[A-Za-z0-9_]+ as defined by [RFC9485]. This is a required member.",
-            "pattern": "^[A-Za-z0-9_]+$"
+            "description": "An identifier used to prevent name conflicts between function names from different plugins that are used within the same execution context. The value MUST match the regex ^[A-Za-z0-9-]+ as defined by [RFC9485]. This is a required member.",
+            "pattern": "^[A-Za-z0-9-]+$"
         },
         "description_for_model": {
             "type": "string",
@@ -112,7 +112,7 @@
                 "name": {
                     "type": "string",
                     "description": "A string that uniquely identifies this function. Runtime objects MAY reference this identifier to bind the runtime to the function. When the function is bound to an OpenAPI runtime, the value must match an `operationId` value in the OpenAPI description.",
-                    "pattern": "^[A-Za-z0-9_]+$"
+                    "pattern": "^[A-Za-z0-9_-]+$"
                 },
                 "description": {
                     "type": "string",
