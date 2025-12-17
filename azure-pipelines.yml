@@ -15,7 +15,7 @@ steps:
 
 - task: M365CdnAssetsUpload@3
   inputs:
-    SourcePath: '$(Build.SourcesDirectory)/prod/**'
+    SourcePath: '$(Build.Repository.LocalPath)\*'
     ConnectionType: 'ServiceConnection'
     AzureSubscription: 'Production_1CDN_Access'
     Environment: 'PublicCloud'
