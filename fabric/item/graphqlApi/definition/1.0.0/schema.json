@@ -1,1 +1,4 @@
-{}
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphsqlApi/definition/1.0.0/schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema#"
+}
