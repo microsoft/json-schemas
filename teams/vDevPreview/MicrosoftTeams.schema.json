@@ -2566,6 +2566,13 @@
                     "items": {
                         "$ref": "#/definitions/extensionRibbonsCustomMobileGroupItem"
                     }
+                },
+                "keytip": {
+                    "type": "string",
+                    "description": "KeyTip shortcut for keyboard navigation (1-3 uppercase alphanumeric characters)",
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "pattern": "^[A-Z0-9]+$"
                 }
             },
             "dependencies": {
@@ -2747,6 +2754,13 @@
                     "items": {
                         "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
                     }
+                },
+                "keytip": {
+                    "type": "string",
+                    "description": "KeyTip shortcut for keyboard navigation (1-3 uppercase alphanumeric characters)",
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "pattern": "^[A-Z0-9]+$"
                 }
             },
             "required": [
@@ -2829,6 +2843,13 @@
                 "overriddenByRibbonApi": {
                     "type": "boolean",
                     "default": "false"
+                },
+                "keytip": {
+                    "type": "string",
+                    "description": "KeyTip shortcut for keyboard navigation (1-3 uppercase alphanumeric characters)",
+                    "minLength": 1,
+                    "maxLength": 3,
+                    "pattern": "^[A-Z0-9]+$"
                 }
             },
             "additionalProperties": false,
