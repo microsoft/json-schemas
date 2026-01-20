@@ -2,7 +2,7 @@
 
 ## January 2026
 
-Modern Tooltips GA, bug fixes
+Modern Tooltips GA, Field Parameter Report Settings, bug fixes
 
 - [bookmark 2.0.0](./definition/bookmark/CHANGELOG.md#2.0.0)
 - [report 3.1.0](./definition/report/CHANGELOG.md#3.1.0)
