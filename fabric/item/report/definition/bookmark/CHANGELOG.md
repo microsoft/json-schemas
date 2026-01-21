@@ -1,5 +1,10 @@
 # Bookmark Versions
 
+### 2.0.0
+<b>Released in: </b> January 2026 <br />
+<b>Notes: </b> 
+- Updates the `selector` property in `DataViewObjectPropertyIdWithSelector` from required to optional to address a bug
+
 ### 1.4.0
 
 <b>Released in: </b> June 2025 <br />
