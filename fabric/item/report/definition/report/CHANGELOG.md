@@ -1,5 +1,11 @@
 # Report Versions
 
+### 3.1.0
+
+<b>Released in: </b> January 2026 <br />
+<b>Notes: </b> 
+- Adds the `fieldParameterReportSettings` property to the `ExplorationSettings` definition
+
 ### 3.0.0
 
 <b>Released in: </b> August 2025 <br />

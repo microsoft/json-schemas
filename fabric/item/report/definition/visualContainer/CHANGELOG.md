@@ -1,5 +1,11 @@
 # Visual Container Versions
 
+### 2.5.0
+
+<b>Released in: </b> January 2026 <br />
+<b>Notes: </b> 
+- Modern Tooltips GA
+
 ### 2.4.0
 
 <b>Released in: </b> November 2025 <br />
