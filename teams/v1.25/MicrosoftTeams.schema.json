@@ -1053,7 +1053,6 @@
       "type": "string",
       "enum": [
         "tier1",
-        "tier2",
         null
       ],
       "description": "A property in the app manifest that declares support for all channel features, categorized by tiers."
