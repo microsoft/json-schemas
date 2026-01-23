@@ -550,7 +550,8 @@
               "botBased",
               "apiBased"
             ],
-            "description": "Type of the compose extension."
+            "description": "Type of the compose extension.",
+            "default": "botBased"
           },
           "authorization": {
             "type": "object",
@@ -1396,6 +1397,16 @@
       "maxLength": 2048,
       "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://"
     },
+    "anyHttpUrl": {
+        "type": "string",
+        "maxLength": 2048,
+        "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://"
+    },
+    "secureHttpUrl": {
+        "type": "string",
+        "maxLength": 2048,
+        "pattern": "^[Hh][Tt][Tt][Pp][Ss]://"
+    },
     "semver": {
       "type": "string",
       "maxLength": 256,
@@ -2066,7 +2077,7 @@
       "type": "array",
       "description": "Specifies the Office application windows in which the ribbon customization is available to the user. Each item in the array is a member of a string array. Possible values are: mailRead, mailCompose, meetingDetailsOrganizer, meetingDetailsAttendee, onlineMeetingDetailsOrganizer, logEventMeetingDetailsAttendee, spamReportingOverride.",
       "minItems": 1,
-      "maxItems": 8,
+      "maxItems": 7,
       "items": {
         "type": "string",
         "enum": [
