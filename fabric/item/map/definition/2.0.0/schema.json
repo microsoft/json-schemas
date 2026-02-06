@@ -323,7 +323,7 @@
           },
           "connectionId": {
             "type": ["string", "null"],
-            "description": "Identifier of a resource provided by the connection. e.g. layer name, asset name"
+            "description": "ID of the connection for external data sources"
           },
           "connectionResourceId": {
             "type": ["string", "null"],
