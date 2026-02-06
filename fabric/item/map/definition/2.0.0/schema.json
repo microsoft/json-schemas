@@ -307,10 +307,15 @@
             "type": ["string", "null"],
             "description": "Relative path to the data source"
           },
-          "querysetTabId": {
+          "querysetId": {
             "type": ["string", "null"],
-            "description": "ID of the queryset and tab in format 'querysetId_tabId'",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}_[0-9a-zA-Z]+$"
+            "description": "ID of the KQL queryset for this layer",
+            "format": "uuid"
+          },
+          "tabId": {
+            "type": ["string", "null"],
+            "description": "ID of the tab within the KQL queryset",
+            "format": "uuid"
           },
           "ontologyEntityId": {
             "type": ["string", "null"],
