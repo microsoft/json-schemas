@@ -1638,26 +1638,24 @@
                     "properties": {
                     "plugin": {
                         "type": "object",
-                        "description": "Configuration details for connectors that leverage a Plugin Manifest. Either both id and file properties must be provided (for external plugin reference), or only the description property must be provided (for inline plugin manifest).",
+                        "description": "Configuration details for connectors that leverage a Plugin Manifest. Both the id and file properties must be provided.",
                         "properties": {
-                        "id": {
-                            "type": "string",
-                            "description": "The unique identifier of the plugin that provides the tools.",
-                            "maxLength": 64
+                            "id": {
+                                "type": "string",
+                                "description": "The unique identifier of the plugin that provides the tools.",
+                                "maxLength": 64
+                            },
+                            "file": {
+                                "$ref": "#/definitions/relativePath",
+                                "description": "The relative path to the plugin manifest file within the app package."
+                            }
                         },
-                        "file": {
-                            "$ref": "#/definitions/relativePath",
-                            "description": "The relative path to the plugin manifest file within the app package."
-                        },
-                        "description": {
-                            "type": "object",
-                            "description": "An inlined Plugin Manifest object for simple plugins that do not require a separate file. It should conform to the Plugin Manifest schema https://learn.microsoft.com/microsoft-365-copilot/extensibility/api-plugin-manifest-2.3."
-                        }
-                        },
+                        "required": [ "id", "file" ],
                         "additionalProperties": false
                     },
                     "remoteMcpServer": {
                         "type": "object",
+                        "description": "Adds support for connectors that leverage a Remote MCP Server as the source of data.",
                         "additionalProperties": false,
                         "properties": {
                         "mcpServerUrl": {
@@ -1666,22 +1664,18 @@
                         },
                         "mcpToolDescription": {
                             "type": "object",
-                            "description": "Configuration for MCP tool descriptions, either by file reference or inline content (but not both). When this property is present it indicates that dynamic discovery will not be used.",
+                            "description": "Configuration for MCP tool descriptions by file reference. When this property is present it indicates that dynamic discovery will not be used.",
                             "properties": {
-                            "file": {
-                                "$ref": "#/definitions/relativePath",
-                                "description": "The relative path to the MCP tool description file within the app package."
-                            },
-                            "description": {
-                                "type": "object",
-                                "description": "An inline JSON object containing the tool descriptions directly. The contents match the results of calling the 'tools/list' method on the MCP Server."
-                            }
+                                "file": {
+                                    "$ref": "#/definitions/relativePath",
+                                    "description": "The relative path to the MCP tool description file within the app package."
+                                }
                             },
                             "additionalProperties": false
                         },
                         "authorization": {
                             "type": "object",
-                            "description": "Authorization configuration for connecting to the local MCP server. The design mirrors that of Plugin Manifests https://learn.microsoft.com/microsoft-365-copilot/extensibility/api-plugin-manifest-2.3",
+                            "description": "Authorization configuration for connecting to the remote MCP server. The design mirrors that of Plugin Manifests https://learn.microsoft.com/microsoft-365-copilot/extensibility/api-plugin-manifest-2.3",
                             "additionalProperties": false,
                             "properties": {
                             "type": {
@@ -1712,6 +1706,7 @@
                     },
                     "localMcpServer": {
                         "type": "object",
+                        "description": "Adds support for connectors that leverage a local MCP Server as the source of data.",
                         "additionalProperties": false,
                         "properties": {
                         "mcpServerIdentifier": {
@@ -1722,16 +1717,12 @@
                         "mcpToolDescription": {
                             "type": "object",
                             "additionalProperties": false,
-                            "description": "Configuration for MCP tool descriptions, either by file reference or inline content (but not both). When this property is present it indicates that dynamic discovery will not be used.",
+                            "description": "Configuration for MCP tool descriptions by file reference. When this property is present it indicates that dynamic discovery will not be used.",
                             "properties": {
-                            "file": {
-                                "$ref": "#/definitions/relativePath",
-                                "description": "The relative path to the MCP tool description file within the app package."
-                            },
-                            "description": {
-                                "type": "object",
-                                "description": "An inline JSON object containing the tool descriptions directly. The contents match the results of calling the 'tools/list' method on the MCP Server."
-                            }
+                                "file": {
+                                    "$ref": "#/definitions/relativePath",
+                                    "description": "The relative path to the MCP tool description file within the app package."
+                                }
                             }
                         },
                         "authorization": {
@@ -2130,7 +2121,7 @@
               },
               "metadataUrl": {
                 "$ref": "#/definitions/secureHttpUrl",
-                "description": "The full URL of a metadata json file with default locale."
+                "description": "The full URL of a metadata json file. If `functions` is not empty, the Office client will install CustomFunctions based on `functions`. Any definitions in `metadataUrl` will be ignored."
               },
               "enums": {
                 "type": "array",
@@ -2240,7 +2231,7 @@
                 "type": "string",
                 "description": "The description of the function that end users see in Excel.",
                 "minLength": 1,
-                "maxLength": 128
+                "maxLength": 1024
               },
               "helpUrl": {
                 "description": "URL that provides information about the function. (It is displayed in a task pane.)",
@@ -2329,7 +2320,7 @@
                 "type": "string",
                 "description": "A description of the parameter. This is displayed in Excel's IntelliSense.",
                 "minLength": 1,
-                "maxLength": 128
+                "maxLength": 512
               },
               "type": {
                 "type": "string",
@@ -2626,8 +2617,8 @@
                 },
                 "icons": {
                     "type": "array",
-                    "minItems": 1,
-                    "maxItems": 3,
+                    "minItems": 3,
+                    "maxItems": 8,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -2669,8 +2660,8 @@
                 "icons": {
                     "type": "array",
                     "description": "Displayed icons for the group.",
-                    "minItems": 1,
-                    "maxItems": 3,
+                    "minItems": 3,
+                    "maxItems": 8,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -2722,8 +2713,8 @@
                 "icons": {
                     "description": "Configures the icons for the custom control.",
                     "type": "array",
-                    "minItems": 1,
-                    "maxItems": 3,
+                    "minItems": 3,
+                    "maxItems": 8,
                     "items": {
                       "$ref": "#/definitions/extensionCommonIcon"
                     }
@@ -2821,8 +2812,8 @@
                 },
                 "icons": {
                     "type": "array",
-                    "minItems": 1,
-                    "maxItems": 3,
+                    "minItems": 3,
+                    "maxItems": 8,
                     "items": {
                         "$ref": "#/definitions/extensionCommonIcon"
                     }
