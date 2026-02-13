@@ -307,16 +307,6 @@
             "type": ["string", "null"],
             "description": "Relative path to the data source"
           },
-          "querysetId": {
-            "type": ["string", "null"],
-            "description": "ID of the KQL queryset for this layer",
-            "format": "uuid"
-          },
-          "tabId": {
-            "type": ["string", "null"],
-            "description": "ID of the tab within the KQL queryset",
-            "format": "uuid"
-          },
           "ontologyEntityId": {
             "type": ["string", "null"],
             "description": "ID of the ontology entity"
