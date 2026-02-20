@@ -1,0 +1,849 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Map Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "colorDefinition": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "A CSS color string (hex, rgb, rgba, hsl, hsla, or named color)"
+        },
+        {
+          "type": "array",
+          "description": "A data-driven expression array for dynamic styling"
+        }
+      ]
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The schema version for the map definition"
+    },
+    "basemap": {
+      "type": "object",
+      "description": "Configuration for the base map settings",
+      "additionalProperties": false,
+      "properties": {
+        "options": {
+          "type": ["object", "null"],
+          "description": "Options for the map",
+          "additionalProperties": false,
+          "properties": {
+            "center": {
+              "type": "array",
+              "description": "The position to align the center of the map view with",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "zoom": {
+              "type": "number",
+              "description": "The zoom level of the map view"
+            },
+            "pitch": {
+              "type": "number",
+              "description": "The pitch (tilt) of the map in degrees between 0 and 60, where 0 is looking straight down on the map"
+            },
+            "bearing": {
+              "type": "number",
+              "description": "The bearing of the map (rotation) in degrees. When the bearing is 0, 90, 180, or 270 the top of the map container will be north, east, south or west respectively"
+            },
+            "style": {
+              "type": "string",
+              "description": "The name of the style to use when rendering the map. Available styles can be found in the supported styles article. The default style is \"road\""
+            },
+            "showLabels": {
+              "type": "boolean",
+              "description": "Specifies if the map should display labels"
+            },
+            "language": {
+              "type": "string",
+              "description": "The language of the map labels. Supported languages can be found in the documentation. If set to \"auto\", the browser's preferred language will be used"
+            },
+            "renderWorldCopies": {
+              "type": "boolean",
+              "description": "Specifies if multiple copies of the world should be rendered when zoomed out"
+            },
+            "styleOverrides": {
+              "type": "object",
+              "description": "Override the default styles for the map elements",
+              "additionalProperties": false,
+              "properties": {
+                "countryRegion": {
+                  "type": "object",
+                  "description": "Country or regions. Supported by map styles \"road\", \"satellite_road_labels\", \"grayscale_light\", \"grayscale_dark\", \"night\", \"road_shaded_relief\", \"high_contrast_dark\", \"high_contrast_light\"",
+                  "properties": {
+                    "borderVisible": {
+                      "type": "boolean",
+                      "description": "Specifies the visibility of the border"
+                    }
+                  }
+                },
+                "adminDistrict": {
+                  "type": "object",
+                  "description": "First administrative level within the country/region level, such as a state or a province. Supported by map styles \"road\", \"satellite_road_labels\", \"grayscale_light\", \"grayscale_dark\", \"night\", \"road_shaded_relief\", \"high_contrast_dark\", \"high_contrast_light\"",
+                  "properties": {
+                    "borderVisible": {
+                      "type": "boolean",
+                      "description": "Specifies the visibility of the border"
+                    }
+                  }
+                },
+                "adminDistrict2": {
+                  "type": "object",
+                  "description": "Second administrative level within the country/region level, such as a county. Supported by map styles \"road\", \"satellite_road_labels\", \"night\", \"road_shaded_relief\", \"high_contrast_dark\", \"high_contrast_light\"",
+                  "properties": {
+                    "borderVisible": {
+                      "type": "boolean",
+                      "description": "Specifies the visibility of the border"
+                    }
+                  }
+                },
+                "roadDetails": {
+                  "type": "object",
+                  "description": "Street blocks in the populated places. Supported by map styles \"road\", \"grayscale_light\", \"grayscale_dark\", \"night\", \"road_shaded_relief\", \"high_contrast_dark\", \"high_contrast_light\"",
+                  "properties": {
+                    "visible": {
+                      "type": "boolean",
+                      "description": "Specifies the visibility of the element"
+                    }
+                  }
+                },
+                "buildingFootprint": {
+                  "type": "object",
+                  "description": "Building footprints along with their address numbers. Supported by map styles \"road\", \"grayscale_light\", \"grayscale_dark\", \"night\", \"road_shaded_relief\", \"high_contrast_dark\", \"high_contrast_light\"",
+                  "properties": {
+                    "visible": {
+                      "type": "boolean",
+                      "description": "Specifies the visibility of the element"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "controls": {
+          "type": "object",
+          "description": "Map control settings",
+          "additionalProperties": false,
+          "properties": {
+            "zoom": {
+              "type": ["boolean", "null"],
+              "description": "Enable zoom control"
+            },
+            "pitch": {
+              "type": ["boolean", "null"],
+              "description": "Enable pitch control"
+            },
+            "compass": {
+              "type": ["boolean", "null"],
+              "description": "Enable compass control"
+            },
+            "scale": {
+              "type": ["boolean", "null"],
+              "description": "Enable scale control"
+            },
+            "traffic": {
+              "type": ["boolean", "null"],
+              "description": "Enable traffic control"
+            },
+            "style": {
+              "type": ["boolean", "null"],
+              "description": "Enable style control"
+            }
+          }
+        },
+        "backgroundColor": {
+          "type": ["string", "null"],
+          "description": "Background color of the map"
+        },
+        "theme": {
+          "type": ["string", "null"],
+          "description": "Theme for the map"
+        }
+      }
+    },
+    "dataSources": {
+      "type": "array",
+      "description": "Array of data sources for the map",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
+            "additionalProperties": false,
+            "properties": {
+              "itemType": {
+                "type": "string",
+                "description": "The type of the data source item (e.g., Lakehouse, KqlDatabase, Ontology)"
+              },
+              "workspaceId": {
+                "type": "string",
+                "description": "The workspace ID of the item",
+                "format": "uuid"
+              },
+              "itemId": {
+                "type": "string",
+                "description": "The item ID",
+                "format": "uuid"
+              }
+            },
+            "required": ["itemType", "workspaceId", "itemId"]
+          },
+          {
+            "type": "object",
+            "description": "A connection data source",
+            "additionalProperties": false,
+            "properties": {
+              "itemType": {
+                "type": "string",
+                "description": "The type of the data source item",
+                "const": "Connection"
+              },
+              "connectionId": {
+                "type": "string",
+                "description": "The connection ID",
+                "format": "uuid"
+              }
+            },
+            "required": ["itemType", "connectionId"]
+          }
+        ]
+      }
+    },
+    "iconSources": {
+      "type": "array",
+      "description": "Array of icon sources for the map",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the icon source",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the icon source"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the icon source"
+          },
+          "itemId": {
+            "type": "string",
+            "description": "ID of the data source item for this icon source",
+            "format": "uuid"
+          },
+          "relativePath": {
+            "type": "string",
+            "description": "Relative path to the icon source"
+          }
+        },
+        "required": ["id", "name", "type", "itemId", "relativePath"]
+      }
+    },
+    "layerSources": {
+      "type": "array",
+      "description": "Array of layer sources for the map",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the layer source",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the layer source"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the layer source"
+          },
+          "options": {
+            "type": ["object", "null"],
+            "description": "Options for the layer source",
+            "additionalProperties": false,
+            "properties": {
+              "cluster": {
+                "type": "boolean",
+                "description": "Enable clustering of point features"
+              },
+              "clusterProperties": {
+                "type": "object",
+                "description": "Defines custom properties that are calculated using expressions against all the points within each cluster and added to the properties of each cluster point",
+                "additionalProperties": {
+                  "type": "array",
+                  "description": "An aggregate expression in the form [operator, mapExpression] or for three-argument operators [operator, mapExpression, reduceExpression]"
+                }
+              },
+              "clusterField": {
+                "type": "string",
+                "description": "Field name to use for cluster aggregation"
+              },
+              "clusterType": {
+                "type": "string",
+                "description": "Type of cluster aggregation to perform"
+              }
+            }
+          },
+          "itemId": {
+            "type": "string",
+            "description": "ID of the data source item for this layer",
+            "format": "uuid"
+          },
+          "relativePath": {
+            "type": ["string", "null"],
+            "description": "Relative path to the data source"
+          },
+          "ontologyEntityId": {
+            "type": ["string", "null"],
+            "description": "ID of the ontology entity"
+          },
+          "refreshIntervalMs": {
+            "type": "integer",
+            "description": "Refresh interval in milliseconds",
+            "minimum": 0
+          },
+          "connectionId": {
+            "type": ["string", "null"],
+            "description": "ID of the connection for external data sources"
+          },
+          "connectionResourceId": {
+            "type": ["string", "null"],
+            "description": "Identifier of a resource provided by the connection. e.g. layer name, asset name"
+          }
+        },
+        "required": ["id", "name", "type"]
+      }
+    },
+    "layerSettings": {
+      "type": "array",
+      "description": "Array of layer settings for the map",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the layer",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the layer"
+          },
+          "sourceId": {
+            "type": "string",
+            "description": "ID of the associated layer source",
+            "format": "uuid"
+          },
+          "sourceLayerId": {
+            "type": ["string", "null"],
+            "description": "ID of the specific layer within the source"
+          },
+          "options": {
+            "type": "object",
+            "description": "Options for the layer rendering",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Layer type (vector or raster)",
+                "enum": ["vector", "raster"]
+              },
+              "visible": {
+                "type": "boolean",
+                "description": "Specifies if the layer is visible or not"
+              },
+              "minZoom": {
+                "type": "number",
+                "description": "An integer specifying the minimum zoom level to render the layer at. This value is inclusive, i.e. the layer will be visible at maxZoom > zoom >= minZoom"
+              },
+              "maxZoom": {
+                "type": "number",
+                "description": "An integer specifying the maximum zoom level to render the layer at. This value is exclusive, i.e. the layer will be visible at maxZoom > zoom >= minZoom"
+              },
+              "color": {
+                "type": "string",
+                "description": "Base color for the layer"
+              },
+              "sourceLayer": {
+                "type": "string",
+                "description": "Required when the source of the layer is a VectorTileSource. A vector source can have multiple layers within it, this identifies which one to render in this layer. Prohibited for all other types of sources"
+              },
+              "latitudeColumnName": {
+                "type": ["string", "null"],
+                "description": "Name of the latitude column"
+              },
+              "longitudeColumnName": {
+                "type": ["string", "null"],
+                "description": "Name of the longitude column"
+              },
+              "geometryColumnName": {
+                "type": ["string", "null"],
+                "description": "Name of the geometry column"
+              },
+              "enablePopups": {
+                "type": "boolean",
+                "description": "Show popups when shapes are clicked"
+              },
+              "heatmapWeight": {
+                "type": "string",
+                "description": "Property name to use for heatmap weight"
+              },
+              "allowExtrusions": {
+                "type": "boolean",
+                "description": "Render polygons with height property as 3D extrusions"
+              },
+              "pointLayerType": {
+                "type": "string",
+                "description": "Type of point layer to render",
+                "enum": ["bubble", "heatmap", "marker"]
+              },
+              "bubbleOptions": {
+                "type": "object",
+                "description": "Styling options for bubble/point geometries",
+                "additionalProperties": false,
+                "properties": {
+                  "color": {
+                    "description": "The color to fill the circle symbol with",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "radius": {
+                    "type": "number",
+                    "description": "The radius of the circle symbols in pixels. Must be greater than or equal to 0"
+                  },
+                  "strokeColor": {
+                    "description": "The color of the circles' outlines",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "The width of the circles' outlines in pixels"
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "A number between 0 and 1 that indicates the opacity at which the circles will be drawn"
+                  },
+                  "sizeType": {
+                    "type": "string",
+                    "description": "Bubble size type",
+                    "enum": ["fixed", "data-driven"]
+                  },
+                  "fixedSize": {
+                    "type": "number",
+                    "description": "Fixed size for bubbles when sizeType is fixed (1-50)",
+                    "minimum": 1,
+                    "maximum": 50
+                  },
+                  "sizeProperty": {
+                    "type": "string",
+                    "description": "Property name for data-driven bubble sizes"
+                  },
+                  "clusterRadius": {
+                    "type": "number",
+                    "description": "Radius of each cluster in pixels"
+                  },
+                  "enableSeriesGroup": {
+                    "type": "boolean",
+                    "description": "Enable grouping by series for color differentiation"
+                  },
+                  "seriesGroup": {
+                    "type": "string",
+                    "description": "Property key to use for series grouping"
+                  },
+                  "paletteId": {
+                    "type": "string",
+                    "description": "ID of the color palette to use for data-driven colors"
+                  },
+                  "customColors": {
+                    "type": "object",
+                    "description": "Custom colors for data-driven styling. Keys are series values, values are color strings.",
+                    "additionalProperties": {
+                      "$ref": "#/$defs/colorDefinition"
+                    }
+                  }
+                }
+              },
+              "heatmapOptions": {
+                "type": "object",
+                "description": "Styling options for heatmap layers",
+                "additionalProperties": false,
+                "properties": {
+                  "intensity": {
+                    "type": "number",
+                    "description": "Similar to heatmap-weight but specifies the global heatmap intensity. The higher this value is, the more 'weight' each point will contribute to the appearance"
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "The opacity at which the heatmap layer will be rendered defined as a number between 0 and 1"
+                  },
+                  "radius": {
+                    "type": "number",
+                    "description": "The radius in pixels used to render a data point on the heatmap. The radius must be a number greater or equal to 1"
+                  },
+                  "weight": {
+                    "type": "number",
+                    "description": "Specifies how much an individual data point contributes to the heatmap. Must be a number greater than 0. A value of 5 would be equivalent to having 5 points of weight 1 in the same spot. This is useful when clustering points to allow heatmap rendering or large datasets"
+                  }
+                }
+              },
+              "markerOptions": {
+                "type": "object",
+                "description": "Styling options for marker layers",
+                "additionalProperties": false,
+                "properties": {
+                  "enableSeriesGroup": {
+                    "type": "boolean",
+                    "description": "Enable grouping by series for color differentiation"
+                  },
+                  "seriesGroup": {
+                    "type": "string",
+                    "description": "Property key to use for series grouping"
+                  },
+                  "fillColor": {
+                    "description": "The color to fill the marker with",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "strokeColor": {
+                    "description": "The color of the markers' outlines",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "The width of the markers' outlines in pixels"
+                  },
+                  "size": {
+                    "type": "number",
+                    "description": "The size of the markers in pixels"
+                  },
+                  "clusterSize": {
+                    "type": "number",
+                    "description": "The size of the clustered markers in pixels"
+                  },
+                  "icon": {
+                    "type": "string",
+                    "description": "Icon name to use for the marker"
+                  }
+                }
+              },
+              "lineOptions": {
+                "type": "object",
+                "description": "Styling options for line geometries",
+                "additionalProperties": false,
+                "properties": {
+                  "strokeColor": {
+                    "description": "Specifies the color of the line",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "The width of the line in pixels. Must be a value greater or equal to 0"
+                  },
+                  "strokeOpacity": {
+                    "type": "number",
+                    "description": "A number between 0 and 1 that indicates the opacity at which the line will be drawn"
+                  },
+                  "enableSeriesGroup": {
+                    "type": "boolean",
+                    "description": "Enable grouping by series for color differentiation"
+                  },
+                  "seriesGroup": {
+                    "type": "string",
+                    "description": "Property key to use for series grouping"
+                  },
+                  "paletteId": {
+                    "type": "string",
+                    "description": "ID of the color palette to use for data-driven colors"
+                  },
+                  "customColors": {
+                    "type": "object",
+                    "description": "Custom colors for data-driven styling. Keys are series values, values are color strings.",
+                    "additionalProperties": {
+                      "$ref": "#/$defs/colorDefinition"
+                    }
+                  }
+                }
+              },
+              "polygonOptions": {
+                "type": "object",
+                "description": "Styling options for polygon fill",
+                "additionalProperties": false,
+                "properties": {
+                  "fillColor": {
+                    "description": "The color to fill the polygons with",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "fillOpacity": {
+                    "type": "number",
+                    "description": "A number between 0 and 1 that indicates the opacity at which the fill will be drawn"
+                  },
+                  "enableSeriesGroup": {
+                    "type": "boolean",
+                    "description": "Enable grouping by series for color differentiation"
+                  },
+                  "seriesGroup": {
+                    "type": "string",
+                    "description": "Property key to use for series grouping"
+                  },
+                  "paletteId": {
+                    "type": "string",
+                    "description": "ID of the color palette to use for data-driven colors"
+                  },
+                  "customColors": {
+                    "type": "object",
+                    "description": "Custom colors for data-driven styling. Keys are series values, values are color strings.",
+                    "additionalProperties": {
+                      "$ref": "#/$defs/colorDefinition"
+                    }
+                  }
+                }
+              },
+              "polygonExtrusionOptions": {
+                "type": "object",
+                "description": "Styling options for extruded polygons (3D)",
+                "additionalProperties": false,
+                "properties": {
+                  "fillColor": {
+                    "description": "The color to fill the polygons with. Ignored if fillPattern is set",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "fillOpacity": {
+                    "type": "number",
+                    "description": "A number between 0 and 1 that indicates the opacity at which the fill will be drawn"
+                  },
+                  "height": {
+                    "type": "number",
+                    "description": "The height in meters to extrude this layer. This height is relative to the ground. Must be a number greater or equal to 0"
+                  },
+                  "base": {
+                    "type": "number",
+                    "description": "The height in meters to extrude the base of this layer. This height is relative to the ground. Must be greater or equal to 0 and less than or equal to height"
+                  }
+                }
+              },
+              "dataLabelOptions": {
+                "type": "object",
+                "description": "Configuration for data labels displayed on features",
+                "additionalProperties": false,
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether data labels are enabled"
+                  },
+                  "color": {
+                    "description": "Text color",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "size": {
+                    "type": "number",
+                    "description": "Text size in pixels"
+                  },
+                  "textStrokeColor": {
+                    "description": "Text stroke color",
+                    "$ref": "#/$defs/colorDefinition"
+                  },
+                  "textStrokeWidth": {
+                    "type": "number",
+                    "description": "Text stroke width in pixels"
+                  },
+                  "allowOverlap": {
+                    "type": "boolean",
+                    "description": "Allow text overlap with other symbols"
+                  }
+                }
+              },
+              "dataLabelKeys": {
+                "type": "array",
+                "description": "Property names to display as data labels",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tooltipKeys": {
+                "type": "array",
+                "description": "Property names to display in tooltips",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "opacity": {
+                "type": "number",
+                "description": "A number between 0 and 1 that indicates the opacity at which the overlay will be drawn",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "latitudeColumnName": {
+            "type": ["string", "null"],
+            "description": "Name of the latitude column"
+          },
+          "longitudeColumnName": {
+            "type": ["string", "null"],
+            "description": "Name of the longitude column"
+          },
+          "geometryColumnName": {
+            "type": ["string", "null"],
+            "description": "Name of the geometry column"
+          },
+          "filters": {
+            "type": "array",
+            "description": "Array of data filters to apply to the layer",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "description": "Text-based filter for string property values",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the filter",
+                      "format": "uuid"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "text",
+                      "description": "Discriminant property for text filter"
+                    },
+                    "field": {
+                      "type": "string",
+                      "description": "Name of the feature property to filter on"
+                    },
+                    "locked": {
+                      "type": "boolean",
+                      "description": "When true, prevents viewers from modifying or removing this filter"
+                    },
+                    "value": {
+                      "type": "array",
+                      "description": "Array of text values to filter by. Empty array indicates no values selected yet.",
+                      "items": {
+                        "type": ["string", "null"]
+                      }
+                    }
+                  },
+                  "required": ["id", "type", "field", "locked", "value"]
+                },
+                {
+                  "type": "object",
+                  "description": "Boolean filter for true/false property values",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the filter",
+                      "format": "uuid"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "boolean",
+                      "description": "Discriminant property for boolean filter"
+                    },
+                    "field": {
+                      "type": "string",
+                      "description": "Name of the feature property to filter on"
+                    },
+                    "locked": {
+                      "type": "boolean",
+                      "description": "When true, prevents viewers from modifying or removing this filter"
+                    },
+                    "value": {
+                      "type": "boolean",
+                      "description": "The boolean value to filter by"
+                    }
+                  },
+                  "required": ["id", "type", "field", "locked", "value"]
+                },
+                {
+                  "type": "object",
+                  "description": "Numeric range filter for integer or decimal property values",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the filter",
+                      "format": "uuid"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "number",
+                      "description": "Discriminant property for number filter"
+                    },
+                    "field": {
+                      "type": "string",
+                      "description": "Name of the feature property to filter on"
+                    },
+                    "locked": {
+                      "type": "boolean",
+                      "description": "When true, prevents viewers from modifying or removing this filter"
+                    },
+                    "min": {
+                      "type": "number",
+                      "description": "Minimum value (inclusive)"
+                    },
+                    "max": {
+                      "type": "number",
+                      "description": "Maximum value (inclusive)"
+                    }
+                  },
+                  "required": ["id", "type", "field", "locked", "min", "max"]
+                },
+                {
+                  "type": "object",
+                  "description": "DateTime range filter for temporal data",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the filter",
+                      "format": "uuid"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "datetime",
+                      "description": "Discriminant property for datetime filter"
+                    },
+                    "field": {
+                      "type": "string",
+                      "description": "Name of the feature property to filter on"
+                    },
+                    "locked": {
+                      "type": "boolean",
+                      "description": "When true, prevents viewers from modifying or removing this filter"
+                    },
+                    "start": {
+                      "type": "string",
+                      "description": "Start of the time range (ISO 8601 format)",
+                      "format": "date-time"
+                    },
+                    "end": {
+                      "type": "string",
+                      "description": "End of the time range (ISO 8601 format)",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": ["id", "type", "field", "locked", "start", "end"]
+                }
+              ]
+            }
+          }
+        },
+        "required": ["id", "name", "sourceId"]
+      }
+    }
+  },
+  "required": ["$schema"]
+}
