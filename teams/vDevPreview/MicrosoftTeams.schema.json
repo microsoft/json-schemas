@@ -3362,11 +3362,11 @@
             "type": "object",
             "properties": {
               "page": {
-                "$ref": "#/definitions/anyHttpUrl",
+                "$ref": "#/definitions/secureHttpUrl",
                 "description": "URL of the .html page to be loaded in browser-based runtimes."
               },
               "script": {
-                "$ref": "#/definitions/anyHttpUrl",
+                "$ref": "#/definitions/secureHttpUrl",
                 "description": "URL of the .js script file to be loaded in UI-less runtimes."
               }
             },
