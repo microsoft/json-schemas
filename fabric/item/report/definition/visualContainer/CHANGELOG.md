@@ -1,5 +1,12 @@
 # Visual Container Versions
 
+### 2.6.0
+
+<b>Released in: </b> February 2026 <br />
+<b>Notes: </b> 
+- Input slicer GA
+- AI narratives "auto-refresh" formatting option
+
 ### 2.5.0
 
 <b>Released in: </b> January 2026 <br />
