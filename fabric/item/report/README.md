@@ -1,5 +1,11 @@
 # Releases
 
+## February 2026
+
+Input slicer GA, AI narratives "auto-refresh" formatting option
+
+- [visualContainer 2.6.0](./definition/visualContainer/CHANGELOG.md#2.6.0)
+
 ## January 2026
 
 Modern Tooltips GA, Field Parameter Report Settings, bug fixes
