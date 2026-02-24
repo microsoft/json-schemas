@@ -19,5 +19,5 @@ steps:
     ConnectionType: 'ServiceConnection'
     AzureSubscription: 'Production_1CDN_Access'
     Environment: 'PublicCloud'
-    ContainerName: 's01-prod'
+    ContainerName: 's01-json-schemas'
     AllLogsToConsole: true
