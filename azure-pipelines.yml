@@ -15,9 +15,10 @@ steps:
 
 - task: M365CdnAssetsUpload@3
   inputs:
-    SourcePath: '$(Build.Repository.LocalPath)\json-schemas\**'
+    SourcePath: '$(Build.Repository.LocalPath)\*'
     ConnectionType: 'ServiceConnection'
     AzureSubscription: 'Production_1CDN_Access'
     Environment: 'PublicCloud'
     ContainerName: 's01-content'
+    BobPrefix: 'json-schemas'
     AllLogsToConsole: true
