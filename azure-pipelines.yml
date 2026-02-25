@@ -11,7 +11,7 @@ pool:
 
 steps:
 - script: echo Triggering staging deployment of JSON-SCHEMAS in github, this copy files to staging blob storage!
-  displayName: 'Staging  deployment JSON-SCHEMAS'
+  displayName: 'Production deployment JSON-SCHEMAS'
 
 - task: M365CdnAssetsUpload@3
   inputs:
@@ -20,5 +20,5 @@ steps:
     AzureSubscription: 'Production_1CDN_Access'
     Environment: 'PublicCloud'
     ContainerName: 's01-content'
-    BobPrefix: 'json-schemas'
+    BlobPrefix: 'json-schemas'
     AllLogsToConsole: true
