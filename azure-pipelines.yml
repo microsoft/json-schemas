@@ -20,5 +20,5 @@ steps:
     AzureSubscription: 'Production_1CDN_Access'
     Environment: 'PublicCloud'
     ContainerName: 's01-content'
-    BlobPrefix: 'json-schemas'
+    BlobPrefix: 'json-schemas/en-us/html'
     AllLogsToConsole: true
