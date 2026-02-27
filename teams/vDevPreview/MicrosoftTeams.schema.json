@@ -1507,11 +1507,10 @@
                             "type": "string",
                             "enum": [
                             "agentOnly",
-                            "agenticUserOnly",
-                            "agentOrAgenticUser"
+                            "agenticUserOnly"
                             ],
                             "default": "agentOnly",
-                            "description": "Possible values: 'agenticUserOnly', 'agentOnly', or 'agentOrAgenticUser'. 'agenticUserOnly' means the customEngineAgent must be hired and cannot be installed as a regular agent. 'agentOrAgenticUser' means the customEngineAgent supports both being installed as a regular agent and being hired. 'agentOnly' means it supports being installed as a regular agent only (default)."
+                            "description": "Possible values: 'agenticUserOnly', 'agentOnly'. 'agenticUserOnly' means the customEngineAgent must be hired and cannot be installed as a regular agent. 'agentOnly' means it supports being installed as a regular agent only (default)."
                         },
                         "agenticUserTemplateId": {
                             "type": "string",
