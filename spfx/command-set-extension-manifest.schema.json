@@ -1,5 +1,5 @@
 {
-  "id": "command-set-extension-manifest.schema.json",
+  "$id": "command-set-extension-manifest.schema.json",
   "title": "Command set extension manifest",
   "description": "A client-side extension that defines a set of custom commands that can be shown in a menu, tool bar, etc.",
 

@@ -1,5 +1,5 @@
 {
-  "id": "client-side-assembly-manifest.schema.json",
+  "$id": "client-side-assembly-manifest.schema.json",
   "title": "Client-side assembly manifest",
   "description": "A client-side assembly is a standalone-executable bundle containing a component, the loader, and all of their dependencies.",
 
