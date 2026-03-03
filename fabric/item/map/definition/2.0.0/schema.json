@@ -70,6 +70,10 @@
               "type": "boolean",
               "description": "Specifies if multiple copies of the world should be rendered when zoomed out"
             },
+            "view": {
+              "type": "string",
+              "description": "The view to show the correct maps for a certain country/region for geopolitically disputed regions. If not specified, the default unified view will be used. Please refer to https://aka.ms/AzureMapsLocalizationViews for details and to see the available Views."
+            },
             "styleOverrides": {
               "type": "object",
               "description": "Override the default styles for the map elements",
