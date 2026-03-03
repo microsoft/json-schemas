@@ -70,6 +70,11 @@
               "type": "boolean",
               "description": "Specifies if multiple copies of the world should be rendered when zoomed out"
             },
+            "view": {
+              "type": "string",
+              "description": "The view to show the correct maps for a certain country/region for geopolitically disputed regions. If not specified, the default unified view will be used",
+              "enum": ["AE", "AR", "BH", "IN", "IQ", "JO", "KW", "LB", "MA", "OM", "PK", "PS", "QA", "SA", "SY", "YE", "Auto", "Unified"]
+            },
             "styleOverrides": {
               "type": "object",
               "description": "Override the default styles for the map elements",
