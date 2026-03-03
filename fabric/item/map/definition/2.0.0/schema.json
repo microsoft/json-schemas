@@ -72,8 +72,7 @@
             },
             "view": {
               "type": "string",
-              "description": "The view to show the correct maps for a certain country/region for geopolitically disputed regions. If not specified, the default unified view will be used",
-              "enum": ["AE", "AR", "BH", "IN", "IQ", "JO", "KW", "LB", "MA", "OM", "PK", "PS", "QA", "SA", "SY", "YE", "Auto", "Unified"]
+              "description": "The view to show the correct maps for a certain country/region for geopolitically disputed regions. If not specified, the default unified view will be used. Please refer to https://aka.ms/AzureMapsLocalizationViews for details and to see the available Views."
             },
             "styleOverrides": {
               "type": "object",
