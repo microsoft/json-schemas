@@ -1,5 +1,11 @@
 # Semantic Query Versions
 
+### 1.4.0
+
+<b>Released in: </b> March 2025 <br />
+<b>Notes: </b> 
+- Added `QueryCustomTotalMetadata` definition to support custom totals for Table and Matrix visuals
+
 ### 1.3.0
 
 <b>Released in: </b> June 2025 <br />

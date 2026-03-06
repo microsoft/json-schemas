@@ -1,5 +1,11 @@
 # Formatting Object Definitions Versions
 
+### 1.5.0
+
+<b>Released in: </b> March 2026 <br />
+<b>Notes: </b> 
+- Updates the reference to the `semanticQuery` schema from `1.3.0` to `1.4.0`
+
 ### 1.4.0
 
 <b>Released in: </b> June 2025 <br />
