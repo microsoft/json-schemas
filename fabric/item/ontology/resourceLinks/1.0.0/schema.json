@@ -1,0 +1,44 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/resourceLinks/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "resource links definition",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "resourceLinks": {
+      "type": "array",
+      "description": "List of resource links",
+      "items": {
+        "$ref": "#/definitions/ResourceLink"
+      }
+    }
+  },
+  "required": ["resourceLinks"],
+  "definitions": {
+    "ResourceLink": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the linked resource"
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The workspace id of the linked resource"
+        },
+        "itemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The item id of the linked resource"
+        }
+      },
+      "required": ["type", "workspaceId", "itemId"]
+    }
+  }
+}
