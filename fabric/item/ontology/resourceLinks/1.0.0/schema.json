@@ -25,17 +25,18 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the linked resource"
+          "enum": ["PowerBIReport"],
+          "description": "Type of resource link"
         },
         "workspaceId": {
           "type": "string",
           "format": "uuid",
-          "description": "The workspace id of the linked resource"
+          "description": "The id of the workspace where the customer’s resource link is located"
         },
         "itemId": {
           "type": "string",
           "format": "uuid",
-          "description": "The item id of the linked resource"
+          "description": "ArtifactId of the customer’s resource link"
         }
       },
       "required": ["type", "workspaceId", "itemId"]
