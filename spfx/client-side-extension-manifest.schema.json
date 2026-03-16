@@ -1,5 +1,5 @@
 {
-  "id": "client-side-extension-manifest.schema.json",
+  "$id": "client-side-extension-manifest.schema.json",
   "title": "Client-side extension manifest",
   "description": "A client-side extension is a plug-in component that customizes or augments the functionality of a client-side application.",
 

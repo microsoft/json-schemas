@@ -1,5 +1,5 @@
 {
-  "id": "client-side-application-manifest.schema.json",
+  "$id": "client-side-application-manifest.schema.json",
   "title": "Client-side application manifest",
   "description": "A client-side application is the architectural component that manages the appearance and behavior of an entire web page.",
 

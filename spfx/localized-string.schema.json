@@ -1,5 +1,5 @@
 {
-  "id": "localized-string.schema.json",
+  "$id": "localized-string.schema.json",
 
   "type": "object",
   "oneOf": [

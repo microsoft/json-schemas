@@ -1,5 +1,5 @@
 {
-  "id": "client-side-library-manifest.schema.json",
+  "$id": "client-side-library-manifest.schema.json",
   "title": "Client-side library manifest",
   "description": "A client-side library is a library containing reusable JavaScript code and/or resources.",
 
