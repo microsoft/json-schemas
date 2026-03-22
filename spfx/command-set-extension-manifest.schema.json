@@ -1,5 +1,5 @@
 {
-  "id": "command-set-extension-manifest.schema.json",
+  "$id": "command-set-extension-manifest.schema.json",
   "title": "Command set extension manifest",
   "description": "A client-side extension that defines a set of custom commands that can be shown in a menu, tool bar, etc.",
 
@@ -8,7 +8,10 @@
     {
       "type": "object",
       "properties": {
-        "$schema": { "type": "string" },
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
 
         "manifestVersion": { "$ref": "any-value.schema.json" },
         "id": { "$ref": "any-value.schema.json" },
@@ -55,9 +58,9 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["command"],
+                  "enum": ["command", "group"],
                   "title": "Type",
-                  "description": "Type of the item. Currently only \"command\" is allowed."
+                  "description": "Type of the item. Use 'command' for executable commands, or 'group' for containers that organize commands into submenus."
                 },
                 "ariaLabel": {
                   "title": "ARIA Label",
@@ -66,8 +69,15 @@
                 },
                 "iconImageUrl": {
                   "type": "string",
+                  "minLength": 1,
                   "title": "Icon Image URL",
                   "description": "An optional URL for an image to be displayed next to the item. The requirements for this image are defined by the type of extension; some extension types may not display the image at all."
+                },
+                "group": {
+                  "type": "string",
+                  "pattern": "^[A-Z0-9_]+$",
+                  "title": "Group",
+                  "description": "Optional ID of a parent group item this command/group belongs to. The parent must be defined in the same manifest with type 'group'. Maximum nesting depth is 2 levels."
                 }
               },
               "additionalProperties": false

@@ -1,5 +1,25 @@
 # Releases
 
+## March 2026
+
+Custom Totals for Table and Matrix visuals
+
+- [bookmark 2.1.0](./definition/bookmark/CHANGELOG.md#2.1.0)
+- [filterConfiguration 1.3.0](./definition/filterConfiguration/CHANGELOG.md#1.3.0)
+- [formattingObjectDefinitions 1.5.0](./definition/formattingObjectDefinitions/CHANGELOG.md#1.5.0)
+- [page 2.1.0](./definition/page/CHANGELOG.md#2.1.0)
+- [report 3.2.0](./definition/report/CHANGELOG.md#3.2.0)
+- [semanticQuery 1.4.0](./definition/semanticQuery/CHANGELOG.md#1.4.0)
+- [visualConfiguration 2.3.0](./definition/visualConfiguration/CHANGELOG.md#2.3.0)
+- [visualContainer 2.7.0](./definition/visualContainer/CHANGELOG.md#2.7.0)
+- [visualContainerMobileState 2.3.0](./definition/visualContainerMobileState/CHANGELOG.md#2.3.0)
+
+## February 2026
+
+Input slicer GA, AI narratives "auto-refresh" formatting option
+
+- [visualContainer 2.6.0](./definition/visualContainer/CHANGELOG.md#2.6.0)
+
 ## January 2026
 
 Modern Tooltips GA, Field Parameter Report Settings, bug fixes

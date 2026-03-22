@@ -1,0 +1,22 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ItemReference": {
+      "description": "Defines a reference to an item in a workspace.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workspaceId": {
+          "description": "The Id of the workspace",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        },
+        "itemId": {
+          "description": "The Id of the item",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        }
+      },
+      "required": [ "workspaceId", "itemId" ]
+    }
+  }
+}
