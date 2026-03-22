@@ -1,14 +1,14 @@
 {
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/MirroredCatalog/definition/MirroredCatalogDefinition/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredCatalog/definition/mirroredCatalogDefinition/1.0.0/schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "Mirrored Catalog Definition",
-  "description": "Defines a MirroredCatalog item that mirrors an external Iceberg REST Catalog into Fabric by creating delegated shortcuts to provider storage. Metadata is mirrored; data is not copied.",
+  "description": "Defines a MirroredCatalog item that mirrors tables from an external Iceberg REST Catalog (IRC) API compliant provider into Fabric by creating delegated shortcuts to provider storage. Metadata is mirrored; data is not copied.",
   "properties": {
     "$schema": {
       "type": "string",
       "description": "The schema version of the MirroredCatalog definition.",
-      "pattern": "^https://developer.microsoft.com/json-schemas/fabric/item/MirroredCatalog/definition/MirroredCatalogDefinition/1.[0-9]+.[0-9]+/schema.json$"
+      "pattern": "^https://developer\\.microsoft\\.com/json-schemas/fabric/item/mirroredCatalog/definition/mirroredCatalogDefinition/1\\.[0-9]+\\.[0-9]+/schema\\.json$"
     },
     "properties": {
       "type": "object",
@@ -20,7 +20,7 @@
         },
         "mountedTables": {
           "type": "array",
-          "description": "Lists the tables to be mirrored from the source catalog. If not specified, all tables under the namespaceScope will be mirrored and new tables will be automatically added.",
+          "description": "Lists the tables to be mirrored from the source catalog. If not specified, all tables under the scope will be mirrored and new tables will be automatically added.",
           "items": {
             "$ref": "#/definitions/MountedTable"
           }
@@ -47,7 +47,7 @@
         },
         "typeProperties": {
           "$ref": "#/definitions/SourceTypeProperties",
-          "description": "Properties for the source connection, such as connectionId, namespaceScope, and warehouse."
+          "description": "Properties for the source connection, such as connectionId, scope."
         }
       },
       "required": [
@@ -58,12 +58,7 @@
     "SourceType": {
       "type": "string",
       "title": "Source Type",
-      "description": "The type of the source catalog. Additional source types may be added over time.",
-      "enum": [
-        "DremioIcebergCatalog",
-        "AWSIcebergCatalog",
-        "GoogleBigLakeIcebergCatalog"
-      ]
+      "description": "The type of the source catalog provider such as DremioIcebergCatalog or AzureMonitorMirroredCatalog. Additional source types may be added over time."
     },
     "SourceTypeProperties": {
       "type": "object",
@@ -72,28 +67,20 @@
       "properties": {
         "connectionId": {
           "type": "string",
-          "description": "The connection identifier for the source catalog. Immutable after creation.",
+          "description": "The connection identifier for the source catalog.",
           "format": "uuid"
         },
-        "namespaceScope": {
+        "scope": {
           "type": "array",
-          "description": "The namespace hierarchy path to scope the mirroring. Array of namespace components (e.g., [\"Accounting\", \"US\"]). Immutable after creation.",
+          "description": "The namespace hierarchy path that scopes the mirroring. Must be a Selectable scope as returned by the List Scopes API. A Selectable scope is a namespace that is a parent of one or more leaf namespaces containing tables.",
           "items": {
             "type": "string"
-          },
-          "minItems": 1
-        },
-        "warehouse": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "The warehouse name for credential vending. Required for some providers."
+          }
         }
       },
       "required": [
         "connectionId",
-        "namespaceScope"
+        "scope"
       ]
     },
     "MountedTable": {
@@ -127,11 +114,15 @@
     "MountedTableSourceTypeProperties": {
       "type": "object",
       "title": "Mounted Table Source Type Properties",
-      "description": "Schema and table name identifying a table in the source catalog.",
+      "description": "Fully qualified scope and table name identifying a table in the source catalog.",
       "properties": {
-        "schemaName": {
-          "type": "string",
-          "description": "The schema name (leaf namespace) of the source table."
+        "fullyQualifiedScope": {
+          "type": "array",
+          "description": "The fully qualified namespace hierarchy for this table (e.g., [\"Accounting\", \"US\", \"Taxes\"]).",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
         },
         "tableName": {
           "type": "string",
@@ -139,7 +130,7 @@
         }
       },
       "required": [
-        "schemaName",
+        "fullyQualifiedScope",
         "tableName"
       ]
     }
