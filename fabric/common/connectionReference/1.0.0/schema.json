@@ -1,0 +1,18 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ConnectionReference": {
+      "description": "Defines a reference to a shared cloud connection.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connectionId": {
+          "description": "The Id of the connection",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        }
+      },
+      "required": [ "connectionId" ]
+    }
+  }
+}
