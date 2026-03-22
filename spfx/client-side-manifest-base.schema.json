@@ -1,5 +1,5 @@
 {
-  "id": "client-side-manifest-base.schema.json",
+  "$id": "client-side-manifest-base.schema.json",
   "title": "Client-side component manifest base",
   "description": "Properties common to all deployable manifests.",
 
