@@ -58,7 +58,11 @@
     "SourceType": {
       "type": "string",
       "title": "Source Type",
-      "description": "The type of the source catalog provider such as DremioIcebergCatalog or AzureMonitorMirroredCatalog. Additional source types may be added over time."
+      "description": "The type of the source catalog provider. Additional source types may be added over time.",
+      "enum": [
+        "DremioIcebergCatalog",
+        "AzureMonitorMirroredCatalog"
+      ]
     },
     "SourceTypeProperties": {
       "type": "object",
