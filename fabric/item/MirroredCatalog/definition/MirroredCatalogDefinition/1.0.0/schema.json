@@ -1,0 +1,142 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredCatalog/definition/mirroredCatalogDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Mirrored Catalog Definition",
+  "description": "Defines a MirroredCatalog item that mirrors tables from an external Iceberg REST Catalog (IRC) API compliant provider into Fabric by creating delegated shortcuts to provider storage. Metadata is mirrored; data is not copied.",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The schema version of the MirroredCatalog definition.",
+      "pattern": "^https://developer\\.microsoft\\.com/json-schemas/fabric/item/mirroredCatalog/definition/mirroredCatalogDefinition/1\\.[0-9]+\\.[0-9]+/schema\\.json$"
+    },
+    "properties": {
+      "type": "object",
+      "description": "The MirroredCatalog configuration properties.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/SourceProperties",
+          "description": "Describes the source catalog properties."
+        },
+        "mountedTables": {
+          "type": "array",
+          "description": "Lists the tables to be mirrored from the source catalog. If not specified, all tables under the scope will be mirrored and new tables will be automatically added.",
+          "items": {
+            "$ref": "#/definitions/MountedTable"
+          }
+        }
+      },
+      "required": [
+        "source"
+      ]
+    }
+  },
+  "required": [
+    "$schema",
+    "properties"
+  ],
+  "definitions": {
+    "SourceProperties": {
+      "type": "object",
+      "title": "Source Properties",
+      "description": "Describes the source catalog connection and scope configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SourceType",
+          "description": "The type of the source catalog provider."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/SourceTypeProperties",
+          "description": "Properties for the source connection, such as connectionId, scope."
+        }
+      },
+      "required": [
+        "type",
+        "typeProperties"
+      ]
+    },
+    "SourceType": {
+      "type": "string",
+      "title": "Source Type",
+      "description": "The type of the source catalog provider. Additional source types may be added over time.",
+      "enum": [
+        "DremioIcebergCatalog",
+        "AzureMonitorMirroredCatalog"
+      ]
+    },
+    "SourceTypeProperties": {
+      "type": "object",
+      "title": "Source Type Properties",
+      "description": "Connection and scope properties for the source catalog.",
+      "properties": {
+        "connectionId": {
+          "type": "string",
+          "description": "The connection identifier for the source catalog.",
+          "format": "uuid"
+        },
+        "scope": {
+          "type": "array",
+          "description": "The namespace hierarchy path that scopes the mirroring. Must be a Selectable scope as returned by the List Scopes API. A Selectable scope is a namespace that is a parent of one or more leaf namespaces containing tables.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "connectionId",
+        "scope"
+      ]
+    },
+    "MountedTable": {
+      "type": "object",
+      "title": "Mounted Table",
+      "description": "Defines a table to be mirrored from the source catalog.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/MountedTableSourceProperties",
+          "description": "Properties for the source table."
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "MountedTableSourceProperties": {
+      "type": "object",
+      "title": "Mounted Table Source Properties",
+      "description": "Source properties for a mounted table.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/MountedTableSourceTypeProperties",
+          "description": "Type properties for the source table."
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MountedTableSourceTypeProperties": {
+      "type": "object",
+      "title": "Mounted Table Source Type Properties",
+      "description": "Fully qualified scope and table name identifying a table in the source catalog.",
+      "properties": {
+        "fullyQualifiedScope": {
+          "type": "array",
+          "description": "The fully qualified namespace hierarchy for this table (e.g., [\"Accounting\", \"US\", \"Taxes\"]).",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the source table."
+        }
+      },
+      "required": [
+        "fullyQualifiedScope",
+        "tableName"
+      ]
+    }
+  }
+}
