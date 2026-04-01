@@ -517,6 +517,11 @@
                           ]
                         }
                     },
+                    "supportsTargetedMessages": {
+                        "type": "boolean",
+                        "description": "When true, the bot is enabled to receive targeted messages and appears in the / slash commands list. Required for slash command support. Developers can optionally add triggers: [\"slash\"] on commandLists entries to surface specific commands.",
+                        "default": false
+                    },
                     "commandLists": {
                         "type": "array",
                         "maxItems": 3,
@@ -525,6 +530,16 @@
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
+                                "triggers": {
+                                    "type": "array",
+                                    "maxItems": 2,
+                                    "items": {
+                                        "type":  "string",
+                                        "enum": [ "mention", "slash" ]
+                                    },
+                                    "default": [ "mention" ],
+                                    "description": "Controls where the commands in this commandLists entry are surfaced. \"mention\" = @mention trigger (current behavior). \"slash\" = slash commands list (targeted messages)."
+                                },
                                 "scopes": {
                                     "type": "array",
                                     "description": "Specifies the scopes for which the command list is valid",
@@ -777,6 +792,15 @@
                                     ],
                                     "description": "Type of the command",
                                     "default": "query"
+                                },
+                                "triggers": {
+                                    "type": "array",
+                                    "maxItems": 1,
+                                    "items": {
+                                        "type":  "string",
+                                        "enum": [ "slash" ]
+                                    },
+                                    "description": "Adding \"slash\" to the array makes the command appear in the / slash commands list in group chat or channel. Note: \"mention\" is not a valid value for composeExtension command triggers — it applies only to bots[].commandLists[]."
                                 },
                                 "samplePrompts": {
                                   "type": "array",
