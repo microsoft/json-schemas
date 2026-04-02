@@ -1352,7 +1352,18 @@
         }
       },
       "additionalProperties": false,
-      "anyOf": []
+      "oneOf": [
+        {
+          "required": [
+            "declarativeAgents"
+          ]
+        },
+        {
+          "required": [
+            "customEngineAgents"
+          ]
+        }
+      ]
     },
     "agenticUserTemplates": {
       "type": "array",
