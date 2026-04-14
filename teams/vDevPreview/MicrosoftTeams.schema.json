@@ -1074,7 +1074,7 @@
         "validDomains": {
             "type": "array",
             "description": "A list of valid domains from which the tabs expect to load any content. Domain listings can include wildcards, for example `*.example.com`. If your tab configuration or content UI needs to navigate to any other domain besides the one use for tab configuration, that domain must be specified here.",
-            "maxItems": 16,
+            "maxItems": 100,
             "items": {
                 "type": "string",
                 "maxLength": 2048
@@ -2577,6 +2577,11 @@
                         "$ref": "#/definitions/extensionRibbonsCustomMobileGroupItem"
                     }
                 },
+                "visible": {
+                    "type": "boolean",
+                    "description": "Controls whether the control is visible.",
+                    "default": true
+                },
                 "keytip": {
                     "type": "string",
                     "description": "KeyTip shortcut for keyboard navigation (1-3 uppercase alphanumeric characters)",
@@ -2659,6 +2664,11 @@
                     "type": "boolean",
                     "description": "Specifies whether a group will be hidden on application and platform combinations that support the API (Office.ribbon.requestCreateControls) that installs custom contextual tabs on the ribbon. Default is false.",
                     "default": "false"
+                },
+                "visible": {
+                    "type": "boolean",
+                    "description": "Controls whether the control is visible.",
+                    "default": true
                 }
             },
             "additionalProperties": false
@@ -2754,6 +2764,11 @@
                 "enabled": {
                     "type": "boolean",
                     "description": "Whether the control is initially enabled.",
+                    "default": true
+                },
+                "visible":{
+                    "type": "boolean",
+                    "description": "Controls whether the control is visible.",
                     "default": true
                 },
                 "items": {
