@@ -569,11 +569,21 @@
                                                 "type": "string",
                                                 "description": "A simple text description or an example of the command syntax and its arguments.",
                                                 "maxLength": 4000
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "enum": [ "basic", "prompt" ],
+                                                "description": "Type of the command. Default is basic",
+                                                "default": "basic"
+                                            },
+                                            "prompt": {
+                                                "type": "string",
+                                                "maxLength": 4000,
+                                                "description": "The prompt text to be used by Teams when user initiates the command from one of the entry points"
                                             }
                                         },
                                         "required": [
-                                            "title",
-                                            "description"
+                                            "title"
                                         ]
                                     }
                                 }
