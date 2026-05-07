@@ -95,13 +95,9 @@
                 "$ref": "#/$defs/worker-agent-object"
             }
         },
-        "agent_skills": {
-            "type": "array",
-            "description": "Optional. A list of agent skill objects that reference skill directories containing SKILL.md files.",
-            "maxItems": 8,
-            "items": {
-                "$ref": "#/$defs/agent-skill-object"
-            }
+        "sensitivity_label": {
+            "description": "Optional. A JSON object that specifies the sensitivity label for the DA.",
+            "$ref": "#/$defs/sensitivity-label-object"
         }
     },
     "required": [
@@ -125,7 +121,7 @@
             "editorial_answers",
             "worker_agents",
             "$schema",
-            "agent_skills"
+            "sensitivity_label"
         ]
     },
     "$defs": {
@@ -307,10 +303,13 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, Dataverse, Email, ScenarioModels, People, GraphicArt, Meetings, and EmbeddedKnowledge.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, GraphicArt, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, EmbeddedKnowledge, Email, People, Meetings, Dataverse, and ScenarioModels.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
+                            },
+                            {
+                                "const": "GraphicArt"
                             },
                             {
                                 "const": "CodeInterpreter"
@@ -322,13 +321,10 @@
                                 "const": "GraphConnectors"
                             },
                             {
-                                "const": "GraphicArt"
-                            },
-                            {
                                 "const": "TeamsMessages"
                             },
                             {
-                                "const": "Dataverse"
+                                "const": "EmbeddedKnowledge"
                             },
                             {
                                 "const": "Email"
@@ -337,13 +333,13 @@
                                 "const": "People"
                             },
                             {
-                                "const": "ScenarioModels"
-                            },
-                            {
                                 "const": "Meetings"
                             },
                             {
-                                "const": "EmbeddedKnowledge"
+                                "const": "Dataverse"
+                            },
+                            {
+                                "const": "ScenarioModels"
                             }
                         ]
                     }
@@ -1219,21 +1215,22 @@
                 ]
             }
         },
-        "agent-skill-object": {
+        "sensitivity-label-object": {
             "type": "object",
-            "description": "An object that references a skill directory containing a SKILL.md file with frontmatter metadata.",
+            "description": "A JSON object that specifies the sensitivity label for the DA. The GUID should match one of the published sensitivity labels within the tenant.",
             "properties": {
-                "folder": {
+                "id": {
                     "type": "string",
-                    "description": "Required. The relative path to the skill directory containing SKILL.md.",
-                    "minLength": 1
+                    "description": "Required. The GUID of the sensitivity label pulled from the Purview API."
                 }
             },
             "required": [
-                "folder"
+                "id"
             ],
             "propertyNames": {
-                "pattern": "^(folder|x-.*)$"
+                "enum": [
+                    "id"
+                ]
             }
         },
         "conversation-starter-depends-on": {
