@@ -1709,20 +1709,20 @@
                             "properties": {
                             "type": {
                                 "type": "string",
-                                "enum": [ "None", "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ],
-                                "description": "The type of authorization required to invoke the MCP server. Supported values are: 'None' (anonymous access), 'OAuthPluginVault' (OAuth flow with referenceId), 'ApiKeyPluginVault' (API Key with referenceId), 'DynamicClientRegistration' (dynamic client registration with referenceId)."
+                                "enum": [ "None", "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration", "AzureKeyVault" ],
+                                "description": "The type of authorization required to invoke the MCP server. Supported values are: 'None' (anonymous access), 'OAuthPluginVault' (OAuth flow with referenceId), 'ApiKeyPluginVault' (API Key with referenceId), 'DynamicClientRegistration' (dynamic client registration with referenceId), 'AzureKeyVault' (Azure Key Vault integration)."
                             },
                             "referenceId": {
                                 "type": "string",
                                 "maxLength": 128,
-                                "description": "A reference identifier used when type is OAuthPluginVault, ApiKeyPluginVault, or DynamicClientRegistration. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
+                                "description": "A reference identifier used when type is OAuthPluginVault, ApiKeyPluginVault, DynamicClientRegistration, or AzureKeyVault. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
                             }
                             },
                             "required": [ "type" ],
                             "if": {
                             "properties": {
                                 "type": {
-                                "enum": [ "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ]
+                                "enum": [ "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration", "AzureKeyVault" ]
                                 }
                             }
                             },
@@ -1760,13 +1760,13 @@
                             "properties": {
                             "type": {
                                 "type": "string",
-                                "enum": [ "None", "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ],
-                                "description": "The type of authorization required to invoke the MCP server. Supported values are: 'None' (anonymous access), 'OAuthPluginVault' (OAuth flow with referenceId), 'ApiKeyPluginVault' (API Key with referenceId), 'DynamicClientRegistration' (dynamic client registration with referenceId)."
+                                "enum": [ "None", "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration", "AzureKeyVault" ],
+                                "description": "The type of authorization required to invoke the MCP server. Supported values are: 'None' (anonymous access), 'OAuthPluginVault' (OAuth flow with referenceId), 'ApiKeyPluginVault' (API Key with referenceId), 'DynamicClientRegistration' (dynamic client registration with referenceId), 'AzureKeyVault' (Azure Key Vault integration)."
                             },
                             "referenceId": {
                                 "type": "string",
                                 "maxLength": 128,
-                                "description": " (maxLength: 128)\tA reference identifier used when type is OAuthPluginVault, ApiKeyPluginVault, or DynamicClientRegistration. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
+                                "description": " (maxLength: 128)\tA reference identifier used when type is OAuthPluginVault, ApiKeyPluginVault, DynamicClientRegistration, or AzureKeyVault. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the plugin manifest."
                             }
                             },
                             "additionalProperties": false,
@@ -1774,7 +1774,7 @@
                             "if": {
                             "properties": {
                                 "type": {
-                                "enum": [ "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration" ]
+                                "enum": [ "OAuthPluginVault", "ApiKeyPluginVault", "DynamicClientRegistration", "AzureKeyVault" ]
                                 }
                             }
                             },
@@ -1790,6 +1790,24 @@
                 }
                 },
                 "required": [ "id", "displayName" ],
+                "additionalProperties": false
+            }
+        },
+        "agentSkills": {
+            "type": "array",
+            "description": "Agent skill declarations following the Agent Skills open standard (agentskills.io). Each entry references a SKILL.md folder.",
+            "maxItems": 20,
+            "items": {
+                "type": "object",
+                "description": "An agent skill declaration. References a folder containing a SKILL.md file.",
+                "properties": {
+                    "folder": {
+                        "type": "string",
+                        "description": "Path to the folder within the app package that contains the SKILL.md file.",
+                        "maxLength": 256
+                    }
+                },
+                "required": ["folder"],
                 "additionalProperties": false
             }
         }
