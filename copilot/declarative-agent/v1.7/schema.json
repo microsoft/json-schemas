@@ -663,7 +663,7 @@
             },
             "graphic-art": {
                 "type": "object",
-                "description": "Indicates that the declarative agent can images and art based on the text input from the user.",
+                "description": "Indicates that the declarative agent can generate images and art based on the text input from the user.",
                 "properties": {
                     "name": {
                         "const": "GraphicArt",
