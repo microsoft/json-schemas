@@ -26,7 +26,22 @@
           ]
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "if": {
+        "properties": {
+          "extensionType": { "const": "FormCustomizer" }
+        },
+        "required": ["extensionType"]
+      },
+      "then": {
+        "properties": {
+          "isPanelExperienceEnabled": {
+            "type": "boolean",
+            "title": "Is Panel Experience Enabled",
+            "description": "When true, the form customizer is rendered inside the new/edit/display panel in the list view instead of opening a separate page. Defaults to false (existing behavior) when absent."
+          }
+        }
+      }
     }
   },
 
@@ -35,7 +50,10 @@
     {
       "type": "object",
       "properties": {
-        "$schema": { "type": "string" },
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
 
         "manifestVersion": { "$ref": "any-value.schema.json" },
         "id": { "$ref": "any-value.schema.json" },
@@ -47,7 +65,8 @@
         "preloadComponents": { "$ref": "any-value.schema.json" },
         "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
         "requiresCustomScript": { "$ref": "any-value.schema.json" },
-        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" }
+        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" },
+        "isPanelExperienceEnabled": { "$ref": "any-value.schema.json" }
       },
       "additionalProperties": false
     },
