@@ -10,7 +10,7 @@
     "manifestVersion": {
       "type": "string",
       "description": "The version of the schema this manifest is using. This schema version supports extending Teams apps to other parts of the Microsoft 365 ecosystem. More info at https://aka.ms/extendteamsapps.",
-      "const": "1.27"
+      "const": "1.28"
     },
     "version": {
       "type": "string",
@@ -76,15 +76,15 @@
           "maxLength": 10
         },
         "websiteUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/anyHttpUrl",
           "description": "The url to the page that provides support information for the app."
         },
         "privacyUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/anyHttpUrl",
           "description": "The url to the page that provides privacy information for the app."
         },
         "termsOfUseUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/anyHttpUrl",
           "description": "The url to the page that provides the terms of use for the app."
         }
       },
@@ -200,7 +200,7 @@
             "maxLength": 64
           },
           "configurationUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "The url to use when configuring the tab."
           },
           "canUpdateConfiguration": {
@@ -289,7 +289,7 @@
             "maxLength": 128
           },
           "contentUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "The url which points to the entity UI to be displayed in the canvas."
           },
           "contentBotId": {
@@ -297,11 +297,11 @@
             "description": "The Microsoft App ID specified for the bot in the Bot Framework portal (https://dev.botframework.com/bots)"
           },
           "websiteUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "The url to point at if a user opts to view in a browser."
           },
           "searchUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "The url to direct a user\u0027s search queries."
           },
           "scopes": {
@@ -531,7 +531,7 @@
             "maxLength": 64
           },
           "configurationUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "The url to use for configuring the connector using the inline configuration experience."
           },
           "scopes": {
@@ -837,7 +837,7 @@
                       "description": "Dialog height - either a number in pixels or default layout such as \u0027large\u0027, \u0027medium\u0027, or \u0027small\u0027"
                     },
                     "url": {
-                      "$ref": "#/definitions/httpsUrl",
+                      "$ref": "#/definitions/anyHttpUrl",
                       "description": "Initial webview URL"
                     }
                   }
@@ -929,7 +929,7 @@
     "validDomains": {
       "type": "array",
       "description": "A list of valid domains from which the tabs expect to load any content. Domain listings can include wildcards, for example \u0060*.example.com\u0060. If your tab configuration or content UI needs to navigate to any other domain besides the one use for tab configuration, that domain must be specified here.",
-      "maxItems": 16,
+      "maxItems": 100,
       "items": {
         "type": "string",
         "maxLength": 2048
@@ -989,7 +989,7 @@
       "description": "Specify the app\u0027s Graph connector configuration. If this is present then webApplicationInfo.id must also be specified.",
       "properties": {
         "notificationUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/anyHttpUrl",
           "description": "The url where Graph-connector notifications for the application should be sent."
         }
       },
@@ -1118,7 +1118,7 @@
       "default": false
     },
     "publisherDocsUrl": {
-      "$ref": "#/definitions/httpsUrl",
+      "$ref": "#/definitions/anyHttpUrl",
       "description": "The url to the page that provides additional app information for the admins"
     },
     "defaultInstallScope": {
@@ -1420,7 +1420,7 @@
           "description": "Optional property within backgroundLoadConfiguration containing tab settings for background loading.",
           "properties": {
             "contentUrl": {
-              "$ref": "#/definitions/httpsUrl",
+              "$ref": "#/definitions/anyHttpUrl",
               "description": "Required URL for background loading. This can be the same contentUrl from the staticTabs section or an alternative endpoint used for background loading."
             }
           },
@@ -1524,6 +1524,25 @@
  ],
                 "additionalProperties": false
       }
+    },
+    "agentSkills": {
+      "type": "array",
+      "description": "Agent skill declarations following the Agent Skills open standard (agentskills.io). Each entry references a SKILL.md folder.",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "description": "An agent skill declaration. References a folder containing a SKILL.md file.",
+        "properties": {
+          "folder": {
+            "type": "string",
+            "description": "Path to the folder within the app package that contains the SKILL.md file.",
+            "maxLength": 256
+          }
+        },
+        "required": [ "folder"
+ ],
+        "additionalProperties": false
+      }
     }
   },
             "required": [
@@ -1541,7 +1560,7 @@
       "type": "string",
       "maxLength": 2048
     },
-    "httpsUrl": {
+    "anyHttpUrl": {
       "type": "string",
       "maxLength": 2048,
       "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://"
@@ -1710,7 +1729,7 @@
             "maxItems": 10
           },
           "audienceClaimUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "The url for your extension, used to validate Exchange user identity tokens."
           }
         },
@@ -1853,7 +1872,7 @@
           "default": false
         },
         "metadataUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/secureHttpUrl",
           "description": "The full URL of a metadata json file with default locale."
         },
         "enums": {
@@ -1969,11 +1988,8 @@
           "maxLength": 1024
         },
         "helpUrl": {
-          "type": "string",
-          "format": "uri",
           "description": "URL that provides information about the function. (It is displayed in a task pane.)",
-          "minLength": 1,
-          "maxLength": 2048
+          "$ref": "#/definitions/secureHttpUrl"
         },
         "parameters": {
           "type": "array",
@@ -2301,6 +2317,11 @@
             "$ref": "#/definitions/extensionRibbonsCustomMobileGroupItem"
           }
         },
+        "visible": {
+          "type": "boolean",
+          "description": "Controls whether the control is visible.",
+          "default": true
+        },
         "keytip": {
           "type": "string",
           "description": "KeyTip shortcut for keyboard navigation (1-3 uppercase alphanumeric characters)",
@@ -2382,6 +2403,11 @@
           "type": "boolean",
           "description": "Specifies whether a group will be hidden on application and platform combinations that support the API (Office.ribbon.requestCreateControls) that installs custom contextual tabs on the ribbon. Default is false.",
           "default": "false"
+        },
+        "visible": {
+          "type": "boolean",
+          "description": "Controls whether the control is visible.",
+          "default": true
         }
       },
       "additionalProperties": false
@@ -2487,6 +2513,11 @@
           "items": {
             "$ref": "#/definitions/extensionCommonCustomControlMenuItem"
           }
+        },
+        "visible": {
+          "type": "boolean",
+          "description": "Controls whether the control is visible.",
+          "default": true
         },
         "keytip": {
           "type": "string",
@@ -2778,7 +2809,7 @@
  ]
         },
         "url": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/anyHttpUrl",
           "description": "Url to the icon."
         },
         "scale": {
@@ -2825,7 +2856,7 @@
  ]
         },
         "url": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/anyHttpUrl",
           "description": "Absolute Url to the icon."
         }
       },
@@ -3167,7 +3198,7 @@
             "maxLength": 250
           },
           "learnMoreUrl": {
-            "$ref": "#/definitions/httpsUrl",
+            "$ref": "#/definitions/anyHttpUrl",
             "description": "A URL to a page that explains the add-in in detail."
           }
         },
@@ -3228,11 +3259,11 @@
       "additionalProperties": false,
       "properties": {
         "shortcutsUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/secureHttpUrl",
           "description": "The full URL of the JSON file that will contain the keyboard combination configuration on Office application and platform combinations that don\u0027t directly support the unified manifest."
         },
         "localizationResourceUrl": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/secureHttpUrl",
           "description": "The full URL of a file that provides supplemental resource, such as localized strings, for the file specified in the shortcutsUrl attribute."
         }
       },
@@ -3329,11 +3360,11 @@
       "type": "object",
       "properties": {
         "page": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/secureHttpUrl",
           "description": "URL of the .html page to be loaded in browser-based runtimes."
         },
         "script": {
-          "$ref": "#/definitions/httpsUrl",
+          "$ref": "#/definitions/secureHttpUrl",
           "description": "URL of the .js script file to be loaded in UI-less runtimes."
         }
       },
