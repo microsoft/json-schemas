@@ -21,6 +21,67 @@
       "type": "string",
       "description": "A variable reference expression in the form $(/**/varlib/<variableName>) that resolves to a value from a Variable Library at runtime",
       "pattern": "^\\$\\(.+\\)$"
+    },
+    "itemReference": {
+      "description": "A reference to an item in a workspace",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Id of the workspace",
+          "format": "uuid"
+        },
+        "itemId": {
+          "type": "string",
+          "description": "The Id of the item",
+          "format": "uuid"
+        }
+      },
+      "required": ["workspaceId", "itemId"]
+    },
+    "itemReferenceOrVar": {
+      "description": "An ItemReference value or a Variable Library reference that resolves to one at runtime",
+      "oneOf": [
+        { "$ref": "#/$defs/itemReference" },
+        {
+          "type": "object",
+          "properties": {
+            "itemReference": {
+              "description": "Variable Library reference that resolves to the target item (and its workspace) at runtime",
+              "$ref": "#/$defs/variableReference"
+            }
+          },
+          "required": ["itemReference"]
+        }
+      ]
+    },
+    "connectionReference": {
+      "description": "A reference to a connection",
+      "type": "object",
+      "properties": {
+        "connectionId": {
+          "type": "string",
+          "description": "The Id of the connection",
+          "format": "uuid"
+        }
+      },
+      "required": ["connectionId"]
+    },
+    "connectionReferenceOrVar": {
+      "description": "A ConnectionReference value or a Variable Library reference that resolves to one at runtime",
+      "oneOf": [
+        { "$ref": "#/$defs/connectionReference" },
+        {
+          "type": "object",
+          "properties": {
+            "connectionReference": {
+              "description": "Variable Library reference that resolves to the target connection at runtime",
+              "$ref": "#/$defs/variableReference"
+            }
+          },
+          "required": ["connectionReference"]
+        }
+      ]
     }
   },
   "properties": {
@@ -186,76 +247,32 @@
         "oneOf": [
           {
             "type": "object",
-            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
-            "additionalProperties": false,
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.). Identified either by a concrete workspaceId/itemId pair or by a Variable Library reference.",
             "properties": {
               "itemType": {
                 "type": "string",
                 "description": "The type of the data source item (e.g., Lakehouse, KqlDatabase, Ontology)"
-              },
-              "workspaceId": {
-                "type": "string",
-                "description": "The workspace ID of the item",
-                "format": "uuid"
-              },
-              "itemId": {
-                "type": "string",
-                "description": "The item ID",
-                "format": "uuid"
               }
             },
-            "required": ["itemType", "workspaceId", "itemId"]
+            "required": ["itemType"],
+            "allOf": [
+              { "$ref": "#/$defs/itemReferenceOrVar" }
+            ]
           },
           {
             "type": "object",
-            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.) referenced through a Variable Library variable",
-            "additionalProperties": false,
-            "properties": {
-              "itemType": {
-                "type": "string",
-                "description": "The type of the data source item (e.g., Lakehouse, KqlDatabase, Ontology)"
-              },
-              "itemReference": {
-                "description": "Variable Library reference that resolves to the target item (and its workspace) at runtime",
-                "$ref": "#/$defs/variableReference"
-              }
-            },
-            "required": ["itemType", "itemReference"]
-          },
-          {
-            "type": "object",
-            "description": "A connection data source",
-            "additionalProperties": false,
+            "description": "A connection data source. Identified either by a concrete connectionId or by a Variable Library reference.",
             "properties": {
               "itemType": {
                 "type": "string",
                 "description": "The type of the data source item",
                 "const": "Connection"
-              },
-              "connectionId": {
-                "type": "string",
-                "description": "The connection ID",
-                "format": "uuid"
               }
             },
-            "required": ["itemType", "connectionId"]
-          },
-          {
-            "type": "object",
-            "description": "A connection data source referenced through a Variable Library variable",
-            "additionalProperties": false,
-            "properties": {
-              "itemType": {
-                "type": "string",
-                "description": "The type of the data source item",
-                "const": "Connection"
-              },
-              "connectionReference": {
-                "description": "Variable Library reference that resolves to the target connection at runtime",
-                "$ref": "#/$defs/variableReference"
-              }
-            },
-            "required": ["itemType", "connectionReference"]
+            "required": ["itemType"],
+            "allOf": [
+              { "$ref": "#/$defs/connectionReferenceOrVar" }
+            ]
           }
         ]
       }
