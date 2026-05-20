@@ -297,9 +297,13 @@
             "type": "string",
             "description": "Type of the icon source"
           },
+          "item": {
+            "description": "Reference to the data source item for this icon source. Accepts a concrete workspaceId/itemId pair or a Variable Library reference.",
+            "$ref": "#/$defs/itemReferenceOrVar"
+          },
           "itemId": {
             "type": "string",
-            "description": "ID of the data source item for this icon source",
+            "description": "DEPRECATED: use `item` instead. ID of the data source item for this icon source.",
             "format": "uuid"
           },
           "relativePath": {
@@ -307,7 +311,11 @@
             "description": "Relative path to the icon source"
           }
         },
-        "required": ["id", "name", "type", "itemId", "relativePath"]
+        "required": ["id", "name", "type", "relativePath"],
+        "oneOf": [
+          { "required": ["item"],   "not": { "required": ["itemId"] } },
+          { "required": ["itemId"], "not": { "required": ["item"] } }
+        ]
       }
     },
     "layerSources": {
@@ -357,14 +365,14 @@
               }
             }
           },
+          "item": {
+            "description": "Reference to the data source item for this layer. Accepts a concrete workspaceId/itemId pair or a Variable Library reference.",
+            "$ref": "#/$defs/itemReferenceOrVar"
+          },
           "itemId": {
             "type": "string",
-            "description": "ID of the data source item for this layer",
+            "description": "DEPRECATED: use `item` instead. ID of the data source item for this layer.",
             "format": "uuid"
-          },
-          "itemReference": {
-            "description": "Variable Library reference that resolves to the data source item for this layer at runtime. Use as an alternative to itemId.",
-            "$ref": "#/$defs/variableReference"
           },
           "relativePath": {
             "type": ["string", "null"],
@@ -379,20 +387,24 @@
             "description": "Refresh interval in milliseconds",
             "minimum": 0
           },
+          "connection": {
+            "description": "Reference to the connection for this layer. Accepts a concrete connectionId or a Variable Library reference.",
+            "$ref": "#/$defs/connectionReferenceOrVar"
+          },
           "connectionId": {
             "type": ["string", "null"],
-            "description": "ID of the connection for external data sources"
-          },
-          "connectionReference": {
-            "description": "Variable Library reference that resolves to the connection for this layer at runtime. Use as an alternative to connectionId.",
-            "$ref": "#/$defs/variableReference"
+            "description": "DEPRECATED: use `connection` instead. ID of the connection for external data sources."
           },
           "connectionResourceId": {
             "type": ["string", "null"],
             "description": "Identifier of a resource provided by the connection. e.g. layer name, asset name"
           }
         },
-        "required": ["id", "name", "type"]
+        "required": ["id", "name", "type"],
+        "allOf": [
+          { "not": { "required": ["item", "itemId"] } },
+          { "not": { "required": ["connection", "connectionId"] } }
+        ]
       }
     },
     "layerSettings": {
