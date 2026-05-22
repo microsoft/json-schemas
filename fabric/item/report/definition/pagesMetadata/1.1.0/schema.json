@@ -1,0 +1,33 @@
+{
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Pages metadata",
+    "description": "Defines additional information about the report's pages.",
+    "type": "object",
+    "properties": {
+        "pageOrder": {
+            "description": "Defines the order in which report pages are rendered (page names). If omitted, they will be ordered by display name by default.\nIf there are pages in this list, that don't have a corresponding definition, they will be ignored.\nPages with definitions, but not in this list will be ordered by display name and appended to the end, after pages that exist in this list.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "activePageName": {
+            "description": "Report will open on this page by default - if omitted, report will open on first page based on order defined by pageOrder semantics. If both activePageName and landingPageName are set, landingPageName takes precedence.",
+            "type": "string"
+        },
+        "landingPageName": {
+            "description": "If set, the report will always open on this page for all users, overriding activePageName. The value is the page name (not display name).",
+            "type": "string"
+        },
+        "$schema": {
+            "description": "Defines the schema to use for an item.",
+            "type": "string",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "$schema"
+    ]
+}
