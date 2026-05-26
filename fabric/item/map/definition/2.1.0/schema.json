@@ -1,5 +1,5 @@
 {
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.1.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "Map Definition",
   "type": "object",
@@ -14,72 +14,6 @@
         {
           "type": "array",
           "description": "A data-driven expression array for dynamic styling"
-        }
-      ]
-    },
-    "variableReference": {
-      "type": "string",
-      "description": "A variable reference expression in the form $(/**/varlib/<variableName>) that resolves to a value from a Variable Library at runtime",
-      "pattern": "^\\$\\(.+\\)$"
-    },
-    "itemReference": {
-      "description": "A reference to an item in a workspace",
-      "type": "object",
-      "properties": {
-        "workspaceId": {
-          "type": "string",
-          "description": "The Id of the workspace",
-          "format": "uuid"
-        },
-        "itemId": {
-          "type": "string",
-          "description": "The Id of the item",
-          "format": "uuid"
-        }
-      },
-      "required": ["workspaceId", "itemId"]
-    },
-    "itemReferenceOrVar": {
-      "description": "An ItemReference value or a Variable Library reference that resolves to one at runtime",
-      "oneOf": [
-        { "$ref": "#/$defs/itemReference" },
-        {
-          "type": "object",
-          "properties": {
-            "itemReference": {
-              "description": "Variable Library reference that resolves to the target item (and its workspace) at runtime",
-              "$ref": "#/$defs/variableReference"
-            }
-          },
-          "required": ["itemReference"]
-        }
-      ]
-    },
-    "connectionReference": {
-      "description": "A reference to a connection",
-      "type": "object",
-      "properties": {
-        "connectionId": {
-          "type": "string",
-          "description": "The Id of the connection",
-          "format": "uuid"
-        }
-      },
-      "required": ["connectionId"]
-    },
-    "connectionReferenceOrVar": {
-      "description": "A ConnectionReference value or a Variable Library reference that resolves to one at runtime",
-      "oneOf": [
-        { "$ref": "#/$defs/connectionReference" },
-        {
-          "type": "object",
-          "properties": {
-            "connectionReference": {
-              "description": "Variable Library reference that resolves to the target connection at runtime",
-              "$ref": "#/$defs/variableReference"
-            }
-          },
-          "required": ["connectionReference"]
         }
       ]
     }
@@ -247,32 +181,43 @@
         "oneOf": [
           {
             "type": "object",
-            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.). Identified either by a concrete workspaceId/itemId pair or by a Variable Library reference.",
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
+            "additionalProperties": false,
             "properties": {
               "itemType": {
                 "type": "string",
                 "description": "The type of the data source item (e.g., Lakehouse, KqlDatabase, Ontology)"
+              },
+              "workspaceId": {
+                "type": "string",
+                "description": "The workspace ID of the item",
+                "format": "uuid"
+              },
+              "itemId": {
+                "type": "string",
+                "description": "The item ID",
+                "format": "uuid"
               }
             },
-            "required": ["itemType"],
-            "allOf": [
-              { "$ref": "#/$defs/itemReferenceOrVar" }
-            ]
+            "required": ["itemType", "workspaceId", "itemId"]
           },
           {
             "type": "object",
-            "description": "A connection data source. Identified either by a concrete connectionId or by a Variable Library reference.",
+            "description": "A connection data source",
+            "additionalProperties": false,
             "properties": {
               "itemType": {
                 "type": "string",
                 "description": "The type of the data source item",
                 "const": "Connection"
+              },
+              "connectionId": {
+                "type": "string",
+                "description": "The connection ID",
+                "format": "uuid"
               }
             },
-            "required": ["itemType"],
-            "allOf": [
-              { "$ref": "#/$defs/connectionReferenceOrVar" }
-            ]
+            "required": ["itemType", "connectionId"]
           }
         ]
       }
@@ -297,13 +242,9 @@
             "type": "string",
             "description": "Type of the icon source"
           },
-          "item": {
-            "description": "Reference to the data source item for this icon source. Accepts a concrete workspaceId/itemId pair or a Variable Library reference.",
-            "$ref": "#/$defs/itemReferenceOrVar"
-          },
           "itemId": {
             "type": "string",
-            "description": "DEPRECATED: use `item` instead. ID of the data source item for this icon source.",
+            "description": "ID of the data source item for this icon source",
             "format": "uuid"
           },
           "relativePath": {
@@ -311,11 +252,7 @@
             "description": "Relative path to the icon source"
           }
         },
-        "required": ["id", "name", "type", "relativePath"],
-        "oneOf": [
-          { "required": ["item"],   "not": { "required": ["itemId"] } },
-          { "required": ["itemId"], "not": { "required": ["item"] } }
-        ]
+        "required": ["id", "name", "type", "itemId", "relativePath"]
       }
     },
     "layerSources": {
@@ -365,13 +302,9 @@
               }
             }
           },
-          "item": {
-            "description": "Reference to the data source item for this layer. Accepts a concrete workspaceId/itemId pair or a Variable Library reference.",
-            "$ref": "#/$defs/itemReferenceOrVar"
-          },
           "itemId": {
             "type": "string",
-            "description": "DEPRECATED: use `item` instead. ID of the data source item for this layer.",
+            "description": "ID of the data source item for this layer",
             "format": "uuid"
           },
           "relativePath": {
@@ -387,24 +320,16 @@
             "description": "Refresh interval in milliseconds",
             "minimum": 0
           },
-          "connection": {
-            "description": "Reference to the connection for this layer. Accepts a concrete connectionId or a Variable Library reference.",
-            "$ref": "#/$defs/connectionReferenceOrVar"
-          },
           "connectionId": {
             "type": ["string", "null"],
-            "description": "DEPRECATED: use `connection` instead. ID of the connection for external data sources."
+            "description": "ID of the connection for external data sources"
           },
           "connectionResourceId": {
             "type": ["string", "null"],
             "description": "Identifier of a resource provided by the connection. e.g. layer name, asset name"
           }
         },
-        "required": ["id", "name", "type"],
-        "allOf": [
-          { "not": { "required": ["item", "itemId"] } },
-          { "not": { "required": ["connection", "connectionId"] } }
-        ]
+        "required": ["id", "name", "type"]
       }
     },
     "layerSettings": {
