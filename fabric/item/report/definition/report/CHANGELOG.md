@@ -1,5 +1,11 @@
 # Report Versions
 
+### 3.3.0
+<b>Released in: </b> May 2026 <br />
+<b>Notes: </b> 
+- Perspective Setting
+- Report Locale
+
 ### 3.2.0
 
 <b>Released in: </b> March 2026 <br />
