@@ -17,6 +17,18 @@
         }
       },
       "required": [ "workspaceId", "itemId" ]
+    },
+    "ItemReferenceOrVar": {
+      "description": "An ItemReference value or a reference to a variable of type ItemReference.",
+      "oneOf": [
+        { "$ref": "#/definitions/ItemReference" },
+        {
+          "allOf": [
+            { "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "ItemReference" } }
+          ]
+        }
+      ]
     }
   }
 }

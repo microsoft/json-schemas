@@ -3,7 +3,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ConnectionReference": {
-      "description": "Defines a reference to a shared cloud connection.",
+      "description": "Defines a reference to a connection.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -13,6 +13,18 @@
         }
       },
       "required": [ "connectionId" ]
+    },
+    "ConnectionReferenceOrVar": {
+      "description": "A ConnectionReference value or a reference to a variable of type ConnectionReference.",
+      "oneOf": [
+        { "$ref": "#/definitions/ConnectionReference" },
+        {
+          "allOf": [
+            { "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "ConnectionReference" } }
+          ]
+        }
+      ]
     }
   }
 }
