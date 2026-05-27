@@ -11,7 +11,7 @@ Last updated: 27 May 2026
 
 Microsoft launched a centralized GitHub repo for publishing Microsoft-owned json schemas. Previously, json schema files are published to a public site (http://json-schema.org) for universally hosting json-schema files and to other Microsoft sites such as dev.office.com. However, there's an inherent risk in using the public site and much benefit to customers to provide a single, supported location for all Microsoft json schemas.
 
-Repo: https://github.com/Microsoft/json-schemas  
+Repo: https://github.com/Microsoft/json-schemas
 Admins: https://github.com/orgs/Microsoft/teams/json-schemas-admins
 Public site: https://developer.microsoft.com/json-schemas
 Owner: Vesa Juvonen vesaj@microsoft.com (Eastern European Time (EET))
@@ -19,7 +19,7 @@ Publishing: Self-publish via an admin from  your team.
 For publishing support or if you don't have an admin who can publish:
   - M365 Developer program engineering team: DevAppPortalEng@microsoft.com
   - Office Developer documentation team: opcontent@microsoft.com
-  - Check the repo for someone in your org with Admin perms!
+  - Check the json-schemas-admins repo for someone in your org with Admin perms!
     
 ## Get admin perms REQUIRED
 
