@@ -181,7 +181,7 @@
         "oneOf": [
           {
             "type": "object",
-            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)\nDeprecated: Use the datasourceId and item reference format.",
             "additionalProperties": false,
             "properties": {
               "itemType": {
@@ -203,7 +203,7 @@
           },
           {
             "type": "object",
-            "description": "A connection data source",
+            "description": "A connection data source\nDeprecated: Use the datasourceId and connection reference format.",
             "additionalProperties": false,
             "properties": {
               "itemType": {
@@ -218,6 +218,40 @@
               }
             },
             "required": ["itemType", "connectionId"]
+          },
+          {
+            "type": "object",
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
+            "additionalProperties": false,
+            "properties": {
+              "datasourceId": {
+                "type": "string",
+                "description": "The datasource ID of the item",
+                "format": "uuid"
+              },
+              "item": {
+                "description": "The item reference",
+                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReferenceOrVar/1.0.0/schema.json"
+              }
+            },
+            "required": ["datasourceId", "item"]
+          },
+          {
+            "type": "object",
+            "description": "A connection data source",
+            "additionalProperties": false,
+            "properties": {
+              "datasourceId": {
+                "type": "string",
+                "description": "The datasource ID of the item",
+                "format": "uuid"
+              },
+              "connection": {
+                "description": "The connection reference",
+                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReferenceOrVar/1.0.0/schema.json"
+              }
+            },
+            "required": ["datasourceId", "connection"]
           }
         ]
       }
@@ -244,7 +278,12 @@
           },
           "itemId": {
             "type": "string",
-            "description": "ID of the data source item for this icon source",
+            "description": "ID of the data source item for this icon source\nDeprecated: Use the datasourceId.",
+            "format": "uuid"
+          },
+          "datasourceId": {
+            "type": "string",
+            "description": "ID of the datasource for this icon source",
             "format": "uuid"
           },
           "relativePath": {
@@ -252,7 +291,7 @@
             "description": "Relative path to the icon source"
           }
         },
-        "required": ["id", "name", "type", "itemId", "relativePath"]
+        "required": ["id", "name", "type", "relativePath"]
       }
     },
     "layerSources": {
@@ -304,7 +343,12 @@
           },
           "itemId": {
             "type": "string",
-            "description": "ID of the data source item for this layer",
+            "description": "ID of the data source item for this layer\nDeprecated: Use the datasourceId.",
+            "format": "uuid"
+          },
+          "datasourceId": {
+            "type": "string",
+            "description": "ID of the datasource for this layer",
             "format": "uuid"
           },
           "relativePath": {
