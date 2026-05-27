@@ -30,11 +30,11 @@ After you're approved as an admin, you have the power to create your own folder,
 
 ## Publish a new schema
 
-1.     Create one folder per team in the repo. Keep your folder structure as flat as reasonable. Each folder will become an element of the json URL (e.g. https://developer.microsoft.com/json-schemas/folder/schema_name.json) Use examples in the repo for guidance. Stay consistent.
+1. Create one folder per team in the repo. Keep your folder structure as flat as reasonable. Each folder will become an element of the json URL (e.g. https://developer.microsoft.com/json-schemas/folder/schema_name.json) Use examples in the repo for guidance. Stay consistent.
 
-2.     Create a working branch in GitHub and add your new schema file. Then open a PR to merge to the **Main** branch. You'll need your other team member to approve, or you can ask any Admin. Changes should appear on the staging servers 2-15 minutes after merging to Main branch.
+2. Create a working branch in GitHub and add your new schema file. Then open a PR to merge to the **Main** branch. You'll need your other team member to approve, or you can ask any Admin. Changes should appear on the staging servers 2-15 minutes after merging to Main branch.
 
-3.     After review, open a pull request and merge to Live branch. After approval, the new schema goes live in about 2-15 minutes.
+3. After review, open a pull request and merge to Live branch. After approval, the new schema goes live in about 2-15 minutes.
 
 ### Troubleshooting
 
