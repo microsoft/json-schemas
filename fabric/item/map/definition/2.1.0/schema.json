@@ -1,5 +1,5 @@
 {
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.1.0/schema.json",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "title": "Map Definition",
   "type": "object",
