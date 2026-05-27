@@ -226,12 +226,12 @@
             "properties": {
               "datasourceId": {
                 "type": "string",
-                "description": "The datasource ID of the item",
+                "description": "The unique identifier of this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers.",
                 "format": "uuid"
               },
               "item": {
                 "description": "The item reference",
-                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReferenceOrVar/1.0.0/schema.json"
+                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
               }
             },
             "required": ["datasourceId", "item"]
@@ -243,12 +243,12 @@
             "properties": {
               "datasourceId": {
                 "type": "string",
-                "description": "The datasource ID of the item",
+                "description": "The unique identifier of this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers.",
                 "format": "uuid"
               },
               "connection": {
                 "description": "The connection reference",
-                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReferenceOrVar/1.0.0/schema.json"
+                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
               }
             },
             "required": ["datasourceId", "connection"]
