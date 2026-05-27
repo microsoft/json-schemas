@@ -1,5 +1,5 @@
 {
-  "id": "semver.schema.json",
+  "$id": "semver.schema.json",
 
   "type": "string",
   "minLength": 5,

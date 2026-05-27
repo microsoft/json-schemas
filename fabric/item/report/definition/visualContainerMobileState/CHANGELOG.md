@@ -1,5 +1,20 @@
 # Visual Container Mobile State Versions
 
+### 2.4.0 
+<b>Released in: </b> May 2026 <br />
+<b>Notes: </b>
+- Azure Maps Format Pane Revamp
+- Fixed Width
+- Slicer Background Transparency
+- Auto Expand Pivot Table 
+
+### 2.3.0
+
+<b>Released in: </b> March 2026 <br />
+<b>Notes: </b>
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.4.0` to `1.5.0`
+- Updates the reference to the `visualConfiguration` schema from `2.2.0` to `2.3.0`
+
 ### 2.2.0
 
 <b>Released in: </b> August 2025 <br />

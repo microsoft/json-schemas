@@ -1,5 +1,5 @@
 {
-  "id": "prefab-app-manifest.schema.json",
+  "$id": "prefab-app-manifest.schema.json",
   "title": "PREFAB application manifest",
   "description": "A PREFAB application is the architectural component that allows developers to declaratively specify behavior of a full page application.",
 

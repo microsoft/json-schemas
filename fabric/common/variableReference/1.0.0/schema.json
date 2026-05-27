@@ -1,0 +1,82 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "VariableReference": {
+      "description": "A reference to a variable. Format: $(<content>). The content inside the parentheses is validated by the semantic validator.",
+      "$anchor": "VariableReference",
+      "type": "string",
+      "pattern": "^\\$\\(.+\\)$"
+    },
+    "NotVariableReference": {
+      "description": "Matches any value that is not a variable reference.",
+      "not": { "type": "string", "pattern": "^\\$\\(.+\\)$" }
+    },
+    "SchemaTypedVariableReference": {
+      "description": "A reference to a variable, with expected type of the value to be specified by the parent schema via the varRef keyword.",
+      "type": "string",
+      "$anchor": "SchemaTypedVariableReference",
+      "pattern": "^\\$\\(.+\\)$"
+    },
+    "StringOrVar": {
+      "description": "A String value or a reference to a variable of type String.",
+      "oneOf": [
+        {
+          "allOf": [
+            { "type": "string" },
+            { "$ref": "#/definitions/NotVariableReference" }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "String" } }
+          ]
+        }
+      ]
+    },
+    "IntegerOrVar": {
+      "description": "An Integer value or a reference to a variable of type Integer.",
+      "oneOf": [
+        { "type": "integer" },
+        {
+          "allOf": [
+            { "$ref": "#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "Integer" } }
+          ]
+        }
+      ]
+    },
+    "NumberOrVar": {
+      "description": "A Number value or a reference to a variable of type Number.",
+      "oneOf": [
+        { "type": "number" },
+        {
+          "allOf": [
+            { "$ref": "#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "Number" } }
+          ]
+        }
+      ]
+    },
+    "BooleanOrVar": {
+      "description": "A Boolean value or a reference to a variable of type Boolean.",
+      "oneOf": [
+        { "type": "boolean" },
+        {
+          "allOf": [
+            { "$ref": "#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "Boolean" } }
+          ]
+        }
+      ]
+    },
+    "ValueOrVar": {
+      "description": "Any JSON value, or a variable reference.",
+      "oneOf": [
+        { "$ref": "#/definitions/NotVariableReference" },
+        { "$ref": "#/definitions/VariableReference" }
+      ]
+    }
+  }
+}

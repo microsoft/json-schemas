@@ -1,5 +1,24 @@
 # Report Versions
 
+### 3.3.0
+<b>Released in: </b> May 2026 <br />
+<b>Notes: </b> 
+- Perspective Setting
+- Report Locale
+
+### 3.2.0
+
+<b>Released in: </b> March 2026 <br />
+<b>Notes: </b> 
+- Updates the reference to the `filterConfiguration` schema from `1.2.0` to `1.3.0`
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.4.0` to `1.5.0`
+
+### 3.1.0
+
+<b>Released in: </b> January 2026 <br />
+<b>Notes: </b> 
+- Adds the `fieldParameterReportSettings` property to the `ExplorationSettings` definition
+
 ### 3.0.0
 
 <b>Released in: </b> August 2025 <br />

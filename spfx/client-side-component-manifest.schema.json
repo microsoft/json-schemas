@@ -1,5 +1,5 @@
 {
-  "id": "client-side-component-manifest.schema.json",
+  "$id": "client-side-component-manifest.schema.json",
   "title": "Client-side component manifest",
   "description": "All client side components built on the SharePoint framework need a valid component manifest. This interface represents properties that are required by all types of client side components like Applications and Web Parts. Component specific manifests will extend this interface to add properties required by that component type.",
   "definitions": {

@@ -1,5 +1,40 @@
 # Visual Container Versions
 
+### 2.9.0
+<b>Released in: </b> May 2026 <br />
+<b>Notes: </b>
+- Azure Maps Format Pane Revamp
+- Fixed Width
+- Slicer Background Transparency
+- Auto Expand Pivot Table 
+
+### 2.8.0
+<b>Released in: </b> April 2026 <br />
+<b>Notes: </b>
+- Cartesian axis nice (round) range control
+- Set height and width for card, slicer, and list slicer
+
+### 2.7.0
+
+<b>Released in: </b> March 2026 <br />
+<b>Notes: </b>
+- Updates the reference to the `filterConfiguration` schema from `1.2.0` to `1.3.0`
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.4.0` to `1.5.0`
+- Updates the reference to the `visualConfiguration` schema from `2.2.0` to `2.3.0`
+
+### 2.6.0
+
+<b>Released in: </b> February 2026 <br />
+<b>Notes: </b> 
+- Input slicer GA
+- AI narratives "auto-refresh" formatting option
+
+### 2.5.0
+
+<b>Released in: </b> January 2026 <br />
+<b>Notes: </b> 
+- Modern Tooltips GA
+
 ### 2.4.0
 
 <b>Released in: </b> November 2025 <br />

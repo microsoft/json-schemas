@@ -1,0 +1,7 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/azureDatabricksStorage/definition/azureDatabricksStorageDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Azure Databricks Storage Definition",
+  "properties": {}
+}

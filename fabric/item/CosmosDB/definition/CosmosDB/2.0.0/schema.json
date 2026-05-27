@@ -29,7 +29,7 @@
 							"required": [
 								"autoscaleSettings"
 							]
-						}
+						},
 						"resource":{
 							"type": "object",
 							"properties": {

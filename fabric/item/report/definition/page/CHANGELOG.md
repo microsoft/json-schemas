@@ -1,6 +1,14 @@
 # Page Versions
 
-### 1.2.0
+### 2.1.0
+
+<b>Released in: </b> March 2026 <br />
+<b>Notes: </b> 
+- Updates the reference to the `filterConfiguration` schema from `1.2.0` to `1.3.0`
+- Updates the reference to the `formattingObjectDefinitions` schema from `1.4.0` to `1.5.0`
+- Updates the reference to the `semanticQuery` schema from `1.3.0` to `1.4.0`
+
+### 2.0.0
 
 <b>Released in: </b> June 2025 <br />
 <b>Notes: </b> 

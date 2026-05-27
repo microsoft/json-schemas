@@ -1,5 +1,5 @@
 {
-  "id": "adaptive-card-extension-manifest.schema.json",
+  "$id": "adaptive-card-extension-manifest.schema.json",
   "title": "Adaptive Card Extension manifest",
   "description": "All Adaptive Card Extension built on the SharePoint framework need a valid component manifest. This interface represents properties that are required by all types of BaseAdaptiveCardExtension. Adaptive Card Extension specific manifests will extend this interface to add properties required by that component type.",
   "definitions": {
