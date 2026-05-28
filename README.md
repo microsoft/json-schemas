@@ -15,7 +15,7 @@ Microsoft launched a centralized GitHub repo for publishing Microsoft-owned JSON
 - Admins: https://github.com/orgs/Microsoft/teams/json-schemas-admins
 - Public site: https://developer.microsoft.com/json-schemas
 - Owner: Vesa Juvonen vesaj@microsoft.com (Eastern European Time (EET))
-- Publishing: Self-publish via an admin from your team/org. 
+- Publishing: Self-publish via an admin from your team/organization.
 - For publishing support or if you don't have an admin who can publish:
   - M365 Developer program engineering team: DevAppPortalEng@microsoft.com
   - Office Developer documentation team: opcontent@microsoft.com or tag @OfficeDev/opcontent in GitHub
