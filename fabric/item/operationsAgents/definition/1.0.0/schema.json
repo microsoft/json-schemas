@@ -8,34 +8,37 @@
     "configuration": {
       "type": "object",
       "title": "Operations Agent Configuration",
-      "description": "User specified configuration containing goals, instructions, data sources, and actions of the agent.",
+      "description": "User specified configuration containing instructions, data sources, actions, message destination, and identity of the agent.",
       "properties": {
-        "goals": {
-          "type": "string",
-          "description": "Business goals for the agent to accomplish."
-        },
         "instructions": {
           "type": "string",
           "description": "Explicit instructions or procedures for the agent to follow."
         },
         "dataSources": {
           "type": "object",
+          "description": "Map of user-chosen data source aliases to data source objects or variable reference strings.",
           "additionalProperties": {
-            "$ref": "#/definitions/dataSource"
+            "oneOf": [
+              { "$ref": "#/definitions/dataSource" },
+              { "$ref": "#/definitions/variableReference" }
+            ]
           }
         },
         "actions": {
           "type": "object",
+          "description": "Map of user-chosen action aliases to action objects.",
           "additionalProperties": {
             "$ref": "#/definitions/action"
           }
         },
-        "recipient": {
-          "type": "string"
+        "messageDestination": {
+          "$ref": "#/definitions/messageDestination"
+        },
+        "identity": {
+          "$ref": "#/definitions/agentIdentity"
         }
       },
       "required": [
-        "goals",
         "instructions",
         "dataSources",
         "actions"
@@ -56,6 +59,11 @@
   ],
   "additionalProperties": false,
   "definitions": {
+    "variableReference": {
+      "type": "string",
+      "description": "Reference to a variable in a Fabric variable library, in the form $(/<WorkspaceName>/<LibraryName>/<VariableName>).",
+      "pattern": "^\\$\\(/[^/]+/[^/]+/[^/]+\\)$"
+    },
     "dataSource": {
       "type": "object",
       "properties": {
@@ -66,7 +74,8 @@
         "type": {
           "type": "string",
           "enum": [
-            "KustoDatabase"
+            "KustoDatabase",
+            "Ontology"
           ]
         },
         "workspaceId": {
@@ -96,7 +105,8 @@
         "kind": {
           "type": "string",
           "enum": [
-            "PowerAutomateAction"
+            "PowerAutomateAction",
+            "FabricJobAction"
           ]
         },
         "parameters": {
@@ -104,6 +114,9 @@
           "items": {
             "$ref": "#/definitions/parameter"
           }
+        },
+        "connection": {
+          "$ref": "#/definitions/fabricItemConnection"
         }
       },
       "required": [
@@ -111,7 +124,53 @@
         "displayName",
         "description",
         "kind"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": { "kind": { "const": "FabricJobAction" } },
+            "required": ["kind"]
+          },
+          "then": {
+            "required": ["connection"]
+          }
+        }
       ]
+    },
+    "fabricItemConnection": {
+      "type": "object",
+      "description": "Specifies the Fabric item and job to invoke for a FabricJobAction.",
+      "properties": {
+        "jobArtifactId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Artifact (item) ID of the Fabric item to run the job on."
+        },
+        "jobWorkspaceId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Workspace ID containing the item."
+        },
+        "itemType": {
+          "type": "string",
+          "description": "The Fabric item type (for example, DataPipeline, Notebook)."
+        },
+        "jobType": {
+          "type": "string",
+          "description": "The job type to invoke on the item (for example, Pipeline, RunNotebook)."
+        },
+        "subItemId": {
+          "type": "string",
+          "description": "Identifier for the sub-item being targeted by the job, when applicable."
+        }
+      },
+      "required": [
+        "jobArtifactId",
+        "jobWorkspaceId",
+        "itemType",
+        "jobType"
+      ],
+      "additionalProperties": false
     },
     "parameter": {
       "type": "object",
@@ -126,6 +185,78 @@
       "required": [
         "name"
       ],
+      "additionalProperties": false
+    },
+    "messageDestination": {
+      "description": "Polymorphic destination for agent notifications. Selected by the kind discriminator.",
+      "oneOf": [
+        { "$ref": "#/definitions/recipientDestination" },
+        { "$ref": "#/definitions/teamsChannelDestination" }
+      ]
+    },
+    "recipientDestination": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "Recipient"
+        },
+        "recipient": {
+          "type": "string",
+          "description": "The UPN of the recipient."
+        }
+      },
+      "required": [
+        "kind",
+        "recipient"
+      ],
+      "additionalProperties": false
+    },
+    "teamsChannelDestination": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "TeamsChannel"
+        },
+        "teamId": {
+          "type": "string",
+          "description": "The Teams team ID."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The Teams channel ID."
+        }
+      },
+      "required": [
+        "kind",
+        "teamId",
+        "channelId"
+      ],
+      "additionalProperties": false
+    },
+    "agentIdentity": {
+      "type": "object",
+      "description": "Identity information for the agent, used for agent OBO / app-only scenarios on ALM import/export.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID for the agent identity."
+        },
+        "blueprintId": {
+          "type": "string",
+          "description": "The agent identity blueprint ID."
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["Delegated"],
+          "description": "Execution mode."
+        },
+        "sponsor": {
+          "type": "string",
+          "description": "The UPN of the sponsor user. Required when messageDestination is a non-Recipient kind."
+        }
+      },
       "additionalProperties": false
     }
   }
