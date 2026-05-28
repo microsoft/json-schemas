@@ -14,16 +14,16 @@ Microsoft launched a centralized GitHub repo for publishing Microsoft-owned JSON
 - Repo: https://github.com/Microsoft/json-schemas
 - Admins: https://github.com/orgs/Microsoft/teams/json-schemas-admins
 - Public site: https://developer.microsoft.com/json-schemas
-- Owner: Vesa Juvonen vesaj@microsoft.com (Eastern European Time (EET))
+- Owner: @VesaJuvonen (Eastern European Time (EET))
 - Publishing: Self-publish via an admin from your team/organization.
 - For publishing support or if you don't have an admin who can publish:
-  - M365 Developer program engineering team: DevAppPortalEng@microsoft.com
-  - Office Developer documentation team: opcontent@microsoft.com or tag @OfficeDev/opcontent in GitHub
+  - M365 Developer program engineering team: DevAppPortalEng@microsoft.com (Indian Standard Time (IST))
+  - Office Developer documentation team: opcontent@microsoft.com or tag @OfficeDev/opcontent in GitHub (Pacific Daylight Time (PDT))
   - Check the json-schemas-admins repo for someone in your organization with Administrator permissions!
     
 ## Get admin perms REQUIRED
 
-All Microsoft teams are welcome to publish schemas to this repo. Pick two team members and request admin perms. Submit your request to @Microsoft/json-schemas-admins for approval and cc: Vesa Juvonen. This may take some time, so please be sure to do this part in advance. 
+All Microsoft teams are welcome to publish schemas to this repo. Pick two FTE team members and request Admin permission. Submit your request to @Microsoft/json-schemas-admins for approval and tag @VesaJuvonen. This may take some time, so please be sure to do this part in advance. 
 
 After you're approved as an admin, you have the power to create your own folder, add your schemas, manage your pull requests, etc. We suggest you contact your documentation team or several reliable PMs/EMs on your team and request Admin perms for them as well. There is no central person (was lindalu) to publish and assist you. 
 
