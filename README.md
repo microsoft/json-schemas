@@ -59,7 +59,7 @@ If your new schema doesn't appear, or to be extra safe, you'll need to "manually
 - tsdoc https://graphprodblobstorage.blob.core.windows.net/content/json-schemas/en-us/html/tsdoc/
 
 > [!IMPORTANT]
-> If you add a new root level folder then you need to send an email to devappportaleng@microsoft.com (developer app portal engineering team) and request they "whitelist" your folder for removing locale from the full URL. You don't need to do this for sub-folders. As mentioned, this is the team that hosts the Azure blob so reach out to them for support if needed. You'll find they're very responsive if you catch them on India time! 
+> If you add a new root level folder then you need to send an email to devappportaleng@microsoft.com (developer app portal engineering team) and request they "allowlist" your folder for removing locale from the full URL. You don't need to do this for sub-folders. As mentioned, this is the team that hosts the Azure blob so reach out to them for support if needed. You'll find they're very responsive if you catch them on India time! 
 
 ## Update existing schemas
 
