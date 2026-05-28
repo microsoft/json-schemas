@@ -7,7 +7,7 @@ This repository contains schemas which are published at https://developer.micros
 
 Last updated: 27 May 2026
 
-## Publish Microsoft Json schemas to the centralized json schema repo
+## Publish Microsoft JSON schemas to the centralized JSON schema repo
 
 Microsoft launched a centralized GitHub repo for publishing Microsoft-owned JSON schemas. Previously, JSON schema files were published to a public site (http://json-schema.org) for universally hosting json-schema files and to other Microsoft sites such as dev.office.com. However, there's an inherent risk in using the public site and much benefit to customers to provide a single, supported location for all Microsoft JSON schemas.
 
