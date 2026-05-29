@@ -584,6 +584,46 @@
                   "icon": {
                     "type": "string",
                     "description": "Icon name to use for the marker"
+                  },
+                  "iconOptions": {
+                    "type": "object",
+                    "description": "Options used to customize the rendering behavior of marker icons",
+                    "additionalProperties": false,
+                    "properties": {
+                      "image": {
+                        "type": "string",
+                        "description": "The name of the image in the map's image sprite to use for drawing the icon"
+                      },
+                      "anchor": {
+                        "type": "string",
+                        "description": "Specifies which part of the icon is placed closest to the anchor position",
+                        "enum": ["center", "left", "right", "top", "bottom", "top-left", "top-right", "bottom-left", "bottom-right"]
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "description": "A number between 0 and 1 that indicates the opacity at which the icon will be drawn",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "rotation": {
+                        "type": "number",
+                        "description": "The amount to rotate the icon clockwise in degrees"
+                      },
+                      "allowOverlap": {
+                        "type": "boolean",
+                        "description": "Specifies if the symbol icon can overlay other symbols on the map"
+                      },
+                      "rotationAlignment": {
+                        "type": "string",
+                        "description": "Determines the rotation behavior of icons",
+                        "enum": ["auto", "map", "viewport"]
+                      },
+                      "pitchAlignment": {
+                        "type": "string",
+                        "description": "Specifies the orientation of the icon when the map is pitched",
+                        "enum": ["auto", "map", "viewport"]
+                      }
+                    }
                   }
                 }
               },
