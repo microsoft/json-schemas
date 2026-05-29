@@ -366,7 +366,7 @@
           },
           "connectionId": {
             "type": ["string", "null"],
-            "description": "ID of the connection for external data sources"
+            "description": "ID of the connection for external data sources\nDeprecated: Use the datasourceId"
           },
           "connectionResourceId": {
             "type": ["string", "null"],
