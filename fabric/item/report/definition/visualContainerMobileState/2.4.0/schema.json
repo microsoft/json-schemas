@@ -16,7 +16,7 @@
         },
         "visualContainerObjects": {
             "description": "Specifies the mobile specific formatting changes for different \"objects\" of the visual container.",
-            "$ref": "../../visualConfiguration/2.4.0/schema-embedded.json#/definitions/VisualContainerFormattingObjects"
+            "$ref": "../../visualConfiguration/2.3.0/schema-embedded.json#/definitions/VisualContainerFormattingObjects"
         },
         "position": {
             "$ref": "#/definitions/VisualContainerPosition",
