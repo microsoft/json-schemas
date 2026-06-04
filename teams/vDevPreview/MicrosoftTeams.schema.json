@@ -1646,11 +1646,6 @@
                     "description": "Unique identifier for the agent connector",
                     "maxLength": 64
                 },
-                "reusable": {
-                    "type": "boolean",
-                    "description": "Indicates whether this connector can be reused by other applications.",
-                    "default": false
-                },
                 "displayName": {
                     "type": "string",
                     "description": "A user-friendly name for the connector, which can be displayed in UIs.",
