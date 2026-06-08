@@ -226,8 +226,7 @@
             "properties": {
               "datasourceId": {
                 "type": "string",
-                "description": "The unique identifier of this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers.",
-                "format": "uuid"
+                "description": "A caller-defined unique string identifier for this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers. Does not need to be a UUID, but must be unique across all dataSources entries."
               },
               "item": {
                 "description": "The item reference",
@@ -243,8 +242,7 @@
             "properties": {
               "datasourceId": {
                 "type": "string",
-                "description": "The unique identifier of this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers.",
-                "format": "uuid"
+                "description": "A caller-defined unique string identifier for this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers. Does not need to be a UUID, but must be unique across all dataSources entries."
               },
               "connection": {
                 "description": "The connection reference",
@@ -283,8 +281,7 @@
           },
           "datasourceId": {
             "type": "string",
-            "description": "ID of the datasource for this icon source",
-            "format": "uuid"
+            "description": "ID of the datasource for this icon source. Must match the datasourceId of an entry in the top-level dataSources array."
           },
           "relativePath": {
             "type": "string",
@@ -303,8 +300,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier for the layer source",
-            "format": "uuid"
+            "description": "A caller-defined unique string identifier for the layer source. Does not need to be a UUID, but must be unique across all layerSources entries."
           },
           "name": {
             "type": "string",
@@ -348,8 +344,7 @@
           },
           "datasourceId": {
             "type": "string",
-            "description": "ID of the datasource for this layer",
-            "format": "uuid"
+            "description": "ID of the datasource for this layer. Must match the datasourceId of an entry in the top-level dataSources array."
           },
           "relativePath": {
             "type": ["string", "null"],
@@ -394,8 +389,7 @@
           },
           "sourceId": {
             "type": "string",
-            "description": "ID of the associated layer source",
-            "format": "uuid"
+            "description": "ID of the associated layer source. Must match the id of an entry in the layerSources array."
           },
           "sourceLayerId": {
             "type": ["string", "null"],
