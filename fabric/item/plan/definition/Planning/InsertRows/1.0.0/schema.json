@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/insertRows/1.0.0/schema.json",
+  "title": "Insert Rows",
+  "description": "Array of custom (inserted) rows for a Planning visual, including static rows and calculated rows.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "rows"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/insertRows/1.0.0/schema.json"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/InsertRow"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "InsertRow": {
+      "type": "object",
+      "required": [
+        "id",
+        "visualId",
+        "rowMeta",
+        "name",
+        "status",
+        "dimensionId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique row identifier."
+        },
+        "visualId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the visual this row belongs to."
+        },
+        "visualRowConfigId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Optional visual row configuration reference."
+        },
+        "rowMeta": {
+          "$ref": "#/definitions/RowMeta"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the row."
+        },
+        "status": {
+          "type": "integer",
+          "description": "Status code of the row."
+        },
+        "dimensionId": {
+          "type": "string",
+          "description": "Dimension this row belongs to."
+        }
+      },
+      "additionalProperties": false
+    },
+    "RowMeta": {
+      "type": "object",
+      "required": [
+        "id",
+        "row_type",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "row_type": {
+          "$ref": "#/definitions/RowType"
+        },
+        "title": {
+          "type": "string"
+        },
+        "scaling_factor": {
+          "type": "string",
+          "description": "Scaling factor for display (e.g., Auto)."
+        },
+        "include_in_total": {
+          "type": "boolean"
+        },
+        "parent_id": {
+          "type": "string",
+          "description": "Parent row ID for hierarchy."
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "previous_row_id": {
+          "type": "string",
+          "description": "ID of the preceding row for ordering."
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "bind_for_cross_filter": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "column_aggregation": {
+          "type": "string",
+          "enum": [
+            "Sum",
+            "Average",
+            "Min",
+            "Max",
+            "Count"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RowType": {
+      "type": "object",
+      "description": "Discriminated union of row types. Exactly one key should be present.",
+      "properties": {
+        "StaticRow": {
+          "$ref": "#/definitions/StaticRowType"
+        },
+        "CalculatedRow": {
+          "$ref": "#/definitions/CalculatedRowType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StaticRowType": {
+      "type": "object",
+      "properties": {
+        "distribute_parent_value_to_child": {
+          "type": "boolean"
+        },
+        "default_value": {
+          "type": "object",
+          "description": "Default value configuration.",
+          "properties": {
+            "Static": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "row_edit_mode": {
+          "type": "string",
+          "enum": [
+            "InEditModeOnly",
+            "Always"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CalculatedRowType": {
+      "type": "object",
+      "required": [
+        "formula"
+      ],
+      "properties": {
+        "formula": {
+          "type": "string",
+          "description": "Calculation formula for this row."
+        },
+        "description": {
+          "type": "string"
+        },
+        "include_in_chart": {
+          "type": "boolean"
+        },
+        "deferred": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "bind_for_cross_filter": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

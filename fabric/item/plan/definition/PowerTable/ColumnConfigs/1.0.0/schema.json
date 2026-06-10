@@ -1,0 +1,216 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/columnConfigs/1.0.0/schema.json",
+  "title": "PowerTable Column Configs",
+  "description": "Array of column configuration definitions for a PowerTable visual.",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/ColumnConfig"
+  },
+  "definitions": {
+    "ColumnConfig": {
+      "type": "object",
+      "required": [
+        "$schema",
+        "columnGuid",
+        "columnName",
+        "columnType",
+        "columnMeta",
+        "displayName"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "format": "uri",
+          "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/columnConfigs/1.0.0/schema.json"
+        },
+        "columnGuid": {
+          "type": "string",
+          "description": "Unique identifier for the column."
+        },
+        "columnName": {
+          "type": "string",
+          "description": "Database column name."
+        },
+        "columnType": {
+          "type": "integer",
+          "description": "Column type code (1=text, 2=single select, 3=multi select, 4=date, etc.)."
+        },
+        "columnMeta": {
+          "$ref": "#/definitions/ColumnMeta"
+        },
+        "hideColumn": {
+          "type": "integer",
+          "description": "Whether the column is hidden (0=visible, 1=hidden).",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "mandatory": {
+          "type": "integer",
+          "description": "Whether the column is mandatory (0=optional, 1=required).",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "allowEdit": {
+          "type": "integer",
+          "description": "Whether the column allows editing (0=readonly, 1=editable).",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "visualColumnType": {
+          "type": "integer",
+          "description": "Visual representation type."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User-facing column name."
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ColumnMeta": {
+      "type": "object",
+      "properties": {
+        "defaultValueType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "STATIC",
+            "FORMULA",
+            "AUTO_INCREMENT"
+          ]
+        },
+        "defaultValue": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isPrimaryKey": {
+          "type": "boolean"
+        },
+        "updateValueOnRowModify": {
+          "type": "boolean"
+        },
+        "resetToDefaultOnRowModify": {
+          "type": "boolean"
+        },
+        "maximumAllowedLength": {
+          "type": "string"
+        },
+        "textFieldColumnType": {
+          "type": "string",
+          "enum": [
+            "Any Value",
+            "Email",
+            "URL",
+            "Phone"
+          ]
+        },
+        "options": {
+          "type": "array",
+          "description": "Static dropdown options.",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "selectionMethod": {
+          "type": "string",
+          "description": "How dropdown options are sourced.",
+          "enum": [
+            "DISTINCT_VALUES",
+            "LOAD_FROM_DATABASE",
+            "STATIC"
+          ]
+        },
+        "optionLinking": {
+          "$ref": "#/definitions/OptionLinking"
+        },
+        "isFilterBasedOnAnotherValue": {
+          "type": "boolean"
+        },
+        "fcVisualName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fcVisualIdColumnName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fcVisualLabelColumnName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OptionLinking": {
+      "type": "object",
+      "properties": {
+        "lookupConfig": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LookupConfig"
+          }
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "LookupConfig": {
+      "type": "object",
+      "required": [
+        "table",
+        "label",
+        "id"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "table": {
+          "type": "string",
+          "description": "Lookup table name."
+        },
+        "label": {
+          "type": "string",
+          "description": "Column used for display label."
+        },
+        "id": {
+          "type": "string",
+          "description": "Column used for the value."
+        },
+        "order": {
+          "type": "integer"
+        },
+        "linkingColumn": {
+          "type": "string",
+          "description": "Column in the main table this links to."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

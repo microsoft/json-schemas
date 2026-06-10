@@ -1,0 +1,396 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/properties/1.0.0/schema.json",
+  "title": "Visual Properties (Planning)",
+  "description": "Properties configuration for a Planning visual, including pivot assignments, sorting, and filter configurations.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "visuals"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/properties/1.0.0/schema.json"
+    },
+    "visuals": {
+      "type": "object",
+      "description": "Map of visual ID to visual properties.",
+      "additionalProperties": {
+        "$ref": "#/definitions/VisualProperties"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "VisualProperties": {
+      "type": "object",
+      "required": [
+        "schema",
+        "properties"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "Properties schema version."
+        },
+        "properties": {
+          "type": "object",
+          "required": [
+            "pivotAssignments"
+          ],
+          "properties": {
+            "pivotAssignments": {
+              "type": "array",
+              "description": "Column/row/measure assignments for the pivot table.",
+              "items": {
+                "$ref": "#/definitions/PivotAssignment"
+              }
+            },
+            "sortingConfig": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "superFilterAssignments": {
+              "type": "array",
+              "description": "Filter configurations for the visual.",
+              "items": {
+                "$ref": "#/definitions/SuperFilterAssignment"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PivotAssignment": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceId",
+        "bucketId",
+        "columnName",
+        "dataType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the assignment (Table[Column] format)."
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "bucketId": {
+          "type": "string",
+          "description": "Target bucket for the assignment.",
+          "enum": [
+            "rows",
+            "columns",
+            "ameasure"
+          ]
+        },
+        "columnName": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string",
+          "enum": [
+            "String",
+            "Int64",
+            "Double",
+            "DateTime",
+            "Boolean"
+          ]
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "columnType": {
+          "type": "string",
+          "enum": [
+            "Column",
+            "Hierarchy Level",
+            "Measure"
+          ]
+        },
+        "formatString": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contents": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "PowerBI"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "customName": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string",
+          "enum": [
+            "sum",
+            "average",
+            "min",
+            "max",
+            "count"
+          ]
+        },
+        "isFlatHierarchy": {
+          "type": "boolean"
+        },
+        "isHierarchyItemInMeasure": {
+          "type": "boolean"
+        },
+        "distinctValueCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hierarchyName": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "dataRoleType": {
+          "type": "string",
+          "enum": [
+            "Grouping",
+            "Measure"
+          ]
+        },
+        "groupDataType": {
+          "type": "string"
+        },
+        "measureGuid": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SuperFilterAssignment": {
+      "type": "object",
+      "required": [
+        "id",
+        "pivotAssignments"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique filter assignment ID."
+        },
+        "pivotAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PivotAssignment"
+          }
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "isDefaultMeasure": {
+          "type": "boolean"
+        },
+        "isDaxMeasure": {
+          "type": "boolean"
+        },
+        "bucketId": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/FilterConfiguration"
+        },
+        "filter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "position": {
+          "type": "string",
+          "enum": [
+            "LEFT",
+            "RIGHT",
+            "TOP",
+            "BOTTOM"
+          ]
+        },
+        "filterLevel": {
+          "type": "string",
+          "enum": [
+            "visual",
+            "page",
+            "report"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilterConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "hide": {
+          "type": "boolean"
+        },
+        "isExpanded": {
+          "type": "boolean"
+        },
+        "locked": {
+          "type": "boolean"
+        },
+        "filterMode": {
+          "type": "string",
+          "enum": [
+            "basic",
+            "advanced"
+          ]
+        },
+        "visualType": {
+          "type": "string",
+          "enum": [
+            "NUMERIC",
+            "TEXT",
+            "DATE"
+          ]
+        },
+        "scale": {
+          "type": "string"
+        },
+        "enableNumericToFacet": {
+          "type": "boolean"
+        },
+        "filterOperator": {
+          "type": "string",
+          "enum": [
+            "between",
+            "equals",
+            "contains",
+            "greaterThan",
+            "lessThan"
+          ]
+        },
+        "singleSelect": {
+          "type": "boolean"
+        },
+        "selectAll": {
+          "type": "boolean"
+        },
+        "slider": {
+          "type": "boolean"
+        },
+        "regex": {
+          "type": "string"
+        },
+        "measureSearch": {
+          "type": "boolean"
+        },
+        "alphaNumericValues": {
+          "type": "object",
+          "properties": {
+            "minValue": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "maxValue": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "equalValue": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "columnName": {
+                "type": "string"
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "ASC",
+                  "DESC"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "topN": {
+          "type": "object",
+          "properties": {
+            "rankMode": {
+              "type": "string",
+              "enum": [
+                "TOP",
+                "BOTTOM"
+              ]
+            },
+            "rankValue": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "rankType": {
+              "type": "string"
+            },
+            "rankMeasure": {
+              "type": "string"
+            },
+            "displayOthers": {
+              "type": "boolean"
+            },
+            "otherLabel": {
+              "type": "string"
+            },
+            "rankMeasureLabel": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sheetDataItemAggregationType": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

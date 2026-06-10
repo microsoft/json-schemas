@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json",
+  "description": "Root definition for a Plan artifact containing semantic model references and sheet declarations.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "semanticModelReference",
+    "sheets"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json"
+    },
+    "semanticModelReference": {
+      "$ref": "#/definitions/SemanticModelReference"
+    },
+    "sheets": {
+      "type": "array",
+      "description": "List of sheets in the plan.",
+      "items": {
+        "$ref": "#/definitions/SheetReference"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "SemanticModelReference": {
+      "type": "object",
+      "description": "Reference to the semantic model backing this plan.",
+      "required": [
+        "connection",
+        "semanticModel"
+      ],
+      "properties": {
+        "connection": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
+        },
+        "semanticModel": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SheetReference": {
+      "type": "object",
+      "description": "A sheet declaration within the plan.",
+      "required": [
+        "id",
+        "displayName",
+        "sheetType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for the sheet."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User-facing name of the sheet."
+        },
+        "sheetType": {
+          "type": "string",
+          "description": "The type of sheet.",
+          "enum": [
+            "Planning",
+            "PowerTable",
+            "Intelligence"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
