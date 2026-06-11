@@ -143,6 +143,18 @@
           "$ref": "#/definitions/CalculatedRowType"
         }
       },
+      "oneOf": [
+        {
+          "required": [
+            "StaticRow"
+          ]
+        },
+        {
+          "required": [
+            "CalculatedRow"
+          ]
+        }
+      ],
       "additionalProperties": false
     },
     "StaticRowType": {
