@@ -116,8 +116,14 @@
           "$ref": "#/definitions/NativeMeasure"
         }
       },
+      "oneOf": [
+        { "required": [ "Forecast" ] },
+        { "required": [ "DataInput" ] },
+        { "required": [ "VisualColumn" ] },
+        { "required": [ "Native" ] }
+      ],
       "additionalProperties": false
-    },
+    }
     "ForecastMeasure": {
       "type": "object",
       "required": [
