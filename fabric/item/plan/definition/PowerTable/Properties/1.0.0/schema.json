@@ -1,0 +1,237 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/properties/1.0.0/schema.json",
+  "title": "PowerTable Properties",
+  "description": "Properties definition for a PowerTable visual, including assignments, filters, styles, and visual state.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "properties"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/properties/1.0.0/schema.json"
+    },
+    "properties": {
+      "$ref": "#/definitions/PowerTableProperties"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "PowerTableProperties": {
+      "type": "object",
+      "required": [
+        "pivotAssignments",
+        "sortingConfig",
+        "superFilterAssignments",
+        "visualState"
+      ],
+      "properties": {
+        "pivotAssignments": {
+          "type": "array"
+        },
+        "sortingConfig": {
+          "type": "array"
+        },
+        "superFilterAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuperFilterAssignment"
+          }
+        },
+        "visualInteractions": {
+          "type": "object"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "visualType": {
+          "type": "integer"
+        },
+        "chartType": {
+          "type": "string"
+        },
+        "originEntityId": {
+          "type": "string"
+        },
+        "splitByCategory": {
+          "type": "object"
+        },
+        "transformMeasure": {
+          "type": "string"
+        },
+        "groupMeasureAssignments": {
+          "type": "array"
+        },
+        "mobileProperties": {
+          "type": "object"
+        },
+        "preVisualId": {
+          "type": "string"
+        },
+        "dimension": {
+          "$ref": "#/definitions/Dimension"
+        },
+        "position": {
+          "$ref": "#/definitions/Position"
+        },
+        "visualStyles": {
+          "type": "object"
+        },
+        "lockAspectRatio": {
+          "type": "boolean"
+        },
+        "layerProperties": {
+          "type": "object"
+        },
+        "shapeType": {
+          "type": "string"
+        },
+        "visualState": {
+          "$ref": "#/definitions/VisualState"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SuperFilterAssignment": {
+      "type": "object",
+      "required": [
+        "id",
+        "filter",
+        "position",
+        "configuration",
+        "filterLevel",
+        "pivotAssignments"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "array"
+        },
+        "position": {
+          "type": "string"
+        },
+        "configuration": {
+          "type": "object"
+        },
+        "filterLevel": {
+          "type": "string"
+        },
+        "pivotAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PivotAssignment"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "PivotAssignment": {
+      "type": "object",
+      "required": [
+        "id",
+        "sourceId",
+        "name",
+        "columnName",
+        "tableName",
+        "order",
+        "dataType",
+        "columnType",
+        "sourceType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "columnName": {
+          "type": "string"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "bucketId": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string"
+        },
+        "columnType": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "Dimension": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Position": {
+      "type": "object",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VisualState": {
+      "type": "object",
+      "properties": {
+        "assignmentColumnMap": {
+          "type": "object"
+        },
+        "superFilterAssignments": {
+          "type": "array"
+        },
+        "superFilter": {
+          "type": "object"
+        },
+        "manageMeasures": {
+          "type": "array"
+        },
+        "columnMeta": {
+          "type": "object"
+        },
+        "superFilterMetaConfig": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

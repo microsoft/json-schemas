@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/forms/1.0.0/schema.json",
+  "title": "PowerTable Forms",
+  "description": "Array of form definitions for a PowerTable visual, defining data entry layouts.",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Form"
+  },
+  "definitions": {
+    "Form": {
+      "type": "object",
+      "required": [
+        "$schema",
+        "title",
+        "layoutMeta"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "format": "uri",
+          "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/forms/1.0.0/schema.json"
+        },
+        "title": {
+          "type": "string",
+          "description": "Form title."
+        },
+        "description": {
+          "type": "string"
+        },
+        "layoutMeta": {
+          "$ref": "#/definitions/LayoutMeta"
+        },
+        "config": {
+          "$ref": "#/definitions/FormConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LayoutMeta": {
+      "type": "object",
+      "required": [
+        "children",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional layout ID."
+        },
+        "children": {
+          "type": "array",
+          "description": "Ordered list of form elements.",
+          "items": {
+            "$ref": "#/definitions/FormElement"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "form"
+          ]
+        },
+        "layoutType": {
+          "type": "string",
+          "enum": [
+            "default",
+            "tabs",
+            "sections"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "FormElement": {
+      "type": "object",
+      "required": [
+        "type",
+        "name"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Element type.",
+          "enum": [
+            "field",
+            "section",
+            "tab"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Field/column name."
+        },
+        "mandatory": {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "allowEdit": {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "props": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FormConfig": {
+      "type": "object",
+      "properties": {
+        "showTitle": {
+          "type": "boolean"
+        },
+        "showLogo": {
+          "type": "boolean"
+        },
+        "submissionMessage": {
+          "type": "string"
+        },
+        "fieldLabel": {
+          "type": "string",
+          "enum": [
+            "stacked",
+            "inline"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

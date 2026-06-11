@@ -1,0 +1,676 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/intelligence/properties/1.0.0/schema.json",
+  "title": "Intelligence Properties",
+  "description": "Properties definition for an Intelligence sheet visual, including page-level settings, variables, canvas styles, commentary, and embedded visual configurations.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "properties",
+    "visuals"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/intelligence/properties/1.0.0/schema.json"
+    },
+    "properties": {
+      "$ref": "#/definitions/PageProperties"
+    },
+    "visuals": {
+      "type": "array",
+      "description": "List of visuals on the Intelligence sheet.",
+      "items": {
+        "$ref": "#/definitions/Visual"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "PageProperties": {
+      "type": "object",
+      "description": "Top-level page properties wrapper.",
+      "required": [
+        "schema",
+        "properties"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "Schema version for the properties format."
+        },
+        "properties": {
+          "$ref": "#/definitions/PageSettings"
+        }
+      }
+    },
+    "PageSettings": {
+      "type": "object",
+      "description": "Page-level settings including filters, variables, canvas styles, and commentary.",
+      "properties": {
+        "pageLevelFilterAssignments": {
+          "type": "array",
+          "description": "Page-level filter assignments."
+        },
+        "entityLevelVariables": {
+          "type": "array",
+          "description": "Entity-level calculated variables (actions, numbers, dropdowns, etc.).",
+          "items": {
+            "$ref": "#/definitions/EntityVariable"
+          }
+        },
+        "filterPanePosition": {
+          "type": "string",
+          "description": "Position of the filter pane.",
+          "enum": [
+            "LEFT",
+            "RIGHT",
+            "TOP",
+            "BOTTOM"
+          ]
+        },
+        "topPositionFilterExpandConfig": {
+          "$ref": "#/definitions/FilterExpandConfig"
+        },
+        "commentary": {
+          "$ref": "#/definitions/Commentary"
+        },
+        "canvasStyle": {
+          "$ref": "#/definitions/CanvasStyle"
+        },
+        "assignmentColumnMap": {
+          "type": "object"
+        },
+        "visualGroupMap": {
+          "type": "object"
+        },
+        "sourceVisualsMeta": {
+          "type": "object"
+        },
+        "controlPanePosition": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ]
+        }
+      }
+    },
+    "EntityVariable": {
+      "type": "object",
+      "description": "A calculated variable (action, number, dropdown, etc.) at the entity level.",
+      "required": [
+        "id",
+        "label",
+        "type",
+        "scope",
+        "technicalName"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique variable identifier (e.g., CALC_VARIABLE_xxxxx)."
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label for the variable."
+        },
+        "type": {
+          "type": "string",
+          "description": "Variable type.",
+          "enum": [
+            "action",
+            "number",
+            "text",
+            "dropdown",
+            "date",
+            "slider"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "description": "Variable scope.",
+          "enum": [
+            "entity",
+            "visual",
+            "page"
+          ]
+        },
+        "technicalName": {
+          "type": "string",
+          "description": "Technical/programmatic name for the variable."
+        },
+        "description": {
+          "type": "string"
+        },
+        "showInViewMode": {
+          "type": "boolean"
+        },
+        "assignInterface": {
+          "type": "boolean"
+        },
+        "allowDecimalValues": {
+          "type": "boolean"
+        },
+        "interfaceType": {
+          "type": "string",
+          "enum": [
+            "switch",
+            "dropdown",
+            "input-box",
+            "slider",
+            "radio",
+            "checkbox"
+          ]
+        },
+        "value": {},
+        "defaultValue": {},
+        "displayMode": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array"
+        },
+        "datasetId": {
+          "type": "string"
+        },
+        "labelColumn": {
+          "type": "string"
+        },
+        "valueColumn": {
+          "type": "string"
+        },
+        "selectedDimension": {
+          "type": "string"
+        },
+        "radioDirection": {
+          "type": "string",
+          "enum": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "enableActionScript": {
+          "type": "boolean"
+        },
+        "enableToggle": {
+          "type": "boolean"
+        },
+        "executeOnInit": {
+          "type": "boolean"
+        },
+        "onLabel": {
+          "type": "string"
+        },
+        "offLabel": {
+          "type": "string"
+        },
+        "activeButton": {
+          "$ref": "#/definitions/ActionButton"
+        },
+        "inactiveButton": {
+          "$ref": "#/definitions/ActionButton"
+        },
+        "assignValues": {
+          "type": "boolean"
+        },
+        "showAsPercentage": {
+          "type": "boolean"
+        },
+        "showAsSlider": {
+          "type": "boolean"
+        },
+        "interval": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      }
+    },
+    "ActionButton": {
+      "type": "object",
+      "description": "Action button configuration for toggle-type variables.",
+      "required": [
+        "label",
+        "style",
+        "actions"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "style": {
+          "$ref": "#/definitions/ButtonStyle"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionScript"
+          }
+        }
+      }
+    },
+    "ButtonStyle": {
+      "type": "object",
+      "properties": {
+        "backgroundColor": {
+          "type": "string"
+        },
+        "textColor": {
+          "type": "string"
+        },
+        "borderColor": {
+          "type": "string"
+        }
+      }
+    },
+    "ActionScript": {
+      "type": "object",
+      "required": [
+        "id",
+        "target",
+        "script"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string",
+          "description": "Action script expression (e.g., SHOW_VISUAL, HIDE_VISUAL)."
+        }
+      }
+    },
+    "FilterExpandConfig": {
+      "type": "object",
+      "properties": {
+        "isFilterPaneCollapsed": {
+          "type": "boolean"
+        },
+        "expandedHeight": {
+          "type": "number"
+        }
+      }
+    },
+    "Commentary": {
+      "type": "object",
+      "description": "Commentary configuration including notes and annotations.",
+      "properties": {
+        "notes": {
+          "$ref": "#/definitions/NotesConfig"
+        },
+        "annotation": {
+          "$ref": "#/definitions/AnnotationConfig"
+        }
+      }
+    },
+    "NotesConfig": {
+      "type": "object",
+      "properties": {
+        "notesMap": {
+          "type": "object",
+          "description": "Map of visual IDs to their notes."
+        },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            },
+            "hideAllNotes": {
+              "type": "boolean"
+            },
+            "indicator": {
+              "type": "object"
+            },
+            "marker": {
+              "type": "object"
+            }
+          }
+        },
+        "noteOrder": {
+          "type": "array"
+        },
+        "enableMarkerMode": {
+          "type": "boolean"
+        },
+        "markerData": {
+          "type": "array"
+        }
+      }
+    },
+    "AnnotationConfig": {
+      "type": "object",
+      "properties": {
+        "settings": {
+          "type": "object",
+          "properties": {
+            "hideAllAnnotations": {
+              "type": "boolean"
+            },
+            "indicator": {
+              "type": "object"
+            },
+            "title": {
+              "type": "object"
+            },
+            "annotationText": {
+              "type": "object"
+            },
+            "style": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "CanvasStyle": {
+      "type": "object",
+      "description": "Canvas layout and styling configuration.",
+      "properties": {
+        "dimension": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "width": {
+              "type": "number"
+            },
+            "height": {
+              "type": "number"
+            },
+            "elementScalingUnit": {
+              "type": "string"
+            }
+          }
+        },
+        "background": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            },
+            "isEnabled": {
+              "type": "boolean"
+            },
+            "fillMode": {
+              "type": "string"
+            },
+            "opacity": {
+              "type": "number"
+            },
+            "color": {
+              "type": "string"
+            },
+            "imageUrl": {
+              "type": "string"
+            }
+          }
+        },
+        "wallpaper": {
+          "type": "object"
+        },
+        "border": {
+          "type": "object"
+        },
+        "shadow": {
+          "type": "object"
+        },
+        "cornerRadius": {
+          "type": "object"
+        },
+        "isLocked": {
+          "type": "boolean"
+        },
+        "gridLineSettings": {
+          "type": "object"
+        },
+        "showVisualGuide": {
+          "type": "boolean"
+        },
+        "showSmartGuide": {
+          "type": "boolean"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "scrollToZoom": {
+          "type": "boolean"
+        },
+        "mobileCanvas": {
+          "type": "object"
+        }
+      }
+    },
+    "Visual": {
+      "type": "object",
+      "description": "A visual element on the Intelligence sheet.",
+      "required": [
+        "id",
+        "visualType",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique visual identifier."
+        },
+        "visualType": {
+          "type": "integer",
+          "description": "Numeric visual type code."
+        },
+        "isEmbedded": {
+          "type": "boolean"
+        },
+        "originEntityId": {
+          "description": "Origin entity ID (integer or string)."
+        },
+        "properties": {
+          "$ref": "#/definitions/VisualProperties"
+        }
+      }
+    },
+    "VisualProperties": {
+      "type": "object",
+      "description": "Visual properties wrapper containing schema version, visual config, and etag.",
+      "required": [
+        "schema",
+        "properties"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/VisualConfig"
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag for concurrency control."
+        }
+      }
+    },
+    "VisualConfig": {
+      "type": "object",
+      "description": "Full visual configuration including pivot assignments, filters, styles, dimensions, and internal state.",
+      "properties": {
+        "pivotAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PivotAssignment"
+          }
+        },
+        "sortingConfig": {
+          "type": "array"
+        },
+        "superFilterAssignments": {
+          "type": "array",
+          "description": "Visual-level filter assignments."
+        },
+        "visualInteractions": {
+          "type": "object"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "visualType": {
+          "type": "integer"
+        },
+        "chartType": {
+          "type": "string",
+          "description": "Chart type identifier (e.g., COLUMN_VERTICAL, LINE, PIE)."
+        },
+        "originEntityId": {},
+        "splitByCategory": {
+          "type": "object"
+        },
+        "transformMeasure": {
+          "type": "string"
+        },
+        "groupMeasureAssignments": {
+          "type": "array"
+        },
+        "mobileProperties": {
+          "type": "object"
+        },
+        "preVisualId": {
+          "type": "string"
+        },
+        "dimension": {
+          "type": "object",
+          "properties": {
+            "height": {
+              "type": "number"
+            },
+            "width": {
+              "type": "number"
+            }
+          }
+        },
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            }
+          }
+        },
+        "visualStyles": {
+          "type": "object",
+          "description": "Visual styling (background, border, corner radius, padding, shadow, tooltip)."
+        },
+        "lockAspectRatio": {
+          "type": "boolean"
+        },
+        "layerProperties": {
+          "type": "object"
+        },
+        "shapeType": {
+          "type": "string"
+        },
+        "visualState": {
+          "type": "object",
+          "description": "Internal visual state including hidden properties stored as stringified JSON."
+        }
+      }
+    },
+    "PivotAssignment": {
+      "type": "object",
+      "description": "A field assignment to a pivot bucket (axis, measure, etc.).",
+      "required": [
+        "id",
+        "bucketId",
+        "columnName",
+        "dataType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "bucketId": {
+          "type": "string",
+          "description": "Target bucket (axis, AC, PY, PL, FC, etc.)."
+        },
+        "columnName": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string",
+          "enum": [
+            "String",
+            "Double",
+            "Integer",
+            "DateTime",
+            "Boolean"
+          ]
+        },
+        "order": {
+          "type": "integer"
+        },
+        "columnType": {
+          "type": "string",
+          "enum": [
+            "Column",
+            "Measure",
+            "Hierarchy"
+          ]
+        },
+        "formatString": {
+          "type": "string"
+        },
+        "contents": {
+          "type": "string"
+        },
+        "sourceType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "customName": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "isFlatHierarchy": {
+          "type": "boolean"
+        },
+        "distinctValueCount": {
+          "type": "integer"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "dataRoleType": {
+          "type": "string",
+          "enum": [
+            "Grouping",
+            "Measure"
+          ]
+        }
+      }
+    }
+  }
+}

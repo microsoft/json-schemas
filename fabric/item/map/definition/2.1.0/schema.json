@@ -16,11 +16,6 @@
           "description": "A data-driven expression array for dynamic styling"
         }
       ]
-    },
-    "variableReference": {
-      "type": "string",
-      "description": "A variable reference expression in the form $(/**/varlib/<variableName>) that resolves to a value from a Variable Library at runtime",
-      "pattern": "^\\$\\(.+\\)$"
     }
   },
   "properties": {
@@ -186,7 +181,7 @@
         "oneOf": [
           {
             "type": "object",
-            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)\nDeprecated: Use the datasourceId and item reference format.",
             "additionalProperties": false,
             "properties": {
               "itemType": {
@@ -208,23 +203,7 @@
           },
           {
             "type": "object",
-            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.) referenced through a Variable Library variable",
-            "additionalProperties": false,
-            "properties": {
-              "itemType": {
-                "type": "string",
-                "description": "The type of the data source item (e.g., Lakehouse, KqlDatabase, Ontology)"
-              },
-              "itemReference": {
-                "description": "Variable Library reference that resolves to the target item (and its workspace) at runtime",
-                "$ref": "#/$defs/variableReference"
-              }
-            },
-            "required": ["itemType", "itemReference"]
-          },
-          {
-            "type": "object",
-            "description": "A connection data source",
+            "description": "A connection data source\nDeprecated: Use the datasourceId and connection reference format.",
             "additionalProperties": false,
             "properties": {
               "itemType": {
@@ -242,20 +221,35 @@
           },
           {
             "type": "object",
-            "description": "A connection data source referenced through a Variable Library variable",
+            "description": "A workspace item data source (Lakehouse, KqlDatabase, Ontology, etc.)",
             "additionalProperties": false,
             "properties": {
-              "itemType": {
+              "datasourceId": {
                 "type": "string",
-                "description": "The type of the data source item",
-                "const": "Connection"
+                "description": "A caller-defined unique string identifier for this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers. Does not need to be a UUID, but must be unique across all dataSources entries."
               },
-              "connectionReference": {
-                "description": "Variable Library reference that resolves to the target connection at runtime",
-                "$ref": "#/$defs/variableReference"
+              "item": {
+                "description": "The item reference",
+                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
               }
             },
-            "required": ["itemType", "connectionReference"]
+            "required": ["datasourceId", "item"]
+          },
+          {
+            "type": "object",
+            "description": "A connection data source",
+            "additionalProperties": false,
+            "properties": {
+              "datasourceId": {
+                "type": "string",
+                "description": "A caller-defined unique string identifier for this datasource within the item definition. This value can be used to reference the datasource from other parts of the definition, e.g., layers. Does not need to be a UUID, but must be unique across all dataSources entries."
+              },
+              "connection": {
+                "description": "The connection reference",
+                "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
+              }
+            },
+            "required": ["datasourceId", "connection"]
           }
         ]
       }
@@ -282,15 +276,19 @@
           },
           "itemId": {
             "type": "string",
-            "description": "ID of the data source item for this icon source",
+            "description": "ID of the data source item for this icon source\nDeprecated: Use the datasourceId.",
             "format": "uuid"
+          },
+          "datasourceId": {
+            "type": "string",
+            "description": "ID of the datasource for this icon source. Must match the datasourceId of an entry in the top-level dataSources array."
           },
           "relativePath": {
             "type": "string",
             "description": "Relative path to the icon source"
           }
         },
-        "required": ["id", "name", "type", "itemId", "relativePath"]
+        "required": ["id", "name", "type", "relativePath"]
       }
     },
     "layerSources": {
@@ -302,8 +300,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier for the layer source",
-            "format": "uuid"
+            "description": "A caller-defined unique string identifier for the layer source. Does not need to be a UUID, but must be unique across all layerSources entries."
           },
           "name": {
             "type": "string",
@@ -342,12 +339,12 @@
           },
           "itemId": {
             "type": "string",
-            "description": "ID of the data source item for this layer",
+            "description": "ID of the data source item for this layer\nDeprecated: Use the datasourceId.",
             "format": "uuid"
           },
-          "itemReference": {
-            "description": "Variable Library reference that resolves to the data source item for this layer at runtime. Use as an alternative to itemId.",
-            "$ref": "#/$defs/variableReference"
+          "datasourceId": {
+            "type": "string",
+            "description": "ID of the datasource for this layer. Must match the datasourceId of an entry in the top-level dataSources array."
           },
           "relativePath": {
             "type": ["string", "null"],
@@ -364,11 +361,7 @@
           },
           "connectionId": {
             "type": ["string", "null"],
-            "description": "ID of the connection for external data sources"
-          },
-          "connectionReference": {
-            "description": "Variable Library reference that resolves to the connection for this layer at runtime. Use as an alternative to connectionId.",
-            "$ref": "#/$defs/variableReference"
+            "description": "ID of the connection for external data sources\nDeprecated: Use the datasourceId"
           },
           "connectionResourceId": {
             "type": ["string", "null"],
@@ -396,8 +389,7 @@
           },
           "sourceId": {
             "type": "string",
-            "description": "ID of the associated layer source",
-            "format": "uuid"
+            "description": "ID of the associated layer source. Must match the id of an entry in the layerSources array."
           },
           "sourceLayerId": {
             "type": ["string", "null"],
@@ -586,6 +578,46 @@
                   "icon": {
                     "type": "string",
                     "description": "Icon name to use for the marker"
+                  },
+                  "iconOptions": {
+                    "type": "object",
+                    "description": "Options used to customize the rendering behavior of marker icons",
+                    "additionalProperties": false,
+                    "properties": {
+                      "image": {
+                        "type": "string",
+                        "description": "The name of the image in the map's image sprite to use for drawing the icon"
+                      },
+                      "anchor": {
+                        "type": "string",
+                        "description": "Specifies which part of the icon is placed closest to the anchor position",
+                        "enum": ["center", "left", "right", "top", "bottom", "top-left", "top-right", "bottom-left", "bottom-right"]
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "description": "A number between 0 and 1 that indicates the opacity at which the icon will be drawn",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "rotation": {
+                        "type": "number",
+                        "description": "The amount to rotate the icon clockwise in degrees"
+                      },
+                      "allowOverlap": {
+                        "type": "boolean",
+                        "description": "Specifies if the symbol icon can overlay other symbols on the map"
+                      },
+                      "rotationAlignment": {
+                        "type": "string",
+                        "description": "Determines the rotation behavior of icons",
+                        "enum": ["auto", "map", "viewport"]
+                      },
+                      "pitchAlignment": {
+                        "type": "string",
+                        "description": "Specifies the orientation of the icon when the map is pitched",
+                        "enum": ["auto", "map", "viewport"]
+                      }
+                    }
                   }
                 }
               },
