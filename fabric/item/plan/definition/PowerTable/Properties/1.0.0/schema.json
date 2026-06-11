@@ -6,7 +6,6 @@
   "type": "object",
   "required": [
     "$schema",
-    "schema",
     "properties"
   ],
   "properties": {

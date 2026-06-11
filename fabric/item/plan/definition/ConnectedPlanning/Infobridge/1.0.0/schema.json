@@ -147,7 +147,7 @@
           }
         },
         "joinType": {
-          "description": "The join type (e.g., 10/20/30/40, INNER, LEFT, etc.).",
+          "description": "The join type (e.g, INNER, LEFT, etc.).",
           "type": "string"
         },
         "sql": {
