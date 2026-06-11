@@ -1,0 +1,375 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json",
+  "title": "Data Input Columns",
+  "description": "Array of data input column definitions for a Planning visual, including forecasts, text inputs, number inputs, and native measures.",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/DataInputColumn"
+  },
+  "definitions": {
+    "DataInputColumn": {
+      "type": "object",
+      "required": [
+        "$schema",
+        "measureGuid",
+        "visualId",
+        "columnMeta",
+        "name",
+        "dataInputType"
+      ],
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "format": "uri",
+          "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json"
+        },
+        "measureGuid": {
+          "type": "string",
+          "description": "Unique identifier for the measure/column."
+        },
+        "visualId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the visual this column belongs to."
+        },
+        "columnMeta": {
+          "$ref": "#/definitions/ColumnMeta"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the column."
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Optional description."
+        },
+        "dataInputType": {
+          "type": "integer",
+          "description": "Numeric code for the data input type."
+        },
+        "disableWriteAccess": {
+          "type": "boolean",
+          "description": "Whether write access is disabled."
+        },
+        "forecastAllowedUserPermissions": {
+          "type": "boolean",
+          "description": "Whether user permissions are allowed for forecast."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ColumnMeta": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "measure_type",
+        "data_type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique column meta identifier."
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label."
+        },
+        "measure_type": {
+          "$ref": "#/definitions/MeasureType"
+        },
+        "data_type": {
+          "type": "string",
+          "description": "Data type of the column.",
+          "enum": [
+            "Number",
+            "Text"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MeasureType": {
+      "type": "object",
+      "description": "Discriminated union of measure types. Exactly one key should be present.",
+      "properties": {
+        "Forecast": {
+          "$ref": "#/definitions/ForecastMeasure"
+        },
+        "DataInput": {
+          "$ref": "#/definitions/DataInputMeasure"
+        },
+        "VisualColumn": {
+          "$ref": "#/definitions/VisualColumnMeasure"
+        },
+        "Native": {
+          "$ref": "#/definitions/NativeMeasure"
+        }
+      },
+      "oneOf": [
+        { "required": [ "Forecast" ] },
+        { "required": [ "DataInput" ] },
+        { "required": [ "VisualColumn" ] },
+        { "required": [ "Native" ] }
+      ],
+      "additionalProperties": false
+    },
+    "ForecastMeasure": {
+      "type": "object",
+      "required": [
+        "forecast_version",
+        "forecast_period"
+      ],
+      "properties": {
+        "forecast_version": {
+          "type": "integer"
+        },
+        "forecast_period": {
+          "type": "object",
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "end": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "start_utc": {
+              "type": "integer"
+            },
+            "end_utc": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "closed_period_till": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "auto_close_forecast_settings": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        },
+        "forecast_value_display": {
+          "type": "string",
+          "enum": [
+            "Actual",
+            "Forecast"
+          ]
+        },
+        "open_period_config": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "closed_period_config": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "forecast_allowed_user_permissions": {
+          "type": "boolean"
+        },
+        "disable_write_access": {
+          "type": "boolean"
+        },
+        "edit_config": {
+          "$ref": "#/definitions/EditConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataInputMeasure": {
+      "type": "object",
+      "required": [
+        "id",
+        "column_type",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "column_type": {
+          "type": "object",
+          "description": "Discriminated union of column types (Number, ShortText, etc.).",
+          "properties": {
+            "Number": {
+              "$ref": "#/definitions/NumberColumnType"
+            },
+            "ShortText": {
+              "$ref": "#/definitions/ShortTextColumnType"
+            }
+          },
+          "additionalProperties": false
+        },
+        "title": {
+          "type": "string"
+        },
+        "disable_write_access": {
+          "type": "boolean"
+        },
+        "on_change_formula": {
+          "type": "string"
+        },
+        "allow_input": {
+          "type": "string",
+          "enum": [
+            "ReadAndEdit",
+            "ReadOnly"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "VisualColumnMeasure": {
+      "type": "object",
+      "description": "Wrapper for a DataInput used as a visual column.",
+      "properties": {
+        "DataInput": {
+          "$ref": "#/definitions/DataInputMeasure"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NativeMeasure": {
+      "type": "object",
+      "required": [
+        "measure_role"
+      ],
+      "properties": {
+        "measure_role": {
+          "type": "string",
+          "description": "Role of the native measure (e.g., ACMeasure)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "EditConfig": {
+      "type": "object",
+      "properties": {
+        "aggregate_total": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allow_input": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "on_change_formula": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "number_column_metadata": {
+          "$ref": "#/definitions/NumberColumnType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NumberColumnType": {
+      "type": "object",
+      "properties": {
+        "min_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "distribute_parent_value_to_children": {
+          "type": "boolean"
+        },
+        "default_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ShortTextColumnType": {
+      "type": "object",
+      "properties": {
+        "default_value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allow_entry_on_totals_or_subtotals": {
+          "type": "boolean"
+        },
+        "prevent_null": {
+          "type": "boolean"
+        },
+        "field_validation": {
+          "type": "string",
+          "enum": [
+            "AnyValue"
+          ]
+        },
+        "minimum_length": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "maximum_length": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

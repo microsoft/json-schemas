@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/automations/1.0.0/schema.json",
+  "title": "PowerTable Automations",
+  "description": "Array of automation definitions for a PowerTable visual, defining triggers and action flows.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "automations"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/automations/1.0.0/schema.json"
+    },
+    "automations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Automation"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Automation": {
+      "type": "object",
+      "required": [
+        "name",
+        "triggerType",
+        "config"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the automation."
+        },
+        "triggerType": {
+          "type": "integer",
+          "description": "Numeric code for the trigger type."
+        },
+        "config": {
+          "$ref": "#/definitions/AutomationConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AutomationConfig": {
+      "type": "object",
+      "required": [
+        "name",
+        "trigger",
+        "entryGroupId",
+        "groups"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "entryGroupId": {
+          "type": "string",
+          "description": "ID of the first action group to execute."
+        },
+        "groups": {
+          "type": "object",
+          "description": "Map of group IDs to action groups.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ActionGroup"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Trigger": {
+      "type": "object",
+      "required": [
+        "id",
+        "triggerType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique trigger identifier."
+        },
+        "triggerType": {
+          "type": "string",
+          "description": "Trigger type code."
+        },
+        "description": {
+          "type": "string"
+        },
+        "triggerConfig": {
+          "type": "object",
+          "properties": {
+            "conditions": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ActionGroup": {
+      "type": "object",
+      "required": [
+        "groupId",
+        "groupType",
+        "entryActionId",
+        "actions"
+      ],
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "groupType": {
+          "type": "string",
+          "description": "Group type code."
+        },
+        "previousGroupId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nextGroupId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "entryActionId": {
+          "type": "string",
+          "description": "ID of the first action in this group."
+        },
+        "actions": {
+          "type": "object",
+          "description": "Map of action IDs to action definitions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "position": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Action": {
+      "type": "object",
+      "required": [
+        "actionId",
+        "actionType",
+        "config"
+      ],
+      "properties": {
+        "actionId": {
+          "type": "string"
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Action type code."
+        },
+        "previousActionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nextActionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config": {
+          "type": "object",
+          "description": "Action-specific configuration.",
+          "properties": {
+            "createRecord": {
+              "$ref": "#/definitions/CreateRecordConfig"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreateRecordConfig": {
+      "type": "object",
+      "required": [
+        "connectionId",
+        "table"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "description": "Field name to value mapping for the new record.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "connectionId": {
+          "type": "string",
+          "description": "Connection identifier (may use variable substitution)."
+        },
+        "table": {
+          "type": "string",
+          "description": "Target table for the record."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

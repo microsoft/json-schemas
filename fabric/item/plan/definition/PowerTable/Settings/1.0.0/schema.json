@@ -1,0 +1,191 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/settings/1.0.0/schema.json",
+  "title": "PowerTable Settings",
+  "description": "Settings/permission configurations for a PowerTable visual.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "settings"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/settings/1.0.0/schema.json"
+    },
+    "settings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Setting"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Setting": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Setting name.",
+          "enum": [
+            "ROW_ADD",
+            "ROW_UPDATE",
+            "ROW_DELETE",
+            "ROW_IDENTIFIER",
+            "COMMENT_SETTINGS",
+            "SCD"
+          ]
+        },
+        "accessType": {
+          "type": "string",
+          "description": "Who has access to this setting.",
+          "enum": [
+            "ALL_USERS",
+            "SPECIFIC_USERS"
+          ]
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        },
+        "rules": {
+          "type": "array",
+          "description": "Access rules for this setting.",
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          }
+        },
+        "settings": {
+          "description": "Setting-specific configuration.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RowIdentifierSettings"
+            },
+            {
+              "$ref": "#/definitions/CommentSettings"
+            },
+            {
+              "$ref": "#/definitions/SCDSettings"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AccessRule": {
+      "type": "object",
+      "required": [
+        "ruleId",
+        "ruleName"
+      ],
+      "properties": {
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleName": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "filterUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RowIdentifierSettings": {
+      "type": "object",
+      "required": [
+        "rowIdentifier"
+      ],
+      "properties": {
+        "rowIdentifier": {
+          "type": "string",
+          "description": "Column name used as the row identifier."
+        }
+      },
+      "additionalProperties": false
+    },
+    "CommentSettings": {
+      "type": "object",
+      "properties": {
+        "notification": {
+          "type": "boolean"
+        },
+        "rowLevelComments": {
+          "type": "boolean"
+        },
+        "toggleAddonColumns": {
+          "type": "boolean"
+        },
+        "displayComment": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SCDSettings": {
+      "type": "object",
+      "required": [
+        "type",
+        "enabled"
+      ],
+      "properties": {
+        "type": {
+          "type": "integer",
+          "description": "SCD type (2 or 3).",
+          "enum": [
+            2,
+            3
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "businessKey": {
+              "type": "string"
+            },
+            "identifierKeys": {
+              "type": "object",
+              "properties": {
+                "activeFlag": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "effectiveDate": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
