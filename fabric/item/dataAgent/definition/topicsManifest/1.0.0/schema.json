@@ -20,32 +20,22 @@
       "description": "The list of topics for this data source, sorted by id for deterministic export.",
       "items": {
         "type": "object",
-        "title": "Data Agent Topic Metadata",
-        "description": "Represents a single topic and the markdown file that holds its body.",
+        "title": "Data Agent Topic",
+        "description": "Represents a single topic and the markdown file that holds its body. The topic's display name and description live in the markdown YAML frontmatter of the body file, not in this manifest.",
         "properties": {
           "id": {
             "type": "string",
-            "description": "The stable, rename-safe identifier of the topic, which is a GUID.",
+            "description": "The stable, rename-safe identifier of the topic (a GUID).",
             "format": "uuid"
           },
           "fileName": {
             "type": "string",
-            "description": "The human-readable markdown file name of the topic body, relative to the topics folder (e.g., \"revenue-definitions.md\"). Must be a lowercase kebab-case slug ending in .md and must not be a canonical GUID.",
-            "pattern": "^(?![0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.md$)[a-z0-9]+(-[a-z0-9]+)*\\.md$"
-          },
-          "displayName": {
-            "type": "string",
-            "description": "The user-facing display name of the topic."
-          },
-          "description": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "An optional short description of what the topic covers."
+            "description": "The file name of the topic body in OneLake (e.g., \"company-policies.md\"). Must end with \".md\", contain only alphanumeric characters, hyphens, and underscores, and be unique within the data source. Maximum length is 256 characters.",
+            "pattern": "^[A-Za-z0-9_-]+\\.md$",
+            "maxLength": 256
           }
         },
-        "required": [ "id", "fileName", "displayName" ]
+        "required": [ "id", "fileName" ]
       }
     }
   },
