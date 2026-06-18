@@ -1,0 +1,53 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/topicsManifest/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Agent Topics Manifest",
+  "description": "The manifest of topics associated with a data source. Maps each topic's stable id to its human-readable markdown file name. The topic bodies live in sibling .md files referenced by fileName.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the topics manifest file (e.g., \"1.0.0\")."
+    },
+    "topics": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The list of topics for this data source, sorted by id for deterministic export.",
+      "items": {
+        "type": "object",
+        "title": "Data Agent Topic Metadata",
+        "description": "Represents a single topic and the markdown file that holds its body.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The stable, rename-safe identifier of the topic, which is a GUID.",
+            "format": "uuid"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The human-readable markdown file name of the topic body, relative to the topics folder (e.g., \"revenue-definitions.md\"). Must be a lowercase kebab-case slug ending in .md and must not be a canonical GUID.",
+            "pattern": "^(?![0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.md$)[a-z0-9]+(-[a-z0-9]+)*\\.md$"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The user-facing display name of the topic."
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "An optional short description of what the topic covers."
+          }
+        },
+        "required": [ "id", "fileName", "displayName" ]
+      }
+    }
+  },
+  "required": [ "$schema" ]
+}
