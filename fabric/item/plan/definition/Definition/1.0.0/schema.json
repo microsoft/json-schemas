@@ -5,6 +5,7 @@
   "type": "object",
   "required": [
     "$schema",
+    "workloadItemName",
     "semanticModelReference",
     "sheets"
   ],
@@ -13,6 +14,10 @@
       "type": "string",
       "format": "uri",
       "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json"
+    },
+    "workloadItemName": {
+      "type": "string",
+      "description": "User-facing name of the workload item."
     },
     "semanticModelReference": {
       "$ref": "#/definitions/SemanticModelReference"
@@ -30,9 +35,25 @@
     "SemanticModelReference": {
       "type": "object",
       "description": "Reference to the semantic model backing this plan.",
-      "required": [
-        "connection",
-        "semanticModel"
+      "anyOf": [
+        {
+          "required": [
+            "connection",
+            "semanticModel"
+          ]
+        },
+        {
+          "required": [
+            "connectionId",
+            "semanticModelId",
+            "semanticModelName",
+            "semanticModelWorkspaceId",
+            "semanticModelWorkspaceName",
+            "directLakeMode",
+            "directQueryMode",
+            "sourceType"
+          ]
+        }
       ],
       "properties": {
         "connection": {
@@ -40,6 +61,34 @@
         },
         "semanticModel": {
           "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+        },
+        "connectionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "semanticModelId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "semanticModelName": {
+          "type": "string"
+        },
+        "semanticModelWorkspaceId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "semanticModelWorkspaceName": {
+          "type": "string"
+        },
+        "directLakeMode": {
+          "type": "boolean"
+        },
+        "directQueryMode": {
+          "type": "boolean"
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": ["POWERTABLE", "INFOBRIDGE", "WORKLOAD"]
         }
       },
       "additionalProperties": false
@@ -48,15 +97,15 @@
       "type": "object",
       "description": "A sheet declaration within the plan.",
       "required": [
-        "id",
         "displayName",
-        "sheetType"
+        "sheetType",
+        "recordGuid"
       ],
       "properties": {
-        "id": {
+         "recordGuid": {
           "type": "string",
           "format": "uuid",
-          "description": "Unique identifier for the sheet."
+          "description": "Unique identifier for the sheet record."
         },
         "displayName": {
           "type": "string",
@@ -66,10 +115,43 @@
           "type": "string",
           "description": "The type of sheet.",
           "enum": [
-            "Planning",
-            "PowerTable",
-            "Intelligence"
+            "PLANNING",
+            "REPORTING",
+            "POWERTABLE",
+            "INFOBRIDGE",
+            "SUPER_FILTER",
+            "BI_REPORTING",
+            "BI_ADHOC_ANALYSIS",
+            "BI_DASHBOARD"
           ]
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "Indicates if the sheet is hidden."
+        },
+        "order": {
+          "type": "number",
+          "description": "Order of the sheet within the report."
+        },
+        "workloadItemEntityVisuals": {
+          "type": "array",
+          "description": "List of visuals associated with the sheet.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "visualType": {
+                "type": "string",
+                "description": "Type of the visual.",
+                "enum": ["POWERTABLE", "PLANNING", "INFO_BRIDGE"]
+              },
+              "visualId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Unique identifier for the visual."
+              }
+            },
+            "additionalProperties": false
+          }
         }
       },
       "additionalProperties": false

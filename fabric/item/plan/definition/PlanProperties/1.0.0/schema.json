@@ -1,0 +1,205 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planProperties/1.0.0/schema.json",
+    "description": "Plan-level UI and behavior properties for a Planning workload item.",
+    "type": "object",
+    "required": [
+        "$schema",
+        "properties"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "format": "uri",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planProperties/1.0.0/schema.json"
+        },
+        "properties": {
+            "$ref": "#/definitions/PlanProperties"
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "PlanProperties": {
+            "type": "object",
+            "required": [
+                "workloadModeConfig"
+            ],
+            "properties": {
+                "theme": {
+                    "type": "object",
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "integer",
+                            "description": "Theme type code."
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "workloadModeConfig": {
+                    "$ref": "#/definitions/WorkloadModeConfig"
+                },
+                "workloadLevelFilterAssignments": {
+                    "type": "array",
+                    "items": {}
+                },
+                "dataStreamerConfig": {
+                    "type": "object",
+                    "required": [
+                        "enabled"
+                    ],
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "workloadLevelVariables": {
+                    "type": "array",
+                    "items": {}
+                },
+                "reportPageTooltipEntities": {
+                    "type": "array",
+                    "items": {}
+                },
+                "syncVisualsState": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "workloadLevelQueryFilterAssignments": {
+                    "type": "array",
+                    "items": {}
+                },
+                "drillThroughConfig": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "entityAdditionalProps": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "favoriteCharts": {
+                    "type": "array",
+                    "items": {}
+                },
+                "syncSlicerConfig": {
+                    "type": "array",
+                    "items": {}
+                },
+                "pageGroupingMeta": {
+                    "$ref": "#/definitions/PageGroupingMeta"
+                }
+            },
+            "additionalProperties": { "type": "string" }
+        },
+        "WorkloadModeConfig": {
+            "type": "object",
+            "required": [
+                "EDIT",
+                "READ"
+            ],
+            "properties": {
+                "EDIT": {
+                    "$ref": "#/definitions/EditModeConfig"
+                },
+                "READ": {
+                    "$ref": "#/definitions/ReadModeConfig"
+                }
+            },
+            "additionalProperties": false
+        },
+        "EditModeConfig": {
+            "type": "object",
+            "required": [
+                "showFilterPane",
+                "showDataPane",
+                "showFieldsPane",
+                "showElementsPane",
+                "showBookmarksPane",
+                "showPersonalizePane",
+                "showCommentsPane",
+                "showVariablesPane"
+            ],
+            "properties": {
+                "showFilterPane": {
+                    "type": "boolean"
+                },
+                "showDataPane": {
+                    "type": "boolean"
+                },
+                "showFieldsPane": {
+                    "type": "boolean"
+                },
+                "showElementsPane": {
+                    "type": "boolean"
+                },
+                "showBookmarksPane": {
+                    "type": "boolean"
+                },
+                "showPersonalizePane": {
+                    "type": "boolean"
+                },
+                "showCommentsPane": {
+                    "type": "boolean"
+                },
+                "showVariablesPane": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ReadModeConfig": {
+            "type": "object",
+            "required": [
+                "showFilterPane",
+                "showDataPane",
+                "showBookmarksPane",
+                "showPersonalizePane",
+                "showVariablesPane",
+                "showCommentsPane"
+            ],
+            "properties": {
+                "showFilterPane": {
+                    "type": "boolean"
+                },
+                "showDataPane": {
+                    "type": "boolean"
+                },
+                "showBookmarksPane": {
+                    "type": "boolean"
+                },
+                "showPersonalizePane": {
+                    "type": "boolean"
+                },
+                "showVariablesPane": {
+                    "type": "boolean"
+                },
+                "showCommentsPane": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PageGroupingMeta": {
+            "type": "object",
+            "required": [
+                "pageGroupMapping",
+                "pageGroups"
+            ],
+            "properties": {
+                "pageGroupMapping": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "pageGroups": {
+                    "type": "array",
+                    "items": {}
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

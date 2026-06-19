@@ -30,7 +30,6 @@
         "visualId",
         "rowMeta",
         "name",
-        "status",
         "dimensionId"
       ],
       "properties": {
@@ -50,16 +49,20 @@
           ],
           "description": "Optional visual row configuration reference."
         },
+        "rowPath": {
+          "type": ["string"],
+          "description": "Optional hierarchical path for the row."
+        },
+        "derivedFromRowId": {
+          "type": ["string"],
+          "description": "Optional source row ID when row is derived."
+        },
         "rowMeta": {
           "$ref": "#/definitions/RowMeta"
         },
         "name": {
           "type": "string",
           "description": "Display name of the row."
-        },
-        "status": {
-          "type": "integer",
-          "description": "Status code of the row."
         },
         "dimensionId": {
           "type": "string",
