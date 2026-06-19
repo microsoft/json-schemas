@@ -8,7 +8,7 @@
     "configuration": {
       "type": "object",
       "title": "Operations Agent Configuration",
-      "description": "User specified configuration containing instructions, data sources, actions, message destination, and identity of the agent.",
+      "description": "User specified configuration containing instructions, data sources, actions, and message destination of the agent.",
       "properties": {
         "instructions": {
           "type": "string",
@@ -33,9 +33,6 @@
         },
         "messageDestination": {
           "$ref": "#/definitions/messageDestination"
-        },
-        "identity": {
-          "$ref": "#/definitions/agentIdentity"
         }
       },
       "required": [
@@ -233,30 +230,6 @@
         "teamId",
         "channelId"
       ],
-      "additionalProperties": false
-    },
-    "agentIdentity": {
-      "type": "object",
-      "description": "Identity information for the agent, used for agent OBO / app-only scenarios on ALM import/export.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID for the agent identity."
-        },
-        "blueprintId": {
-          "type": "string",
-          "description": "The agent identity blueprint ID."
-        },
-        "mode": {
-          "type": "string",
-          "enum": ["Delegated"],
-          "description": "Execution mode."
-        },
-        "sponsor": {
-          "type": "string",
-          "description": "The UPN of the sponsor user. Required when messageDestination is a non-Recipient kind."
-        }
-      },
       "additionalProperties": false
     }
   }
