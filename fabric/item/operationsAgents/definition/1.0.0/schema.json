@@ -8,7 +8,7 @@
     "configuration": {
       "type": "object",
       "title": "Operations Agent Configuration",
-      "description": "User specified configuration containing instructions, data sources, actions, and message destination of the agent.",
+      "description": "User specified configuration containing instructions, data sources, actions, message destination, and user-provided identity fields of the agent.",
       "properties": {
         "instructions": {
           "type": "string",
@@ -33,6 +33,9 @@
         },
         "messageDestination": {
           "$ref": "#/definitions/messageDestination"
+        },
+        "identity": {
+          "$ref": "#/definitions/agentIdentity"
         }
       },
       "required": [
@@ -229,6 +232,20 @@
         "kind",
         "teamId",
         "channelId"
+      ],
+      "additionalProperties": false
+    },
+    "agentIdentity": {
+      "type": "object",
+      "description": "User-provided identity settings for definition payloads. Server-generated identity fields are read-only and excluded.",
+      "properties": {
+        "sponsor": {
+          "type": "string",
+          "description": "Sponsor alias provided by the user."
+        }
+      },
+      "required": [
+        "sponsor"
       ],
       "additionalProperties": false
     }
