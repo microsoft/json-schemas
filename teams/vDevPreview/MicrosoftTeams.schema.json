@@ -3063,6 +3063,7 @@
                                     "properties": {
                                         "sendMode": {
                                             "type": "string",
+                                            "description": "Specifies the actions to take during a mail send event.",
                                             "enum": [
                                                 "promptUser",
                                                 "softBlock",
