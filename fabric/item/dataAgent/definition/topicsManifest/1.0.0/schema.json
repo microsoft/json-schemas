@@ -1,0 +1,43 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/topicsManifest/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Data Agent Topics Manifest",
+  "description": "The manifest of topics associated with a data source. Maps each topic's stable id to its human-readable markdown file name. The topic bodies live in sibling .md files referenced by fileName.",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The schema version of the topics manifest file (e.g., \"1.0.0\")."
+    },
+    "topics": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "The list of topics for this data source, sorted by id for deterministic export.",
+      "items": {
+        "type": "object",
+        "title": "Data Agent Topic",
+        "description": "Represents a single topic and the markdown file that holds its body. The topic's display name and description live in the markdown YAML frontmatter of the body file, not in this manifest.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The stable, rename-safe identifier of the topic (a GUID).",
+            "format": "uuid"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The file name of the topic body in OneLake (e.g., \"company-policies.md\"). Must end with \".md\", contain only alphanumeric characters, hyphens, and underscores, and be unique within the data source. Maximum length is 256 characters.",
+            "pattern": "^[A-Za-z0-9_-]+\\.md$",
+            "maxLength": 256
+          }
+        },
+        "required": [ "id", "fileName" ]
+      }
+    }
+  },
+  "required": [ "$schema" ]
+}

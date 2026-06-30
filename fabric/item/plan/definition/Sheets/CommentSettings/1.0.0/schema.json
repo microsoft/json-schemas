@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/commentSettings/1.0.0/schema.json",
+  "title": "Comment Settings",
+  "description": "Comment panel settings for a Planning visual.",
+  "type": "object",
+   "required": [
+    "$schema",
+    "recordGuid",
+    "allowComment",
+    "enableCommentsColumn",
+    "notification"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/commentSettings/1.0.0/schema.json"
+    },
+    "recordGuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "keepCommentPanelOpen": {
+      "type": "boolean",
+      "description": "status for comment panel open status."
+    },
+    "showStarredComments": {
+      "type": "boolean",
+      "description": "status for showing starred comments."
+    },
+    "allowComment": {
+      "type": "boolean",
+      "description": "status for allowing comments."
+    },
+    "enableCommentsColumn": {
+      "type": "boolean",
+      "description": "status for enabling comments column."
+    },
+    "enableStatusColumn": {
+      "type": "boolean",
+      "description": "status for enabling status column."
+    },
+    "rollUpComments": {
+      "type": "boolean",
+      "description": "status for rolling up comments."
+    },
+    "commentIndicatorDisplay": {
+      "$ref": "#/definitions/CommentIndicatorDisplay"
+    },
+    "notification": {
+      "type": "boolean",
+      "description": "status for showing notification."
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "CommentIndicatorDisplay": {
+      "type": "object",
+      "required": ["type", "pixel", "position"],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "pixel": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "position": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
