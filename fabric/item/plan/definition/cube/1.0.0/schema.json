@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/cube/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/cube/1.0.0/schema.json",
   "title": "Cube Configuration",
   "description": "Schema for cube partition payloads including partition definitions, cube partition measures, and mapping tables.",
   "type": "object",
