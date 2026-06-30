@@ -1,0 +1,801 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/cube/schema.json",
+  "title": "Cube Configuration",
+  "description": "Schema for cube partition payloads including partition definitions, cube partition measures, and mapping tables.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cubePartitions",
+    "cubePartitionMeasures",
+    "cubePartitionMeasureMappings",
+    "cubePartitionMeasureDataInputColumnMappings"
+  ],
+  "properties": {
+    "$schema": {
+      "description": "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to.",
+      "type": "string"
+    },
+    "cubePartitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CubePartition"
+      }
+    },
+    "cubePartitionMeasures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CubePartitionMeasure"
+      }
+    },
+    "cubePartitionMeasureMappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CubePartitionMeasureMapping"
+      }
+    },
+    "cubePartitionMeasureDataInputColumnMappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CubePartitionMeasureDataInputColumnMapping"
+      }
+    }
+  },
+  "definitions": {
+    "StatusCode": {
+      "type": "string",
+      "enum": ["ACTIVE"]
+    },
+    "CubePartitionMeasureType": {
+      "type": "string",
+      "enum": ["FORECAST", "NUMBER", "FORMULA"]
+    },
+    "Guid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "DimensionId": {
+      "type": "string"
+    },
+    "Dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "type", "dataType"],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/DimensionId"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "distinctValueCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dataType": {
+          "type": "string"
+        }
+      }
+    },
+    "TimeDimension": {
+      "$ref": "#/definitions/Dimension"
+    },
+    "Measure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "type",
+        "dataType",
+        "isNative",
+        "aggregationType"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/DimensionId"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "distinctValueCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dataType": {
+          "type": "string"
+        },
+        "isNative": {
+          "type": "boolean"
+        },
+        "aggregationType": {
+          "type": "string"
+        }
+      }
+    },
+    "CubePartition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recordGuid",
+        "name",
+        "dimensions",
+        "timeDimensions",
+        "measures",
+        "rowCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/definitions/StatusCode"
+        },
+        "recordGuid": {
+          "$ref": "#/definitions/Guid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "timeDimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeDimension"
+          }
+        },
+        "measures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Measure"
+          }
+        },
+        "rowCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "NumberColumnType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_value": {
+          "type": ["number", "null"]
+        },
+        "max_value": {
+          "type": ["number", "null"]
+        },
+        "distribute_parent_value_to_children": {
+          "type": "boolean"
+        },
+        "default_value": {
+          "type": ["number", "null"]
+        },
+        "minValue": {
+          "type": ["number", "null"]
+        },
+        "maxValue": {
+          "type": ["number", "null"]
+        },
+        "distributeParentValueToChildren": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": ["number", "null"]
+        }
+      }
+    },
+    "AccessControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read", "write"],
+      "properties": {
+        "read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "write": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataInputMeasureSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "column_type": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Number": {
+              "$ref": "#/definitions/NumberColumnType"
+            }
+          }
+        },
+        "columnType": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Number": {
+              "$ref": "#/definitions/NumberColumnType"
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "access_control": {
+          "$ref": "#/definitions/AccessControl"
+        },
+        "accessControl": {
+          "$ref": "#/definitions/AccessControl"
+        },
+        "disable_write_access": {
+          "type": "boolean"
+        },
+        "disableWriteAccess": {
+          "type": "boolean"
+        },
+        "on_change_formula": {
+          "type": "string"
+        },
+        "onChangeFormula": {
+          "type": "string"
+        },
+        "allow_input": {
+          "oneOf": [
+            {
+              "enum": ["ReadAndEdit", "ReadOnly"]
+            }
+          ]
+        },
+        "allowInput": {
+          "oneOf": [
+            {
+              "enum": ["ReadAndEdit", "ReadOnly"]
+            }
+          ]
+        },
+        "cube_partition_measure_id": {
+          "type": "integer"
+        },
+        "bound_to_filter_context": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MeasureTypeDictionary": {
+      "type": "object",
+      "description": "Dictionary of measure types. Supports known measure keys and dynamic keys from persisted column metadata.",
+      "properties": {
+        "Forecast": {
+          "$ref": "#/definitions/ForecastMeasure"
+        },
+        "DataInput": {
+          "$ref": "#/definitions/DataInputMeasureSettings"
+        },
+        "VisualColumn": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DataInput": {
+              "$ref": "#/definitions/DataInputMeasureSettings"
+            }
+          }
+        },
+        "Native": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "measure_role": {
+              "type": "string"
+            }
+          }
+        },
+        "Formula": {
+          "$ref": "#/definitions/FormulaMeasure"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/DataInputMeasureSettings"
+      }
+    },
+    "PeriodRange": {
+      "type": "object",
+      "required": ["start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      }
+    },
+    "ForecastOpenPeriodItem": {
+      "type": "object",
+      "required": ["forecastMethod", "targetPeriodRange"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceRange": {
+          "$ref": "#/definitions/PeriodRange"
+        },
+        "measureId": {
+          "type": "string"
+        },
+        "forecastMethod": {
+          "type": "string"
+        },
+        "targetPeriodRange": {
+          "$ref": "#/definitions/PeriodRange"
+        }
+      }
+    },
+    "ForecastOpenPeriodItemSnake": {
+      "type": "object",
+      "required": ["forecast_method", "target_period_range"],
+      "additionalProperties": false,
+      "properties": {
+        "source_range": {
+          "$ref": "#/definitions/PeriodRangeSnake"
+        },
+        "measure_id": {
+          "type": "string"
+        },
+        "forecast_method": {
+          "type": "string"
+        },
+        "target_period_range": {
+          "$ref": "#/definitions/PeriodRangeSnake"
+        }
+      }
+    },
+    "PeriodRangeSnake": {
+      "type": "object",
+      "required": ["start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      }
+    },
+    "ForecastMeasure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aggregationType",
+        "closedPeriodConfig",
+        "openPeriodConfig",
+        "openPeriodRange"
+      ],
+      "properties": {
+        "aggregationType": {
+          "type": "string"
+        },
+        "closedPeriodConfig": {
+          "type": "object",
+          "required": ["measureId", "startTime", "endTime"],
+          "additionalProperties": false,
+          "properties": {
+            "measureId": {
+              "type": "string"
+            },
+            "startTime": {
+              "type": "number"
+            },
+            "endTime": {
+              "type": "number"
+            }
+          }
+        },
+        "openPeriodConfig": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastOpenPeriodItem"
+          }
+        },
+        "openPeriodRange": {
+          "$ref": "#/definitions/PeriodRange"
+        }
+      }
+    },
+    "ForecastMeasureSnake": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "aggregation_type": {
+          "type": "string"
+        },
+        "closed_period_config": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "open_period_config": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastOpenPeriodItemSnake"
+          }
+        },
+        "open_period_range": {
+          "$ref": "#/definitions/PeriodRangeSnake"
+        }
+      }
+    },
+    "FormulaMeasure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "formulaQuery": {
+          "type": "string"
+        },
+        "formula_query": {
+          "type": "string"
+        },
+        "multiDimensionSettings": {
+          "$ref": "#/definitions/MultiDimensionSettings"
+        },
+        "multi_dimension_settings": {
+          "$ref": "#/definitions/MultiDimensionSettingsSnake"
+        }
+      },
+      "anyOf": [
+        {
+          "required": ["formulaQuery"]
+        },
+        {
+          "required": ["formula_query"]
+        }
+      ]
+    },
+    "MultiDimensionSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "visualMeasureIdMapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "nativeMeasureMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Measure"
+          }
+        }
+      }
+    },
+    "MultiDimensionSettingsSnake": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "visual_measure_id_mapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "native_measure_mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Measure"
+          }
+        }
+      }
+    },
+    "CubePartitionMeasureConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "measure_type": {
+          "$ref": "#/definitions/MeasureTypeDictionary"
+        },
+        "measureType": {
+          "$ref": "#/definitions/MeasureTypeCamel"
+        },
+        "data_type": {
+          "oneOf": [
+            {
+              "enum": ["Number", "Text"]
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "dataType": {
+          "oneOf": [
+            {
+              "enum": ["Number", "Text"]
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "closedPeriodConfig": {
+          "type": "object",
+          "required": ["measureId", "startTime", "endTime"],
+          "additionalProperties": false,
+          "properties": {
+            "measureId": {
+              "type": "string"
+            },
+            "startTime": {
+              "type": "number"
+            },
+            "endTime": {
+              "type": "number"
+            }
+          }
+        },
+        "openPeriodConfig": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["forecastMethod", "targetPeriodRange"],
+            "additionalProperties": false,
+            "properties": {
+              "sourceRange": {
+                "$ref": "#/definitions/PeriodRange"
+              },
+              "measureId": {
+                "type": "string"
+              },
+              "forecastMethod": {
+                "type": "string"
+              },
+              "targetPeriodRange": {
+                "$ref": "#/definitions/PeriodRange"
+              }
+            }
+          }
+        },
+        "openPeriodRange": {
+          "$ref": "#/definitions/PeriodRange"
+        },
+        "formulaQuery": {
+          "type": "string"
+        },
+        "multiDimensionSettings": {
+          "$ref": "#/definitions/MultiDimensionSettings"
+        },
+        "nativeMeasureMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Measure"
+          }
+        },
+        "aggregation_type": {
+          "type": "string"
+        },
+        "closed_period_config": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "open_period_config": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecastOpenPeriodItemSnake"
+          }
+        },
+        "open_period_range": {
+          "$ref": "#/definitions/PeriodRangeSnake"
+        },
+        "formula_query": {
+          "type": "string"
+        },
+        "multi_dimension_settings": {
+          "$ref": "#/definitions/MultiDimensionSettingsSnake"
+        },
+        "native_measure_mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Measure"
+          }
+        }
+      }
+    },
+    "MeasureTypeCamel": {
+      "type": "object",
+      "properties": {
+        "DataInput": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "columnType": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "Number": {
+                  "$ref": "#/definitions/NumberColumnType"
+                }
+              }
+            },
+            "title": {
+              "type": "string"
+            },
+            "accessControl": {
+              "$ref": "#/definitions/AccessControl"
+            },
+            "disableWriteAccess": {
+              "type": "boolean"
+            },
+            "onChangeFormula": {
+              "type": "string"
+            },
+            "allowInput": {
+              "oneOf": [
+                {
+                  "enum": ["ReadAndEdit", "ReadOnly"]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CubePartitionMeasure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordGuid", "name", "config", "type"],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/definitions/StatusCode"
+        },
+        "recordGuid": {
+          "$ref": "#/definitions/Guid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/CubePartitionMeasureConfig"
+        },
+        "type": {
+          "$ref": "#/definitions/CubePartitionMeasureType"
+        }
+      }
+    },
+    "CubePartitionMeasureMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordGuid"],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/definitions/StatusCode"
+        },
+        "recordGuid": {
+          "$ref": "#/definitions/Guid"
+        },
+        "cubePartitionId": {
+          "type": "integer"
+        },
+        "cubePartitionMeasureId": {
+          "type": "integer"
+        },
+        "cubePartition_RefId": {
+          "$ref": "#/definitions/Guid"
+        },
+        "cubePartitionMeasure_RefId": {
+          "$ref": "#/definitions/Guid"
+        }
+      },
+      "anyOf": [
+        {
+          "required": ["cubePartitionId", "cubePartitionMeasureId"]
+        },
+        {
+          "required": ["cubePartition_RefId", "cubePartitionMeasure_RefId"]
+        }
+      ]
+    },
+    "CubePartitionMeasureDataInputColumnMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recordGuid"],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/definitions/StatusCode"
+        },
+        "recordGuid": {
+          "$ref": "#/definitions/Guid"
+        },
+        "dataInputColumnId": {
+          "type": "integer"
+        },
+        "cubePartitionMeasureId": {
+          "type": "integer"
+        },
+        "visualId": {
+          "type": "integer"
+        },
+        "cubePartitionId": {
+          "type": ["integer", "null"]
+        },
+        "filterHash": {
+          "type": ["string", "null"]
+        },
+        "visual_RefId": {
+          "$ref": "#/definitions/Guid"
+        },
+        "cubePartitionMeasure_RefId": {
+          "$ref": "#/definitions/Guid"
+        },
+        "cubePartition_RefId": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Guid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "dataInputColumnMeasureGuid": {
+          "type": "string"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "dataInputColumnId",
+            "cubePartitionMeasureId",
+            "visualId"
+          ]
+        },
+        {
+          "required": [
+            "dataInputColumnMeasureGuid",
+            "cubePartitionMeasure_RefId",
+            "visual_RefId"
+          ]
+        }
+      ]
+    }
+  }
+}
