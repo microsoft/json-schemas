@@ -3,15 +3,28 @@
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json",
   "title": "Data Input Columns",
   "description": "Array of data input column definitions for a Planning visual, including forecasts, text inputs, number inputs, and native measures.",
-  "type": "array",
-  "items": {
-    "$ref": "#/definitions/DataInputColumn"
+  "type": "object",
+  "required": [
+    "$schema",
+    "columns"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataInputColumn"
+      }
+    }
   },
   "definitions": {
     "DataInputColumn": {
       "type": "object",
       "required": [
-        "$schema",
         "measureGuid",
         "visualId",
         "columnMeta",
@@ -19,11 +32,6 @@
         "dataInputType"
       ],
       "properties": {
-        "$schema": {
-          "type": "string",
-          "format": "uri",
-          "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json"
-        },
         "measureGuid": {
           "type": "string",
           "description": "Unique identifier for the measure/column."
@@ -114,6 +122,9 @@
         },
         "Native": {
           "$ref": "#/definitions/NativeMeasure"
+        },
+        "Formula": {
+          "$ref": "#/definitions/FormulaMeasure"
         }
       },
       "oneOf": [
@@ -158,6 +169,12 @@
           },
           "additionalProperties": false
         },
+        "closed_period_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "closed_period_till": {
           "type": [
             "string",
@@ -179,13 +196,16 @@
             "Forecast"
           ]
         },
+        "forecast_value_retain_blanks": {
+          "type": "boolean"
+        },
         "open_period_config": {
           "type": "object",
           "properties": {
             "method": {
               "type": "object",
               "additionalProperties": {
-                "type": "string"
+                  "type": "string"
               }
             }
           },
@@ -197,7 +217,7 @@
             "method": {
               "type": "object",
               "additionalProperties": {
-                "type": "string"
+                  "type": "string"
               }
             }
           },
@@ -277,6 +297,20 @@
         "measure_role": {
           "type": "string",
           "description": "Role of the native measure (e.g., ACMeasure)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "FormulaMeasure": {
+      "type": "object",
+      "description": "Measure defined by a formula.",
+      "required": [
+        "formula"
+      ],
+      "properties": {
+        "formula": {
+          "type": "string",
+          "description": "The formula expression for the measure."
         }
       },
       "additionalProperties": false

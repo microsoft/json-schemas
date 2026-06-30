@@ -1,0 +1,766 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json",
+	"description": "Sheet-level UI and canvas properties for a Planning workload item.",
+	"type": "object",
+	"required": [
+		"$schema",
+		"properties"
+	],
+	"properties": {
+		"$schema": {
+            "type": "string",
+            "format": "uri",
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json"
+        },
+		"properties": {
+			"$ref": "#/definitions/SheetProperties"
+		}
+	},
+	"additionalProperties": false,
+	"definitions": {
+		"SheetProperties": {
+			"type": "object",
+			"required": [
+				"pageLevelFilterAssignments",
+				"entityLevelVariables",
+				"filterPanePosition",
+				"topPositionFilterExpandConfig",
+				"commentary",
+				"canvasStyle",
+				"assignmentColumnMap",
+				"visualGroupMap",
+				"sourceVisualsMeta",
+				"controlPanePosition"
+			],
+			"properties": {
+				"pageLevelFilterAssignments": {
+					"type": "array",
+					"items": {}
+				},
+				"entityLevelVariables": {
+					"type": "array",
+					"items": {}
+				},
+				"filterPanePosition": {
+					"type": "string"
+				},
+				"topPositionFilterExpandConfig": {
+					"$ref": "#/definitions/TopPositionFilterExpandConfig"
+				},
+				"commentary": {
+					"$ref": "#/definitions/Commentary"
+				},
+				"canvasStyle": {
+					"$ref": "#/definitions/CanvasStyle"
+				},
+				"assignmentColumnMap": {
+					"type": "object",
+					"additionalProperties": true
+				},
+				"visualGroupMap": {
+					"type": "object",
+					"additionalProperties": true
+				},
+				"sourceVisualsMeta": {
+					"type": "object",
+					"additionalProperties": true
+				},
+				"controlPanePosition": {
+					"type": "string"
+				}
+			}
+		},
+		"TopPositionFilterExpandConfig": {
+			"type": "object",
+			"required": [
+				"isFilterPaneCollapsed",
+				"expandedHeight"
+			],
+			"properties": {
+				"isFilterPaneCollapsed": {
+					"type": "boolean"
+				},
+				"expandedHeight": {
+					"type": "integer"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Commentary": {
+			"type": "object",
+			"required": [
+				"notes",
+				"annotation"
+			],
+			"properties": {
+				"notes": {
+					"$ref": "#/definitions/Notes"
+				},
+				"annotation": {
+					"$ref": "#/definitions/Annotation"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Notes": {
+			"type": "object",
+			"required": [
+				"notesMap",
+				"settings",
+				"noteOrder",
+				"enableMarkerMode",
+				"markerData"
+			],
+			"properties": {
+				"notesMap": {
+					"type": "object",
+					"additionalProperties": true
+				},
+				"settings": {
+					"$ref": "#/definitions/NotesSettings"
+				},
+				"noteOrder": {
+					"type": "array",
+					"items": {}
+				},
+				"enableMarkerMode": {
+					"type": "boolean"
+				},
+				"markerData": {
+					"type": "array",
+					"items": {}
+				}
+			},
+			"additionalProperties": false
+		},
+		"NotesSettings": {
+			"type": "object",
+			"required": [
+				"enable",
+				"hideAllNotes",
+				"indicator",
+				"marker",
+				"displayStyle",
+				"floatSettings"
+			],
+			"properties": {
+				"enable": {
+					"type": "boolean"
+				},
+				"hideAllNotes": {
+					"type": "boolean"
+				},
+				"indicator": {
+					"$ref": "#/definitions/NotesIndicator"
+				},
+				"marker": {
+					"$ref": "#/definitions/NotesMarker"
+				},
+				"displayStyle": {
+					"type": "string"
+				},
+				"floatSettings": {
+					"$ref": "#/definitions/FloatSettings"
+				}
+			},
+			"additionalProperties": false
+		},
+		"NotesIndicator": {
+			"type": "object",
+			"required": [
+				"size",
+				"type",
+				"fontSize",
+				"color",
+				"position"
+			],
+			"properties": {
+				"size": {
+					"type": "integer"
+				},
+				"type": {
+					"type": "string"
+				},
+				"fontSize": {
+					"type": "integer"
+				},
+				"color": {
+					"type": "string"
+				},
+				"position": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"NotesMarker": {
+			"type": "object",
+			"required": [
+				"pattern",
+				"style",
+				"size",
+				"color"
+			],
+			"properties": {
+				"pattern": {
+					"type": "string"
+				},
+				"style": {
+					"type": "string"
+				},
+				"size": {
+					"type": "integer"
+				},
+				"color": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"FloatSettings": {
+			"type": "object",
+			"required": [
+				"horizontalAlign",
+				"verticalAlign",
+				"shape",
+				"borderStyle",
+				"borderColor",
+				"borderWidth",
+				"arrowStyle",
+				"arrowEnd",
+				"arrowColor",
+				"arrowWidth",
+				"dragLineType",
+				"displayNoteAs"
+			],
+			"properties": {
+				"horizontalAlign": {
+					"type": "string"
+				},
+				"verticalAlign": {
+					"type": "string"
+				},
+				"shape": {
+					"type": "string"
+				},
+				"borderStyle": {
+					"type": "string"
+				},
+				"borderColor": {
+					"type": "string"
+				},
+				"borderWidth": {
+					"type": "integer"
+				},
+				"arrowStyle": {
+					"type": "string"
+				},
+				"arrowEnd": {
+					"type": "string"
+				},
+				"arrowColor": {
+					"type": "string"
+				},
+				"arrowWidth": {
+					"type": "integer"
+				},
+				"dragLineType": {
+					"type": "string"
+				},
+				"displayNoteAs": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Annotation": {
+			"type": "object",
+			"required": [
+				"settings"
+			],
+			"properties": {
+				"settings": {
+					"$ref": "#/definitions/AnnotationSettings"
+				}
+			},
+			"additionalProperties": false
+		},
+		"AnnotationSettings": {
+			"type": "object",
+			"required": [
+				"hideAllAnnotations",
+				"indicator",
+				"title",
+				"annotationText",
+				"style"
+			],
+			"properties": {
+				"hideAllAnnotations": {
+					"type": "boolean"
+				},
+				"indicator": {
+					"$ref": "#/definitions/AnnotationIndicator"
+				},
+				"title": {
+					"type": "object",
+					"additionalProperties": true
+				},
+				"annotationText": {
+					"type": "object",
+					"additionalProperties": true
+				},
+				"style": {
+					"$ref": "#/definitions/AnnotationStyle"
+				}
+			},
+			"additionalProperties": false
+		},
+		"AnnotationIndicator": {
+			"type": "object",
+			"required": [
+				"type",
+				"size",
+				"color"
+			],
+			"properties": {
+				"type": {
+					"type": "string"
+				},
+				"size": {
+					"type": "integer"
+				},
+				"color": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"AnnotationStyle": {
+			"type": "object",
+			"required": [
+				"cornerRadius",
+				"borderAndCorner",
+				"shadow",
+				"padding"
+			],
+			"properties": {
+				"cornerRadius": {
+					"$ref": "#/definitions/CornerRadius"
+				},
+				"borderAndCorner": {
+					"$ref": "#/definitions/EnabledFlag"
+				},
+				"shadow": {
+					"$ref": "#/definitions/EnabledFlag"
+				},
+				"padding": {
+					"$ref": "#/definitions/Padding"
+				}
+			},
+			"additionalProperties": false
+		},
+		"CornerRadius": {
+			"type": "object",
+			"required": [
+				"radiusTopLeft",
+				"radiusTopRight",
+				"radiusBottomLeft",
+				"radiusBottomRight",
+				"isCustomCornerRadius",
+				"isEnabled"
+			],
+			"properties": {
+				"radiusTopLeft": {
+					"type": "integer"
+				},
+				"radiusTopRight": {
+					"type": "integer"
+				},
+				"radiusBottomLeft": {
+					"type": "integer"
+				},
+				"radiusBottomRight": {
+					"type": "integer"
+				},
+				"isCustomCornerRadius": {
+					"type": "boolean"
+				},
+				"isEnabled": {
+					"type": "boolean"
+				}
+			},
+			"additionalProperties": false
+		},
+		"EnabledFlag": {
+			"type": "object",
+			"required": [
+				"isEnabled"
+			],
+			"properties": {
+				"isEnabled": {
+					"type": "boolean"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Padding": {
+			"type": "object",
+			"required": [
+				"top",
+				"right",
+				"bottom",
+				"left",
+				"isCustomPadding"
+			],
+			"properties": {
+				"top": {
+					"type": "integer"
+				},
+				"right": {
+					"type": "integer"
+				},
+				"bottom": {
+					"type": "integer"
+				},
+				"left": {
+					"type": "integer"
+				},
+				"isCustomPadding": {
+					"type": "boolean"
+				}
+			},
+			"additionalProperties": false
+		},
+		"CanvasStyle": {
+			"type": "object",
+			"required": [
+				"dimension",
+				"background",
+				"wallpaper",
+				"border",
+				"shadow",
+				"cornerRadius",
+				"isLocked",
+				"gridLineSettings",
+				"showVisualGuide",
+				"showSmartGuide",
+				"verticalAlign",
+				"scrollToZoom",
+				"mobileCanvas",
+				"isAutoLayoutDisabled"
+			],
+			"properties": {
+				"dimension": {
+					"$ref": "#/definitions/Dimension"
+				},
+				"background": {
+					"$ref": "#/definitions/Background"
+				},
+				"wallpaper": {
+					"$ref": "#/definitions/Wallpaper"
+				},
+				"border": {
+					"$ref": "#/definitions/Border"
+				},
+				"shadow": {
+					"$ref": "#/definitions/Shadow"
+				},
+				"cornerRadius": {
+					"$ref": "#/definitions/CanvasCornerRadius"
+				},
+				"isLocked": {
+					"type": "boolean"
+				},
+				"gridLineSettings": {
+					"$ref": "#/definitions/GridLineSettings"
+				},
+				"showVisualGuide": {
+					"type": "boolean"
+				},
+				"showSmartGuide": {
+					"type": "boolean"
+				},
+				"verticalAlign": {
+					"type": "string"
+				},
+				"scrollToZoom": {
+					"type": "boolean"
+				},
+				"mobileCanvas": {
+					"$ref": "#/definitions/MobileCanvas"
+				},
+				"isAutoLayoutDisabled": {
+					"type": "boolean"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Dimension": {
+			"type": "object",
+			"required": [
+				"type",
+				"width",
+				"height",
+				"elementScalingUnit"
+			],
+			"properties": {
+				"type": {
+					"type": "string"
+				},
+				"width": {
+					"type": "integer"
+				},
+				"height": {
+					"type": "integer"
+				},
+				"elementScalingUnit": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Background": {
+			"type": "object",
+			"required": [
+				"type",
+				"value",
+				"isEnabled",
+				"fillMode",
+				"opacity",
+				"color",
+				"imageUrl"
+			],
+			"properties": {
+				"type": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				},
+				"isEnabled": {
+					"type": "boolean"
+				},
+				"fillMode": {
+					"type": "string"
+				},
+				"opacity": {
+					"type": "number"
+				},
+				"color": {
+					"type": "string"
+				},
+				"imageUrl": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Wallpaper": {
+			"type": "object",
+			"required": [
+				"value",
+				"isEnabled",
+				"opacity"
+			],
+			"properties": {
+				"value": {
+					"$ref": "#/definitions/WallpaperValue"
+				},
+				"isEnabled": {
+					"type": "boolean"
+				},
+				"opacity": {
+					"type": "number"
+				}
+			},
+			"additionalProperties": false
+		},
+		"WallpaperValue": {
+			"type": "object",
+			"required": [
+				"type",
+				"color",
+				"imageUrl"
+			],
+			"properties": {
+				"type": {
+					"type": "string"
+				},
+				"color": {
+					"type": "string"
+				},
+				"imageUrl": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Border": {
+			"type": "object",
+			"required": [
+				"color",
+				"side",
+				"width",
+				"isEnabled"
+			],
+			"properties": {
+				"color": {
+					"type": "string"
+				},
+				"side": {
+					"type": "string"
+				},
+				"width": {
+					"type": "integer"
+				},
+				"isEnabled": {
+					"type": "boolean"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Shadow": {
+			"type": "object",
+			"required": [
+				"blur",
+				"color",
+				"isEnabled",
+				"placement",
+				"side",
+				"width",
+				"opacity",
+				"distance",
+				"angle"
+			],
+			"properties": {
+				"blur": {
+					"type": "integer"
+				},
+				"color": {
+					"type": "string"
+				},
+				"isEnabled": {
+					"type": "boolean"
+				},
+				"placement": {
+					"type": "string"
+				},
+				"side": {
+					"type": "string"
+				},
+				"width": {
+					"type": "integer"
+				},
+				"opacity": {
+					"type": "number"
+				},
+				"distance": {
+					"type": "integer"
+				},
+				"angle": {
+					"type": "integer"
+				}
+			},
+			"additionalProperties": false
+		},
+		"CanvasCornerRadius": {
+			"type": "object",
+			"required": [
+				"isEnabled",
+				"isCustomCornerRadius",
+				"radiusBottomLeft",
+				"radiusBottomRight",
+				"radiusTopLeft",
+				"radiusTopRight"
+			],
+			"properties": {
+				"isEnabled": {
+					"type": "boolean"
+				},
+				"isCustomCornerRadius": {
+					"type": "boolean"
+				},
+				"radiusBottomLeft": {
+					"type": "integer"
+				},
+				"radiusBottomRight": {
+					"type": "integer"
+				},
+				"radiusTopLeft": {
+					"type": "integer"
+				},
+				"radiusTopRight": {
+					"type": "integer"
+				}
+			},
+			"additionalProperties": false
+		},
+		"GridLineSettings": {
+			"type": "object",
+			"required": [
+				"showGridLines",
+				"snapToGrid",
+				"gridRows",
+				"gridColumns",
+				"gridLayoutType"
+			],
+			"properties": {
+				"showGridLines": {
+					"type": "boolean"
+				},
+				"snapToGrid": {
+					"type": "boolean"
+				},
+				"gridRows": {
+					"type": [
+						"integer",
+						"null"
+					]
+				},
+				"gridColumns": {
+					"type": [
+						"integer",
+						"null"
+					]
+				},
+				"gridLayoutType": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		},
+		"MobileCanvas": {
+			"type": "object",
+			"required": [
+				"editModeDimension",
+				"runtimeDimension"
+			],
+			"properties": {
+				"editModeDimension": {
+					"$ref": "#/definitions/Size"
+				},
+				"runtimeDimension": {
+					"$ref": "#/definitions/Size"
+				}
+			},
+			"additionalProperties": false
+		},
+		"Size": {
+			"type": "object",
+			"required": [
+				"width",
+				"height"
+			],
+			"properties": {
+				"width": {
+					"type": "integer"
+				},
+				"height": {
+					"type": "integer"
+				}
+			},
+			"additionalProperties": false
+		}
+	}
+}
