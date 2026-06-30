@@ -3063,16 +3063,29 @@
                                     "properties": {
                                         "sendMode": {
                                             "type": "string",
+                                            "description": "Specifies the actions to take during a mail send event.",
                                             "enum": [
                                                 "promptUser",
                                                 "softBlock",
                                                 "block"
                                             ]
+                                        },
+                                        "headerName": {
+                                            "type": "string",
+                                            "description": "Specifies the internet header name used to identify a message during a decryption event. Follows email header name constraints.",
+                                            "regex": "^[A-Za-z0-9][A-Za-z0-9-]*$"
                                         }
                                     },
                                     "additionalProperties": false,
-                                    "required": [
-                                        "sendMode"
+                                    "anyOf": [
+                                        {
+                                        "required": [ "sendMode" ],
+                                        "not": { "required": [ "headerName" ] }
+                                        },
+                                        {
+                                        "required": [ "headerName" ],
+                                        "not": { "required": [ "sendMode" ] }
+                                        }
                                     ]
                                 }
                             },
