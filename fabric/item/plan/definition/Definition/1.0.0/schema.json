@@ -148,6 +148,10 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "Unique identifier for the visual."
+              },
+              "isEmbedded": {
+                "type": "boolean",
+                "description": "Indicates if the visual is embedded."
               }
             },
             "additionalProperties": false
