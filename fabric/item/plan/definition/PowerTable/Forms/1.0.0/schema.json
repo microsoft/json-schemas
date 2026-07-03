@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/forms/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Forms/1.0.0/schema.json",
   "title": "PowerTable Forms",
   "description": "Array of form definitions for a PowerTable visual, defining data entry layouts.",
   "type": "array",
@@ -19,7 +19,7 @@
         "$schema": {
           "type": "string",
           "format": "uri",
-          "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/forms/1.0.0/schema.json"
+          "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Forms/1.0.0/schema.json"
         },
         "title": {
           "type": "string",
