@@ -13,7 +13,8 @@
       "required": [
         "$schema",
         "title",
-        "layoutMeta"
+        "layoutMeta",
+        "config"
       ],
       "properties": {
         "$schema": {

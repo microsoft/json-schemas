@@ -16,7 +16,11 @@
         "columnName",
         "columnType",
         "columnMeta",
-        "displayName"
+        "displayName",
+        "hideColumn",
+        "mandatory",
+        "allowEdit",
+        "visualColumnType"
       ],
       "properties": {
         "$schema": {

@@ -6,7 +6,12 @@
 	"type": "object",
 	"required": [
 		"$schema",
-		"ruleType"
+		"ruleType",
+		"persistFlag",
+		"approvalLevel",
+		"multiLevelEnabled",
+		"approvalLevels",
+		"approvalFilter"
 	],
 	"properties": {
 		"$schema": {
