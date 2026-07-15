@@ -13,12 +13,6 @@
       "format": "uri",
       "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/connectedPlanning/infobridge/1.0.0/schema.json"
     },
-    "version": {
-      "description": "The InfoBridge export definition version.",
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 32
-    },
     "sources": {
       "title": "Sources",
       "description": "List of InfoBridge data sources.",
