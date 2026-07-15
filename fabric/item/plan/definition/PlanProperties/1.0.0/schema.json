@@ -85,6 +85,20 @@
                     "type": "array",
                     "items": {}
                 },
+                "workloadUserPreferences": {
+                    "type": "array",
+                    "description": "User-specific workload preferences.",
+                    "items": {
+                        "$ref": "#/definitions/WorkloadUserPreference"
+                    }
+                },
+                "bookmarks": {
+                    "type": "array",
+                    "description": "Public bookmarks.",
+                    "items": {
+                        "$ref": "#/definitions/Bookmark"
+                    }
+                },
                 "syncSlicerConfig": {
                     "type": "array",
                     "items": {}
@@ -93,7 +107,82 @@
                     "$ref": "#/definitions/PageGroupingMeta"
                 }
             },
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": true
+        },
+        "WorkloadUserPreference": {
+            "type": "object",
+            "properties": {
+                "attribute": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                },
+                "entityType": {
+                    "type": "integer"
+                },
+                "entityId": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                }
+            },
+            "additionalProperties": true
+        },
+        "Bookmark": {
+            "type": "object",
+            "required": [
+                "recordGuid",
+                "bookmarkSlug",
+                "name",
+                "bookmarkType"
+            ],
+            "properties": {
+                "recordGuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "bookmarkSlug": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "bookmarkType": {
+                    "type": "integer"
+                },
+                "properties": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BookmarkProperty"
+                    }
+                },
+                "cloudMeta": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "BookmarkProperty": {
+            "type": "object",
+            "required": [
+                "property"
+            ],
+            "properties": {
+                "property": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true
         },
         "WorkloadModeConfig": {
             "type": "object",

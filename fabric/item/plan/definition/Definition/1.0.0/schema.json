@@ -6,7 +6,6 @@
   "required": [
     "$schema",
     "workloadItemName",
-    "semanticModelReference",
     "sheets"
   ],
   "properties": {
@@ -28,6 +27,18 @@
       "items": {
         "$ref": "#/definitions/SheetReference"
       }
+    },
+    "cube": {
+      "$ref": "#/definitions/CubeReference"
+    },
+    "appDBconnection": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Application database connection ID."
+    },
+    "appDBconnectionVariable": {
+      "type": "string",
+      "description": "Environment variable key for resolving application database connection ID."
     }
   },
   "additionalProperties": false,
@@ -35,40 +46,72 @@
     "SemanticModelReference": {
       "type": "object",
       "description": "Reference to the semantic model backing this plan.",
-      "anyOf": [
+      "required": [
+        "recordGuid",
+        "sourceType"
+      ],
+      "allOf": [
         {
-          "required": [
-            "connection",
-            "semanticModel"
+          "oneOf": [
+            {
+              "required": [
+                "connectionId"
+              ]
+            },
+            {
+              "required": [
+                "connectionIdVariable",
+                "connectionIdVariableName"
+              ]
+            }
           ]
         },
         {
-          "required": [
-            "connectionId",
-            "semanticModelId",
-            "semanticModelName",
-            "semanticModelWorkspaceId",
-            "semanticModelWorkspaceName",
-            "directLakeMode",
-            "directQueryMode",
-            "sourceType"
+          "oneOf": [
+            {
+              "required": [
+                "semanticModelVariable",
+                "semanticModelVariableName"
+              ]
+            },
+            {
+              "required": [
+                "semanticModelId",
+                "semanticModelName",
+                "semanticModelWorkspaceId",
+                "semanticModelWorkspaceName",
+                "directLakeMode",
+                "directQueryMode",
+                "url"
+              ]
+            }
           ]
         }
       ],
       "properties": {
-        "connection": {
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
-        },
-        "semanticModel": {
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+        "recordGuid": {
+          "type": "string",
+          "format": "uuid"
         },
         "connectionId": {
           "type": "string",
           "format": "uuid"
         },
+        "connectionIdVariable": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
+        },
+        "connectionIdVariableName": {
+          "type": "string"
+        },
         "semanticModelId": {
           "type": "string",
           "format": "uuid"
+        },
+        "semanticModelVariable": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+        },
+        "semanticModelVariableName": {
+          "type": "string"
         },
         "semanticModelName": {
           "type": "string"
@@ -86,9 +129,37 @@
         "directQueryMode": {
           "type": "boolean"
         },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
         "sourceType": {
           "type": "string",
           "enum": ["POWERTABLE", "INFOBRIDGE", "WORKLOAD"]
+        },
+        "artifactId": {
+          "type": ["string", "null"]
+        },
+        "datasetRelations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CubeReference": {
+      "type": "object",
+      "required": [
+        "partitionRefIds"
+      ],
+      "properties": {
+        "partitionRefIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
