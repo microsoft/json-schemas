@@ -13,26 +13,59 @@
       "format": "uri",
       "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/connectedPlanning/infobridge/1.0.0/schema.json"
     },
+    "version": {
+      "description": "The InfoBridge export definition version.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
     "sources": {
       "title": "Sources",
       "description": "List of InfoBridge data sources.",
       "type": "array",
-      "minItems": 1,
-      "items": {
+      "minItems": 0,
+      "items": { 
         "$ref": "#/definitions/Source"
+      }
+    },
+    "linkedQueries": {
+      "title": "LinkedQueries",
+      "description": "Dependent query mappings linking dependent sources (APPEND/MERGE/JOIN/SQL_SOURCE) to their referenced queries.",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/LinkedQuery"
       }
     },
     "queryGroups": {
       "title": "QueryGroups",
       "description": "Optional groupings of queries for organizational purposes.",
       "type": "array",
-      "items": {
+      "minItems": 0,   
+      "items": { 
         "$ref": "#/definitions/QueryGroup"
       }
     }
   },
   "additionalProperties": false,
   "definitions": {
+    "NonEmptyString": {
+      "description": "A non-empty short string (names, ids, column names).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "VariableString": {
+      "description": "A variable reference string (matches DB varchar(256)).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "FreeText": {
+      "description": "Free-form text (SQL, descriptions).",
+      "type": "string",
+      "maxLength": 10000
+    },
     "Source": {
       "title": "Source",
       "description": "An InfoBridge data source configuration.",
@@ -44,54 +77,29 @@
       "properties": {
         "name": {
           "description": "The display name of the source.",
-          "type": "string"
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
         },
         "type": {
           "description": "The source type. Supports known string or numeric codes.",
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "PLANNING",
-                "PARQUET",
-                "APPEND",
-                "MERGE",
-                "CSV",
-                "JSON",
-                "XLSX",
-                "SQL_SOURCE",
-                "JOIN",
-                "ENCRYPTED_PARQUET",
-                "EDITABLE"
-              ]
-            },
-            {
-              "type": "integer",
-              "enum": [
-                10,
-                20,
-                30,
-                40,
-                50,
-                60,
-                70,
-                80,
-                170,
-                220,
-                230
-              ]
-            }
-          ]
+          "type": "string",
+          "enum": [
+            "PLANNING", 
+             "APPEND",
+             "MERGE",
+             "SQL_SOURCE",
+             "JOIN",
+             "EDITABLE"]
         },
         "visualId": {
-          "description": "The visual identifier this source is associated with. Can be numeric internal ID or UUID in external definitions.",
+          "description": "GUID of the associated visual, or null when no visual is associated.",
           "oneOf": [
             {
-              "type": "integer"
+              "$ref": "#/definitions/NonEmptyString"
             },
             {
-              "type": "string",
-              "format": "uuid"
+              "type": "null"
             }
           ]
         },
@@ -102,13 +110,14 @@
               "$ref": "#/definitions/SourceMeta"
             },
             {
-              "type": "string"
+              "$ref": "#/definitions/FreeText"
             }
           ]
         },
         "queries": {
           "description": "List of queries for this source.",
           "type": "array",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/Query"
           }
@@ -116,8 +125,9 @@
         "dependentQueries": {
           "description": "List of dependent query GUIDs for join sources.",
           "type": "array",
+          "minItems": 0,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NonEmptyString"
           }
         }
       }
@@ -128,67 +138,122 @@
       "type": "object",
       "properties": {
         "includeMeasures": {
+          "description": "Measures to be included for a source. Each entry is an object identifying a measure (id and name are required; alias and measureGuid are optional).",
           "type": "array",
+          "minItems": 1,
           "items": {
-            "type": "string"
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/definitions/NonEmptyString"
+              },
+              "name": {
+                "$ref": "#/definitions/NonEmptyString"
+              },
+              "alias": {
+                "$ref": "#/definitions/NonEmptyString"
+              },
+              "measureGuid": {
+                "$ref": "#/definitions/NonEmptyString"
+              }
+            },
+            "additionalProperties": true
           }
         },
         "includeScenarios": {
+          "description": "Name of the scenarios to be included for a source.",
           "type": "array",
+          "minItems": 0,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NonEmptyString"
           }
         },
         "queries": {
-          "description": "Join query references (for join sources).",
+          "description": "Referenced source queries. Shape varies by source type: a plain query GUID string for APPEND/SQL_SOURCE, a MergeQueryReference object for MERGE, or a JoinQueryReference object for JOIN.",
           "type": "array",
+          "minItems": 0,
           "items": {
-            "$ref": "#/definitions/JoinQueryReference"
+            "oneOf": [
+              {
+                "$ref": "#/definitions/NonEmptyString"
+              },
+              {
+                "$ref": "#/definitions/MergeQueryReference"
+              },
+              {
+                "$ref": "#/definitions/JoinQueryReference"
+              }
+            ]
           }
         },
         "joinType": {
-          "description": "The join type (e.g, INNER, LEFT, etc.).",
-          "type": "string"
+          "description": "The join type.",
+          "type": "string",
+          "enum": ["INNER", "LEFT_OUTER", "RIGHT_OUTER", "FULL_OUTER"]
         },
         "sql": {
           "description": "Optional SQL text for SQL source.",
-          "type": "string"
+          "$ref": "#/definitions/FreeText"
         }
       }
     },
-    "JoinQueryReference": {
-      "title": "JoinQueryReference",
-      "description": "A reference to a query used in a join.",
+    "MergeQueryReference": {
+      "title": "MergeQueryReference",
+      "description": "A reference to a source query used in a merge, with per-source measure selections.",
       "type": "object",
       "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "GUID of the referenced query.",
+          "$ref": "#/definitions/NonEmptyString"
+        },
+        "sourceMeasures": {
+          "description": "Measures selected from this source for the merge.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "JoinQueryReference": {
+      "title": "JoinQueryReference",
+      "description": "A reference to a source query used in a join.",
+      "type": "object",
+      "required": [
+        "sourceId",
         "sourceName",
         "joinColumnName"
       ],
       "properties": {
-        "queryId": {
-          "description": "The GUID of the referenced query.",
-          "type": "string"
-        },
         "sourceId": {
-          "description": "Internal numeric source/query identifier.",
+          "description": "Identifier of the referenced source query.",
           "oneOf": [
             {
               "type": "integer"
             },
             {
-              "type": "string"
+               "$ref": "#/definitions/NonEmptyString"
             }
           ]
         },
         "sourceName": {
-          "description": "The display name of the source query.",
-          "type": "string"
+          "description": "The display name of the referenced source query.",
+          "$ref": "#/definitions/NonEmptyString"
         },
         "joinColumnName": {
           "description": "Column names used for the join.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NonEmptyString"
           },
           "minItems": 1
         },
@@ -196,19 +261,7 @@
           "description": "Whether this is the base query in the join.",
           "type": "boolean"
         }
-      },
-      "oneOf": [
-        {
-          "required": [
-            "queryId"
-          ]
-        },
-        {
-          "required": [
-            "sourceId"
-          ]
-        }
-      ]
+      }
     },
     "Query": {
       "title": "Query",
@@ -221,49 +274,52 @@
       "properties": {
         "name": {
           "description": "The display name of the query.",
-          "type": "string"
+          "$ref": "#/definitions/NonEmptyString"
         },
         "type": {
           "description": "The query type (string or numeric code).",
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
+          "type": "string",
+          "enum": ["PLANNING", "APPEND", "MERGE", "SQL_SOURCE", "JOIN", "EDITABLE"]
         },
         "visualId": {
-          "description": "The visual identifier (numeric internal ID or UUID in external definitions).",
+          "description": "GUID of the associated visual, or null when no visual is associated.",
           "oneOf": [
             {
-              "type": "integer"
+              "$ref": "#/definitions/NonEmptyString"
             },
             {
-              "type": "string",
-              "format": "uuid"
+              "type": "null"
             }
           ]
         },
         "meta": {
           "description": "Query-level metadata.",
-          "type": "object"
+          "meta": {
+            "$ref": "#/definitions/QueryMeta"
+          }
         },
         "queryId": {
-          "description": "The unique GUID for this query.",
-          "type": "string"
+          "description": "Unique query identifier: a 'Q'-prefixed GUID (e.g. 'Qb5283651742e4a22a4fda767134e6399'), not a standard UUID.",
+          "$ref": "#/definitions/NonEmptyString"
         },
         "transformationSteps": {
           "description": "Ordered list of transformation steps.",
           "type": "array",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/TransformationStep"
           }
         },
         "writebackSettings": {
-          "description": "Writeback settings for this query.",
-          "$ref": "#/definitions/WritebackSettings"
+          "description": "Writeback settings for this query, or null when writeback destination preferences have not been explicitly configured for this query.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WritebackSettings"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "writebackDestinations": {
           "description": "List of writeback destinations.",
@@ -273,6 +329,29 @@
           }
         }
       }
+    },
+    "QueryMeta": {
+      "title": "QueryMeta",
+      "description": "Concrete query metadata. Fields are optional and vary by query type (e.g., 'sql' for SQL_SOURCE, 'queries' for JOIN/MERGE/APPEND).",
+      "type": "object",
+      "properties": {
+        "dimensions": { "type": "array", "items": { "type": "object" } },
+        "columns": { "type": "array", "items": { "type": "object" } },
+        "measures": { "type": "array", "items": { "type": "object" } },
+        "dateColumns": { "type": "array", "items": { "type": "object" } },
+        "transformationRule": { "type": "array", "items": { "type": "object" } },
+        "source": { "type": "object", "description": "Source connection properties (file / oneLake / editable)." },
+        "includeMeasures": { "type": "array", "items": { "type": "object" } },
+        "includeScenarios": { "type": "array", "items": { "type": "object" } },
+        "selectedHierarchyColumns": { "type": "array", "items": { "$ref": "#/definitions/NonEmptyString" } },
+        "selectedMeasures": { "type": "array", "items": { "type": "object" } },
+        "sql": { "description": "SQL text for SQL_SOURCE queries.", "$ref": "#/definitions/FreeText" },
+        "queries": {
+          "description": "Referenced source queries for JOIN/MERGE/APPEND (ids or join references).",
+          "type": "array"
+        }
+      },
+      "additionalProperties": true
     },
     "TransformationStep": {
       "title": "TransformationStep",
@@ -284,7 +363,7 @@
       ],
       "properties": {
         "stepIndex": {
-          "description": "The ordinal index of this step.",
+          "description": "The ordinal 1 based index of this step.",
           "type": "integer"
         },
         "meta": {
@@ -298,37 +377,9 @@
     },
     "TransformationStepMeta": {
       "title": "TransformationStepMeta",
-      "description": "Metadata describing a transformation step.",
+      "description": "Opaque step metadata (a JSON blob stored as-is in ib_query_transformation_steps.meta). The shape varies by transformation step type and is not enforced by the backend beyond remapping nested measure-id references, so no fields are required here.",
       "type": "object",
-      "required": [
-        "type",
-        "name"
-      ],
-      "properties": {
-        "type": {
-          "description": "The transformation type (e.g., PLANNING, XLSX, or numeric code).",
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        },
-        "name": {
-          "description": "The display name of the step.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Step-specific configuration values.",
-          "type": "object"
-        },
-        "description": {
-          "description": "A human-readable description of the step.",
-          "type": "string"
-        }
-      }
+      "additionalProperties": true
     },
     "WritebackSettings": {
       "title": "WritebackSettings",
@@ -356,14 +407,7 @@
                   "type": "integer"
                 },
                 "length": {
-                  "oneOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "object"
-                    }
-                  ]
+                  "type": "integer"
                 }
               }
             }
@@ -373,81 +417,115 @@
     },
     "WritebackDestination": {
       "title": "WritebackDestination",
-      "description": "A writeback destination configuration.",
+      "description": "A writeback destination configuration. The connection identity is exactly one of a static 'connectionId' or a 'connectionIdVariable'; the database identity lives inside 'settings' (static 'host'/'database' or a 'databaseVariable').",
       "type": "object",
       "required": [
         "tableName"
       ],
       "properties": {
-        "connection": {
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
-        },
-        "database": {
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
-        },
         "schema": {
-          "type": "string"
+          "$ref": "#/definitions/NonEmptyString"
         },
         "tableName": {
-          "type": "string"
+          "$ref": "#/definitions/NonEmptyString"
         },
         "connectionId": {
-          "type": "string"
-        },
-        "dmtsConnectionId": {
-          "description": "Legacy/writeback connection id variable used by connected planning examples.",
-          "type": "string"
-        },
-        "databaseId": {
-          "type": "string"
+          "description": "Static connection id. Present only when the destination is not bound to a connection variable.",
+          "$ref": "#/definitions/NonEmptyString"
         },
         "connectionIdVariable": {
-          "type": "string"
+          "description": "Connection-variable reference. Present only when the destination is bound to a connection variable.",
+          "$ref": "#/definitions/VariableString"
         },
         "settingsHash": {
-          "type": "string"
+          "$ref": "#/definitions/NonEmptyString"
         },
         "settings": {
           "type": "object",
           "properties": {
             "host": {
-              "type": "string"
+              "$ref": "#/definitions/NonEmptyString"
             },
             "database": {
-              "type": "string"
+              "$ref": "#/definitions/NonEmptyString"
             },
             "databaseVariable": {
-              "type": "string"
+              "$ref": "#/definitions/VariableString"
             },
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/NonEmptyString"
             },
             "dbDisplayName": {
-              "type": "string"
+              "$ref": "#/definitions/NonEmptyString"
             }
-          }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "host",
+                "database"
+              ],
+              "not": {
+                "required": [
+                  "databaseVariable"
+                ]
+              }
+            },
+            {
+              "required": [
+                "databaseVariable"
+              ]
+            }
+          ]
         }
       },
       "oneOf": [
         {
           "required": [
-            "connection",
-            "database"
+            "connectionId"
           ]
         },
         {
           "required": [
-            "connectionId",
-            "databaseId"
-          ]
-        },
-        {
-          "required": [
-            "dmtsConnectionId",
-            "databaseId"
+            "connectionIdVariable"
           ]
         }
       ]
+    },
+    "LinkedQuery": {
+      "title": "LinkedQuery",
+      "description": "A dependent (linked) query mapping that connects a dependent source (APPEND/MERGE/JOIN/SQL_SOURCE) to one of its referenced queries. All identifiers are stable GUIDs so the mapping is portable across environments.",
+      "type": "object",
+      "required": [
+        "linkedQueryGuid",
+        "sourceId",
+        "queryId"
+      ],
+      "properties": {
+        "linkedQueryGuid": {
+          "description": "Stable GUID of this linked-query mapping record (IBAppendQueryMapping.recordGuid).",
+          "$ref": "#/definitions/NonEmptyString"
+        },
+        "visualId": {
+          "description": "GUID of the associated visual (Visual.recordGuid), or null when the mapping is not tied to a visual.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NonEmptyString"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sourceId": {
+          "description": "GUID of the dependent source (IBSource.recordGuid). Despite the 'Id' suffix, this value is a GUID, not a numeric id.",
+          "$ref": "#/definitions/NonEmptyString"
+        },
+        "queryId": {
+          "description": "GUID of the referenced query: a 'Q'-prefixed GUID, not a standard UUID.",
+          "$ref": "#/definitions/NonEmptyString"
+        }
+      }
     },
     "QueryGroup": {
       "title": "QueryGroup",
@@ -460,11 +538,11 @@
       "properties": {
         "name": {
           "description": "The group display name.",
-          "type": "string"
+          "$ref": "#/definitions/NonEmptyString"
         },
         "description": {
           "description": "Optional group description.",
-          "type": "string"
+          "$ref": "#/definitions/FreeText"
         },
         "parentGroupId": {
           "description": "Optional parent group id for hierarchy.",
@@ -474,7 +552,7 @@
           "description": "List of query GUIDs belonging to this group.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NonEmptyString"
           }
         }
       }
