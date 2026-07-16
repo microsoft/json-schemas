@@ -20,7 +20,8 @@
         "hideColumn",
         "mandatory",
         "allowEdit",
-        "visualColumnType"
+        "visualColumnType",
+        "recordGuid"
       ],
       "properties": {
         "$schema": {
@@ -77,6 +78,10 @@
         },
         "description": {
           "type": "string"
+        },
+        "recordGuid": {
+          "type": "string",
+          "format": "uuid"
         }
       },
       "additionalProperties": false

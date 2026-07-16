@@ -11,7 +11,8 @@
 		"approvalLevel",
 		"multiLevelEnabled",
 		"approvalLevels",
-		"approvalFilter"
+		"approvalFilter",
+		"recordGuid"
 	],
 	"properties": {
 		"$schema": {
@@ -44,6 +45,10 @@
 				1
 			]
 		},
+		"recordGuid": {
+			"type": "string",
+			"format": "uuid"
+		},
 		"approvalLevels": {
 			"type": "array",
 			"description": "Configured approval levels.",
@@ -66,7 +71,8 @@
 			"required": [
 				"name",
 				"description",
-				"level"
+				"level",
+				"recordGuid"
 			],
 			"properties": {
 				"name": {
@@ -78,6 +84,10 @@
 				"level": {
 					"type": "integer",
 					"minimum": 1
+				},
+				"recordGuid": {
+					"type": "string",
+					"format": "uuid"
 				}
 			},
 			"additionalProperties": false
@@ -87,7 +97,8 @@
 			"required": [
 				"name",
 				"filter",
-				"order"
+				"order",
+				"recordGuid"
 			],
 			"properties": {
 				"name": {
@@ -103,6 +114,10 @@
 				"order": {
 					"type": "integer",
 					"minimum": 0
+				},
+				"recordGuid": {
+					"type": "string",
+					"format": "uuid"
 				}
 			},
 			"additionalProperties": false

@@ -7,7 +7,8 @@
   "required": [
     "$schema",
     "tableName",
-    "schema"
+    "schema",
+    "recordGuid"
   ],
   "anyOf": [
     {
@@ -48,6 +49,10 @@
     },
     "tableName": {
       "type": "string"
+    },
+    "recordGuid": {
+      "type": "string",
+      "format": "uuid"
     }
   },
   "additionalProperties": false

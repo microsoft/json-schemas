@@ -6,7 +6,8 @@
   "type": "object",
   "required": [
     "$schema",
-    "automations"
+    "automations",
+    "recordGuid"
   ],
   "properties": {
     "$schema": {
@@ -28,7 +29,8 @@
       "required": [
         "name",
         "triggerType",
-        "config"
+        "config",
+        "recordGuid"
       ],
       "properties": {
         "name": {
@@ -41,6 +43,10 @@
         },
         "config": {
           "$ref": "#/definitions/AutomationConfig"
+        },
+        "recordGuid": {
+          "type": "string",
+          "format": "uuid"
         }
       },
       "additionalProperties": false

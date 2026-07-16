@@ -14,7 +14,8 @@
         "$schema",
         "title",
         "layoutMeta",
-        "config"
+        "config",
+        "recordGuid"
       ],
       "properties": {
         "$schema": {
@@ -34,6 +35,10 @@
         },
         "config": {
           "$ref": "#/definitions/FormConfig"
+        },
+        "recordGuid": {
+          "type": "string",
+          "format": "uuid"
         }
       },
       "additionalProperties": false
@@ -73,48 +78,31 @@
       },
       "additionalProperties": false
     },
-    "FormElement": {
+    "formFields": {
       "type": "object",
       "required": [
-        "type",
-        "name"
+        "recordGuid",
+        "required",
+        "columnConfigId"
       ],
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Element type.",
-          "enum": [
-            "field",
-            "section",
-            "tab"
-          ]
-        },
-        "name": {
+        "description": {
           "type": "string",
           "description": "Field/column name."
         },
-        "mandatory": {
+        "required": {
           "type": "integer",
           "enum": [
             0,
             1
           ]
         },
-        "allowEdit": {
-          "type": "integer",
-          "enum": [
-            0,
-            1
-          ]
+        "defaultValue": {
+          "type": "string"
         },
-        "props": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": true
+        "columnConfigId": {
+          "type": "string",
+          "format": "uuid"
         }
       },
       "additionalProperties": false
