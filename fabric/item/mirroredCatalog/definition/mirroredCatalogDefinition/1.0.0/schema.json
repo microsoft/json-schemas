@@ -61,7 +61,8 @@
       "description": "The type of the source catalog provider. Additional source types may be added over time.",
       "enum": [
         "DremioIcebergCatalog",
-        "AzureMonitorMirroredCatalog"
+        "AzureMonitorMirroredCatalog",
+        "AWSIcebergCatalog"
       ]
     },
     "SourceTypeProperties": {
