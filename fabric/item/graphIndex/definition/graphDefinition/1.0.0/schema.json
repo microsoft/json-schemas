@@ -1,0 +1,158 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/graphDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the schema for the graphDefinition part of the GraphIndex item definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/graphDefinition/1.0.0/schema.json"
+    },
+    "nodeTables": {
+      "description": "The node table definitions in the graph definition.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NodeTable"
+      },
+      "maxItems": 1000
+    },
+    "edgeTables": {
+      "description": "The edge table definitions in the graph definition.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EdgeTable"
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "$schema",
+    "nodeTables",
+    "edgeTables"
+  ],
+  "definitions": {
+    "PropertyMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "propertyName": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/Name"
+        },
+        "sourceColumn": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "propertyName",
+        "sourceColumn"
+      ]
+    },
+    "GraphElementDefinitionBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "dataSourceName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "propertyMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyMapping"
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "dataSourceName"
+      ]
+    },
+    "NodeTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "nodeTypeAlias": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "dataSourceName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "propertyMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyMapping"
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "nodeTypeAlias",
+        "dataSourceName"
+      ]
+    },
+    "EdgeTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "edgeTypeAlias": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "dataSourceName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "propertyMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyMapping"
+          },
+          "maxItems": 1000
+        },
+        "edgeIdMapping": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 1000
+        },
+        "sourceNodeKeyColumns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 1000
+        },
+        "destinationNodeKeyColumns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "edgeTypeAlias",
+        "dataSourceName"
+      ]
+    }
+  }
+}
