@@ -98,14 +98,6 @@
         "sensitivity_label": {
             "description": "Optional. A JSON object that specifies the sensitivity label for the DA.",
             "$ref": "#/$defs/sensitivity-label-object"
-        },
-        "agent_skills": {
-            "type": "array",
-            "description": "Optional. A list of agent skill objects that reference skill directories containing SKILL.md files.",
-            "maxItems": 8,
-            "items": {
-                "$ref": "#/$defs/agent-skill-object"
-            }
         }
     },
     "required": [
@@ -129,8 +121,7 @@
             "editorial_answers",
             "worker_agents",
             "$schema",
-            "sensitivity_label",
-            "agent_skills"
+            "sensitivity_label"
         ]
     },
     "$defs": {
@@ -312,7 +303,7 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "description": "Required. The name of the capability. Allowed values are WebSearch, GraphicArt, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, EmbeddedKnowledge, Email, EmailActions, People, Meetings, MeetingActions, Dataverse, ScenarioModels, and PowerBI.",
+                        "description": "Required. The name of the capability. Allowed values are WebSearch, GraphicArt, CodeInterpreter, OneDriveAndSharePoint, GraphConnectors, TeamsMessages, EmbeddedKnowledge, Email, EmailActions, People, Meetings, MeetingActions, Dataverse, and ScenarioModels.",
                         "anyOf": [
                             {
                                 "const": "WebSearch"
@@ -355,9 +346,6 @@
                             },
                             {
                                 "const": "ScenarioModels"
-                            },
-                            {
-                                "const": "PowerBI"
                             }
                         ]
                     }
@@ -404,9 +392,6 @@
                     },
                     {
                         "$ref": "#/$defs/capabilities/email-actions"
-                    },
-                    {
-                        "$ref": "#/$defs/capabilities/power-bi"
                     }
                 ],
                 "required": [
@@ -817,24 +802,6 @@
                     "name": {
                         "const": "MeetingActions",
                         "description": "Required. Must be set to MeetingActions."
-                    }
-                },
-                "required": [
-                    "name"
-                ],
-                "propertyNames": {
-                    "enum": [
-                        "name"
-                    ]
-                }
-            },
-            "power-bi": {
-                "type": "object",
-                "description": "A JSON object whose presence indicates that the DA will be able to query and visualize Power BI datasets within conversations.",
-                "properties": {
-                    "name": {
-                        "const": "PowerBI",
-                        "description": "Required. Must be set to PowerBI."
                     }
                 },
                 "required": [
@@ -1312,27 +1279,6 @@
                 "enum": [
                     "id"
                 ]
-            }
-        },
-        "agent-skill-object": {
-            "type": "object",
-            "description": "An object that references a skill directory containing a SKILL.md file with frontmatter metadata.",
-            "properties": {
-                "folder": {
-                    "type": "string",
-                    "description": "Required. The relative path to the skill directory containing SKILL.md.",
-                    "minLength": 1
-                },
-                "expose_skill_to_copilot": {
-                    "type": "boolean",
-                    "description": "Optional. A boolean that determines whether the skill is exposed directly to the mainline Copilot orchestrator. Defaults to false if not specified."
-                }
-            },
-            "required": [
-                "folder"
-            ],
-            "propertyNames": {
-                "pattern": "^(folder|expose_skill_to_copilot|x-.*)$"
             }
         },
         "conversation-starter-depends-on": {
