@@ -16,7 +16,12 @@
         "columnName",
         "columnType",
         "columnMeta",
-        "displayName"
+        "displayName",
+        "hideColumn",
+        "mandatory",
+        "allowEdit",
+        "visualColumnType",
+        "recordGuid"
       ],
       "properties": {
         "$schema": {
@@ -73,6 +78,10 @@
         },
         "description": {
           "type": "string"
+        },
+        "recordGuid": {
+          "type": "string",
+          "format": "uuid"
         }
       },
       "additionalProperties": false

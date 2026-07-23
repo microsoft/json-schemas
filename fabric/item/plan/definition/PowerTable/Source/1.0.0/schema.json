@@ -6,10 +6,21 @@
   "type": "object",
   "required": [
     "$schema",
-    "connection",
     "tableName",
     "schema",
-    "database"
+    "recordGuid"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "connectionId", "dbHost", "dbName"
+      ]
+    },
+    {
+      "required": [
+        "connectionVariable", "databaseVariable"
+      ]
+    }
   ],
   "properties": {
     "$schema": {
@@ -17,10 +28,20 @@
       "format": "uri",
       "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/source/1.0.0/schema.json"
     },
-    "connection": {
+    "connectionId": {
+      "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar",
+      "format": "uuid"
+    },
+    "dbHost": {
+      "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+    },
+    "dbName": {
+      "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+    },
+    "connectionIdVariable": {
       "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
     },
-    "database": {
+    "databaseVariable": {
       "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
     },
     "schema": {
@@ -28,6 +49,10 @@
     },
     "tableName": {
       "type": "string"
+    },
+    "recordGuid": {
+      "type": "string",
+      "format": "uuid"
     }
   },
   "additionalProperties": false
