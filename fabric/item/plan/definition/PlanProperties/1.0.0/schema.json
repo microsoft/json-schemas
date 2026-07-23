@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planProperties/1.0.0/schema.json",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PlanProperties/1.0.0/schema.json",
     "description": "Plan-level UI and behavior properties for a Planning workload item.",
     "type": "object",
     "required": [
@@ -11,7 +11,7 @@
         "$schema": {
             "type": "string",
             "format": "uri",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planProperties/1.0.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PlanProperties/1.0.0/schema.json"
         },
         "properties": {
             "$ref": "#/definitions/PlanProperties"
@@ -85,6 +85,20 @@
                     "type": "array",
                     "items": {}
                 },
+                "workloadUserPreferences": {
+                    "type": "array",
+                    "description": "User-specific workload preferences.",
+                    "items": {
+                        "$ref": "#/definitions/WorkloadUserPreference"
+                    }
+                },
+                "bookmarks": {
+                    "type": "array",
+                    "description": "Public bookmarks.",
+                    "items": {
+                        "$ref": "#/definitions/Bookmark"
+                    }
+                },
                 "syncSlicerConfig": {
                     "type": "array",
                     "items": {}
@@ -93,7 +107,82 @@
                     "$ref": "#/definitions/PageGroupingMeta"
                 }
             },
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": true
+        },
+        "WorkloadUserPreference": {
+            "type": "object",
+            "properties": {
+                "attribute": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                },
+                "entityType": {
+                    "type": "integer"
+                },
+                "entityId": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                }
+            },
+            "additionalProperties": true
+        },
+        "Bookmark": {
+            "type": "object",
+            "required": [
+                "recordGuid",
+                "bookmarkSlug",
+                "name",
+                "bookmarkType"
+            ],
+            "properties": {
+                "recordGuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "bookmarkSlug": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "bookmarkType": {
+                    "type": "integer"
+                },
+                "properties": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BookmarkProperty"
+                    }
+                },
+                "cloudMeta": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "BookmarkProperty": {
+            "type": "object",
+            "required": [
+                "property"
+            ],
+            "properties": {
+                "property": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true
         },
         "WorkloadModeConfig": {
             "type": "object",

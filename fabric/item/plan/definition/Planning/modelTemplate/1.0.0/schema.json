@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/modelTemplate/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/ModelTemplate/1.0.0/schema.json",
   "description": "Configuration schema for dynamic model templates and rows.",
   "type": "object",
   "required": [
@@ -11,7 +11,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/scenarios/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/ModelTemplate/1.0.0/schema.json"
     },
     "properties": {
       "$ref": "#/definitions/Properties"
