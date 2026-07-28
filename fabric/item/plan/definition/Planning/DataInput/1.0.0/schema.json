@@ -63,6 +63,35 @@
           "type": "boolean",
           "description": "Whether write access is disabled."
         },
+        "status": {
+          "type": [
+            "string",
+            "integer",
+            "boolean",
+            "null"
+          ]
+        },
+        "boundToFilterContext": {
+          "type": [
+            "boolean",
+            "integer",
+            "null"
+          ]
+        },
+        "sidecarHydrationStatus": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "sidecarHydrationLeaseAt": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
         "forecastAllowedUserPermissions": {
           "type": "boolean",
           "description": "Whether user permissions are allowed for forecast."
@@ -103,6 +132,9 @@
             "string",
             "null"
           ]
+        },
+        "name": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -131,7 +163,8 @@
         { "required": [ "Forecast" ] },
         { "required": [ "DataInput" ] },
         { "required": [ "VisualColumn" ] },
-        { "required": [ "Native" ] }
+        { "required": [ "Native" ] },
+        { "required": [ "Formula" ] }
       ],
       "additionalProperties": false
     },
@@ -273,6 +306,20 @@
           "enum": [
             "ReadAndEdit",
             "ReadOnly"
+          ]
+        },
+        "bound_to_filter_context": {
+          "type": [
+            "boolean",
+            "integer",
+            "null"
+          ]
+        },
+        "boundToFilterContext": {
+          "type": [
+            "boolean",
+            "integer",
+            "null"
           ]
         }
       },

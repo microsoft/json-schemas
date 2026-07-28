@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/commentSettings/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/commentsettings/1.0.0/schema.json",
   "title": "Comment Settings",
   "description": "Comment panel settings for a Planning visual.",
   "type": "object",
@@ -15,7 +15,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/commentSettings/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/commentsettings/1.0.0/schema.json"
     },
     "recordGuid": {
       "type": "string",
@@ -57,7 +57,7 @@
   "definitions": {
     "CommentIndicatorDisplay": {
       "type": "object",
-      "required": ["type", "pixel", "position"],
+      "required": ["type", "pixel"],
       "properties": {
         "type": {
           "type": "string"
@@ -67,6 +67,9 @@
           "minimum": 0
         },
         "position": {
+          "type": "string"
+        },
+        "color": {
           "type": "string"
         }
       },

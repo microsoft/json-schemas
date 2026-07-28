@@ -3,7 +3,10 @@
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/columnConfigs/1.0.0/schema.json",
   "title": "PowerTable Column Configs",
   "description": "Array of column configuration definitions for a PowerTable visual.",
-  "type": "array",
+  "type": [
+    "array",
+    "object"
+  ],
   "items": {
     "$ref": "#/definitions/ColumnConfig"
   },
@@ -11,7 +14,6 @@
     "ColumnConfig": {
       "type": "object",
       "required": [
-        "$schema",
         "columnGuid",
         "columnName",
         "columnType",
@@ -19,6 +21,12 @@
         "displayName"
       ],
       "properties": {
+        "id": {
+          "type": "string"
+        },
+        "recordGuid": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string",
           "format": "uri",
@@ -158,7 +166,7 @@
           ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "OptionLinking": {
       "type": "object",

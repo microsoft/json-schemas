@@ -3,16 +3,27 @@
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/settings/1.0.0/schema.json",
   "title": "PowerTable Settings",
   "description": "Settings/permission configurations for a PowerTable visual.",
-  "type": "object",
+  "type": [
+    "object",
+    "array"
+  ],
+  "items": {
+    "$ref": "#/definitions/Setting"
+  },
   "required": [
-    "$schema",
-    "settings"
+  "$schema"
   ],
   "properties": {
     "$schema": {
       "type": "string",
       "format": "uri",
       "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/settings/1.0.0/schema.json"
+    },
+    "sourceSettings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Setting"
+      }
     },
     "settings": {
       "type": "array",
@@ -65,6 +76,18 @@
             "$ref": "#/definitions/AccessRule"
           }
         },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceFilter"
+          }
+        },
+        "recordGuid": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
         "settings": {
           "description": "Setting-specific configuration.",
           "oneOf": [
@@ -76,6 +99,9 @@
             },
             {
               "$ref": "#/definitions/SCDSettings"
+            },
+            {
+              "$ref": "#/definitions/EnabledOnlySettings"
             }
           ]
         }
@@ -104,6 +130,28 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceFilter": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "recordGuid": {
+          "type": "string"
+        },
+        "filterType": {
+          "type": "integer"
+        },
+        "filter": {
+          "type": "object",
+          "additionalProperties": true
         }
       },
       "additionalProperties": false
@@ -139,6 +187,18 @@
       },
       "additionalProperties": false
     },
+    "EnabledOnlySettings": {
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
     "SCDSettings": {
       "type": "object",
       "required": [
@@ -169,17 +229,30 @@
                 "activeFlag": {
                   "type": "string"
                 },
+                "allowEditStartDate": {
+                  "type": "boolean"
+                },
                 "startDate": {
                   "type": "string"
                 },
                 "endDate": {
                   "type": "string"
                 },
+                "endDateDefaultValue": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
                 "effectiveDate": {
                   "type": "string"
                 }
               },
               "additionalProperties": false
+            },
+            "selectedColumns": {
+              "type": "array",
+              "items": {}
             }
           },
           "additionalProperties": false

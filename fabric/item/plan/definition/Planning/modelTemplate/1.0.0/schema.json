@@ -11,7 +11,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/scenarios/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/modelTemplate/1.0.0/schema.json"
     },
     "properties": {
       "$ref": "#/definitions/Properties"
@@ -118,13 +118,17 @@
           ]
         },
         "column_aggregation": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             "Sum",
             "Average",
             "Min",
             "Max",
-            "Count"
+            "Count",
+            null
           ]
         }
       },

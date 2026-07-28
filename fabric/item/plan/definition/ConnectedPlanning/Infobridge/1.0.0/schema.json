@@ -4,7 +4,6 @@
   "description": "InfoBridge configuration defining data sources, queries, transformation steps, and writeback destinations for connected planning.",
   "type": "object",
   "required": [
-    "$schema",
     "sources"
   ],
   "properties": {
@@ -17,7 +16,7 @@
       "title": "Sources",
       "description": "List of InfoBridge data sources.",
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": {
         "$ref": "#/definitions/Source"
       }
@@ -29,6 +28,20 @@
       "items": {
         "$ref": "#/definitions/QueryGroup"
       }
+    },
+    "linkedQueries": {
+      "type": [
+        "array",
+        "object",
+        "null"
+      ]
+    },
+    "version": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
     }
   },
   "additionalProperties": false,
@@ -130,7 +143,15 @@
         "includeMeasures": {
           "type": "array",
           "items": {
-            "type": "string"
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "additionalProperties": true
+              }
+            ]
           }
         },
         "includeScenarios": {
@@ -154,7 +175,8 @@
           "description": "Optional SQL text for SQL source.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": true
     },
     "JoinQueryReference": {
       "title": "JoinQueryReference",
@@ -215,8 +237,7 @@
       "description": "An InfoBridge query definition.",
       "type": "object",
       "required": [
-        "name",
-        "queryId"
+        "name"
       ],
       "properties": {
         "name": {
@@ -402,7 +423,10 @@
           "type": "string"
         },
         "connectionIdVariable": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "settingsHash": {
           "type": "string"
@@ -428,26 +452,7 @@
           }
         }
       },
-      "oneOf": [
-        {
-          "required": [
-            "connection",
-            "database"
-          ]
-        },
-        {
-          "required": [
-            "connectionId",
-            "databaseId"
-          ]
-        },
-        {
-          "required": [
-            "dmtsConnectionId",
-            "databaseId"
-          ]
-        }
-      ]
+      "additionalProperties": true
     },
     "QueryGroup": {
       "title": "QueryGroup",

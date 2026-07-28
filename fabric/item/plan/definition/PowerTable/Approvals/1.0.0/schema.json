@@ -5,14 +5,24 @@
 	"description": "Approval workflow configuration for a PowerTable visual.",
 	"type": "object",
 	"required": [
-		"$schema",
-		"ruleType"
+		"$schema"
 	],
 	"properties": {
 		"$schema": {
 			"type": "string",
 			"format": "uri",
 			"const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/approvals/1.0.0/schema.json"
+		},
+		"approvals": {
+			"type": [
+				"array",
+				"object"
+			],
+			"items": {
+				"type": "object",
+				"additionalProperties": true
+			},
+			"additionalProperties": true
 		},
 		"ruleType": {
 			"type": "integer",

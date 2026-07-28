@@ -3,7 +3,13 @@
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/automations/1.0.0/schema.json",
   "title": "PowerTable Automations",
   "description": "Array of automation definitions for a PowerTable visual, defining triggers and action flows.",
-  "type": "object",
+  "type": [
+    "object",
+    "array"
+  ],
+  "items": {
+    "$ref": "#/definitions/Automation"
+  },
   "required": [
     "$schema",
     "automations"
@@ -39,6 +45,9 @@
           "type": "integer",
           "description": "Numeric code for the trigger type."
         },
+        "sourceId": {
+          "type": "string"
+        },
         "config": {
           "$ref": "#/definitions/AutomationConfig"
         }
@@ -56,6 +65,14 @@
       "properties": {
         "name": {
           "type": "string"
+        },
+        "version": {
+          "type": [
+            "integer",
+            "number",
+            "string",
+            "null"
+          ]
         },
         "trigger": {
           "$ref": "#/definitions/Trigger"
@@ -98,12 +115,14 @@
             "conditions": {
               "type": [
                 "array",
+                "object",
                 "null"
               ],
               "items": {
                 "type": "object",
                 "additionalProperties": true
-              }
+              },
+              "additionalProperties": true
             }
           },
           "additionalProperties": true
@@ -199,11 +218,13 @@
     "CreateRecordConfig": {
       "type": "object",
       "required": [
-        "connectionId",
         "table"
       ],
       "properties": {
         "description": {
+          "type": "string"
+        },
+        "schema": {
           "type": "string"
         },
         "fields": {
