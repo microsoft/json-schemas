@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/definition/1.0.0/schema.json",
   "description": "Root definition for a Plan artifact containing semantic model references and sheet declarations.",
   "type": "object",
   "required": [
@@ -12,7 +12,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/definition/1.0.0/schema.json"
     },
     "workloadItemName": {
       "type": "string",
@@ -100,7 +100,39 @@
         "artifactId": {
           "type": [
             "string",
-            "integer"
+            "integer",
+            "null"
+          ]
+        },
+        "configuredBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "folderId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subfolderId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sizeInMB": {
+          "type": [
+            "number",
+            "integer",
+            "null"
+          ]
+        },
+        "createdDate": {
+          "type": [
+            "string",
+            "null"
           ]
         },
         "datasetRelations": {

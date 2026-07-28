@@ -163,7 +163,8 @@
         { "required": [ "Forecast" ] },
         { "required": [ "DataInput" ] },
         { "required": [ "VisualColumn" ] },
-        { "required": [ "Native" ] }
+        { "required": [ "Native" ] },
+        { "required": [ "Formula" ] }
       ],
       "additionalProperties": false
     },

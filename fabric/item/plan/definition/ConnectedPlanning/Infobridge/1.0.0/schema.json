@@ -4,7 +4,6 @@
   "description": "InfoBridge configuration defining data sources, queries, transformation steps, and writeback destinations for connected planning.",
   "type": "object",
   "required": [
-    "$schema",
     "sources"
   ],
   "properties": {
