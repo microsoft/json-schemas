@@ -6,7 +6,6 @@
   "required": [
     "$schema",
     "workloadItemName",
-    "semanticModelReference",
     "sheets"
   ],
   "properties": {
@@ -28,6 +27,14 @@
       "items": {
         "$ref": "#/definitions/SheetReference"
       }
+    },
+    "cube": {
+      "description": "Optional cube metadata used by legacy exports.",
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
     }
   },
   "additionalProperties": false,
@@ -89,6 +96,26 @@
         "sourceType": {
           "type": "string",
           "enum": ["POWERTABLE", "INFOBRIDGE", "WORKLOAD"]
+        },
+        "artifactId": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "datasetRelations": {
+          "type": [
+            "array",
+            "object",
+            "null"
+          ]
+        },
+        "recordGuid": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
         }
       },
       "additionalProperties": false
@@ -142,12 +169,16 @@
               "visualType": {
                 "type": "string",
                 "description": "Type of the visual.",
-                "enum": ["POWERTABLE", "PLANNING", "INFO_BRIDGE"]
+                "enum": ["POWERTABLE", "PLANNING", "INFO_BRIDGE", "ANALYTICS_PLUS", "UNKNOWN"]
               },
               "visualId": {
                 "type": "string",
                 "format": "uuid",
                 "description": "Unique identifier for the visual."
+              },
+              "isEmbedded": {
+                "type": "boolean",
+                "description": "Indicates whether the visual is embedded."
               }
             },
             "additionalProperties": false

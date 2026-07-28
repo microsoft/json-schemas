@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json",
+	"$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/sheet/1.0.0/schema.json",
 	"description": "Sheet-level UI and canvas properties for a Planning workload item.",
 	"type": "object",
 	"required": [
@@ -11,7 +11,7 @@
 		"$schema": {
             "type": "string",
             "format": "uri",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json"
+			"const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/sheet/1.0.0/schema.json"
         },
 		"properties": {
 			"$ref": "#/definitions/SheetProperties"
@@ -22,7 +22,6 @@
 		"SheetProperties": {
 			"type": "object",
 			"required": [
-				"pageLevelFilterAssignments",
 				"entityLevelVariables",
 				"filterPanePosition",
 				"topPositionFilterExpandConfig",
@@ -106,9 +105,7 @@
 		"Notes": {
 			"type": "object",
 			"required": [
-				"notesMap",
 				"settings",
-				"noteOrder",
 				"enableMarkerMode",
 				"markerData"
 			],
@@ -116,6 +113,13 @@
 				"notesMap": {
 					"type": "object",
 					"additionalProperties": true
+				},
+				"counter": {
+					"type": [
+						"integer",
+						"number",
+						"null"
+					]
 				},
 				"settings": {
 					"$ref": "#/definitions/NotesSettings"
@@ -162,6 +166,14 @@
 				},
 				"floatSettings": {
 					"$ref": "#/definitions/FloatSettings"
+				},
+				"footNotes": {
+					"type": [
+						"array",
+						"object",
+						"null"
+					],
+					"additionalProperties": true
 				}
 			},
 			"additionalProperties": false
@@ -214,6 +226,14 @@
 				},
 				"color": {
 					"type": "string"
+				},
+				"textSize": {
+					"type": [
+						"integer",
+						"number",
+						"string",
+						"null"
+					]
 				}
 			},
 			"additionalProperties": false
@@ -526,7 +546,6 @@
 				"type",
 				"value",
 				"isEnabled",
-				"fillMode",
 				"opacity",
 				"color",
 				"imageUrl"
@@ -572,6 +591,9 @@
 				},
 				"opacity": {
 					"type": "number"
+				},
+				"fillMode": {
+					"type": "string"
 				}
 			},
 			"additionalProperties": false

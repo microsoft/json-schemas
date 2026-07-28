@@ -5,11 +5,7 @@
   "description": "Database source configuration for a PowerTable visual.",
   "type": "object",
   "required": [
-    "$schema",
-    "connection",
-    "tableName",
-    "schema",
-    "database"
+  "$schema"
   ],
   "properties": {
     "$schema": {
@@ -28,6 +24,10 @@
     },
     "tableName": {
       "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": true
     }
   },
   "additionalProperties": false

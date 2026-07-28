@@ -50,11 +50,17 @@
           "description": "Optional visual row configuration reference."
         },
         "rowPath": {
-          "type": ["string"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Optional hierarchical path for the row."
         },
         "derivedFromRowId": {
-          "type": ["string"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Optional source row ID when row is derived."
         },
         "rowMeta": {
@@ -67,6 +73,14 @@
         "dimensionId": {
           "type": "string",
           "description": "Dimension this row belongs to."
+        },
+        "status": {
+          "type": [
+            "string",
+            "integer",
+            "boolean",
+            "null"
+          ]
         }
       },
       "additionalProperties": false
@@ -89,7 +103,10 @@
           "type": "string"
         },
         "scaling_factor": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Scaling factor for display (e.g., Auto)."
         },
         "include_in_total": {
@@ -123,14 +140,25 @@
           ]
         },
         "column_aggregation": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             "Sum",
             "Average",
             "Min",
             "Max",
-            "Count"
+            "Count",
+            null
           ]
+        },
+        "cross_filter_config": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
         }
       },
       "additionalProperties": false
@@ -144,6 +172,9 @@
         },
         "CalculatedRow": {
           "$ref": "#/definitions/CalculatedRowType"
+        },
+        "AggregationRow": {
+          "$ref": "#/definitions/AggregationRowType"
         }
       },
       "oneOf": [
@@ -156,6 +187,11 @@
           "required": [
             "CalculatedRow"
           ]
+        },
+        {
+          "required": [
+            "AggregationRow"
+          ]
         }
       ],
       "additionalProperties": false
@@ -167,7 +203,10 @@
           "type": "boolean"
         },
         "default_value": {
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "description": "Default value configuration.",
           "properties": {
             "Static": {
@@ -205,11 +244,36 @@
         "deferred": {
           "type": [
             "boolean",
+            "string",
             "null"
           ]
         },
         "bind_for_cross_filter": {
           "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AggregationRowType": {
+      "type": "object",
+      "required": [
+        "aggregation_type"
+      ],
+      "properties": {
+        "aggregation_type": {
+          "type": "string"
+        },
+        "aggregation_distribution_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aggregate_distribution_rows": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false

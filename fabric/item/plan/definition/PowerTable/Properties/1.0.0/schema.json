@@ -22,13 +22,14 @@
   "definitions": {
     "PowerTableProperties": {
       "type": "object",
-      "required": [
-        "pivotAssignments",
-        "sortingConfig",
-        "superFilterAssignments",
-        "visualState"
-      ],
       "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true
+        },
         "pivotAssignments": {
           "type": "array"
         },

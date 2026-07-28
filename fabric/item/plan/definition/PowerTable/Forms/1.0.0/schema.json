@@ -3,7 +3,10 @@
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/forms/1.0.0/schema.json",
   "title": "PowerTable Forms",
   "description": "Array of form definitions for a PowerTable visual, defining data entry layouts.",
-  "type": "array",
+  "type": [
+    "array",
+    "object"
+  ],
   "items": {
     "$ref": "#/definitions/Form"
   },
@@ -11,11 +14,16 @@
     "Form": {
       "type": "object",
       "required": [
-        "$schema",
         "title",
         "layoutMeta"
       ],
       "properties": {
+        "sourceId": {
+          "type": "string"
+        },
+        "recordGuid": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string",
           "format": "uri",
@@ -33,6 +41,13 @@
         },
         "config": {
           "$ref": "#/definitions/FormConfig"
+        },
+        "formFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
         }
       },
       "additionalProperties": false
@@ -68,6 +83,13 @@
             "tabs",
             "sections"
           ]
+        },
+        "status": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
         }
       },
       "additionalProperties": false
@@ -91,6 +113,12 @@
         "name": {
           "type": "string",
           "description": "Field/column name."
+        },
+        "id": {
+          "type": "string"
+        },
+        "dataKey": {
+          "type": "string"
         },
         "mandatory": {
           "type": "integer",

@@ -34,6 +34,16 @@
                         "type": {
                             "type": "integer",
                             "description": "Theme type code."
+                        },
+                        "appliedThemes": {
+                            "type": [
+                                "array",
+                                "object",
+                                "string",
+                                "null"
+                            ],
+                            "additionalProperties": true,
+                            "items": {}
                         }
                     },
                     "additionalProperties": false
@@ -91,6 +101,28 @@
                 },
                 "pageGroupingMeta": {
                     "$ref": "#/definitions/PageGroupingMeta"
+                },
+                "adhocPresets": {
+                    "type": [
+                        "array",
+                        "string",
+                        "null"
+                    ]
+                },
+                "homeLayout": {
+                    "type": [
+                        "object",
+                        "string",
+                        "null"
+                    ],
+                    "additionalProperties": true
+                },
+                "timeIntervalMapping": {
+                    "type": [
+                        "array",
+                        "string",
+                        "null"
+                    ]
                 }
             },
             "additionalProperties": { "type": "string" }
@@ -147,6 +179,9 @@
                 },
                 "showVariablesPane": {
                     "type": "boolean"
+                },
+                "showLumelAIPane": {
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -178,6 +213,9 @@
                     "type": "boolean"
                 },
                 "showCommentsPane": {
+                    "type": "boolean"
+                },
+                "showLumelAIPane": {
                     "type": "boolean"
                 }
             },
