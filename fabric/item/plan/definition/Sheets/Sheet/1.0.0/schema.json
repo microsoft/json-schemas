@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Sheets/Sheet/1.0.0/schema.json",
 	"description": "Sheet-level UI and canvas properties for a Planning workload item.",
 	"type": "object",
 	"required": [
@@ -11,7 +11,7 @@
 		"$schema": {
             "type": "string",
             "format": "uri",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Sheets/Sheet/1.0.0/schema.json"
         },
 		"properties": {
 			"$ref": "#/definitions/SheetProperties"
@@ -22,7 +22,6 @@
 		"SheetProperties": {
 			"type": "object",
 			"required": [
-				"pageLevelFilterAssignments",
 				"entityLevelVariables",
 				"filterPanePosition",
 				"topPositionFilterExpandConfig",
@@ -105,13 +104,6 @@
 		},
 		"Notes": {
 			"type": "object",
-			"required": [
-				"notesMap",
-				"settings",
-				"noteOrder",
-				"enableMarkerMode",
-				"markerData"
-			],
 			"properties": {
 				"notesMap": {
 					"type": "object",
@@ -130,9 +122,10 @@
 				"markerData": {
 					"type": "array",
 					"items": {}
-				}
+				},
+				"counter": {}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"NotesSettings": {
 			"type": "object",
@@ -162,9 +155,10 @@
 				},
 				"floatSettings": {
 					"$ref": "#/definitions/FloatSettings"
-				}
+				},
+				"footNotes": {}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"NotesIndicator": {
 			"type": "object",
@@ -214,6 +208,9 @@
 				},
 				"color": {
 					"type": "string"
+				},
+				"textSize": {
+					"type": "integer"
 				}
 			},
 			"additionalProperties": false
@@ -572,6 +569,9 @@
 				},
 				"opacity": {
 					"type": "number"
+				},
+				"fillMode": {
+					"type": "string"
 				}
 			},
 			"additionalProperties": false

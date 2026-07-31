@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/insertRows/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/InsertRows/1.0.0/schema.json",
   "title": "Insert Rows",
   "description": "Array of custom (inserted) rows for a Planning visual, including static rows and calculated rows.",
   "type": "object",
@@ -12,7 +12,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/insertRows/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/InsertRows/1.0.0/schema.json"
     },
     "rows": {
       "type": "array",
@@ -50,11 +50,11 @@
           "description": "Optional visual row configuration reference."
         },
         "rowPath": {
-          "type": ["string"],
+          "type": ["string", "null"],
           "description": "Optional hierarchical path for the row."
         },
         "derivedFromRowId": {
-          "type": ["string"],
+          "type": ["string", "null"],
           "description": "Optional source row ID when row is derived."
         },
         "rowMeta": {
@@ -67,6 +67,10 @@
         "dimensionId": {
           "type": "string",
           "description": "Dimension this row belongs to."
+        },
+        "status": {
+          "type": ["string", "integer"],
+          "description": "Status of the row."
         }
       },
       "additionalProperties": false
@@ -123,13 +127,14 @@
           ]
         },
         "column_aggregation": {
-          "type": "string",
+          "type": ["string", "null"],
           "enum": [
             "Sum",
             "Average",
             "Min",
             "Max",
-            "Count"
+            "Count",
+            null
           ]
         }
       },
@@ -144,7 +149,8 @@
         },
         "CalculatedRow": {
           "$ref": "#/definitions/CalculatedRowType"
-        }
+        },
+        "PercentContributionRow": {}
       },
       "oneOf": [
         {
@@ -156,9 +162,14 @@
           "required": [
             "CalculatedRow"
           ]
+        },
+        {
+          "required": [
+            "PercentContributionRow"
+          ]
         }
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "StaticRowType": {
       "type": "object",
@@ -205,7 +216,8 @@
         "deferred": {
           "type": [
             "boolean",
-            "null"
+            "null",
+            "string"
           ]
         },
         "bind_for_cross_filter": {
