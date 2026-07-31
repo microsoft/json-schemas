@@ -1,19 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Definition/1.0.0/schema.json",
   "description": "Root definition for a Plan artifact containing semantic model references and sheet declarations.",
   "type": "object",
   "required": [
     "$schema",
     "workloadItemName",
-    "semanticModelReference",
     "sheets"
   ],
   "properties": {
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Definition/1.0.0/schema.json"
     },
     "workloadItemName": {
       "type": "string",
@@ -28,6 +27,10 @@
       "items": {
         "$ref": "#/definitions/SheetReference"
       }
+    },
+    "cube": {
+      "type": "object",
+      "description": "Cube definition for the plan."
     }
   },
   "additionalProperties": false,
@@ -89,6 +92,20 @@
         "sourceType": {
           "type": "string",
           "enum": ["POWERTABLE", "INFOBRIDGE", "WORKLOAD"]
+        },
+        "artifactId": {
+          "type": ["string", "integer"],
+          "format": "uuid"
+        },
+        "datasetRelations": {
+          "type": "array"
+        },
+        "recordGuid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "url": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -148,6 +165,10 @@
                 "type": "string",
                 "format": "uuid",
                 "description": "Unique identifier for the visual."
+              },
+              "isEmbedded": {
+                "type": "boolean",
+                "description": "Indicates if the visual is embedded."
               }
             },
             "additionalProperties": false
