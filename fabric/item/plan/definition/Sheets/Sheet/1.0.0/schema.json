@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json",
+    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Sheets/Sheet/1.0.0/schema.json",
 	"description": "Sheet-level UI and canvas properties for a Planning workload item.",
 	"type": "object",
 	"required": [
@@ -11,7 +11,7 @@
 		"$schema": {
             "type": "string",
             "format": "uri",
-            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/sheet/1.0.0/schema.json"
+            "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Sheets/Sheet/1.0.0/schema.json"
         },
 		"properties": {
 			"$ref": "#/definitions/SheetProperties"
@@ -22,11 +22,9 @@
 		"SheetProperties": {
 			"type": "object",
 			"required": [
-				"pageLevelFilterAssignments",
 				"entityLevelVariables",
 				"filterPanePosition",
 				"topPositionFilterExpandConfig",
-				"commentary",
 				"canvasStyle",
 				"assignmentColumnMap",
 				"visualGroupMap",
@@ -89,29 +87,21 @@
 		},
 		"Commentary": {
 			"type": "object",
-			"required": [
-				"notes",
-				"annotation"
-			],
 			"properties": {
 				"notes": {
 					"$ref": "#/definitions/Notes"
 				},
 				"annotation": {
 					"$ref": "#/definitions/Annotation"
+				},
+				"activeBookmarkId": {
+					"type": ["string", "null"]
 				}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"Notes": {
 			"type": "object",
-			"required": [
-				"notesMap",
-				"settings",
-				"noteOrder",
-				"enableMarkerMode",
-				"markerData"
-			],
 			"properties": {
 				"notesMap": {
 					"type": "object",
@@ -130,41 +120,24 @@
 				"markerData": {
 					"type": "array",
 					"items": {}
-				}
+				},
+				"counter": {}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"NotesSettings": {
 			"type": "object",
-			"required": [
-				"enable",
-				"hideAllNotes",
-				"indicator",
-				"marker",
-				"displayStyle",
-				"floatSettings"
-			],
 			"properties": {
-				"enable": {
-					"type": "boolean"
-				},
-				"hideAllNotes": {
-					"type": "boolean"
-				},
-				"indicator": {
-					"$ref": "#/definitions/NotesIndicator"
-				},
-				"marker": {
-					"$ref": "#/definitions/NotesMarker"
-				},
-				"displayStyle": {
-					"type": "string"
-				},
-				"floatSettings": {
-					"$ref": "#/definitions/FloatSettings"
-				}
+				"enable": { "type": "boolean" },
+				"hideAllNotes": { "type": "boolean" },
+				"indicator": { "$ref": "#/definitions/NotesIndicator" },
+				"marker": { "$ref": "#/definitions/NotesMarker" },
+				"displayStyle": { "type": "string" },
+				"floatSettings": { "$ref": "#/definitions/FloatSettings" },
+				"footNotes": {},
+				"textSize": {}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"NotesIndicator": {
 			"type": "object",
@@ -196,27 +169,14 @@
 		},
 		"NotesMarker": {
 			"type": "object",
-			"required": [
-				"pattern",
-				"style",
-				"size",
-				"color"
-			],
 			"properties": {
-				"pattern": {
-					"type": "string"
-				},
-				"style": {
-					"type": "string"
-				},
-				"size": {
-					"type": "integer"
-				},
-				"color": {
-					"type": "string"
-				}
+				"pattern": { "type": "string" },
+				"style": { "type": "string" },
+				"size": { "type": "integer" },
+				"color": { "type": "string" },
+				"textSize": {}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"FloatSettings": {
 			"type": "object",
@@ -447,8 +407,7 @@
 				"showSmartGuide",
 				"verticalAlign",
 				"scrollToZoom",
-				"mobileCanvas",
-				"isAutoLayoutDisabled"
+				"mobileCanvas"
 			],
 			"properties": {
 				"dimension": {
@@ -558,11 +517,6 @@
 		},
 		"Wallpaper": {
 			"type": "object",
-			"required": [
-				"value",
-				"isEnabled",
-				"opacity"
-			],
 			"properties": {
 				"value": {
 					"$ref": "#/definitions/WallpaperValue"
@@ -572,9 +526,12 @@
 				},
 				"opacity": {
 					"type": "number"
+				},
+				"fillMode": {
+					"type": "string"
 				}
 			},
-			"additionalProperties": false
+			"additionalProperties": true
 		},
 		"WallpaperValue": {
 			"type": "object",

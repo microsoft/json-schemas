@@ -1,19 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/writeback/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/Writeback/1.0.0/schema.json",
   "title": "Writeback Configuration",
   "description": "Writeback configuration for a Planning visual, defining destination, column mapping, and auto-writeback settings.",
   "type": "object",
   "required": [
     "$schema",
-    "writebackType",
-    "destination"
+    "writebackType"
   ],
   "properties": {
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/writeback/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/Writeback/1.0.0/schema.json"
     },
     "writebackType": {
       "type": "integer",
@@ -112,6 +111,15 @@
     },
     "hasWritebackAccess": {
       "type": "boolean"
+    },
+    "skippedDimensionIds": {
+      "type": "array",
+      "description": "Dimension IDs skipped in writeback.",
+      "items": { "type": "string" }
+    },
+    "destination": {
+      "$ref": "#/definitions/WritebackDestination",
+      "description": "Single writeback destination (optional)."
     }
   },
   "additionalProperties": false,
@@ -155,9 +163,12 @@
         },
         "settingsHash": {
           "type": "string"
-        }
+        },
+        "artifactRelations": {},
+        "status": { "type": ["string", "integer"] },
+        "visualId": { "type": ["string", "integer"] }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "DestinationSettings": {
       "type": "object",
@@ -195,7 +206,7 @@
           ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "DebounceConfig": {
       "type": "object",
