@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/insertRows/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/InsertRows/1.0.0/schema.json",
   "title": "Insert Rows",
   "description": "Array of custom (inserted) rows for a Planning visual, including static rows and calculated rows.",
   "type": "object",
@@ -12,7 +12,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/insertRows/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/InsertRows/1.0.0/schema.json"
     },
     "rows": {
       "type": "array",
@@ -50,11 +50,11 @@
           "description": "Optional visual row configuration reference."
         },
         "rowPath": {
-          "type": ["string"],
+          "type": ["string", "null"],
           "description": "Optional hierarchical path for the row."
         },
         "derivedFromRowId": {
-          "type": ["string"],
+          "type": ["string", "null"],
           "description": "Optional source row ID when row is derived."
         },
         "rowMeta": {
@@ -67,9 +67,13 @@
         "dimensionId": {
           "type": "string",
           "description": "Dimension this row belongs to."
+        },
+        "status": {
+          "type": ["string", "integer"],
+          "description": "Row status."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "RowMeta": {
       "type": "object",
@@ -89,7 +93,7 @@
           "type": "string"
         },
         "scaling_factor": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Scaling factor for display (e.g., Auto)."
         },
         "include_in_total": {
@@ -123,17 +127,11 @@
           ]
         },
         "column_aggregation": {
-          "type": "string",
-          "enum": [
-            "Sum",
-            "Average",
-            "Min",
-            "Max",
-            "Count"
-          ]
+          "type": ["string", "null"],
+          "enum": ["Sum", "Average", "Min", "Max", "Count", null]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "RowType": {
       "type": "object",
@@ -144,21 +142,21 @@
         },
         "CalculatedRow": {
           "$ref": "#/definitions/CalculatedRowType"
+        },
+        "ForecastRow": {
+          "$ref": "#/definitions/ForecastRow"
+        },
+        "PercentContributionRow": {
+          "$ref": "#/definitions/PercentContributionRow"
         }
       },
       "oneOf": [
-        {
-          "required": [
-            "StaticRow"
-          ]
-        },
-        {
-          "required": [
-            "CalculatedRow"
-          ]
-        }
+        { "required": ["StaticRow"] },
+        { "required": ["CalculatedRow"] },
+        { "required": ["ForecastRow"] },
+        { "required": ["PercentContributionRow"] }
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "StaticRowType": {
       "type": "object",
@@ -169,50 +167,35 @@
         "default_value": {
           "type": "object",
           "description": "Default value configuration.",
-          "properties": {
-            "Static": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
+          "additionalProperties": true
         },
         "row_edit_mode": {
-          "type": "string",
-          "enum": [
-            "InEditModeOnly",
-            "Always"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "CalculatedRowType": {
       "type": "object",
-      "required": [
-        "formula"
-      ],
       "properties": {
         "formula": {
-          "type": "string",
+          "type": ["string", "object"],
           "description": "Calculation formula for this row."
         },
-        "description": {
-          "type": "string"
-        },
-        "include_in_chart": {
-          "type": "boolean"
-        },
-        "deferred": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "bind_for_cross_filter": {
-          "type": "boolean"
-        }
+        "description": { "type": "string" },
+        "include_in_chart": { "type": "boolean" },
+        "deferred": { "type": ["boolean", "string", "null"] },
+        "bind_for_cross_filter": { "type": "boolean" }
       },
-      "additionalProperties": false
+      "additionalProperties": true
+    },
+    "ForecastRow": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "PercentContributionRow": {
+      "type": ["object", "string"],
+      "additionalProperties": true
     }
   }
 }

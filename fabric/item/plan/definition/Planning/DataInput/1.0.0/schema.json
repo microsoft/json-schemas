@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/DataInput/1.0.0/schema.json",
   "title": "Data Input Columns",
   "description": "Array of data input column definitions for a Planning visual, including forecasts, text inputs, number inputs, and native measures.",
   "type": "object",
@@ -12,7 +12,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/DataInput/1.0.0/schema.json"
     },
     "columns": {
       "type": "array",
@@ -66,9 +66,25 @@
         "forecastAllowedUserPermissions": {
           "type": "boolean",
           "description": "Whether user permissions are allowed for forecast."
+        },
+        "boundToFilterContext": {
+          "type": ["boolean", "integer"],
+          "description": "Whether bound to filter context."
+        },
+        "status": {
+          "type": ["string", "integer"],
+          "description": "Status of the column."
+        },
+        "sidecarHydrationLeaseAt": {
+          "type": ["string", "null"],
+          "description": "Sidecar hydration lease time."
+        },
+        "sidecarHydrationStatus": {
+          "type": ["string", "integer"],
+          "description": "Sidecar hydration status."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "ColumnMeta": {
       "type": "object",
@@ -95,7 +111,9 @@
           "description": "Data type of the column.",
           "enum": [
             "Number",
-            "Text"
+            "Text",
+            "DateTime",
+            "Date"
           ]
         },
         "description": {
@@ -103,9 +121,13 @@
             "string",
             "null"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the column."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "MeasureType": {
       "type": "object",
@@ -131,9 +153,10 @@
         { "required": [ "Forecast" ] },
         { "required": [ "DataInput" ] },
         { "required": [ "VisualColumn" ] },
-        { "required": [ "Native" ] }
+        { "required": [ "Native" ] },
+        { "required": [ "Formula" ] }
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "ForecastMeasure": {
       "type": "object",
@@ -255,9 +278,21 @@
             },
             "ShortText": {
               "$ref": "#/definitions/ShortTextColumnType"
+            },
+            "SingleSelect": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "Date": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "DateTime": {
+              "type": "object",
+              "additionalProperties": true
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         },
         "title": {
           "type": "string"
@@ -269,14 +304,10 @@
           "type": "string"
         },
         "allow_input": {
-          "type": "string",
-          "enum": [
-            "ReadAndEdit",
-            "ReadOnly"
-          ]
+          "type": ["string", "object", "null"]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "VisualColumnMeasure": {
       "type": "object",
@@ -361,10 +392,7 @@
           "type": "boolean"
         },
         "default_value": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null", "object"]
         }
       },
       "additionalProperties": false
@@ -373,10 +401,7 @@
       "type": "object",
       "properties": {
         "default_value": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null", "object"]
         },
         "allow_entry_on_totals_or_subtotals": {
           "type": "boolean"
