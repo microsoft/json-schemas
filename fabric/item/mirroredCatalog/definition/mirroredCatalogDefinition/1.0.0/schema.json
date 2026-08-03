@@ -62,7 +62,8 @@
       "enum": [
         "DremioIcebergCatalog",
         "AzureMonitorMirroredCatalog",
-        "AWSIcebergCatalog"
+        "AWSIcebergCatalog",
+        "MirroredGoogleLakehouseRuntimeCatalog"
       ]
     },
     "SourceTypeProperties": {
