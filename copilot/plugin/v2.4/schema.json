@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "$comment": "This schema describes the constraints of a plugin manifest for third party developers to be deployed to Microsoft 365 Copilot",
     "type": "object",
     "title": "API Plugin manifest object",
@@ -353,61 +353,40 @@
             "patternProperties": {
                 "^x-": {}
             },
-            "allOf": [
+            "oneOf": [
                 {
-                    "if": {
-                        "required": [
-                            "type"
-                        ],
-                        "properties": {
-                            "type": {
-                                "const": "OpenApi"
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "spec": {
-                                "$ref": "#/$defs/open-api-spec"
-                            }
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "OpenApi"
+                            ]
+                        },
+                        "spec": {
+                            "$ref": "#/$defs/open-api-spec"
                         }
                     }
                 },
                 {
-                    "if": {
-                        "required": [
-                            "type"
-                        ],
-                        "properties": {
-                            "type": {
-                                "const": "LocalPlugin"
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "spec": {
-                                "$ref": "#/$defs/local-plugin-spec"
-                            }
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "LocalPlugin"
+                            ]
+                        },
+                        "spec": {
+                            "$ref": "#/$defs/local-plugin-spec"
                         }
                     }
                 },
                 {
-                    "if": {
-                        "required": [
-                            "type"
-                        ],
-                        "properties": {
-                            "type": {
-                                "const": "RemoteMCPServer"
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "spec": {
-                                "$ref": "#/$defs/mcp-execution-spec"
-                            }
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "RemoteMCPServer"
+                            ]
+                        },
+                        "spec": {
+                            "$ref": "#/$defs/mcp-execution-spec"
                         }
                     }
                 }
