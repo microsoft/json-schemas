@@ -17,10 +17,6 @@
             "description": "The parent organizational app id.",
             "$ref": "#/definitions/Guid"
         },
-        "parentArtifactLogicalId": {
-            "description": "Defines the parent organizational app's logical unique identifier in Git repository.",
-            "$ref": "#/definitions/Guid"
-        },
         "elementReferences": {
             "description": "Defines the list of element references for the audience.",
             "type": [
@@ -39,20 +35,9 @@
             "maxItems": 1000
         }
     },
-    "oneOf": [
-        {
-            "required": [
-                "parentAppId"
-            ]
-        },
-        {
-            "required": [
-                "parentArtifactLogicalId"
-            ]
-        }
-    ],
     "required": [
         "$schema",
+        "parentAppId",
         "elementReferences"
     ],
     "additionalProperties": false,
