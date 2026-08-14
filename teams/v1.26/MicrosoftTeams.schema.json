@@ -1352,7 +1352,18 @@
         }
       },
       "additionalProperties": false,
-      "anyOf": []
+      "oneOf": [
+        {
+          "required": [
+            "declarativeAgents"
+          ]
+        },
+        {
+          "required": [
+            "customEngineAgents"
+          ]
+        }
+      ]
     },
     "agenticUserTemplates": {
       "type": "array",
@@ -3011,7 +3022,7 @@
         "fileName": {
           "type": "string",
           "description": "File name for the XLL extension. Maximum length is 254 characters.",
-          "pattern": "^(?!.*[\\r\\n\\f\\b\\v\\a\\t])[\\S]*\\.xll$",
+          "pattern": "^(?!.*[\\r\\n\\f\\b\\v\\u0007\\t])[\\S]*\\.xll$",
           "minLength": 4,
           "maxLength": 254
         }

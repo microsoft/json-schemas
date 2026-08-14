@@ -1,5 +1,10 @@
 # Pages Metadata Versions
 
+### 1.1.0
+<b>Released in: </b> May 2026 <br />
+<b>Notes: </b> 
+-  Report Landing Page
+
 ### 1.0.0
 
 <b>Released in: </b> June 2024 <br />

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Source/1.0.0/schema.json",
+  "title": "PowerTable Source",
+  "description": "Database source configuration for a PowerTable visual.",
+  "type": "object",
+  "required": [
+    "$schema"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Source/1.0.0/schema.json"
+    },
+    "source": {
+      "type": "object",
+      "description": "Database source configuration.",
+      "additionalProperties": true
+    },
+    "connection": {
+      "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
+    },
+    "database": {
+      "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+    },
+    "schema": {
+      "type": "string"
+    },
+    "tableName": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,5 +1,21 @@
 # Releases
 
+## May 2026
+
+Auto Expand PivotTable, Report Landing Page, Fixed Width, Azure Maps Format Pane Revamp, Slicer, Slicer Background Transparency, Perspective setting, Report Locale
+
+- [pagesMetadata 1.1.0](./definition/pagesMetadata/CHANGELOG.md#1.1.0)
+- [report 3.3.0](./definition/report/CHANGELOG.md#3.3.0)
+- [visualContainer 2.9.0](./definition/visualContainer/CHANGELOG.md#2.9.0)
+- [visualContainerMobileState 2.4.0](./definition/visualContainerMobileState/CHANGELOG.md#2.4.0)
+
+## April 2026
+
+Cartesian axis nice (round) range control, Set height and width for card, slicer, and list slicer
+
+- [visualContainer 2.8.0](./definition/visualContainer/CHANGELOG.md#2.8.0)
+
+
 ## March 2026
 
 Custom Totals for Table and Matrix visuals

@@ -1,0 +1,121 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/stylingConfiguration/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the schema for the stylingConfiguration part of the GraphIndex item definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/stylingConfiguration/1.0.0/schema.json"
+    },
+    "modelLayout": {
+      "$ref": "#/definitions/ModelLayout"
+    },
+    "visualFormat": {
+      "description": "Visual formatting details keyed by node or edge type alias.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VisualFormatDetails"
+      }
+    },
+    "scenario": {
+      "description": "The scenario this graph is used for.",
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "$schema",
+    "modelLayout",
+    "visualFormat"
+  ],
+  "definitions": {
+    "Position": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "y": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "ModelStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "ModelLayout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "positions": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/Position"
+          }
+        },
+        "styles": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/ModelStyle"
+          }
+        },
+        "pan": {
+          "$ref": "#/definitions/Position"
+        },
+        "zoomLevel": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "positions",
+        "styles",
+        "pan",
+        "zoomLevel"
+      ]
+    },
+    "VisualFormatDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "defaultDisplayProperty": {
+          "type": "string",
+          "minLength": 1
+        },
+        "color": {
+          "type": "string",
+          "minLength": 1
+        },
+        "shape": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

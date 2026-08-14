@@ -7,11 +7,35 @@
       "type": "string",
       "format": "uuid"
     },
+    "GuidOrVar": {
+      "description": "A Guid value or a reference to a variable of type Guid.",
+      "oneOf": [
+        { "$ref": "#/definitions/Guid" },
+        {
+          "allOf": [
+            { "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "Guid" } }
+          ]
+        }
+      ]
+    },
     "DateTime": {
       "description": "A string representing date and time in UTC format. For example 2024-11-25T08:30:10Z.",
       "type": "string",
       "format": "date-time",
       "pattern": "^.*Z$"
+    },
+    "DateTimeOrVar": {
+      "description": "A DateTime value or a reference to a variable of type DateTime.",
+      "oneOf": [
+        { "$ref": "#/definitions/DateTime" },
+        {
+          "allOf": [
+            { "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/SchemaTypedVariableReference" },
+            { "varRef": { "type": "DateTime" } }
+          ]
+        }
+      ]
     }
   }
 }

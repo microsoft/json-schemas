@@ -1,6 +1,20 @@
 # Visual Container Versions
 
-### 2.1.0
+### 2.9.0
+<b>Released in: </b> May 2026 <br />
+<b>Notes: </b>
+- Azure Maps Format Pane Revamp
+- Fixed Width
+- Slicer Background Transparency
+- Auto Expand Pivot Table 
+
+### 2.8.0
+<b>Released in: </b> April 2026 <br />
+<b>Notes: </b>
+- Cartesian axis nice (round) range control
+- Set height and width for card, slicer, and list slicer
+
+### 2.7.0
 
 <b>Released in: </b> March 2026 <br />
 <b>Notes: </b>

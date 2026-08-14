@@ -68,6 +68,13 @@
         "$ref": "#/definitions/EntityTypeProperty"
       },
       "description": "List of entity type timeseries properties"
+    }, 
+    "untypedProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/UntypedEntityTypeProperty"
+      },
+      "description": "List of entity type untyped properties"
     }
   },
   "required": ["id", "namespace", "name", "namespaceType"],
@@ -101,6 +108,40 @@
         "valueType": {
           "type": "string",
           "enum": ["String", "Boolean", "DateTime", "Object", "BigInt", "Double"],
+          "description": "Describes the value type of the entity type property"
+        }
+      },
+      "required": ["id", "name", "valueType"]
+    },
+    "UntypedEntityTypeProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique id of the entity type property"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,127}$",
+          "description": "Name of the entity type property"
+        },
+        "redefines": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Pointer to property inherited from base type that this property redefines"
+        },
+        "baseTypeNamespaceType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The namespace of the base entity type"
+        },
+        "valueType": {
+          "type": "string",
+          "const": "Any",
           "description": "Describes the value type of the entity type property"
         }
       },
