@@ -55,7 +55,8 @@
                         "^[A-Za-z0-9_]+$": {
                             "$ref": "#/definitions/parameter"
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 },
                 "required": {
                     "title": "Required parameters",
