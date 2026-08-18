@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "JSON Schema for Office Add-in Actions File",
-    "description": "A file describing the data format for the Office.js actions referenced by an Office Add-in's actionFile property.",
+    "title": "JSON Schema for an Office Add-in Action File",
+    "description": "A file describing the data format for a single Office.js action referenced by an Office Add-in's actionFile property.",
     "type": "object",
     "properties": {
         "$schema": {
@@ -9,53 +9,33 @@
             "description": "The Office actions JSON schema file.",
             "type": "string"
         },
-        "actions": {
-            "title": "Actions",
-            "description": "The Office.js actions of this file. Each id must match an action in the manifest.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/action"
-            },
-            "minItems": 1
+        "id": {
+            "title": "Action ID",
+            "description": "The unique ID of the action. Matches the manifest's action id.",
+            "type": "string",
+            "maxLength": 64
+        },
+        "description": {
+            "title": "Description",
+            "description": "Describes what the action does and when to use it.",
+            "type": "string"
+        },
+        "parameters": {
+            "$ref": "#/definitions/parameters"
+        },
+        "returns": {
+            "$ref": "#/definitions/returns"
+        },
+        "states": {
+            "$ref": "#/definitions/states"
         }
     },
     "required": [
-        "actions"
+        "id",
+        "description"
     ],
     "additionalProperties": false,
     "definitions": {
-        "action": {
-            "title": "Action",
-            "description": "An action that invokes a command and retrieves data.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "title": "Action ID",
-                    "description": "The unique ID of the action. Matches the manifest's action id.",
-                    "type": "string",
-                    "maxLength": 64
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "Describes what the action does and when to use it.",
-                    "type": "string"
-                },
-                "parameters": {
-                    "$ref": "#/definitions/parameters"
-                },
-                "returns": {
-                    "$ref": "#/definitions/returns"
-                },
-                "states": {
-                    "$ref": "#/definitions/states"
-                }
-            },
-            "required": [
-                "id",
-                "description"
-            ],
-            "additionalProperties": false
-        },
         "parameters": {
             "title": "Parameters",
             "description": "The parameters that can be passed to the action.",
