@@ -11,7 +11,7 @@
         },
         "id": {
             "title": "Action ID",
-            "description": "The unique ID of the action. Matches the manifest's action id.",
+            "description": "The ID of the action, which must match an action ID in the manifest.",
             "type": "string",
             "maxLength": 64
         },
