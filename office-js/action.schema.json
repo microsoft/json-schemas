@@ -15,7 +15,7 @@
             "type": "string",
             "maxLength": 64
         },
-        "description": {
+        "actionDescription": {
             "title": "Description",
             "description": "Describes what the action does and when to use it.",
             "type": "string"
