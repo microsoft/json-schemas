@@ -110,8 +110,8 @@
             ],
             "additionalProperties": false
         },
-        "returns": {
-            "title": "Returns",
+        "returnedValue": {
+            "title": "Returned Value",
             "description": "The value returned by the action.",
             "type": "object",
             "properties": {
