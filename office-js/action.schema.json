@@ -115,8 +115,8 @@
             "description": "The value returned by the action.",
             "type": "object",
             "properties": {
-                "type": {
-                    "title": "Type",
+                "dataType": {
+                    "title": "Return Value Data Type",
                     "description": "The type of the returned value.",
                     "type": "string",
                     "enum": [
