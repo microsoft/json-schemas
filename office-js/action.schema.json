@@ -16,15 +16,15 @@
             "maxLength": 64
         },
         "actionDescription": {
-            "title": "Description",
+            "title": "Action Description",
             "description": "Describes what the action does and when to use it.",
             "type": "string"
         },
         "parameters": {
             "$ref": "#/definitions/parameters"
         },
-        "returns": {
-            "$ref": "#/definitions/returns"
+        "returnedValue": {
+            "$ref": "#/definitions/returnedValue"
         },
         "states": {
             "$ref": "#/definitions/states"
@@ -32,7 +32,7 @@
     },
     "required": [
         "id",
-        "description"
+        "actionDescription"
     ],
     "additionalProperties": false,
     "definitions": {
