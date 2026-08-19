@@ -6,7 +6,7 @@
     "properties": {
         "$schema": {
             "title": "ActionSchema",
-            "description": "The Office actions JSON schema file.",
+            "description": "The URI/URL of this schema, which should always be https://developer.microsoft.com/json-schemas/office-js/action.schema.json",
             "type": "string"
         },
         "id": {
