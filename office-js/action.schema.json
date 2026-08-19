@@ -130,7 +130,7 @@
                 }
             },
             "required": [
-                "type"
+                "dataType"
             ],
             "additionalProperties": false
         },
