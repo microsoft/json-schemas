@@ -5,7 +5,7 @@
     "type": "object",
     "properties": {
         "$schema": {
-            "title": "Schema",
+            "title": "ActionSchema",
             "description": "The Office actions JSON schema file.",
             "type": "string"
         },
