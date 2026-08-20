@@ -6,7 +6,7 @@
     "properties": {
         "$schema": {
             "title": "ActionSchema",
-            "description": "The URI/URL of this schema, which should always be https://developer.microsoft.com/json-schemas/office-js/action.schema.json",
+            "description": "The URI/URL of this schema, which should always be https://developer.microsoft.com/json-schemas/office-js/1.0/action.schema.json",
             "type": "string"
         },
         "id": {
@@ -18,7 +18,8 @@
         "actionDescription": {
             "title": "Action Description",
             "description": "Describes what the action does and when to use it.",
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
         },
         "parameters": {
             "$ref": "#/definitions/parameters"
@@ -39,45 +40,23 @@
         "parameters": {
             "title": "Parameters",
             "description": "The parameters that can be passed to the action.",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "title": "Type",
-                    "description": "The JSON Schema type.",
-                    "type": "string",
-                    "const": "object"
-                },
-                "properties": {
-                    "title": "Properties",
-                    "description": "The parameter definitions, keyed by name.",
-                    "type": "object",
-                    "patternProperties": {
-                        "^[A-Za-z0-9_]+$": {
-                            "$ref": "#/definitions/parameter"
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "required": {
-                    "title": "Required parameters",
-                    "description": "The names of the required parameters.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "type",
-                "properties"
-            ],
-            "additionalProperties": false
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/parameter"
+            }
         },
         "parameter": {
             "title": "Parameter",
             "description": "Describes a single action parameter.",
             "type": "object",
             "properties": {
+                "name": {
+                    "title": "Name",
+                    "description": "The name of the parameter.",
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^[A-Za-z0-9_]+$"
+                },
                 "type": {
                     "title": "Type",
                     "description": "Specifies the parameter's type.",
@@ -92,7 +71,14 @@
                 "description": {
                     "title": "Description",
                     "description": "The description of the parameter.",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 512
+                },
+                "required": {
+                    "title": "Required",
+                    "description": "Whether the parameter is required. Defaults to false.",
+                    "type": "boolean",
+                    "default": false
                 },
                 "default": {
                     "title": "Default",
@@ -106,6 +92,7 @@
                 }
             },
             "required": [
+                "name",
                 "type"
             ],
             "additionalProperties": false
@@ -126,7 +113,8 @@
                 "returnedValueDescription": {
                     "title": "Returned Value Description",
                     "description": "The description of the returned value.",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 512
                 }
             },
             "required": [
@@ -159,7 +147,8 @@
                 "description": {
                     "title": "Description",
                     "description": "The purpose of the action in this state.",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 512
                 }
             },
             "required": [
