@@ -1,0 +1,93 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredStorage/definition/mirroredStorageDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Mirrored Storage Definition",
+  "description": "Defines a MirroredStorage item that mirrors folders from an external storage target into Fabric.",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The JSON schema URI for this MirroredStorage definition.",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredStorage/definition/mirroredStorageDefinition/1.0.0/schema.json"
+    },
+    "properties": {
+      "type": "object",
+      "description": "The configuration properties for the mirrored storage target and optional folder selection.",
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "type": "object",
+          "description": "The external storage target to mirror.",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of external storage target.",
+              "enum": [
+                "S3",
+                "S3Compatible",
+                "GCP",
+                "ExternalADLS",
+                "AzureBlob"
+              ]
+            },
+            "targetProperties": {
+              "type": "object",
+              "description": "The connection and container details for the external storage target.",
+              "additionalProperties": false,
+              "properties": {
+                "connectionId": {
+                  "description": "The connection identifier used to access the external storage target.",
+                  "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar"
+                },
+                "containerName": {
+                  "description": "The bucket or container name in the external storage target.",
+                  "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/StringOrVar"
+                }
+              },
+              "required": [
+                "connectionId",
+                "containerName"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "targetProperties"
+          ]
+        },
+        "folderPaths": {
+          "type": "object",
+          "description": "The optional folders to include from the external storage target.",
+          "additionalProperties": false,
+          "properties": {
+            "includedPaths": {
+              "type": "array",
+              "description": "The decoded folder paths to include. Paths must not contain URL-encoded octets.",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "description": "A non-empty decoded folder path.",
+                "minLength": 1,
+                "pattern": "^(?!.*%[0-9A-Fa-f]{2}).+$"
+              }
+            }
+          },
+          "required": [
+            "includedPaths"
+          ]
+        }
+      },
+      "required": [
+        "target"
+      ]
+    }
+  },
+  "required": [
+    "$schema",
+    "properties"
+  ]
+}
