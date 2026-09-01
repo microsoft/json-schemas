@@ -3,12 +3,24 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "Mirrored AWS Databricks Catalog Definition",
+  "description": "Defines the exported definition for a Mirrored AWS Databricks Catalog artifact, capturing the catalog connection and its mirroring configuration.",
+  "additionalProperties": false,
+  "definitions": {
+    "mirroringMode": {
+      "type": "string",
+      "description": "The replication mode for mirroring.",
+      "enum": [
+        "Partial",
+        "Full",
+        "Exclude"
+      ]
+    }
+  },
   "properties": {
     "$schema": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": "string",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredAwsDatabricksCatalog/definition/mirroredAwsDatabricksCatalogDefinition/1.0.0/schema.json",
+      "description": "The JSON schema reference for this definition."
     },
     "catalogName": {
       "type": "string",
@@ -29,35 +41,36 @@
       ]
     },
     "mirroringMode": {
-      "type": "string",
       "description": "The replication mode.",
-      "enum": [
-        "Partial",
-        "Full",
-        "Exclude"
+      "allOf": [
+        {
+          "$ref": "#/definitions/mirroringMode"
+        }
       ]
     },
     "mirrorConfiguration": {
       "type": "object",
       "description": "Databricks artifact mirroring configuration like include schema or exclude schema etc.",
+      "additionalProperties": false,
       "properties": {
         "schemas": {
           "type": "array",
           "description": "List of schemas to mirror.",
           "items": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
               "name": {
                 "type": "string",
-                "description": "The schema name."
+                "description": "The schema name.",
+                "minLength": 1
               },
               "mirroringMode": {
-                "type": "string",
                 "description": "The schema replication mode.",
-                "enum": [
-                  "Partial",
-                  "Full",
-                  "Exclude"
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/mirroringMode"
+                  }
                 ]
               },
               "tables": {
@@ -65,18 +78,19 @@
                 "description": "List of tables to mirror within the schema.",
                 "items": {
                   "type": "object",
+                  "additionalProperties": false,
                   "properties": {
                     "name": {
                       "type": "string",
-                      "description": "The table name."
+                      "description": "The table name.",
+                      "minLength": 1
                     },
                     "mirroringMode": {
-                      "type": "string",
                       "description": "The table replication mode.",
-                      "enum": [
-                        "Partial",
-                        "Full",
-                        "Exclude"
+                      "allOf": [
+                        {
+                          "$ref": "#/definitions/mirroringMode"
+                        }
                       ]
                     }
                   },
