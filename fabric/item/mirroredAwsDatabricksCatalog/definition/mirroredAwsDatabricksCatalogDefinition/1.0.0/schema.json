@@ -1,0 +1,108 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredAwsDatabricksCatalog/definition/mirroredAwsDatabricksCatalogDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Mirrored AWS Databricks Catalog Definition",
+  "description": "Defines the exported definition for a Mirrored AWS Databricks Catalog artifact, capturing the catalog connection and its mirroring configuration.",
+  "additionalProperties": false,
+  "definitions": {
+    "mirroringMode": {
+      "type": "string",
+      "description": "The replication mode for mirroring.",
+      "enum": [
+        "Partial",
+        "Full",
+        "Exclude"
+      ]
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredAwsDatabricksCatalog/definition/mirroredAwsDatabricksCatalogDefinition/1.0.0/schema.json",
+      "description": "The JSON schema reference for this definition."
+    },
+    "catalogName": {
+      "type": "string",
+      "description": "The catalog name.",
+      "pattern": "^[^.\\s\\/\\x00-\\x1F\\x7F]{1,255}$"
+    },
+    "databricksWorkspaceConnectionId": {
+      "type": "string",
+      "description": "The workspace connection ID.",
+      "format": "uuid"
+    },
+    "autoSync": {
+      "type": "string",
+      "description": "A value indicating whether auto sync is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ]
+    },
+    "mirroringMode": {
+      "description": "The replication mode.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/mirroringMode"
+        }
+      ]
+    },
+    "mirrorConfiguration": {
+      "type": "object",
+      "description": "Databricks artifact mirroring configuration like include schema or exclude schema etc.",
+      "additionalProperties": false,
+      "properties": {
+        "schemas": {
+          "type": "array",
+          "description": "List of schemas to mirror.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The schema name.",
+                "minLength": 1
+              },
+              "mirroringMode": {
+                "description": "The schema replication mode.",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/mirroringMode"
+                  }
+                ]
+              },
+              "tables": {
+                "type": "array",
+                "description": "List of tables to mirror within the schema.",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The table name.",
+                      "minLength": 1
+                    },
+                    "mirroringMode": {
+                      "description": "The table replication mode.",
+                      "allOf": [
+                        {
+                          "$ref": "#/definitions/mirroringMode"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [ "name", "mirroringMode" ]
+                }
+              }
+            },
+            "required": [ "name", "mirroringMode" ]
+          }
+        }
+      }
+    }
+  },
+  "required": [ "$schema", "catalogName", "databricksWorkspaceConnectionId", "mirroringMode" ]
+}
