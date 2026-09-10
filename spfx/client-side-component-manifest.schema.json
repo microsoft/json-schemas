@@ -46,8 +46,8 @@
             "componentType": {
               "type": "string",
               "title": "Component Type",
-              "description": "Type of client side component (\"Application\", \"Prefab\", \"Extension\", \"Library\", \"WebPart\", or \"AdaptiveCardExtension\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
-              "enum": ["Application", "WebPart", "Library", "Extension", "AdaptiveCardExtension", "Prefab"]
+              "description": "Type of client side component (\"Application\", \"Prefab\", \"Extension\", \"Library\", \"WebPart\", \"AdaptiveCardExtension\", or \"CopilotComponent\"). Components with the \"Application\" type are defined by the \"IClientSideApplicationManifest\" interface; components with the \"WebPart\" type are defined by the \"IClientSideWebPartManifest\" interface; and so forth.",
+              "enum": ["Application", "WebPart", "Library", "Extension", "AdaptiveCardExtension", "Prefab", "CopilotComponent"]
             },
 
             "loadLegacyFabricCss": {
@@ -126,6 +126,9 @@
     },
     {
       "$ref": "prefab-app-manifest.schema.json"
+    },
+    {
+      "$ref": "copilot-component-manifest.schema.json"
     }
   ]
 }

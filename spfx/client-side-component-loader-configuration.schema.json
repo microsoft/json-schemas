@@ -5,7 +5,6 @@
 
   "definitions": {
     "moduleConfiguration": {
-      "id": "moduleConfiguration",
       "type": "object",
       "title": "Module Configuration",
       "description": "This is the base interface for a script module's definition.",
