@@ -1,0 +1,148 @@
+{
+  "$id": "copilot-component-manifest.schema.json",
+  "title": "Copilot component manifest",
+  "description": "Copilot components are loaded by Copilot via the SPFx MCP server and rendered in an iframe. Unlike web parts and ACEs, they do not persist on a page canvas.",
+
+  "type": "object",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "minLength": 1
+        },
+
+        "manifestVersion": { "$ref": "any-value.schema.json" },
+        "id": { "$ref": "any-value.schema.json" },
+        "alias": { "$ref": "any-value.schema.json" },
+        "version": { "$ref": "any-value.schema.json" },
+        "loaderConfig": { "$ref": "any-value.schema.json" },
+        "componentType": { "$ref": "any-value.schema.json" },
+        "preloadComponents": { "$ref": "any-value.schema.json" },
+        "properties": { "$ref": "any-value.schema.json" },
+        "requiresCustomScript": { "$ref": "any-value.schema.json" },
+        "safeWithCustomScriptDisabled": { "$ref": "any-value.schema.json" },
+        "loadLegacyFabricCss": { "$ref": "any-value.schema.json" },
+        "experimentalData": {
+          "type": "object",
+          "title": "Experimental property bag",
+          "description": "Only use for properties not ready for production."
+        },
+        "copilotType": {
+          "type": "string",
+          "title": "Copilot Component Type",
+          "description": "Sub-type of the copilot component.",
+          "enum": ["Ux"]
+        },
+        "capabilities": {
+          "type": "object",
+          "title": "Component Capabilities",
+          "description": "Capabilities declared by a Copilot Component. availableDisplayModes and tools mirror MCP Apps capabilities; defaultDisplayMode is an SPFx startup preference resolved after ui/initialize.",
+          "properties": {
+            "availableDisplayModes": {
+              "type": "array",
+              "title": "Available Display Modes",
+              "description": "Display modes this component supports. The host uses this to decide which UI affordances to surface (e.g. an expand button for fullscreen).",
+              "items": {
+                "type": "string",
+                "enum": ["inline", "fullscreen", "pip"]
+              },
+              "uniqueItems": true
+            },
+            "defaultDisplayMode": {
+              "type": "string",
+              "title": "Default Display Mode",
+              "description": "SPFx startup preference. If 'fullscreen' is selectable, SPFx requests it once per logical component invocation after ui/initialize and uses the mode the host grants; otherwise the component stays inline. Values not in availableDisplayModes are ignored.",
+              "enum": ["inline", "fullscreen"]
+            },
+            "tools": {
+              "type": "object",
+              "title": "Tool Provider Capabilities",
+              "description": "Declares that the component exposes MCP-style tools the host can call back into it.",
+              "properties": {
+                "listChanged": {
+                  "type": "boolean",
+                  "description": "Whether the component supports tools/list_changed notifications."
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "tools": {
+          "type": "array",
+          "title": "Tool Definitions",
+          "description": "Each entry is a distinct MCP tool backed by this component. The MCP server emits one tool per entry in list_tools; tool/call routes by name to the same component class with the matching tool's validated arguments.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "description", "propertiesSchema"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "Tool Name",
+                "description": "The MCP tool name used in list_tools / tool/call. Must be a valid identifier: start with a letter or underscore, then letters/digits/underscores only.",
+                "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+              },
+              "description": {
+                "title": "Tool Description",
+                "description": "LLM-friendly description of when to use this tool. Exposed as the description in the MCP tool definition.",
+                "$ref": "localized-string.schema.json"
+              },
+              "propertiesSchema": {
+                "title": "Properties Schema",
+                "description": "A JSON Schema (draft-07) defining the properties needed to render the component for this tool, or a build-time reference with an id field.",
+                "type": "object",
+                "if": {
+                  "type": "object",
+                  "required": ["id"],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "^\\$[^:]+:.+;$"
+                    }
+                  }
+                },
+                "then": {
+                  "description": "Reference to a properties schema export, resolved at build time.",
+                  "required": ["id"],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The identifier for the properties schema reference.",
+                      "pattern": "^\\$[^:]+:.+;$"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "else": {
+                  "$ref": "http://json-schema.org/draft-07/schema#",
+                  "description": "An inline JSON Schema (draft-07) object defining the component properties."
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "client-side-component-manifest.schema.json#/definitions/clientSideComponentManifest"
+    },
+    {
+      "type": "object",
+      "required": ["componentType", "copilotType", "tools"],
+      "properties": {
+        "componentType": {
+          "type": "string",
+          "enum": ["CopilotComponent"]
+        }
+      },
+
+      "additionalProperties": true
+    }
+  ]
+}
