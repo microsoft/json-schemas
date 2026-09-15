@@ -1,0 +1,132 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/share/definition/common/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Asset": {
+      "description": "A Fabric item being shared, referenced by workspace and item ID under 'item'.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "item": {
+          "description": "The reference to the Fabric item being shared.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "referenceType": {
+              "description": "The reference mode. Always 'ById'.",
+              "type": "string",
+              "const": "ById",
+              "default": "ById"
+            },
+            "workspaceId": {
+              "description": "The unique identifier of the workspace containing the item.",
+              "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+            },
+            "itemId": {
+              "description": "The unique identifier of the item.",
+              "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+            }
+          },
+          "required": ["workspaceId", "itemId"]
+        },
+        "shareAs": {
+          "description": "How the shared item is represented to recipients. Optional; defaults to 'MirroredOneLake' when omitted. 'self' shares the native item as-is (e.g. a native Ontology share) and is persisted and returned on export so the representation is preserved across an export/import cycle; 'MirroredOneLake' shares a mirrored OneLake representation.",
+          "type": "string",
+          "enum": ["self", "MirroredOneLake"],
+          "default": "MirroredOneLake"
+        }
+      },
+      "required": ["item"]
+    },
+    "Recipient": {
+      "description": "A recipient of the share. Discriminated by the 'type' property.",
+      "oneOf": [
+        { "$ref": "#/definitions/ShareUserRecipient" },
+        { "$ref": "#/definitions/ShareServicePrincipalRecipient" }
+      ]
+    },
+    "ShareUserRecipient": {
+      "description": "A user recipient identified by UPN or email. Exactly one of userPrincipalName or email must be supplied.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "The recipient type discriminator.",
+          "type": "string",
+          "const": "User"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the recipient, matched against the UPN attribute.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "email": {
+          "description": "The email address of the recipient, matched against mail or verified proxy.",
+          "type": "string",
+          "format": "email",
+          "maxLength": 256
+        },
+        "tenantId": {
+          "description": "The tenant identifier for cross-tenant sharing.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        }
+      },
+      "required": ["type"],
+      "oneOf": [
+        { "required": ["userPrincipalName"], "not": { "required": ["email"] } },
+        { "required": ["email"], "not": { "required": ["userPrincipalName"] } }
+      ]
+    },
+    "ShareServicePrincipalRecipient": {
+      "description": "A service principal recipient identified by principal ID and tenant.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "The recipient type discriminator.",
+          "type": "string",
+          "const": "ServicePrincipal"
+        },
+        "principalId": {
+          "description": "The object identifier of the service principal.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        },
+        "tenantId": {
+          "description": "The tenant identifier of the service principal.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        }
+      },
+      "required": ["type", "principalId", "tenantId"]
+    },
+    "ShareExpirationPolicy": {
+      "description": "A policy that sets an expiration date for the share.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "The policy type discriminator.",
+          "type": "string",
+          "const": "ShareExpiration"
+        },
+        "properties": {
+          "description": "The policy-specific properties.",
+          "$ref": "#/definitions/ShareExpirationProperties"
+        }
+      },
+      "required": ["type", "properties"]
+    },
+    "ShareExpirationProperties": {
+      "description": "Properties for the ShareExpiration policy.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expirationDateTime": {
+          "description": "The date and time when the share expires, in UTC format.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/DateTime"
+        }
+      },
+      "required": ["expirationDateTime"]
+    }
+  }
+}
