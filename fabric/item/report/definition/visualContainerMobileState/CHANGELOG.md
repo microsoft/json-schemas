@@ -1,5 +1,23 @@
 # Visual Container Mobile State Versions
 
+### 2.7.0
+
+<b>Released in: </b> August 2026 <br />
+<b>Notes: </b>
+- Updates the embedded `visualConfiguration` reference from `2.6.0` to `2.7.0` for the SU08 visual updates
+
+### 2.6.0
+
+<b>Released in: </b> July 2026 <br />
+<b>Notes: </b>
+- Updates the embedded `visualConfiguration` reference from `2.5.0` to `2.6.0` for title-area spacing and explicit tooltip formatting
+
+### 2.5.0
+
+<b>Released in: </b> June 2026 <br />
+<b>Notes: </b>
+- Updates the embedded `visualConfiguration` reference to `2.5.0`
+
 ### 2.4.0 
 <b>Released in: </b> May 2026 <br />
 <b>Notes: </b>
