@@ -1,0 +1,172 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/deploymentPlan/definition/common/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "DeploymentPlanElementName": {
+      "description": "The name of a plan element (group, action). Maximum 60 characters, no leading or trailing whitespace.",
+      "type": "string",
+      "pattern": "^\\S.{0,59}(?<!\\s)$"
+    },
+    "DeploymentPlanGroupDependency": {
+      "description": "Represents a dependency of a group.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "groupName": {
+          "description": "The name of the group to depend on.",
+          "$ref": "#/definitions/DeploymentPlanElementName"
+        }
+      },
+      "required": ["groupName"]
+    },
+    "DeploymentPlanActionDependency": {
+      "description": "Represents a dependency of an action.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "actionName": {
+          "description": "The name of the action to depend on.",
+          "$ref": "#/definitions/DeploymentPlanElementName"
+        }
+      },
+      "required": ["actionName"]
+    },
+    "DeploymentPlanAction": {
+      "description": "Represents an action in a deployment group.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "The name of the action. Action names must be unique (case-insensitive) in the scope of the group.",
+          "$ref": "#/definitions/DeploymentPlanElementName"
+        },
+        "job": {
+          "description": "The configuration of the job to execute.",
+          "$ref": "#/definitions/DeploymentPlanJob"
+        },
+        "dependsOn": {
+          "description": "The dependencies on other actions within the same group.",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/DeploymentPlanActionDependency"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": ["name"]
+    },
+    "DeploymentPlanGroupOption": {
+      "description": "Represents an option in a deployment group. Use a single-name object such as { \"ActiveValueSet\": \"Default value set\" } where the option name contains only English letters (max 64) and the value is up to 256 characters.",
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z]{1,64}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 256,
+        "pattern": "^[^\\r\\n]*$"
+      }
+    },
+    "DeploymentPlanJobParameterName": {
+      "description": "The name of a parameter for a job action. Maximum 255 characters, must start with a letter, no whitespaces, underscore and dashes allowed.",
+      "type": "string",
+      "pattern": "^([A-Za-z_][A-Za-z0-9_\\-]{0,254})$"
+    },
+    "DeploymentPlanJobParameter": {
+      "description": "Represents a parameter for a job action.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "The name of the parameter.",
+          "$ref": "#/definitions/DeploymentPlanJobParameterName"
+        },
+        "value": {
+          "description": "The value of the parameter.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/ValueOrVar"
+        }
+      },
+      "required": ["name", "value"]
+    },
+    "DeploymentPlanJob": {
+      "description": "The job configuration for a deployment action.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "itemId": {
+          "description": "The Id of the item that implements the job to execute.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        },
+        "logicalId": {
+          "description": "The logical Id of the item that implements the job to execute.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        },
+        "type": {
+          "description": "The type of the job.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The parameters for the job.",
+          "type": [ "array", "null" ],
+          "items": {
+            "$ref": "#/definitions/DeploymentPlanJobParameter"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": ["type"]
+    },
+    "DeploymentPlanGroup": {
+      "description": "Represents a group of items with their deployment configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "The name of the group. Must be unique (case-insensitive) in the scope of the plan.",
+          "$ref": "#/definitions/DeploymentPlanElementName"
+        },
+        "logicalId": {
+          "description":  "The logical Id of the item to import.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
+        },
+        "dependsOn": {
+          "description": "The dependencies on other groups.",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/DeploymentPlanGroupDependency"
+          },
+          "maxItems": 1000
+        },
+        "preActions": {
+          "description": "The actions to run before importing this group.",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/DeploymentPlanAction"
+          },
+          "maxItems": 20
+        },
+        "postActions": {
+          "description": "The actions to run after importing this group.",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/DeploymentPlanAction"
+          },
+          "maxItems": 20
+        },
+        "options": {
+          "description": "The options for the item.",
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/definitions/DeploymentPlanGroupOption"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": ["name", "logicalId"]
+    }
+  }
+}
