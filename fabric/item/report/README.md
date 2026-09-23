@@ -1,5 +1,29 @@
 # Releases
 
+## August 2026
+
+Column expand/collapse, matrix freeze row headers, donut chart callouts, Cartesian outer padding control, slicer border and icon colors, date slicer preselection GA
+
+- [visualConfiguration 2.7.0](./definition/visualConfiguration/CHANGELOG.md#270)
+- [visualContainer 2.12.0](./definition/visualContainer/CHANGELOG.md#2120)
+- [visualContainerMobileState 2.7.0](./definition/visualContainerMobileState/CHANGELOG.md#270)
+
+## July 2026
+
+Visual container title-area spacing, chart series legend conditional formatting, explicit tooltip formatting
+
+- [visualConfiguration 2.6.0](./definition/visualConfiguration/CHANGELOG.md#260)
+- [visualContainer 2.11.0](./definition/visualContainer/CHANGELOG.md#2110)
+- [visualContainerMobileState 2.6.0](./definition/visualContainerMobileState/CHANGELOG.md#260)
+
+## June 2026
+
+AI narratives, visual header Copilot summary button, Shape Map GA, explicit tooltips, Azure Maps conditional formatting, slicer selection icon color, date slicer preselection
+
+- [visualConfiguration 2.5.0](./definition/visualConfiguration/CHANGELOG.md#250)
+- [visualContainer 2.10.0](./definition/visualContainer/CHANGELOG.md#2100)
+- [visualContainerMobileState 2.5.0](./definition/visualContainerMobileState/CHANGELOG.md#250)
+
 ## May 2026
 
 Auto Expand PivotTable, Report Landing Page, Fixed Width, Azure Maps Format Pane Revamp, Slicer, Slicer Background Transparency, Perspective setting, Report Locale
