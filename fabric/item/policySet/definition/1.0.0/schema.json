@@ -1,0 +1,184 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/policySet/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PolicySet",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Defines the schema to use for a policy set definition.",
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/policySet/definition/1.0.0/schema.json"
+    },
+    "properties": {
+      "description": "Defines the properties of the policy set.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "Defines the scope of the policy set.",
+          "type": "object",
+          "properties": {
+            "type": {
+              "description": "The scope type. Supported values and length restrictions are defined by the policy platform rather than constrained by this schema.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "scope"
+      ],
+      "additionalProperties": false
+    },
+    "policyRules": {
+      "description": "Defines the rules in the policy set.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/policyRule"
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "properties",
+    "policyRules"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "policyRule": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the policy rule. Free-form text with no length restrictions imposed by this schema.",
+          "type": "string"
+        },
+        "description": {
+          "description": "An optional description of the policy rule. Free-form text with no length restrictions imposed by this schema.",
+          "type": "string"
+        },
+        "policy": {
+          "description": "The policy type governed by the rule.",
+          "type": "string",
+          "enum": [
+            "ExternalDataSharing",
+            "ItemCreation"
+          ]
+        },
+        "conditions": {
+          "description": "Defines the conditions of the policy rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/condition"
+          }
+        },
+        "effects": {
+          "description": "Defines the effects of the policy rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/effect"
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "policy",
+        "conditions",
+        "effects"
+      ],
+      "additionalProperties": false
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/staticCondition"
+        },
+        {
+          "$ref": "#/definitions/dynamicCondition"
+        }
+      ]
+    },
+    "staticCondition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identifies a static condition. Only Static is permitted.",
+          "type": "string",
+          "const": "Static"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "dynamicCondition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identifies a dynamic condition. Only Dynamic is permitted.",
+          "type": "string",
+          "const": "Dynamic"
+        },
+        "targetProperty": {
+          "description": "The property evaluated by the condition, expressed as an identifier or a dot-separated property path.",
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$"
+        },
+        "predicate": {
+          "description": "Defines the comparison applied to the target property.",
+          "$ref": "#/definitions/predicate"
+        }
+      },
+      "required": [
+        "type",
+        "targetProperty",
+        "predicate"
+      ],
+      "additionalProperties": false
+    },
+    "predicate": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "description": "The comparison operator applied to the target property and the supplied values.",
+          "type": "string",
+          "enum": [
+            "AnyOf",
+            "NoneOf"
+          ]
+        },
+        "values": {
+          "description": "The values used for comparison with the target property.",
+          "type": "array",
+          "items": {
+            "description": "A comparison value. Allowed values and length restrictions depend on the target property and are not constrained by this schema.",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "operator",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "effect": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identifies the effect of the policy rule. Only Allow is permitted.",
+          "type": "string",
+          "const": "Allow"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
