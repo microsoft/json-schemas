@@ -1,16 +1,25 @@
 {
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/policySet/definition/1.0.0/schema.json",
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "PolicySet",
   "type": "object",
   "properties": {
+    "$schema": {
+      "description": "Defines the schema to use for a policy set definition.",
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/policySet/definition/1.0.0/schema.json"
+    },
     "properties": {
+      "description": "Defines the properties of the policy set.",
       "type": "object",
       "properties": {
         "scope": {
+          "description": "Defines the scope of the policy set.",
           "type": "object",
           "properties": {
             "type": {
+              "description": "The scope type. Supported values and length restrictions are defined by the policy platform rather than constrained by this schema.",
               "type": "string"
             }
           },
@@ -26,6 +35,7 @@
       "additionalProperties": false
     },
     "policyRules": {
+      "description": "Defines the rules in the policy set.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/policyRule"
@@ -33,6 +43,7 @@
     }
   },
   "required": [
+    "$schema",
     "properties",
     "policyRules"
   ],
@@ -42,12 +53,15 @@
       "type": "object",
       "properties": {
         "displayName": {
+          "description": "The display name of the policy rule. Free-form text with no length restrictions imposed by this schema.",
           "type": "string"
         },
         "description": {
+          "description": "An optional description of the policy rule. Free-form text with no length restrictions imposed by this schema.",
           "type": "string"
         },
         "policy": {
+          "description": "The policy type governed by the rule.",
           "type": "string",
           "enum": [
             "ExternalDataSharing",
@@ -55,12 +69,14 @@
           ]
         },
         "conditions": {
+          "description": "Defines the conditions of the policy rule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/condition"
           }
         },
         "effects": {
+          "description": "Defines the effects of the policy rule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/effect"
@@ -89,6 +105,8 @@
       "type": "object",
       "properties": {
         "type": {
+          "description": "Identifies a static condition. Only Static is permitted.",
+          "type": "string",
           "const": "Static"
         }
       },
@@ -101,13 +119,17 @@
       "type": "object",
       "properties": {
         "type": {
+          "description": "Identifies a dynamic condition. Only Dynamic is permitted.",
+          "type": "string",
           "const": "Dynamic"
         },
         "targetProperty": {
+          "description": "The property evaluated by the condition, expressed as an identifier or a dot-separated property path.",
           "type": "string",
           "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$"
         },
         "predicate": {
+          "description": "Defines the comparison applied to the target property.",
           "$ref": "#/definitions/predicate"
         }
       },
@@ -122,6 +144,7 @@
       "type": "object",
       "properties": {
         "operator": {
+          "description": "The comparison operator applied to the target property and the supplied values.",
           "type": "string",
           "enum": [
             "AnyOf",
@@ -129,8 +152,10 @@
           ]
         },
         "values": {
+          "description": "The values used for comparison with the target property.",
           "type": "array",
           "items": {
+            "description": "A comparison value. Allowed values and length restrictions depend on the target property and are not constrained by this schema.",
             "type": "string"
           }
         }
@@ -145,6 +170,8 @@
       "type": "object",
       "properties": {
         "type": {
+          "description": "Identifies the effect of the policy rule. Only Allow is permitted.",
+          "type": "string",
           "const": "Allow"
         }
       },
