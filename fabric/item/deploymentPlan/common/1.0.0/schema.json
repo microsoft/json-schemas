@@ -97,10 +97,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "itemId": {
-          "description": "The Id of the item that implements the job to execute.",
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
-        },
         "logicalId": {
           "description": "The logical Id of the item that implements the job to execute.",
           "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/Guid"
