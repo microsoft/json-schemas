@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "exportedDefinition.json",
+      "type": "json",
+      "description": "Fabric Git emits GraphQuerySet as a dependencies and ArtifactContents wrapper; the public payload is embedded as a JSON string.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1
+    },
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Optional public GraphQuerySet definition payload; not emitted as a root file in this Fabric export.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/graphQuerySet/definition/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

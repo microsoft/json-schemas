@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Root Mirrored AWS Databricks Catalog definition file returned by getDefinition and ALM export (Git integration / deployment pipelines).",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredAwsDatabricksCatalog/definition/mirroredAwsDatabricksCatalogDefinition/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

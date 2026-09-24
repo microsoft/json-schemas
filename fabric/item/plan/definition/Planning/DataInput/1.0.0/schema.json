@@ -68,23 +68,35 @@
           "description": "Whether user permissions are allowed for forecast."
         },
         "boundToFilterContext": {
-          "type": ["boolean", "integer"],
+          "type": [
+            "boolean",
+            "integer"
+          ],
           "description": "Whether bound to filter context."
         },
         "status": {
-          "type": ["string", "integer"],
+          "type": [
+            "string",
+            "integer"
+          ],
           "description": "Status of the column."
         },
         "sidecarHydrationLeaseAt": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Sidecar hydration lease time."
         },
         "sidecarHydrationStatus": {
-          "type": ["string", "integer"],
+          "type": [
+            "string",
+            "integer"
+          ],
           "description": "Sidecar hydration status."
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
     "ColumnMeta": {
       "type": "object",
@@ -127,7 +139,7 @@
           "description": "Name of the column."
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
     "MeasureType": {
       "type": "object",
@@ -150,13 +162,33 @@
         }
       },
       "oneOf": [
-        { "required": [ "Forecast" ] },
-        { "required": [ "DataInput" ] },
-        { "required": [ "VisualColumn" ] },
-        { "required": [ "Native" ] },
-        { "required": [ "Formula" ] }
+        {
+          "required": [
+            "Forecast"
+          ]
+        },
+        {
+          "required": [
+            "DataInput"
+          ]
+        },
+        {
+          "required": [
+            "VisualColumn"
+          ]
+        },
+        {
+          "required": [
+            "Native"
+          ]
+        },
+        {
+          "required": [
+            "Formula"
+          ]
+        }
       ],
-      "additionalProperties": true
+      "additionalProperties": false
     },
     "ForecastMeasure": {
       "type": "object",
@@ -228,7 +260,7 @@
             "method": {
               "type": "object",
               "additionalProperties": {
-                  "type": "string"
+                "type": "string"
               }
             }
           },
@@ -240,7 +272,7 @@
             "method": {
               "type": "object",
               "additionalProperties": {
-                  "type": "string"
+                "type": "string"
               }
             }
           },
@@ -292,7 +324,7 @@
               "additionalProperties": true
             }
           },
-          "additionalProperties": true
+          "additionalProperties": false
         },
         "title": {
           "type": "string"
@@ -304,10 +336,14 @@
           "type": "string"
         },
         "allow_input": {
-          "type": ["string", "object", "null"]
+          "type": "string",
+          "enum": [
+            "ReadAndEdit",
+            "ReadOnly"
+          ]
         }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
     "VisualColumnMeasure": {
       "type": "object",
@@ -392,7 +428,11 @@
           "type": "boolean"
         },
         "default_value": {
-          "type": ["number", "null", "object"]
+          "type": [
+            "number",
+            "null",
+            "object"
+          ]
         }
       },
       "additionalProperties": false
@@ -401,7 +441,11 @@
       "type": "object",
       "properties": {
         "default_value": {
-          "type": ["string", "null", "object"]
+          "type": [
+            "string",
+            "null",
+            "object"
+          ]
         },
         "allow_entry_on_totals_or_subtotals": {
           "type": "boolean"

@@ -1,6 +1,6 @@
 {
   "$id": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json",
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Map Definition",
   "type": "object",
   "additionalProperties": false,
@@ -21,7 +21,9 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "description": "The schema version for the map definition"
+      "description": "The schema version for the map definition",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json"
     },
     "basemap": {
       "type": "object",
