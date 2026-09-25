@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.1.0",
+  "files": [
+    {
+      "path": "graphType.json",
+      "type": "json",
+      "description": "Specifies the graph type (e.g., knowledge graph, lineage graph)",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/graphType/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "graphDefinition.json",
+      "type": "json",
+      "description": "Defines the graph structure including node types, edge types, and their properties",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/graphDefinition/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "dataSources.json",
+      "type": "json",
+      "description": "Declares the data sources that feed nodes and edges into the graph",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/dataSources/1.1.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "stylingConfiguration.json",
+      "type": "json",
+      "description": "Optional visual styling rules for rendering the graph (colors, icons, layouts)",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/stylingConfiguration/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

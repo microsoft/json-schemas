@@ -44,11 +44,17 @@
   "definitions": {
     "StatusCode": {
       "type": "string",
-      "enum": ["ACTIVE"]
+      "enum": [
+        "ACTIVE"
+      ]
     },
     "CubePartitionMeasureType": {
       "type": "string",
-      "enum": ["FORECAST", "NUMBER", "FORMULA"]
+      "enum": [
+        "FORECAST",
+        "NUMBER",
+        "FORMULA"
+      ]
     },
     "Guid": {
       "type": "string",
@@ -60,7 +66,12 @@
     "Dimension": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "label", "type", "dataType"],
+      "required": [
+        "id",
+        "label",
+        "type",
+        "dataType"
+      ],
       "properties": {
         "id": {
           "$ref": "#/definitions/DimensionId"
@@ -172,35 +183,56 @@
       "additionalProperties": false,
       "properties": {
         "min_value": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "max_value": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "distribute_parent_value_to_children": {
           "type": "boolean"
         },
         "default_value": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "minValue": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "maxValue": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         },
         "distributeParentValueToChildren": {
           "type": "boolean"
         },
         "defaultValue": {
-          "type": ["number", "null"]
+          "type": [
+            "number",
+            "null"
+          ]
         }
       }
     },
     "AccessControl": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["read", "write"],
+      "required": [
+        "read",
+        "write"
+      ],
       "properties": {
         "read": {
           "type": "array",
@@ -265,14 +297,20 @@
         "allow_input": {
           "oneOf": [
             {
-              "enum": ["ReadAndEdit", "ReadOnly"]
+              "enum": [
+                "ReadAndEdit",
+                "ReadOnly"
+              ]
             }
           ]
         },
         "allowInput": {
           "oneOf": [
             {
-              "enum": ["ReadAndEdit", "ReadOnly"]
+              "enum": [
+                "ReadAndEdit",
+                "ReadOnly"
+              ]
             }
           ]
         },
@@ -322,7 +360,10 @@
     },
     "PeriodRange": {
       "type": "object",
-      "required": ["start", "end"],
+      "required": [
+        "start",
+        "end"
+      ],
       "additionalProperties": false,
       "properties": {
         "start": {
@@ -335,7 +376,10 @@
     },
     "ForecastOpenPeriodItem": {
       "type": "object",
-      "required": ["forecastMethod", "targetPeriodRange"],
+      "required": [
+        "forecastMethod",
+        "targetPeriodRange"
+      ],
       "additionalProperties": false,
       "properties": {
         "sourceRange": {
@@ -354,7 +398,10 @@
     },
     "ForecastOpenPeriodItemSnake": {
       "type": "object",
-      "required": ["forecast_method", "target_period_range"],
+      "required": [
+        "forecast_method",
+        "target_period_range"
+      ],
       "additionalProperties": false,
       "properties": {
         "source_range": {
@@ -373,7 +420,10 @@
     },
     "PeriodRangeSnake": {
       "type": "object",
-      "required": ["start", "end"],
+      "required": [
+        "start",
+        "end"
+      ],
       "additionalProperties": false,
       "properties": {
         "start": {
@@ -399,7 +449,11 @@
         },
         "closedPeriodConfig": {
           "type": "object",
-          "required": ["measureId", "startTime", "endTime"],
+          "required": [
+            "measureId",
+            "startTime",
+            "endTime"
+          ],
           "additionalProperties": false,
           "properties": {
             "measureId": {
@@ -465,10 +519,14 @@
       },
       "anyOf": [
         {
-          "required": ["formulaQuery"]
+          "required": [
+            "formulaQuery"
+          ]
         },
         {
-          "required": ["formula_query"]
+          "required": [
+            "formula_query"
+          ]
         }
       ]
     },
@@ -510,7 +568,7 @@
     },
     "CubePartitionMeasureConfig": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "label": {
           "type": "string"
@@ -522,10 +580,32 @@
           "$ref": "#/definitions/MeasureTypeCamel"
         },
         "data_type": {
-          "type": "string"
+          "type": "string",
+          "oneOf": [
+            {
+              "enum": [
+                "Number",
+                "Text"
+              ]
+            },
+            {
+              "type": "string"
+            }
+          ]
         },
         "dataType": {
-          "type": "string"
+          "type": "string",
+          "oneOf": [
+            {
+              "enum": [
+                "Number",
+                "Text"
+              ]
+            },
+            {
+              "type": "string"
+            }
+          ]
         },
         "description": {
           "type": "string"
@@ -535,7 +615,11 @@
         },
         "closedPeriodConfig": {
           "type": "object",
-          "required": ["measureId", "startTime", "endTime"],
+          "required": [
+            "measureId",
+            "startTime",
+            "endTime"
+          ],
           "additionalProperties": false,
           "properties": {
             "measureId": {
@@ -553,7 +637,10 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["forecastMethod", "targetPeriodRange"],
+            "required": [
+              "forecastMethod",
+              "targetPeriodRange"
+            ],
             "additionalProperties": false,
             "properties": {
               "sourceRange": {
@@ -647,7 +734,10 @@
             "allowInput": {
               "oneOf": [
                 {
-                  "enum": ["ReadAndEdit", "ReadOnly"]
+                  "enum": [
+                    "ReadAndEdit",
+                    "ReadOnly"
+                  ]
                 }
               ]
             }
@@ -659,7 +749,12 @@
     "CubePartitionMeasure": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["recordGuid", "name", "config", "type"],
+      "required": [
+        "recordGuid",
+        "name",
+        "config",
+        "type"
+      ],
       "properties": {
         "id": {
           "type": "integer"
@@ -684,7 +779,9 @@
     "CubePartitionMeasureMapping": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["recordGuid"],
+      "required": [
+        "recordGuid"
+      ],
       "properties": {
         "id": {
           "type": "integer"
@@ -710,17 +807,25 @@
       },
       "anyOf": [
         {
-          "required": ["cubePartitionId", "cubePartitionMeasureId"]
+          "required": [
+            "cubePartitionId",
+            "cubePartitionMeasureId"
+          ]
         },
         {
-          "required": ["cubePartition_RefId", "cubePartitionMeasure_RefId"]
+          "required": [
+            "cubePartition_RefId",
+            "cubePartitionMeasure_RefId"
+          ]
         }
       ]
     },
     "CubePartitionMeasureDataInputColumnMapping": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["recordGuid"],
+      "required": [
+        "recordGuid"
+      ],
       "properties": {
         "id": {
           "type": "integer"
@@ -741,10 +846,16 @@
           "type": "integer"
         },
         "cubePartitionId": {
-          "type": ["integer", "null"]
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "filterHash": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "visual_RefId": {
           "$ref": "#/definitions/Guid"

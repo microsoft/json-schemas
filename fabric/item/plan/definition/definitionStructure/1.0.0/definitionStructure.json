@@ -1,0 +1,103 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Plan root definition; example is a schema-valid projection of the real export because Fabric emits extra fields not allowed by the public schema.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/definition/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "planProperties.json",
+      "type": "json",
+      "description": "Plan properties; example is a schema-valid projection of the real export because Fabric emits extra fields/value shapes not allowed by the public schema.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planProperties/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "connectedPlanning/infobridge.json",
+      "type": "json",
+      "description": "InfoBridge configuration exported by Fabric; no schemaRef because the real export has empty sources and extra fields that do not validate against the public schema.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1
+    },
+    {
+      "path": "cube/cube.json",
+      "type": "json",
+      "description": "Cube configuration exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/cube/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "sheets/*/sheet.json",
+      "type": "json",
+      "description": "Sheet UI/canvas configuration exported by Fabric; no schemaRef because the real export is missing public-schema-required notes members and includes extra fields.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000
+    },
+    {
+      "path": "sheets/*/commentSettings.json",
+      "type": "json",
+      "description": "Sheet comment settings exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/sheets/commentSettings/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "sheets/*/visuals/*/dataInput.json",
+      "type": "json",
+      "description": "Visual data input configuration; example is a schema-valid projection of the real export because Fabric emits extra state fields.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/dataInput/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "sheets/*/visuals/*/properties.json",
+      "type": "json",
+      "description": "Visual properties exported by Fabric; no schemaRef because the real file shape does not match the public Planning/Intelligence/PowerTable properties schemas.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000
+    },
+    {
+      "path": "sheets/*/visuals/*/writeback.json",
+      "type": "json",
+      "description": "Visual writeback configuration exported by Fabric; no schemaRef because the real export lacks public-schema-required destination.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000
+    }
+  ]
+}
