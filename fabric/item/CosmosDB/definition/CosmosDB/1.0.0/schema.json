@@ -4,9 +4,7 @@
     "title": "CosmosDB Containers Schema",
     "type": "object",
     "properties": {
-        "type": "object",
-        "properties": {
-            "containers": {
+        "containers": {
                 "type": "array",
                 "items": {
                     "type": "object",
@@ -316,4 +314,3 @@
             }
         }
     }
-}
