@@ -11,14 +11,20 @@
       ]
     },
     "widgets": {
-      "type": "array",
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/definitions/DashboardWidget"
       },
       "description": "The widgets on the dashboard"
     },
     "settings": {
-      "$ref": "#/definitions/DashboardSettings",
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/definitions/DashboardSettings" }
+      ],
       "description": "The settings of the dashboard"
     }
   },

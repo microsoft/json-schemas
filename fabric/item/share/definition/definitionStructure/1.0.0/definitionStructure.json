@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "share.json",
+      "type": "json",
+      "description": "The IQShare definition containing shared assets, recipients, and policies",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/share/definition/share/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

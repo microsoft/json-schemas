@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "2.0.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "CosmosDB database definition emitted by Fabric Git Integration.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/CosmosDB/definition/CosmosDB/2.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

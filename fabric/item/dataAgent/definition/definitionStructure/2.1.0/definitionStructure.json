@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "2.1.0",
+  "files": [
+    {
+      "path": "Files/Config/data_agent.json",
+      "type": "json",
+      "description": "Data Agent root configuration exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataAgent/2.1.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/draft/stage_config.json",
+      "type": "json",
+      "description": "Draft stage configuration exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/stageConfiguration/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/draft/*/datasource.json",
+      "type": "json",
+      "description": "Draft data source configuration exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/draft/*/fewshots.json",
+      "type": "json",
+      "description": "Optional draft few-shot examples exported for a data source.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/fewShots/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/publish_info.json",
+      "type": "json",
+      "description": "Optional publish information exported for a published Data Agent.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/publishInfo/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/published/stage_config.json",
+      "type": "json",
+      "description": "Optional published stage configuration exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/stageConfiguration/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/published/*/datasource.json",
+      "type": "json",
+      "description": "Optional published data source configuration exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "Files/Config/published/*/fewshots.json",
+      "type": "json",
+      "description": "Optional published few-shot examples exported for a data source.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/fewShots/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}
