@@ -1,5 +1,27 @@
 # Visual Configuration Versions
 
+### 2.7.0
+
+<b>Released in: </b> August 2026 <br />
+<b>Notes: </b>
+- Updates the schema identity for the SU08 visual updates, retaining the schema structure introduced in `2.6.0`
+- Includes both the standalone and embedded visual configuration schemas
+
+### 2.6.0
+
+<b>Released in: </b> July 2026 <br />
+<b>Notes: </b>
+- Adds `spaceAbovePlotArea`, `spaceAboveDivider`, and `spaceAboveSubtitle` to the `Spacing` definition
+- Adds `showTooltipFieldsOnly`, `showSentenceFormat`, `sentenceTemplate`, `showChartSpecificTooltips`, and `showValuesInBold` to the `VisualTooltip` definition
+- Includes the same formatting properties in the standalone and embedded schemas
+
+### 2.5.0
+
+<b>Released in: </b> June 2026 <br />
+<b>Notes: </b>
+- Adds `showCopilotSummaryButton` to the `VisualHeader` definition
+- Includes both the standalone and embedded visual configuration schemas
+
 ### 2.3.0
 
 <b>Released in: </b> March 2026 <br />
