@@ -25,3 +25,15 @@ jobs:
       - name: Run tests
         run: |
           pytest ./tests/validate-fabric-schemas_test.py
+
+      - name: Setup JSON Schema CLI
+        uses: sourcemeta/jsonschema@b28b4c48f04b566101e5be37cbe42fb9fca15622 # v16.12.0
+
+      - name: Validate Fabric schemas against metaschema
+        run: |
+          jsonschema metaschema fabric
+
+      - name: Check schema formatting (advisory)
+        continue-on-error: true
+        run: |
+          jsonschema fmt fabric --check
