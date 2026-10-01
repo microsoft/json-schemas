@@ -22,7 +22,7 @@
       "description": "Id for the localized string in the form '$<moduleName>:<expression>;'",
       "type": "string",
       "minLength": 1,
-      "pattern": "^\\$[^:]+\\:.+\\;$"
+      "pattern": "^\\$[^:]+:.+;$"
     }
   },
   "patternProperties": {
