@@ -1,0 +1,21 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PostgreSQL database definition manifest",
+  "description": "Defines the schema for the decoded manifest.json part of a PostgreSQLDatabase item definition in pgschema format, version 1.0.0. This schema does not validate the other definition files or their transport representations.",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string",
+      "description": "Format of the PostgreSQL database definition.",
+      "const": "pgschema"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the definition format, independent of the pgschema generator version and Fabric platform metadata version.",
+      "const": "1.0.0"
+    }
+  },
+  "required": ["format", "version"],
+  "additionalProperties": false
+}
