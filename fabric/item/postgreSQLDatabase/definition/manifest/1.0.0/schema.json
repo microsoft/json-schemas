@@ -1,21 +1,27 @@
 {
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "PostgreSQL database definition manifest",
-  "description": "Defines the schema for the decoded manifest.json part of a PostgreSQLDatabase item definition in pgschema format, version 1.0.0. This schema does not validate the other definition files or their transport representations.",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json",
   "type": "object",
+  "description": "Describes the pgschema manifest for a Fabric PostgreSQL Database item definition, identifying its serialization format and version.",
+  "additionalProperties": false,
+  "required": ["$schema", "format", "version"],
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Identifies the JSON schema for this manifest.",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json"
+    },
     "format": {
       "type": "string",
-      "description": "Format of the PostgreSQL database definition.",
+      "description": "The definition serialization format, fixed to pgschema.",
       "const": "pgschema"
     },
     "version": {
       "type": "string",
-      "description": "Version of the definition format, independent of the pgschema generator version and Fabric platform metadata version.",
-      "const": "1.0.0"
+      "description": "The supported pgschema definition serialization version, fixed to 1.0.0.",
+      "const": "1.0.0",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
     }
-  },
-  "required": ["format", "version"],
-  "additionalProperties": false
+  }
 }
