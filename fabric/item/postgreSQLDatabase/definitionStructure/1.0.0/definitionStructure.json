@@ -1,0 +1,92 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "format": "pgschema",
+  "files": [
+    {
+      "path": "manifest.json",
+      "type": "json",
+      "description": "The manifest identifying the pgschema definition serialization format and version.",
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "main.sql",
+      "type": "sql",
+      "description": "The SQL include and index entry script for the database structure and source files.",
+      "minCount": 1,
+      "maxCount": 1
+    },
+    {
+      "path": "types/*.sql",
+      "type": "sql",
+      "description": "Database type declarations.",
+      "minCount": 0
+    },
+    {
+      "path": "domains/*.sql",
+      "type": "sql",
+      "description": "Database domain declarations.",
+      "minCount": 0
+    },
+    {
+      "path": "sequences/*.sql",
+      "type": "sql",
+      "description": "Structural sequence declarations.",
+      "minCount": 0
+    },
+    {
+      "path": "functions/*.sql",
+      "type": "sql",
+      "description": "Database routine source.",
+      "minCount": 0
+    },
+    {
+      "path": "procedures/*.sql",
+      "type": "sql",
+      "description": "Stored procedure declarations and source.",
+      "minCount": 0
+    },
+    {
+      "path": "aggregates/*.sql",
+      "type": "sql",
+      "description": "Aggregate declarations.",
+      "minCount": 0
+    },
+    {
+      "path": "tables/*.sql",
+      "type": "sql",
+      "description": "Table declarations and associated constraints, indexes, and triggers.",
+      "minCount": 0
+    },
+    {
+      "path": "views/*.sql",
+      "type": "sql",
+      "description": "View declarations.",
+      "minCount": 0
+    },
+    {
+      "path": "materialized_views/*.sql",
+      "type": "sql",
+      "description": "Materialized view declarations and associated indexes and comments.",
+      "minCount": 0
+    },
+    {
+      "path": "privileges/*.sql",
+      "type": "sql",
+      "description": "Object and column GRANT and REVOKE statements.",
+      "minCount": 0
+    },
+    {
+      "path": "default_privileges/*.sql",
+      "type": "sql",
+      "description": "Schema-scoped default GRANT and REVOKE statements.",
+      "minCount": 0
+    }
+  ]
+}
