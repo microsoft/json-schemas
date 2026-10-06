@@ -1,0 +1,921 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/dataQuality/definition/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Data Quality item definition",
+  "description": "Aggregate definition for a Data Quality item: the data items it monitors and the quality rules applied to each.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Schema identifier for this definition document.",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/dataQuality/definition/definition/1.0.0/schema.json"
+    },
+    "dataItems": {
+      "type": "array",
+      "description": "Monitored data items with their source references and quality rules.",
+      "items": {
+        "$ref": "#/definitions/DataItem"
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "dataItems"
+  ],
+  "definitions": {
+    "DataItem": {
+      "type": "object",
+      "description": "A monitored data item, identifying the source data it reads and the quality rules applied to it. The id must be unique (case-insensitive) within the dataItems array; this is a runtime invariant not enforced by the schema.",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the data item, unique within this definition. Must not be blank.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "\\S"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Optional name of the data item shown in the Data Quality experience. It can change without affecting the id.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "Type of the Fabric item hosting the source data. Warehouse sources use table or view data.",
+          "enum": [
+            "Lakehouse",
+            "Warehouse"
+          ]
+        },
+        "sourceReference": {
+          "$ref": "#/definitions/SourceReference",
+          "description": "Location of the source data this item monitors."
+        },
+        "rules": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Quality rules applied to this data item. May be omitted or null for compatibility with stored definitions.",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "sourceType",
+        "sourceReference"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceType": {
+                "const": "Warehouse"
+              }
+            },
+            "required": [
+              "sourceType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sourceReference": {
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "type": {
+                        "enum": [
+                          "Table",
+                          "View"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SourceReference": {
+      "type": "object",
+      "description": "Points at the Fabric item and the table, view or file within it that backs a data item.",
+      "additionalProperties": false,
+      "properties": {
+        "itemId": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar",
+          "description": "Identifier of the Fabric item hosting the data."
+        },
+        "data": {
+          "$ref": "#/definitions/SourceData",
+          "description": "The table, view or file within the referenced item."
+        }
+      },
+      "required": [
+        "itemId",
+        "data"
+      ]
+    },
+    "SourceData": {
+      "type": "object",
+      "description": "Describes how the source data is organized within the hosting item. Table sources require tableName and format; file sources require fileName and format; view sources require viewName and may omit format. A source can only include the tableName, viewName or folderPath and fileName fields that match its type. Type and format values are PascalCase, like the other enumerations in this definition.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Whether the source data is a table, view or file.",
+          "enum": [
+            "Table",
+            "View",
+            "File"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "description": "Storage format of the source data. Required for tables and files; optional for views.",
+          "enum": [
+            "Delta",
+            "Parquet",
+            "Csv"
+          ]
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "Schema containing the table or view.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "tableName": {
+          "type": "string",
+          "description": "Name of the table. Required for table sources.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "\\S"
+        },
+        "viewName": {
+          "type": "string",
+          "description": "Name of the view. Required for view sources.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "Folder containing the file, relative to the item's Files area. Empty for a file directly under Files. Applies to file sources.",
+          "maxLength": 1024
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the file. Required for file sources.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Table"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "format",
+              "tableName"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "viewName"
+                  ]
+                },
+                {
+                  "required": [
+                    "folderPath"
+                  ]
+                },
+                {
+                  "required": [
+                    "fileName"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "File"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "format",
+              "fileName"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "tableName"
+                  ]
+                },
+                {
+                  "required": [
+                    "viewName"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "View"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "viewName"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "tableName"
+                  ]
+                },
+                {
+                  "required": [
+                    "folderPath"
+                  ]
+                },
+                {
+                  "required": [
+                    "fileName"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Rule": {
+      "type": "object",
+      "description": "A quality rule applied to a data item. Rule name must be unique (case-insensitive) within the data item's rules array; this is a runtime invariant not enforced by the schema.",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the quality rule. Must not be blank.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "\\S"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Optional description of the quality rule.",
+          "maxLength": 4000
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of quality check performed by this rule.",
+          "enum": [
+            "NotNull",
+            "Unique",
+            "TypeMatch",
+            "Duplicate",
+            "Timeliness",
+            "Regex",
+            "Like",
+            "Enumeration",
+            "TableLookup",
+            "CustomTruth"
+          ]
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Quality dimension measured by this rule.",
+          "enum": [
+            "Accuracy",
+            "Completeness",
+            "Conformity",
+            "Consistency",
+            "Timeliness",
+            "Uniqueness"
+          ]
+        },
+        "typeProperties": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Optional rule-type-specific configuration. May be omitted or null for compatibility with stored definitions. A supplied object must satisfy the selected rule type's schema, including its required fields. Schema validation does not establish that the rule is ready to execute."
+        },
+        "status": {
+          "type": "string",
+          "description": "Lifecycle status of the rule.",
+          "enum": [
+            "Active",
+            "Disabled"
+          ],
+          "default": "Active"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "dimension"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "NotNull"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NotNullTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Unique"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/UniqueTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "TypeMatch"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/TypeMatchTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Duplicate"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/DuplicateTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Timeliness"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/TimelinessTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Regex"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/RegexTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Like"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/LikeTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Enumeration"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/EnumerationTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "TableLookup"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/TableLookupTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "CustomTruth"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "typeProperties": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/CustomTruthTypeProperties"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RuleColumn": {
+      "type": "object",
+      "description": "A column or expression reference used in rule type properties.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Whether this references a column by name or an expression.",
+          "enum": [
+            "Column",
+            "Expression"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Column name or expression text.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "NotNullTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a NotNull rule. Requires values to be non-null. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column to check for non-null values."
+        }
+      },
+      "required": [
+        "column"
+      ]
+    },
+    "UniqueTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a Unique rule. Requires values to be unique. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column to check for unique values."
+        }
+      },
+      "required": [
+        "column"
+      ]
+    },
+    "TypeMatchTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a TypeMatch rule. Checks that the column's values conform to the column's data type. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column to check for data type conformance."
+        }
+      },
+      "required": [
+        "column"
+      ]
+    },
+    "DuplicateTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a Duplicate rule. Detects duplicate records based on one or more columns. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires columns or the legacy column.",
+      "additionalProperties": false,
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Columns to check for duplicates.",
+          "items": {
+            "$ref": "#/definitions/RuleColumn"
+          },
+          "minItems": 1
+        },
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Legacy single-column reference, accepted for definitions saved before columns was introduced. New definitions should use columns."
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "columns"
+          ]
+        },
+        {
+          "required": [
+            "column"
+          ]
+        }
+      ]
+    },
+    "TimelinessTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a Timeliness rule. Checks whether data is sufficiently current. Optional or null on the containing rule for stored-definition compatibility; all fields in a supplied object are optional, so an empty object is also accepted.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column containing the timestamp to evaluate."
+        },
+        "timeDifference": {
+          "type": "integer",
+          "description": "Maximum acceptable age in milliseconds.",
+          "minimum": 1,
+          "maximum": 311040000000
+        }
+      }
+    },
+    "RegexTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a Regex rule. Requires values to match a regular expression. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column and pattern.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column whose values must match the pattern."
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Regular expression pattern to match against.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "column",
+        "pattern"
+      ]
+    },
+    "LikeTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a Like rule. Requires values to match a LIKE pattern. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column and pattern.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column whose values must match the pattern."
+        },
+        "pattern": {
+          "type": "string",
+          "description": "LIKE pattern to match against.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "column",
+        "pattern"
+      ]
+    },
+    "EnumerationTypeProperties": {
+      "type": "object",
+      "description": "Type properties for an Enumeration rule. Requires values to belong to an allowed set. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column and values.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column whose values must be in the allowed set."
+        },
+        "values": {
+          "type": "array",
+          "description": "Allowed values for the column.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "column",
+        "values"
+      ]
+    },
+    "TableLookupTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a TableLookup rule. Validates values against a column in a referenced data item. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column and reference.",
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column in the source data item to validate."
+        },
+        "reference": {
+          "$ref": "#/definitions/TableLookupReference",
+          "description": "The data item and column to look up against."
+        }
+      },
+      "required": [
+        "column",
+        "reference"
+      ]
+    },
+    "TableLookupReference": {
+      "type": "object",
+      "description": "Identifies the data item and column that a TableLookup rule validates against.",
+      "additionalProperties": false,
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "description": "Type of the Fabric item hosting the referenced data. Warehouse sources use table or view data.",
+          "enum": [
+            "Lakehouse",
+            "Warehouse"
+          ]
+        },
+        "itemId": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar",
+          "description": "Identifier of the Fabric item hosting the referenced data."
+        },
+        "data": {
+          "$ref": "#/definitions/SourceData",
+          "description": "The table, view or file within the referenced item."
+        },
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Column in the referenced data item to look up against."
+        }
+      },
+      "required": [
+        "sourceType",
+        "itemId",
+        "data",
+        "column"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sourceType": {
+                "const": "Warehouse"
+              }
+            },
+            "required": [
+              "sourceType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "Table",
+                      "View"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "CustomTruthTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a CustomTruth rule. Evaluates a custom truth expression. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires condition.",
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Truth expression to evaluate.",
+          "minLength": 1
+        },
+        "filterCriteria": {
+          "type": "string",
+          "description": "Optional filter to apply before evaluating the condition.",
+          "minLength": 1
+        },
+        "emptyCriteria": {
+          "type": "string",
+          "description": "Criteria for handling empty results.",
+          "minLength": 1
+        },
+        "column": {
+          "$ref": "#/definitions/RuleColumn",
+          "description": "Optional column reference for the expression."
+        },
+        "columns": {
+          "type": "array",
+          "description": "Optional column references for the expression.",
+          "items": {
+            "$ref": "#/definitions/RuleColumn"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "condition"
+      ]
+    }
+  }
+}
