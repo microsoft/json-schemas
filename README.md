@@ -69,3 +69,10 @@ For minor changes, i.e. schema changes that are just a few lines, you can elimin
 4. After you verify your update was merged to **Main**, open a new PR and merge **Main** to **Live**. You may note other schema commits; it's up to you how to handle this but my theory is that if they're in **Main**, then they're ready to go live. 
 
 Generally, updates occur within 30 minutes but it can take up to 24 hours. To see your updated or new file, you may need to clear your cache.
+
+## Schema validation
+
+Automated schema validation runs via GitHub Actions on pull requests touching `fabric/**/*.json`:
+- **Metaschema validation**: Verifies that schemas strictly conform to their declared JSON Schema dialect using the [Sourcemeta `jsonschema` CLI](https://github.com/sourcemeta/jsonschema) (`jsonschema metaschema fabric`).
+- **Schema formatting (advisory)**: Checks schemas against canonical formatting standards (`jsonschema fmt fabric --check`).
+- **Reference integrity testing**: Pytest suite (`tests/validate-fabric-schemas_test.py`) verifies local relative `$ref` file targets.
