@@ -721,12 +721,12 @@
     },
     "TimelinessTypeProperties": {
       "type": "object",
-      "description": "Type properties for a Timeliness rule. Checks whether data is sufficiently current. Optional or null on the containing rule for stored-definition compatibility; all fields in a supplied object are optional, so an empty object is also accepted.",
+      "description": "Type properties for a Timeliness rule. Checks whether data is sufficiently current. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires timeDifference.",
       "additionalProperties": false,
       "properties": {
         "column": {
           "$ref": "#/definitions/RuleColumn",
-          "description": "Column containing the timestamp to evaluate."
+          "description": "Optional column containing the timestamp to evaluate."
         },
         "timeDifference": {
           "type": "integer",
@@ -734,7 +734,10 @@
           "minimum": 1,
           "maximum": 311040000000
         }
-      }
+      },
+      "required": [
+        "timeDifference"
+      ]
     },
     "RegexTypeProperties": {
       "type": "object",
