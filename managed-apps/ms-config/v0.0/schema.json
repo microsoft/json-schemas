@@ -1,0 +1,295 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Microsoft App configuration (ms.config.json).",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "const": "0.0"
+    },
+    "appId": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "appDisplayName": {
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "environmentId": {
+      "type": "string"
+    },
+    "buildPath": {
+      "type": "string"
+    },
+    "buildCommand": {
+      "type": "string"
+    },
+    "buildEntryPoint": {
+      "type": "string"
+    },
+    "db": {
+      "type": "object",
+      "properties": {
+        "schemaPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "schemaPath"
+      ],
+      "additionalProperties": false
+    },
+    "iconPath": {
+      "type": "string"
+    },
+    "localAppUrl": {
+      "type": "string"
+    },
+    "cloud": {
+      "type": "string",
+      "enum": [
+        "test",
+        "preprod",
+        "public",
+        "usgov",
+        "usgovhigh",
+        "usgovdod",
+        "china"
+      ]
+    },
+    "repositoryId": {
+      "type": "string"
+    },
+    "repoType": {
+      "type": "string",
+      "enum": [
+        "native",
+        "github",
+        "none"
+      ]
+    },
+    "externalRepoUrl": {
+      "type": "string"
+    },
+    "hasCustomMiddleTier": {
+      "type": "boolean"
+    },
+    "connectionReferences": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "dataSources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authenticationType": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sharedConnectionId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dataSets": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "dataSources": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "tableName": {
+                        "type": "string"
+                      },
+                      "tableNameOverride": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "environmentVariableName": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "allowedActions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "datasetOverride": {
+                  "type": "object",
+                  "properties": {
+                    "environmentVariableName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "environmentVariableName"
+                  ],
+                  "additionalProperties": false
+                },
+                "siteId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dataSources"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "xrmConnectionReferenceLogicalName": {
+            "type": "string"
+          },
+          "dataSourcesShareLinks": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "linkKind": {
+                  "type": "number"
+                },
+                "shareId": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "linkKind",
+                "shareId",
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "isOnPremiseConnection": {
+            "type": "boolean"
+          },
+          "gatewayObjectIdHint": {
+            "type": "string"
+          },
+          "dataverseTables": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "environmentId": {
+                  "type": "string"
+                },
+                "logicalName": {
+                  "type": "string"
+                },
+                "entitySetName": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "environmentId",
+                "logicalName"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "allowedActions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "displayName"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "appSettings": {
+      "type": "object",
+      "properties": {
+        "showHeader": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "functions": {
+      "type": "object",
+      "properties": {
+        "baseDirectory": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "baseDirectory"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
