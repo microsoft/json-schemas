@@ -63,7 +63,8 @@
         "DremioIcebergCatalog",
         "AzureMonitorMirroredCatalog",
         "AWSIcebergCatalog",
-        "MirroredGoogleLakehouseRuntimeCatalog"
+        "MirroredGoogleLakehouseRuntimeCatalog",
+        "AvevaConnectCatalog"
       ]
     },
     "SourceTypeProperties": {
