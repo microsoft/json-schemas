@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Best-effort assumed root MirroredCatalog definition file; filename assumed to be definition.json because no real Fabric export was possible for an unconfigured mirrored catalog.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredCatalog/definition/mirroredCatalogDefinition/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

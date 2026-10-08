@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "plan.yml",
+      "type": "yml",
+      "description": "The deployment plan definition containing deployment sets, steps, and dependencies",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/deploymentPlan/definition/plan/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}
