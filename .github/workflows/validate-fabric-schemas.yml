@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest
+          pip install pytest jsonschema
 
       - name: Run tests
         run: |
