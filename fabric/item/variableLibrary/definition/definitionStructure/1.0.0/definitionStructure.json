@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "settings.json",
+      "type": "json",
+      "description": "Library-level settings such as default value set and metadata",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/settings/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "variables.json",
+      "type": "json",
+      "description": "Declares the variables in this library with their names, types, and default values",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/variables/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "valueSets/*.json",
+      "type": "json",
+      "description": "Environment-specific value overrides for the declared variables (e.g., Production, Staging)",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 1000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Root Ontology definition payload emitted by Fabric Git Integration.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/definition/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "EntityTypes/*/definition.json",
+      "type": "json",
+      "description": "Ontology entity type definition files, such as the Customer and Device entity types in the pilot export.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/entityType/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "RelationshipTypes/*/definition.json",
+      "type": "json",
+      "description": "Ontology relationship type definition files, such as the owns relationship in the pilot export.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/relationshipType/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "RelationshipTypes/*/Contextualizations/*.json",
+      "type": "json",
+      "description": "Optional relationship contextualization files exported under each relationship type.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/contextualization/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "EntityTypes/*/DataBindings/*.json",
+      "type": "json",
+      "description": "Optional entity data binding files exported under each entity type.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/dataBinding/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "EntityTypes/*/Documents/document1.json",
+      "type": "json",
+      "description": "Optional entity document metadata file exported under each entity type.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/document/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "EntityTypes/*/Overviews/definition.json",
+      "type": "json",
+      "description": "Optional entity overview dashboard definition exported under each entity type.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/overviews/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "EntityTypes/*/ResourceLinks/definition.json",
+      "type": "json",
+      "description": "Optional entity resource link list exported under each entity type when non-empty.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/ontology/resourceLinks/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "mlmodel.metadata.json",
+      "type": "json",
+      "description": "ML model metadata containing artifact dependency references. The pilot Fabric export was an empty dependencies array.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/mlModel/definition/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.1.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "User data function definition emitted by Fabric Git Integration using the 1.1.0 public schema shape.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/userDataFunction/definition/1.1.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

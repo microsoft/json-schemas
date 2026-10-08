@@ -93,7 +93,9 @@
                     "$ref": "#/definitions/PageGroupingMeta"
                 }
             },
-            "additionalProperties": true
+            "additionalProperties": {
+                "type": "string"
+            }
         },
         "WorkloadModeConfig": {
             "type": "object",
@@ -152,7 +154,7 @@
                     "type": "boolean"
                 }
             },
-            "additionalProperties": true
+            "additionalProperties": false
         },
         "ReadModeConfig": {
             "type": "object",
@@ -187,7 +189,7 @@
                     "type": "boolean"
                 }
             },
-            "additionalProperties": true
+            "additionalProperties": false
         },
         "PageGroupingMeta": {
             "type": "object",
