@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/automations/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Automations/1.0.0/schema.json",
   "title": "PowerTable Automations",
   "description": "Array of automation definitions for a PowerTable visual, defining triggers and action flows.",
   "type": "object",
@@ -12,7 +12,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/automations/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Automations/1.0.0/schema.json"
     },
     "automations": {
       "type": "array",
@@ -21,7 +21,7 @@
       }
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "definitions": {
     "Automation": {
       "type": "object",
@@ -43,7 +43,7 @@
           "$ref": "#/definitions/AutomationConfig"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "AutomationConfig": {
       "type": "object",
@@ -70,9 +70,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/ActionGroup"
           }
-        }
+        },
+        "version": {}
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "Trigger": {
       "type": "object",
@@ -199,7 +200,6 @@
     "CreateRecordConfig": {
       "type": "object",
       "required": [
-        "connectionId",
         "table"
       ],
       "properties": {
@@ -220,9 +220,13 @@
         "table": {
           "type": "string",
           "description": "Target table for the record."
+        },
+        "schema": {
+          "type": "string",
+          "description": "Database schema for the table."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     }
   }
 }

@@ -1,0 +1,66 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/dataSources/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the schema for the dataSources part of the GraphIndex item definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/dataSources/1.0.0/schema.json"
+    },
+    "dataSources": {
+      "description": "The data sources in the graph index definition.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataSource"
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "$schema",
+    "dataSources"
+  ],
+  "definitions": {
+    "DataSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "The unique name of this data source within the definition part.",
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "description": "The data source type.",
+          "type": "string",
+          "const": "DeltaTable"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "properties"
+      ]
+    },
+    "DataSourceProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "The delta table path.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  }
+}

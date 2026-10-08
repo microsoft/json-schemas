@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/connectedPlanning/infobridge/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/ConnectedPlanning/Infobridge/1.0.0/schema.json",
   "description": "InfoBridge configuration defining data sources, queries, transformation steps, and writeback destinations for connected planning.",
   "type": "object",
   "required": [
@@ -11,7 +11,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/connectedPlanning/infobridge/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/ConnectedPlanning/Infobridge/1.0.0/schema.json"
     },
     "sources": {
       "title": "Sources",
@@ -29,9 +29,22 @@
       "items": {
         "$ref": "#/definitions/QueryGroup"
       }
+    },
+    "linkedQueries": {
+      "title": "LinkedQueries",
+      "description": "Optional linked query references.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "version": {
+      "description": "Schema version.",
+      "type": ["integer", "string"]
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "definitions": {
     "Source": {
       "title": "Source",
@@ -86,13 +99,9 @@
         "visualId": {
           "description": "The visual identifier this source is associated with. Can be numeric internal ID or UUID in external definitions.",
           "oneOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "string",
-              "format": "uuid"
-            }
+            { "type": "integer" },
+            { "type": "string", "format": "uuid" },
+            { "type": "null" }
           ]
         },
         "meta": {
@@ -130,7 +139,7 @@
         "includeMeasures": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": ["string", "object"]
           }
         },
         "includeScenarios": {
@@ -143,7 +152,9 @@
           "description": "Join query references (for join sources).",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JoinQueryReference"
+            "type": ["object", "string"],
+            "if": { "type": "object" },
+            "then": { "$ref": "#/definitions/JoinQueryReference" }
           }
         },
         "joinType": {
@@ -215,8 +226,7 @@
       "description": "An InfoBridge query definition.",
       "type": "object",
       "required": [
-        "name",
-        "queryId"
+        "name"
       ],
       "properties": {
         "name": {
@@ -237,13 +247,9 @@
         "visualId": {
           "description": "The visual identifier (numeric internal ID or UUID in external definitions).",
           "oneOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "string",
-              "format": "uuid"
-            }
+            { "type": "integer" },
+            { "type": "string", "format": "uuid" },
+            { "type": "null" }
           ]
         },
         "meta": {
@@ -263,7 +269,10 @@
         },
         "writebackSettings": {
           "description": "Writeback settings for this query.",
-          "$ref": "#/definitions/WritebackSettings"
+          "oneOf": [
+            { "$ref": "#/definitions/WritebackSettings" },
+            { "type": "null" }
+          ]
         },
         "writebackDestinations": {
           "description": "List of writeback destinations.",

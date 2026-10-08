@@ -1,26 +1,29 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/writeback/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/Writeback/1.0.0/schema.json",
   "title": "Writeback Configuration",
   "description": "Writeback configuration for a Planning visual, defining destination, column mapping, and auto-writeback settings.",
   "type": "object",
   "required": [
     "$schema",
-    "writebackType",
-    "destination"
+    "writebackType"
   ],
   "properties": {
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/planning/writeback/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/Planning/Writeback/1.0.0/schema.json"
     },
     "writebackType": {
       "type": "integer",
       "description": "Writeback type code."
     },
-    "destination": {
-      "$ref": "#/definitions/WritebackDestination"
+    "destinations": {
+      "type": "array",
+      "description": "List of writeback destinations.",
+      "items": {
+        "$ref": "#/definitions/WritebackDestination"
+      }
     },
     "writebackFilter": {
       "type": "object",
@@ -29,7 +32,8 @@
           "type": "string",
           "enum": [
             "none",
-            "filter"
+            "filter",
+            "calculatedRows"
           ]
         }
       },
@@ -93,6 +97,11 @@
       "type": "boolean",
       "description": "Whether to write back as HTML."
     },
+    "writebackConstraints": {
+      "type": "object",
+      "description": "Constraint configuration for writeback validation.",
+      "additionalProperties": true
+    },
     "wbColumns": {
       "type": "array",
       "description": "Column definitions for the writeback table.",
@@ -102,6 +111,15 @@
     },
     "hasWritebackAccess": {
       "type": "boolean"
+    },
+    "skippedDimensionIds": {
+      "type": "array",
+      "description": "Dimension IDs skipped in writeback.",
+      "items": { "type": "string" }
+    },
+    "destination": {
+      "$ref": "#/definitions/WritebackDestination",
+      "description": "Single writeback destination (optional)."
     }
   },
   "additionalProperties": false,
@@ -109,26 +127,86 @@
     "WritebackDestination": {
       "type": "object",
       "required": [
-        "connection",
         "tableName",
-        "schema",
-        "database"
+        "settings",
+        "settingsHash"
+      ],
+      "anyOf": [
+        {
+          "required": ["connectionId"]
+        },
+        {
+          "required": ["connection"]
+        }
       ],
       "properties": {
-        "connection": {
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
-        },
-        "database": {
-          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
-        },
-        "schema": {
-          "type": "string"
-        },
         "tableName": {
           "type": "string"
+        },
+        "connectionId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "connection": {
+          "description": "connection reference as variable resolves to connectionId.",
+          "anyOf": [
+            {
+              "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/connectionReference/1.0.0/schema.json#/definitions/ConnectionReferenceOrVar"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "settings": {
+          "$ref": "#/definitions/DestinationSettings"
+        },
+        "settingsHash": {
+          "type": "string"
+        },
+        "artifactRelations": {},
+        "status": { "type": ["string", "integer"] },
+        "visualId": { "type": ["string", "integer"] }
+      },
+      "additionalProperties": true
+    },
+    "DestinationSettings": {
+      "type": "object",
+      "required": ["dbSchema"],
+      "anyOf": [
+        {
+          "required": ["dbName", "dbHost"]
+        },
+        {
+          "required": ["database"]
+        }
+      ],
+      "properties": {
+        "dbHost": {
+          "type": "string"
+        },
+        "dbName": {
+          "type": "string"
+        },
+        "dbSchema": {
+          "type": "string"
+        },
+        "dbDisplayName": {
+          "type": "string"
+        },
+        "database": {
+          "description": "database references variable resolves to db details.",
+          "anyOf": [
+            {
+              "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReferenceOrVar"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "DebounceConfig": {
       "type": "object",

@@ -1,0 +1,31 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/deploymentPlan/definition/plan/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the schema for the plan part of the DeploymentPlan item definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/deploymentPlan/definition/plan/1.0.0/schema.json"
+    },
+    "version": {
+      "description": "The schema version (e.g., '1.0.0').",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "groups": {
+      "description": "The list of groups with their deployment configuration.",
+      "type": ["array", "null"],
+      "items": {
+        "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/deploymentPlan/definition/common/1.0.0/schema.json#/definitions/DeploymentPlanGroup"
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "$schema",
+    "version"
+  ]
+}

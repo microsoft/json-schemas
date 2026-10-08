@@ -1,27 +1,34 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/settings/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Settings/1.0.0/schema.json",
   "title": "PowerTable Settings",
   "description": "Settings/permission configurations for a PowerTable visual.",
   "type": "object",
   "required": [
-    "$schema",
-    "settings"
+    "$schema"
   ],
   "properties": {
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/settings/1.0.0/schema.json"
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Settings/1.0.0/schema.json"
     },
     "settings": {
-      "type": "array",
+      "type": ["array", "object"],
       "items": {
         "$ref": "#/definitions/Setting"
       }
+    },
+    "sourceSettings": {
+      "type": "array",
+      "description": "Array of source-level settings.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "definitions": {
     "Setting": {
       "type": "object",

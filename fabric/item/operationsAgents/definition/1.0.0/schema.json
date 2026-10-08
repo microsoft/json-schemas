@@ -8,7 +8,7 @@
     "configuration": {
       "type": "object",
       "title": "Operations Agent Configuration",
-      "description": "User specified configuration containing instructions, data sources, actions, message destination, and identity of the agent.",
+      "description": "User specified configuration containing instructions, data sources, actions, message destination, and user-provided identity fields of the agent.",
       "properties": {
         "instructions": {
           "type": "string",
@@ -237,24 +237,11 @@
     },
     "agentIdentity": {
       "type": "object",
-      "description": "Identity information for the agent, used for agent OBO / app-only scenarios on ALM import/export.",
+      "description": "User-provided identity settings for definition payloads. Server-generated identity fields are read-only and excluded.",
       "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID for the agent identity."
-        },
-        "blueprintId": {
-          "type": "string",
-          "description": "The agent identity blueprint ID."
-        },
-        "mode": {
-          "type": "string",
-          "enum": ["Delegated"],
-          "description": "Execution mode."
-        },
         "sponsor": {
           "type": "string",
-          "description": "The UPN of the sponsor user. Required when messageDestination is a non-Recipient kind."
+          "description": "Sponsor alias provided by the user."
         }
       },
       "additionalProperties": false

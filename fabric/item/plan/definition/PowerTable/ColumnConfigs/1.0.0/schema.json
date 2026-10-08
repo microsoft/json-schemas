@@ -1,17 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/columnConfigs/1.0.0/schema.json",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/ColumnConfigs/1.0.0/schema.json",
   "title": "PowerTable Column Configs",
-  "description": "Array of column configuration definitions for a PowerTable visual.",
-  "type": "array",
-  "items": {
-    "$ref": "#/definitions/ColumnConfig"
+  "description": "Column configuration definitions for a PowerTable visual.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "columnConfigs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ColumnConfig"
+      }
+    }
   },
+  "additionalProperties": true,
   "definitions": {
     "ColumnConfig": {
       "type": "object",
       "required": [
-        "$schema",
         "columnGuid",
         "columnName",
         "columnType",
@@ -73,9 +82,13 @@
         },
         "description": {
           "type": "string"
+        },
+        "recordGuid": {
+          "type": "string",
+          "description": "Record GUID for the column."
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "ColumnMeta": {
       "type": "object",
@@ -156,9 +169,18 @@
             "string",
             "null"
           ]
-        }
+        },
+        "allowNegative": { "type": "boolean" },
+        "dbMeta": {},
+        "largeNumberAbbrevation": { "type": ["string", "boolean"] },
+        "max": {},
+        "min": {},
+        "negativeValueFormat": { "type": "string" },
+        "prefix": { "type": "string" },
+        "suffix": { "type": "string" },
+        "thousandSeparator": { "type": ["string", "boolean"] }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "OptionLinking": {
       "type": "object",

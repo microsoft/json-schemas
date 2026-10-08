@@ -40,8 +40,7 @@
           "description": "Current status of the scenario.",
           "enum": [
             "ACTIVE",
-            "INACTIVE",
-            "DRAFT"
+            "LOCK"
           ]
         },
         "meta": {
@@ -61,14 +60,6 @@
             "null"
           ],
           "description": "List of simulations associated with this scenario.",
-          "items": {
-            "type": "object",
-            "additionalProperties": true
-          }
-        },
-        "userPermission": {
-          "type": "array",
-          "description": "User permissions for this scenario.",
           "items": {
             "type": "object",
             "additionalProperties": true

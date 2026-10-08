@@ -1,0 +1,140 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/graphType/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the schema for the graphType part of the GraphIndex item definition.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/definition/graphType/1.0.0/schema.json"
+    },
+    "nodeTypes": {
+      "description": "The node types in the graph type definition.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NodeType"
+      },
+      "maxItems": 1000
+    },
+    "edgeTypes": {
+      "description": "The edge types in the graph type definition.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EdgeType"
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "$schema",
+    "nodeTypes",
+    "edgeTypes"
+  ],
+  "definitions": {
+    "Property": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/Name"
+        },
+        "type": {
+          "description": "The graph property type.",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "NodeTypeReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "alias": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        }
+      },
+      "required": [
+        "alias"
+      ]
+    },
+    "NodeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "alias": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/Name"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          },
+          "maxItems": 1000
+        },
+        "primaryKeyProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/Name"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "alias",
+        "labels",
+        "primaryKeyProperties"
+      ]
+    },
+    "EdgeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "alias": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/InternalIdentifier"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/graphIndex/common/identifiers/1.0.0/schema.json#/definitions/Name"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Property"
+          },
+          "maxItems": 1000
+        },
+        "sourceNodeType": {
+          "$ref": "#/definitions/NodeTypeReference"
+        },
+        "destinationNodeType": {
+          "$ref": "#/definitions/NodeTypeReference"
+        }
+      },
+      "required": [
+        "alias",
+        "labels",
+        "sourceNodeType",
+        "destinationNodeType"
+      ]
+    }
+  }
+}

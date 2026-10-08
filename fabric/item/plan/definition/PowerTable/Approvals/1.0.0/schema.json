@@ -1,18 +1,22 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/approvals/1.0.0/schema.json",
+	"$id": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Approvals/1.0.0/schema.json",
 	"title": "PowerTable Approvals",
 	"description": "Approval workflow configuration for a PowerTable visual.",
 	"type": "object",
 	"required": [
-		"$schema",
-		"ruleType"
+		"$schema"
 	],
 	"properties": {
 		"$schema": {
 			"type": "string",
 			"format": "uri",
-			"const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/powerTable/approvals/1.0.0/schema.json"
+			"const": "https://developer.microsoft.com/json-schemas/fabric/item/plan/definition/PowerTable/Approvals/1.0.0/schema.json"
+		},
+		"approvals": {
+			"type": "object",
+			"description": "Approval workflow configuration.",
+			"additionalProperties": true
 		},
 		"ruleType": {
 			"type": "integer",
@@ -54,7 +58,7 @@
 			}
 		}
 	},
-	"additionalProperties": false,
+	"additionalProperties": true,
 	"definitions": {
 		"ApprovalLevel": {
 			"type": "object",

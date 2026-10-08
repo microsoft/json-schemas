@@ -1,0 +1,19 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/rtlp/definition/runtimeLineageItemDefinition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Runtime Lineage item definition",
+  "description": "The metadata-only definition for a Runtime Lineage item.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The JSON Schema that validates this Runtime Lineage item definition.",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/rtlp/definition/runtimeLineageItemDefinition/1.0.0/schema.json"
+    }
+  },
+  "required": [
+    "$schema"
+  ],
+  "additionalProperties": false
+}
