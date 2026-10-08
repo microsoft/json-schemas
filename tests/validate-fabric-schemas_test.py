@@ -2,6 +2,8 @@ import json
 import os
 import glob
 import pytest
+import jsonschema
+from jsonschema.validators import validator_for
 
 SCHEMA_DIR = "fabric"
 
@@ -15,7 +17,10 @@ SCHEMA_DIR = "fabric"
 #      "http://json-schema.org/draft-07/schema#"). These carry a "$id" on
 #      developer.microsoft.com and describe the shape of other documents. They
 #      run the schema-only contract tests (top-level $id + json-schema.org
-#      $schema). See is_json_schema_document().
+#      $schema) AND are structurally validated against their declared dialect's
+#      metaschema (test_schema_documents_are_valid_json_schema), which catches
+#      malformed schemas that the $id/$schema/$ref convention checks miss. See
+#      is_json_schema_document().
 #
 #   2. Recognized instance (definitionStructure ONLY) - "$schema" is one of OUR
 #      published definition-structure META-schema URLs on developer.microsoft.com
@@ -193,6 +198,27 @@ def test_schema_properties_exist(json_file):
     assert isinstance(schema["$schema"], str), f"$schema property must be a string in {json_file}"
     assert schema["$schema"].startswith("http://json-schema.org/") or schema["$schema"].startswith("https://json-schema.org/"), \
         f"$schema property in {json_file} must start with 'http://json-schema.org/', got: {schema['$schema']}"
+
+
+@pytest.mark.parametrize("json_file", list(find_json_files(SCHEMA_DIR)))
+def test_schema_documents_are_valid_json_schema(json_file):
+    with open(json_file, "r", encoding="utf-8") as f:
+        try:
+            doc = json.load(f)
+        except json.JSONDecodeError as e:
+            pytest.fail(f"Invalid JSON in {json_file}: {e}")
+
+    if not is_json_schema_document(doc):
+        pytest.skip("not a JSON Schema document; structural validation applies to schemas only")
+
+    cls = validator_for(doc)
+    # Validate structural well-formedness for the declared dialect; this catches
+    # malformed schemas (for example bad properties nesting) that string/ref
+    # convention checks miss, while staying offline via bundled metaschemas.
+    try:
+        cls.check_schema(doc)
+    except jsonschema.exceptions.SchemaError as e:
+        pytest.fail(f"Schema {json_file} is not a valid {cls.__name__} schema: {e.message}")
 
 
 @pytest.mark.parametrize("json_file", list(find_json_files(SCHEMA_DIR)))
