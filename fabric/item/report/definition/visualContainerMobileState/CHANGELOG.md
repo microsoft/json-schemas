@@ -1,5 +1,11 @@
 # Visual Container Mobile State Versions
 
+### 2.8.0
+
+<b>Released in: </b> September 2026 <br />
+<b>Notes: </b>
+- Updates the embedded `visualConfiguration` reference from `2.7.0` to `2.8.0` for the SU09 visual updates
+
 ### 2.7.0
 
 <b>Released in: </b> August 2026 <br />

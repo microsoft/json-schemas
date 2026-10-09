@@ -1,5 +1,13 @@
 # Releases
 
+## September 2026
+
+Slicer slider handle size, Cartesian category axis initial scroll position
+
+- [visualConfiguration 2.8.0](./definition/visualConfiguration/CHANGELOG.md#280)
+- [visualContainer 2.13.0](./definition/visualContainer/CHANGELOG.md#2130)
+- [visualContainerMobileState 2.8.0](./definition/visualContainerMobileState/CHANGELOG.md#280)
+
 ## August 2026
 
 Column expand/collapse, matrix freeze row headers, donut chart callouts, Cartesian outer padding control, slicer border and icon colors, date slicer preselection GA
