@@ -8,26 +8,7 @@ The complete workload definition requires one `manifest.json` and one `main.sql`
 
 ### Expanded Git and default workload representation
 
-Git integration and the default workload export emit the workload files individually as expanded text parts. In Git, they appear as individual files, not as `definition.pgschema`. A representative item directory is:
-
-```text
-Example.PostgreSQLDatabase\
-|-- .platform                 # Fabric-owned metadata, not a workload file
-|-- manifest.json             # Required workload manifest
-|-- main.sql                  # Required workload SQL
-|-- domains\
-|   `-- example.sql            # Optional SQL file
-|-- functions\
-|   `-- example.sql            # Optional SQL file
-|-- tables\
-|   `-- example.sql            # Optional SQL file
-|-- types\
-|   `-- example.sql            # Optional SQL file
-`-- views\
-    `-- example.sql            # Optional SQL file
-```
-
-This directory tree shows a subset of the optional SQL groups. SQL filenames are illustrative; the complete group inventory is listed below.
+Git integration and the default workload export emit the workload files individually as expanded text parts. In Git, they appear as individual files, not as `definition.pgschema`.
 
 ### Public `pgschema` workload representation
 
@@ -61,17 +42,7 @@ The descriptor describes file paths and cardinality; it does not validate SQL co
 
 ## Manifest part schema
 
-The decoded `manifest.json` is:
-
-```json
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json",
-  "format": "pgschema",
-  "version": "1.0.0"
-}
-```
-
-All three properties are required strings with the exact, case-sensitive values shown. Property order is insignificant, and no other properties are allowed. The required `$schema` marker is a URI fixed to the manifest schema identifier. The `version` also follows a three-component, no-leading-zero pattern; its fixed value remains `1.0.0`, so the pattern does not enable other versions. The [inline example](./definition/manifest/1.0.0/examples/inline.json) contains exactly these three values.
+The decoded `manifest.json` requires the `$schema`, `format`, and `version` properties. All three properties are required strings with exact, case-sensitive values, property order is insignificant, and no other properties are allowed. The required `$schema` marker is a URI fixed to the manifest schema identifier. The `version` also follows a three-component, no-leading-zero pattern; its fixed value remains `1.0.0`, so the pattern does not enable other versions.
 
 The manifest schema's canonical identifier is:
 
