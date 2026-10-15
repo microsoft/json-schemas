@@ -1,5 +1,12 @@
 # Visual Configuration Versions
 
+### 2.8.0
+
+<b>Released in: </b> September 2026 <br />
+<b>Notes: </b>
+- Updates the schema identity for the SU09 visual updates, retaining the schema structure introduced in `2.6.0`
+- Includes both the standalone and embedded visual configuration schemas
+
 ### 2.7.0
 
 <b>Released in: </b> August 2026 <br />
