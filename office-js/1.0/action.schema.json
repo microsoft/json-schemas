@@ -15,8 +15,8 @@
             "type": "string",
             "maxLength": 64
         },
-        "description": {
-            "title": "Description",
+        "actionDescription": {
+            "title": "Action Description",
             "description": "Describes what the action does and when to use it.",
             "type": "string",
             "maxLength": 1024
@@ -26,14 +26,11 @@
         },
         "returns": {
             "$ref": "#/definitions/returns"
-        },
-        "states": {
-            "$ref": "#/definitions/states"
         }
     },
     "required": [
         "id",
-        "description"
+        "actionDescription"
     ],
     "additionalProperties": false,
     "definitions": {
@@ -155,40 +152,6 @@
                 }
             },
             "additionalProperties": true
-        },
-        "states": {
-            "title": "States",
-            "description": "Per-state instructions for the Copilot orchestrator.",
-            "type": "object",
-            "properties": {
-                "reasoning": {
-                    "$ref": "#/definitions/stateConfig",
-                    "description": "The state where the model can call actions."
-                },
-                "responding": {
-                    "$ref": "#/definitions/stateConfig",
-                    "description": "The state where the model responds to the user."
-                }
-            },
-            "minProperties": 1,
-            "additionalProperties": false
-        },
-        "stateConfig": {
-            "title": "State Configuration",
-            "description": "Instructions for the action in this orchestrator state.",
-            "type": "object",
-            "properties": {
-                "description": {
-                    "title": "Description",
-                    "description": "The purpose of the action in this state.",
-                    "type": "string",
-                    "maxLength": 512
-                }
-            },
-            "required": [
-                "description"
-            ],
-            "additionalProperties": false
         }
     }
 }
