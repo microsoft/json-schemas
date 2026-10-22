@@ -39,7 +39,7 @@
     "definitions": {
         "parameters": {
             "title": "Parameters",
-            "description": "The parameters that can be passed to the action. Mirrors the shape of an MCP tool inputSchema (a JSON Schema object), but supports only a subset of JSON Schema keywords.",
+            "description": "The JSON Schema 2020-12 input schema for the action, following the MCP tool inputSchema shape. The root type must be 'object'.",
             "type": "object",
             "properties": {
                 "type": {
@@ -52,16 +52,16 @@
                     "title": "Properties",
                     "description": "Maps parameter names to their definitions.",
                     "type": "object",
-                    "patternProperties": {
-                        "^[A-Za-z0-9_]+$": {
-                            "$ref": "#/definitions/parameter"
-                        }
-                    },
-                    "additionalProperties": false
+                    "additionalProperties": {
+                        "type": [
+                            "object",
+                            "boolean"
+                        ]
+                    }
                 },
                 "required": {
                     "title": "Required",
-                    "description": "The names of the required parameters. Each name must match a key in 'properties'.",
+                    "description": "The names of the required parameters.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -69,128 +69,92 @@
                 },
                 "additionalProperties": {
                     "title": "Additional Properties",
-                    "description": "Whether parameters not listed in 'properties' are allowed.",
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "type",
-                "properties"
-            ],
-            "additionalProperties": false
-        },
-        "parameter": {
-            "title": "Parameter",
-            "description": "Describes a single action parameter.",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "title": "Type",
-                    "description": "Specifies the parameter's type.",
-                    "type": "string",
-                    "enum": [
-                        "string",
-                        "number",
-                        "integer",
-                        "boolean",
-                        "array"
-                    ]
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "The description of the parameter.",
-                    "type": "string",
-                    "maxLength": 512
-                },
-                "enum": {
-                    "title": "Enum",
-                    "description": "The valid values for this parameter. Only valid when 'type' is 'string'.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "items": {
-                    "$ref": "#/definitions/arrayItem",
-                    "description": "Describes a single element in an array. Only valid when 'type' is 'array'."
-                },
-                "default": {
-                    "title": "Default",
-                    "description": "The default value for an optional parameter. Must match the type specified by 'type'.",
+                    "description": "A schema for parameters not listed in 'properties', or a boolean indicating whether they are allowed.",
                     "type": [
-                        "string",
-                        "number",
-                        "integer",
-                        "boolean",
-                        "array"
+                        "object",
+                        "boolean"
                     ]
                 }
             },
             "required": [
                 "type"
             ],
-            "additionalProperties": false
+            "additionalProperties": true
         },
-        "arrayItem": {
-            "title": "Array Item",
-            "description": "Describes a single element of an array parameter.",
+        "returns": {
+            "title": "Returns",
+            "description": "The JSON Schema 2020-12 output schema for the action, following the MCP tool outputSchema shape.",
             "type": "object",
             "properties": {
                 "type": {
                     "title": "Type",
-                    "description": "Specifies the element's type.",
-                    "type": "string",
-                    "enum": [
-                        "string",
-                        "number",
-                        "integer",
+                    "description": "The type of the returned value or values.",
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "object",
+                                "array",
+                                "string",
+                                "number",
+                                "integer",
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 1,
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "object",
+                                    "array",
+                                    "string",
+                                    "number",
+                                    "integer",
+                                    "boolean",
+                                    "null"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "properties": {
+                    "title": "Properties",
+                    "description": "Maps returned property names to their definitions.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": [
+                            "object",
+                            "boolean"
+                        ]
+                    }
+                },
+                "required": {
+                    "title": "Required",
+                    "description": "The names of the required returned properties.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {
+                    "title": "Additional Properties",
+                    "description": "A schema for returned properties not listed in 'properties', or a boolean indicating whether they are allowed.",
+                    "type": [
+                        "object",
                         "boolean"
                     ]
                 },
                 "description": {
                     "title": "Description",
-                    "description": "The description of the element.",
-                    "type": "string",
-                    "maxLength": 512
-                },
-                "enum": {
-                    "title": "Enum",
-                    "description": "The valid values for the element. Only valid when 'type' is 'string'.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "description": "A description of the returned value.",
+                    "type": "string"
                 }
             },
-            "required": [
-                "type"
-            ],
-            "additionalProperties": false
-        },
-        "returns": {
-            "title": "Returns",
-            "description": "The value returned by the action.",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "title": "Type",
-                    "description": "The type of the returned value.",
-                    "type": "string",
-                    "enum": [
-                        "string"
-                    ]
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "The description of the returned value.",
-                    "type": "string",
-                    "maxLength": 512
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "additionalProperties": false
+            "additionalProperties": true
         },
         "states": {
             "title": "States",
