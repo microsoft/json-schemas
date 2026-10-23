@@ -1,0 +1,51 @@
+name: Publish schemas to Azure Blob Storage
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: publish-to-blob
+  cancel-in-progress: false
+
+env:
+  STORAGE_ACCOUNT: graphprodblobstorage
+  CONTAINER: content
+  DEST_PATH: json-schemas/en-us/html
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Stage files to publish
+        run: |
+          mkdir -p _publish
+          rsync -a \
+            --exclude='.git/' --exclude='.github/' --exclude='tests/' \
+            --exclude='.gitignore' --exclude='_publish/' \
+            ./ _publish/
+
+      - name: Azure login (OIDC)
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+        with:
+          client-id: 974eee6c-4419-4723-a159-2b6bd8724df7
+          tenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
+          subscription-id: 90ef20af-9235-401a-9e50-94d14a8a1adb
+
+      - name: Upload to blob storage
+        run: |
+          az storage blob upload-batch \
+            --account-name "$STORAGE_ACCOUNT" \
+            --auth-mode login \
+            --destination "$CONTAINER" \
+            --destination-path "$DEST_PATH" \
+            --source _publish \
+            --overwrite true
