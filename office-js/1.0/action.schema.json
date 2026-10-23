@@ -15,8 +15,8 @@
             "type": "string",
             "maxLength": 64
         },
-        "actionDescription": {
-            "title": "Action Description",
+        "description": {
+            "title": "Description",
             "description": "Describes what the action does and when to use it.",
             "type": "string",
             "maxLength": 1024
@@ -30,7 +30,7 @@
     },
     "required": [
         "id",
-        "actionDescription"
+        "description"
     ],
     "additionalProperties": false,
     "definitions": {
