@@ -15,8 +15,8 @@
             "type": "string",
             "maxLength": 64
         },
-        "actionDescription": {
-            "title": "Action Description",
+        "description": {
+            "title": "Description",
             "description": "Describes what the action does and when to use it.",
             "type": "string",
             "maxLength": 1024
@@ -24,8 +24,8 @@
         "parameters": {
             "$ref": "#/definitions/parameters"
         },
-        "returnedValue": {
-            "$ref": "#/definitions/returnedValue"
+        "returns": {
+            "$ref": "#/definitions/returns"
         },
         "states": {
             "$ref": "#/definitions/states"
@@ -33,90 +33,162 @@
     },
     "required": [
         "id",
-        "actionDescription"
+        "description"
     ],
     "additionalProperties": false,
     "definitions": {
         "parameters": {
-            "title": "Action Parameters",
-            "description": "The parameters that can be passed to the action.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/parameter"
-            }
+            "title": "Parameters",
+            "description": "The parameters that can be passed to the action. Mirrors the shape of an MCP tool inputSchema (a JSON Schema object), but supports only a subset of JSON Schema keywords.",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "The JSON Schema type. Must be 'object'.",
+                    "type": "string",
+                    "const": "object"
+                },
+                "properties": {
+                    "title": "Properties",
+                    "description": "Maps parameter names to their definitions.",
+                    "type": "object",
+                    "patternProperties": {
+                        "^[A-Za-z0-9_]+$": {
+                            "$ref": "#/definitions/parameter"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "required": {
+                    "title": "Required",
+                    "description": "The names of the required parameters. Each name must match a key in 'properties'.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {
+                    "title": "Additional Properties",
+                    "description": "Whether parameters not listed in 'properties' are allowed.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "properties"
+            ],
+            "additionalProperties": false
         },
         "parameter": {
             "title": "Parameter",
             "description": "Describes a single action parameter.",
             "type": "object",
             "properties": {
-                "name": {
-                    "title": "Name",
-                    "description": "The name of the parameter.",
-                    "type": "string",
-                    "maxLength": 64,
-                    "pattern": "^[A-Za-z0-9_]+$"
-                },
-                "parameterDataType": {
-                    "title": "Parameter Data Type",
+                "type": {
+                    "title": "Type",
                     "description": "Specifies the parameter's type.",
                     "type": "string",
                     "enum": [
                         "string",
+                        "number",
+                        "integer",
                         "boolean",
-                        "number"
+                        "array"
                     ]
                 },
-                "parameterDescription": {
-                    "title": "Parameter Description",
+                "description": {
+                    "title": "Description",
                     "description": "The description of the parameter.",
                     "type": "string",
                     "maxLength": 512
                 },
-                "isRequired": {
-                    "title": "Required",
-                    "description": "Whether the parameter is required. Defaults to false.",
-                    "type": "boolean",
-                    "default": false
+                "enum": {
+                    "title": "Enum",
+                    "description": "The valid values for this parameter. Only valid when 'type' is 'string'.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
-                "defaultValue": {
-                    "title": "Default Value",
-                    "description": "The default value for an optional parameter.",
+                "items": {
+                    "$ref": "#/definitions/arrayItem",
+                    "description": "Describes a single element in an array. Only valid when 'type' is 'array'."
+                },
+                "default": {
+                    "title": "Default",
+                    "description": "The default value for an optional parameter. Must match the type specified by 'type'.",
                     "type": [
                         "string",
+                        "number",
+                        "integer",
                         "boolean",
-                        "number"
+                        "array"
                     ]
                 }
             },
             "required": [
-                "name",
-                "parameterDataType"
+                "type"
             ],
             "additionalProperties": false
         },
-        "returnedValue": {
-            "title": "Returned Value",
+        "arrayItem": {
+            "title": "Array Item",
+            "description": "Describes a single element of an array parameter.",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "Specifies the element's type.",
+                    "type": "string",
+                    "enum": [
+                        "string",
+                        "number",
+                        "integer",
+                        "boolean"
+                    ]
+                },
+                "description": {
+                    "title": "Description",
+                    "description": "The description of the element.",
+                    "type": "string",
+                    "maxLength": 512
+                },
+                "enum": {
+                    "title": "Enum",
+                    "description": "The valid values for the element. Only valid when 'type' is 'string'.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "returns": {
+            "title": "Returns",
             "description": "The value returned by the action.",
             "type": "object",
             "properties": {
-                "dataType": {
-                    "title": "Return Value Data Type",
+                "type": {
+                    "title": "Type",
                     "description": "The type of the returned value.",
                     "type": "string",
                     "enum": [
                         "string"
                     ]
                 },
-                "returnedValueDescription": {
-                    "title": "Returned Value Description",
+                "description": {
+                    "title": "Description",
                     "description": "The description of the returned value.",
                     "type": "string",
                     "maxLength": 512
                 }
             },
             "required": [
-                "dataType"
+                "type"
             ],
             "additionalProperties": false
         },
@@ -142,15 +214,15 @@
             "description": "Instructions for the action in this orchestrator state.",
             "type": "object",
             "properties": {
-                "stateDescription": {
-                    "title": "State Description",
+                "description": {
+                    "title": "Description",
                     "description": "The purpose of the action in this state.",
                     "type": "string",
                     "maxLength": 512
                 }
             },
             "required": [
-                "stateDescription"
+                "description"
             ],
             "additionalProperties": false
         }
