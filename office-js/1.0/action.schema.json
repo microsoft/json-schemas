@@ -89,8 +89,7 @@
                         "string",
                         "number",
                         "integer",
-                        "boolean",
-                        "array"
+                        "boolean"
                     ]
                 },
                 "description": {
@@ -107,10 +106,6 @@
                         "type": "string"
                     }
                 },
-                "items": {
-                    "$ref": "#/definitions/arrayItem",
-                    "description": "Describes a single element in an array. Only valid when 'type' is 'array'."
-                },
                 "default": {
                     "title": "Default",
                     "description": "The default value for an optional parameter. Must match the type specified by 'type'.",
@@ -118,45 +113,8 @@
                         "string",
                         "number",
                         "integer",
-                        "boolean",
-                        "array"
-                    ]
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "additionalProperties": false
-        },
-        "arrayItem": {
-            "title": "Array Item",
-            "description": "Describes a single element of an array parameter.",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "title": "Type",
-                    "description": "Specifies the element's type.",
-                    "type": "string",
-                    "enum": [
-                        "string",
-                        "number",
-                        "integer",
                         "boolean"
                     ]
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "The description of the element.",
-                    "type": "string",
-                    "maxLength": 512
-                },
-                "enum": {
-                    "title": "Enum",
-                    "description": "The valid values for the element. Only valid when 'type' is 'string'.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
                 }
             },
             "required": [
