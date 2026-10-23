@@ -24,11 +24,8 @@
         "parameters": {
             "$ref": "#/definitions/parameters"
         },
-        "returnedValue": {
-            "$ref": "#/definitions/returnedValue"
-        },
-        "states": {
-            "$ref": "#/definitions/states"
+        "returns": {
+            "$ref": "#/definitions/returns"
         }
     },
     "required": [
@@ -38,121 +35,123 @@
     "additionalProperties": false,
     "definitions": {
         "parameters": {
-            "title": "Action Parameters",
-            "description": "The parameters that can be passed to the action.",
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/parameter"
-            }
-        },
-        "parameter": {
-            "title": "Parameter",
-            "description": "Describes a single action parameter.",
+            "title": "Parameters",
+            "description": "The JSON Schema 2020-12 input schema for the action, following the MCP tool inputSchema shape. The root type must be 'object'.",
             "type": "object",
             "properties": {
-                "name": {
-                    "title": "Name",
-                    "description": "The name of the parameter.",
+                "type": {
+                    "title": "Type",
+                    "description": "The JSON Schema type. Must be 'object'.",
                     "type": "string",
-                    "maxLength": 64,
-                    "pattern": "^[A-Za-z0-9_]+$"
+                    "const": "object"
                 },
-                "parameterDataType": {
-                    "title": "Parameter Data Type",
-                    "description": "Specifies the parameter's type.",
-                    "type": "string",
-                    "enum": [
-                        "string",
-                        "boolean",
-                        "number"
-                    ]
+                "properties": {
+                    "title": "Properties",
+                    "description": "Maps parameter names to their definitions.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": [
+                            "object",
+                            "boolean"
+                        ]
+                    }
                 },
-                "parameterDescription": {
-                    "title": "Parameter Description",
-                    "description": "The description of the parameter.",
-                    "type": "string",
-                    "maxLength": 512
-                },
-                "isRequired": {
+                "required": {
                     "title": "Required",
-                    "description": "Whether the parameter is required. Defaults to false.",
-                    "type": "boolean",
-                    "default": false
+                    "description": "The names of the required parameters.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
-                "defaultValue": {
-                    "title": "Default Value",
-                    "description": "The default value for an optional parameter.",
+                "additionalProperties": {
+                    "title": "Additional Properties",
+                    "description": "A schema for parameters not listed in 'properties', or a boolean indicating whether they are allowed.",
                     "type": [
-                        "string",
-                        "boolean",
-                        "number"
+                        "object",
+                        "boolean"
                     ]
                 }
             },
             "required": [
-                "name",
-                "parameterDataType"
+                "type"
             ],
-            "additionalProperties": false
+            "additionalProperties": true
         },
-        "returnedValue": {
-            "title": "Returned Value",
-            "description": "The value returned by the action.",
+        "returns": {
+            "title": "Returns",
+            "description": "The JSON Schema 2020-12 output schema for the action, following the MCP tool outputSchema shape.",
             "type": "object",
             "properties": {
-                "dataType": {
-                    "title": "Return Value Data Type",
-                    "description": "The type of the returned value.",
-                    "type": "string",
-                    "enum": [
-                        "string"
+                "type": {
+                    "title": "Type",
+                    "description": "The type of the returned value or values.",
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "object",
+                                "array",
+                                "string",
+                                "number",
+                                "integer",
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 1,
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "object",
+                                    "array",
+                                    "string",
+                                    "number",
+                                    "integer",
+                                    "boolean",
+                                    "null"
+                                ]
+                            }
+                        }
                     ]
                 },
-                "returnedValueDescription": {
-                    "title": "Returned Value Description",
-                    "description": "The description of the returned value.",
-                    "type": "string",
-                    "maxLength": 512
-                }
-            },
-            "required": [
-                "dataType"
-            ],
-            "additionalProperties": false
-        },
-        "states": {
-            "title": "States",
-            "description": "Per-state instructions for the Copilot orchestrator.",
-            "type": "object",
-            "properties": {
-                "reasoning": {
-                    "$ref": "#/definitions/stateConfig",
-                    "description": "The state where the model can call actions."
+                "properties": {
+                    "title": "Properties",
+                    "description": "Maps returned property names to their definitions.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": [
+                            "object",
+                            "boolean"
+                        ]
+                    }
                 },
-                "responding": {
-                    "$ref": "#/definitions/stateConfig",
-                    "description": "The state where the model responds to the user."
+                "required": {
+                    "title": "Required",
+                    "description": "The names of the required returned properties.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {
+                    "title": "Additional Properties",
+                    "description": "A schema for returned properties not listed in 'properties', or a boolean indicating whether they are allowed.",
+                    "type": [
+                        "object",
+                        "boolean"
+                    ]
+                },
+                "description": {
+                    "title": "Description",
+                    "description": "A description of the returned value.",
+                    "type": "string"
                 }
             },
-            "minProperties": 1,
-            "additionalProperties": false
-        },
-        "stateConfig": {
-            "title": "State Configuration",
-            "description": "Instructions for the action in this orchestrator state.",
-            "type": "object",
-            "properties": {
-                "stateDescription": {
-                    "title": "State Description",
-                    "description": "The purpose of the action in this state.",
-                    "type": "string",
-                    "maxLength": 512
-                }
-            },
-            "required": [
-                "stateDescription"
-            ],
-            "additionalProperties": false
+            "additionalProperties": true
         }
     }
 }
