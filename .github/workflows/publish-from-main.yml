@@ -2,7 +2,7 @@ name: Publish schemas to Azure Blob Storage
 
 on:
   push:
-    branches: [main]
+    branches: [live]
   workflow_dispatch:
 
 permissions:
