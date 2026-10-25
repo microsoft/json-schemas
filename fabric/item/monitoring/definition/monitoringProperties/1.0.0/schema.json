@@ -25,9 +25,13 @@
       "$ref": "#/definitions/OperationsAgent"
     }
   },
-  "required": ["$schema"],
+  "required": [
+    "$schema"
+  ],
   "dependencies": {
-    "operationsAgent": ["dataCollectionSettings"]
+    "operationsAgent": [
+      "dataCollectionSettings"
+    ]
   },
   "definitions": {
     "DataCollectionSetting": {
@@ -44,7 +48,10 @@
           "$ref": "#/definitions/MonitoringDestinations"
         }
       },
-      "required": ["sources", "destinations"]
+      "required": [
+        "sources",
+        "destinations"
+      ]
     },
     "MonitoringSources": {
       "description": "The diagnostic signals collected by a routing set.",
@@ -56,7 +63,9 @@
           "$ref": "#/definitions/WorkspaceDiagnosticsSource"
         }
       },
-      "required": ["workspaceDiagnostics"]
+      "required": [
+        "workspaceDiagnostics"
+      ]
     },
     "WorkspaceDiagnosticsSource": {
       "description": "The set of workspace items that diagnostics are collected from.",
@@ -66,10 +75,14 @@
         "mode": {
           "description": "The collection scope. 'All' collects diagnostics from every supported item in the workspace.",
           "type": "string",
-          "enum": ["All"]
+          "enum": [
+            "All"
+          ]
         }
       },
-      "required": ["mode"]
+      "required": [
+        "mode"
+      ]
     },
     "MonitoringDestinations": {
       "description": "The stores that the collected diagnostic signals are written to.",
@@ -85,14 +98,20 @@
           "$ref": "#/definitions/EventStreamDestination"
         }
       },
-      "required": ["eventhouse"]
+      "required": [
+        "eventhouse"
+      ]
     },
     "EventhouseDestination": {
       "description": "The Eventhouse (KQL) store of a routing set. It is either provisioned and owned by this Monitoring item, or owned by another Monitoring item that this item links to.",
       "type": "object",
       "oneOf": [
-        {"$ref": "#/definitions/AutoEventhouseDestination"},
-        {"$ref": "#/definitions/LinkedEventhouseDestination"}
+        {
+          "$ref": "#/definitions/AutoEventhouseDestination"
+        },
+        {
+          "$ref": "#/definitions/LinkedEventhouseDestination"
+        }
       ]
     },
     "AutoEventhouseDestination": {
@@ -106,7 +125,9 @@
           "const": "Auto"
         }
       },
-      "required": ["mode"]
+      "required": [
+        "mode"
+      ]
     },
     "LinkedEventhouseDestination": {
       "description": "An Eventhouse owned by another Monitoring item that this Monitoring item routes into. It is referenced rather than owned, so deleting this item does not delete it.",
@@ -123,7 +144,10 @@
           "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReference"
         }
       },
-      "required": ["mode", "parentMonitoringItem"]
+      "required": [
+        "mode",
+        "parentMonitoringItem"
+      ]
     },
     "EventStreamDestination": {
       "description": "The Eventstream destination of a routing set.",
@@ -135,7 +159,9 @@
           "$ref": "#/definitions/CustomEndpointDestination"
         }
       },
-      "required": ["customEndpoint"]
+      "required": [
+        "customEndpoint"
+      ]
     },
     "CustomEndpointDestination": {
       "description": "Whether the collected telemetry is streamed to an external custom endpoint.",
@@ -147,7 +173,9 @@
           "type": "boolean"
         }
       },
-      "required": ["enabled"]
+      "required": [
+        "enabled"
+      ]
     },
     "OperationsAgent": {
       "description": "The Operations Agent provisioned as a child of this Monitoring item.",
@@ -159,7 +187,9 @@
           "type": "boolean"
         }
       },
-      "required": ["enabled"]
+      "required": [
+        "enabled"
+      ]
     }
   }
 }
