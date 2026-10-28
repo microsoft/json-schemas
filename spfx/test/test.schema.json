@@ -1,0 +1,8 @@
+{
+  "$id": "any-value.schema.json",
+
+  "type": ["array", "boolean", "integer", "number", "object", "string"],
+  "items": {
+    "$ref": "any-value.schema.json"
+  }
+}
