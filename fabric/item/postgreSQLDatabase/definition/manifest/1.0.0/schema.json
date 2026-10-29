@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json",
+  "type": "object",
+  "description": "Describes the pgschema manifest for a Fabric PostgreSQL Database item definition, identifying its serialization format and version.",
+  "additionalProperties": false,
+  "required": ["$schema", "format", "version"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Identifies the JSON schema for this manifest.",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/postgreSQLDatabase/definition/manifest/1.0.0/schema.json"
+    },
+    "format": {
+      "type": "string",
+      "description": "The definition serialization format, fixed to pgschema.",
+      "const": "pgschema"
+    },
+    "version": {
+      "type": "string",
+      "description": "The supported pgschema definition serialization version, fixed to 1.0.0.",
+      "const": "1.0.0",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    }
+  }
+}

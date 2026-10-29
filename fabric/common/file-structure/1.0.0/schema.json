@@ -1,0 +1,89 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/common/file-structure/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Artifact Registry File Structure Schema",
+  "description": "Schema for defining file structure validation rules with shared field definitions. Supports both JSON and non-JSON file types via glob patterns.",
+  "type": "object",
+  "definitions": {
+    "FileDefinition": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/definitions/FilePath"
+        },
+        "excludePath": {
+          "$ref": "#/definitions/FilePath"
+        },
+        "type": {
+          "$ref": "#/definitions/FileType"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Human-readable description of the file's purpose within the artifact definition"
+        },
+        "schemaRef": {
+          "$ref": "#/definitions/SchemaReference"
+        },
+        "maxSize": {
+          "$ref": "#/definitions/FileSize"
+        },
+        "minCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of matching files (0 = optional, 1+ = required)"
+        },
+        "maxCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "Maximum number of matching files (for patterns)"
+        }
+      },
+      "required": [ "path", "type", "minCount" ],
+      "additionalProperties": false,
+      "description": "Defines a file entry in the structure. For non-JSON file types (e.g., images), schemaRef is optional since schema validation does not apply."
+    },
+    "FilePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Valid glob-style path pattern. Supports wildcards: '*' matches any characters within a path segment, '**' matches across path segments, '?' matches a single character. Examples: '*.json', 'images/**/*.png', 'assets/?con.svg'."
+    },
+    "FileType": {
+      "type": "string",
+      "description": "File type identifier (e.g., 'json', 'xml', 'image', 'binary')"
+    },
+    "SchemaReference": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [ "uri" ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Array of schema references for validation - base definition to be overridden by specific schemas for maxItems constraint"
+    },
+    "Version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "description": "Semantic version (e.g., '1.0.0', '2.1.3')"
+    },
+    "FileSize": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The size of the file in bytes"
+    },
+    "MaxSize": {
+      "$ref": "#/definitions/FileSize",
+      "description": "Maximum size for entire files collection"
+    }
+  }
+}

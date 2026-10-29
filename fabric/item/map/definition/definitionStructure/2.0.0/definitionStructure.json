@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "2.0.0",
+  "files": [
+    {
+      "path": "map.json",
+      "type": "json",
+      "description": "Map item definition.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/map/definition/2.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "queries/layerSource-*.kql",
+      "type": "kql",
+      "description": "Optional KQL query text extracted from a Kusto layer source; the file name identifies the corresponding layerSources entry.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000
+    }
+  ]
+}

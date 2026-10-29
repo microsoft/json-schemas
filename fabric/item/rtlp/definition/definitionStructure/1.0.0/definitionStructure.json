@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "RuntimeLineageItemDefinition.json",
+      "type": "json",
+      "description": "The metadata-only definition for a Runtime Lineage item.",
+      "maxSize": 1048576,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/rtlp/definition/runtimeLineageItemDefinition/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

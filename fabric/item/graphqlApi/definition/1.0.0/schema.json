@@ -1,4 +1,24 @@
 {
-    "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphsqlApi/definition/1.0.0/schema.json",
-    "$schema": "https://json-schema.org/draft-07/schema#"
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/graphqlApi/definition/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GraphQL API definition",
+  "description": "Baseline-derived schema for the GraphQL definition payload emitted by Fabric Git Integration.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "datasources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "datasources"
+  ]
 }

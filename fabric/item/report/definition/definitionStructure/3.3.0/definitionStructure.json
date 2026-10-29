@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "3.3.0",
+  "files": [
+    {
+      "path": "definition.pbir",
+      "type": "json",
+      "description": "Report definition properties exported at the item root.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition/report.json",
+      "type": "json",
+      "description": "Report-level enhanced PBIR definition.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition/version.json",
+      "type": "json",
+      "description": "Report definition version metadata.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/versionMetadata/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition/pages/pages.json",
+      "type": "json",
+      "description": "Report pages metadata and page ordering.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition/pages/*/page.json",
+      "type": "json",
+      "description": "Per-page report definitions exported under definition/pages.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition/pages/*/visuals/*/visual.json",
+      "type": "resource",
+      "description": "Fabric exports per-visual visual.json files that declare $schema visualContainer/2.12.0, which is not yet published to the public json-schemas repo (public max 2.9.0); therefore no schemaRef is attached until 2.12.0 is published.",
+      "maxSize": 5242880,
+      "minCount": 0,
+      "maxCount": 10000
+    },
+    {
+      "path": "StaticResources/**",
+      "type": "resource",
+      "description": "Static resource payloads exported with the report, including theme JSON and image files; no published per-file schema applies.",
+      "maxSize": 52428800,
+      "minCount": 0,
+      "maxCount": 10000
+    },
+    {
+      "path": "CustomVisuals/**",
+      "type": "resource",
+      "description": "Custom visual package metadata/resources exported with the report; no published report definition schema applies.",
+      "maxSize": 52428800,
+      "minCount": 0,
+      "maxCount": 10000
+    }
+  ]
+}

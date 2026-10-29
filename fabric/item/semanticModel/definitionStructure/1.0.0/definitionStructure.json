@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": ".pbi/editorSettings.json",
+      "type": "json",
+      "description": "Power BI editor settings exported with the SemanticModel.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/editorSettings/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition.pbism",
+      "type": "json",
+      "description": "Semantic model definition properties exported by Fabric.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/semanticModel/definitionProperties/1.0.0/schema.json"
+        }
+      ]
+    },
+    {
+      "path": "definition/**/*.tmdl",
+      "type": "tmdl",
+      "description": "TMDL semantic model definition files exported by Fabric; no JSON schema applies to TMDL content.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 10000
+    }
+  ]
+}

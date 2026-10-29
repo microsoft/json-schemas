@@ -1,0 +1,151 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "JSON Schema for an Office Add-in Action File",
+    "description": "A file describing the data format for a single Office.js action referenced by an Office Add-in's actionFile property.",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "title": "ActionSchema",
+            "description": "The URI/URL of this schema, which should always be https://developer.microsoft.com/json-schemas/office-js/1.0/action.schema.json in a production app",
+            "type": "string"
+        },
+        "id": {
+            "title": "Action ID",
+            "description": "The ID of the action, which must match an action ID in the manifest.",
+            "type": "string",
+            "maxLength": 64
+        },
+        "description": {
+            "title": "Description",
+            "description": "Describes what the action does and when to use it.",
+            "type": "string",
+            "maxLength": 1024
+        },
+        "parameters": {
+            "$ref": "#/definitions/parameters"
+        },
+        "returns": {
+            "$ref": "#/definitions/returns"
+        }
+    },
+    "required": [
+        "id",
+        "description"
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "parameters": {
+            "title": "Parameters",
+            "description": "The parameters that can be passed to the action. Mirrors the shape of an MCP tool inputSchema (a JSON Schema object), but supports only a subset of JSON Schema keywords.",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "The JSON Schema type. Must be 'object'.",
+                    "type": "string",
+                    "const": "object"
+                },
+                "properties": {
+                    "title": "Properties",
+                    "description": "Maps parameter names to their definitions.",
+                    "type": "object",
+                    "patternProperties": {
+                        "^[A-Za-z0-9_]+$": {
+                            "$ref": "#/definitions/parameter"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "required": {
+                    "title": "Required",
+                    "description": "The names of the required parameters. Each name must match a key in 'properties'.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": {
+                    "title": "Additional Properties",
+                    "description": "Whether parameters not listed in 'properties' are allowed.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "properties"
+            ],
+            "additionalProperties": false
+        },
+        "parameter": {
+            "title": "Parameter",
+            "description": "Describes a single action parameter.",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "Specifies the parameter's type.",
+                    "type": "string",
+                    "enum": [
+                        "string",
+                        "number",
+                        "integer",
+                        "boolean"
+                    ]
+                },
+                "description": {
+                    "title": "Description",
+                    "description": "The description of the parameter.",
+                    "type": "string",
+                    "maxLength": 512
+                },
+                "enum": {
+                    "title": "Enum",
+                    "description": "The valid values for this parameter. Only valid when 'type' is 'string'.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "default": {
+                    "title": "Default",
+                    "description": "The default value for an optional parameter. Must match the type specified by 'type'.",
+                    "type": [
+                        "string",
+                        "number",
+                        "integer",
+                        "boolean"
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "returns": {
+            "title": "Returns",
+            "description": "The value returned by the action.",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "The type of the returned value.",
+                    "type": "string",
+                    "enum": [
+                        "string"
+                    ]
+                },
+                "description": {
+                    "title": "Description",
+                    "description": "The description of the returned value.",
+                    "type": "string",
+                    "maxLength": 512
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

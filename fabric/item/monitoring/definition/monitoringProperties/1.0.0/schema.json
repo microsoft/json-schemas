@@ -1,0 +1,195 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/monitoring/definition/monitoringProperties/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the Workspace Monitoring configuration of the Monitoring item: which diagnostic signals are collected and which stores they are routed into.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "description": "The URI of the schema that validates this document.",
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/monitoring/definition/monitoringProperties/1.0.0/schema.json"
+    },
+    "dataCollectionSettings": {
+      "description": "The source to destination routing sets of this Monitoring item. Exactly one routing set is supported. When absent, data collection is not configured.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "$ref": "#/definitions/DataCollectionSetting"
+      }
+    },
+    "operationsAgent": {
+      "description": "The Operations Agent component of this Monitoring item. When absent, the Operations Agent is not enabled. Requires dataCollectionSettings to be present.",
+      "$ref": "#/definitions/OperationsAgent"
+    }
+  },
+  "required": [
+    "$schema"
+  ],
+  "dependencies": {
+    "operationsAgent": [
+      "dataCollectionSettings"
+    ]
+  },
+  "definitions": {
+    "DataCollectionSetting": {
+      "description": "A routing set that pairs the collected diagnostic sources with the destinations they are written to.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "description": "The diagnostic signals collected by this routing set.",
+          "$ref": "#/definitions/MonitoringSources"
+        },
+        "destinations": {
+          "description": "The stores that the collected diagnostic signals are written to.",
+          "$ref": "#/definitions/MonitoringDestinations"
+        }
+      },
+      "required": [
+        "sources",
+        "destinations"
+      ]
+    },
+    "MonitoringSources": {
+      "description": "The diagnostic signals collected by a routing set.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workspaceDiagnostics": {
+          "description": "The workspace diagnostics signal collected from the items in the workspace.",
+          "$ref": "#/definitions/WorkspaceDiagnosticsSource"
+        }
+      },
+      "required": [
+        "workspaceDiagnostics"
+      ]
+    },
+    "WorkspaceDiagnosticsSource": {
+      "description": "The set of workspace items that diagnostics are collected from.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "The collection scope. 'All' collects diagnostics from every supported item in the workspace.",
+          "type": "string",
+          "enum": [
+            "All"
+          ]
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "MonitoringDestinations": {
+      "description": "The stores that the collected diagnostic signals are written to.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventhouse": {
+          "description": "The Eventhouse (KQL) store that this routing set writes into.",
+          "$ref": "#/definitions/EventhouseDestination"
+        },
+        "eventStream": {
+          "description": "An additional Eventstream destination for this routing set. Supported with both the Auto and Linked Eventhouse ownership models.",
+          "$ref": "#/definitions/EventStreamDestination"
+        }
+      },
+      "required": [
+        "eventhouse"
+      ]
+    },
+    "EventhouseDestination": {
+      "description": "The Eventhouse (KQL) store of a routing set. It is either provisioned and owned by this Monitoring item, or owned by another Monitoring item that this item links to.",
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/AutoEventhouseDestination"
+        },
+        {
+          "$ref": "#/definitions/LinkedEventhouseDestination"
+        }
+      ]
+    },
+    "AutoEventhouseDestination": {
+      "description": "An Eventhouse that this Monitoring item provisions and owns as a child.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "The Eventhouse ownership model. 'Auto' means this Monitoring item provisions and owns the Eventhouse.",
+          "type": "string",
+          "const": "Auto"
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "LinkedEventhouseDestination": {
+      "description": "An Eventhouse owned by another Monitoring item that this Monitoring item routes into. It is referenced rather than owned, so deleting this item does not delete it.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "The Eventhouse ownership model. 'Linked' means the Eventhouse is owned by another Monitoring item.",
+          "type": "string",
+          "const": "Linked"
+        },
+        "parentMonitoringItem": {
+          "description": "The Monitoring item that owns the target Eventhouse. The Eventhouse is resolved from that item when the route is bound.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReference"
+        }
+      },
+      "required": [
+        "mode",
+        "parentMonitoringItem"
+      ]
+    },
+    "EventStreamDestination": {
+      "description": "The Eventstream destination of a routing set.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "customEndpoint": {
+          "description": "The Eventstream custom endpoint that the collected telemetry is streamed to.",
+          "$ref": "#/definitions/CustomEndpointDestination"
+        }
+      },
+      "required": [
+        "customEndpoint"
+      ]
+    },
+    "CustomEndpointDestination": {
+      "description": "Whether the collected telemetry is streamed to an external custom endpoint.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "description": "Whether streaming to the external custom endpoint is enabled. Streaming is off when the containing object is absent.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "OperationsAgent": {
+      "description": "The Operations Agent provisioned as a child of this Monitoring item.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "description": "Whether the Operations Agent is enabled. Once enabled it cannot be disabled.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    }
+  }
+}

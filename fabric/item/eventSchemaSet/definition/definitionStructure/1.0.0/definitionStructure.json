@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "EventSchemaSetDefinition.json",
+      "type": "json",
+      "description": "Event schema set definition emitted by Fabric Git Integration, including eventTypes and schemas arrays.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/eventSchemaSet/definition/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}
