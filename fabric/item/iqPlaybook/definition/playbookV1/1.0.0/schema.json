@@ -1,0 +1,30 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/iqPlaybook/definition/playbookV1/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Defines the customer playbook section hierarchy for an IQPlaybook item.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Identifies the schema version used by this playbook definition.",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/iqPlaybook/definition/playbookV1/1.0.0/schema.json"
+    },
+    "sections": {
+      "type": "array",
+      "description": "The unique root-relative section paths in the customer playbook. An empty array represents a playbook with no sections. Every ancestor path must also be listed; the application must enforce this relationship because JSON Schema cannot validate arbitrary parent-path membership.",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "description": "A literal, non-empty section path. A slash separates parent and child section names; leading slashes, trailing slashes, and empty path segments are not allowed. Section names have no additional character or length restrictions.",
+        "minLength": 1,
+        "pattern": "^[^/]+(?:/[^/]+)*$"
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "sections"
+  ]
+}
