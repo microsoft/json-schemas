@@ -91,8 +91,38 @@
                     "properties": {
                       "type": {
                         "enum": [
-                          "Table",
-                          "View"
+                          "table",
+                          "view"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceType": {
+                "const": "Lakehouse"
+              }
+            },
+            "required": [
+              "sourceType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sourceReference": {
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "type": {
+                        "enum": [
+                          "table",
+                          "file"
                         ]
                       }
                     }
@@ -109,6 +139,10 @@
       "description": "Points at the Fabric item and the table, view or file within it that backs a data item.",
       "additionalProperties": false,
       "properties": {
+        "workspaceId": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar",
+          "description": "Identifier of the workspace containing the Fabric item that hosts the data. It may differ from the Data Quality item's workspace. When omitted, the Data Quality item's own workspace is used."
+        },
         "itemId": {
           "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar",
           "description": "Identifier of the Fabric item hosting the data."
@@ -125,30 +159,30 @@
     },
     "SourceData": {
       "type": "object",
-      "description": "Describes how the source data is organized within the hosting item. Table sources require tableName and format; file sources require fileName and format; view sources require viewName and may omit format. A source can only include the tableName, viewName or folderPath and fileName fields that match its type. Type and format values are PascalCase, like the other enumerations in this definition.",
+      "description": "Describes how the source data is organized within the hosting item. Table sources require tableName and format; file sources require fileName and format and have no schemaName; view sources require schemaName and viewName and have no format. A source can only include the tableName, viewName or folderPath and fileName fields that match its type. Type and format values are lowercase.",
       "additionalProperties": false,
       "properties": {
         "type": {
           "type": "string",
           "description": "Whether the source data is a table, view or file.",
           "enum": [
-            "Table",
-            "View",
-            "File"
+            "table",
+            "view",
+            "file"
           ]
         },
         "format": {
           "type": "string",
-          "description": "Storage format of the source data. Required for tables and files; optional for views.",
+          "description": "Storage format of the source data. Required for tables and files; not used for views.",
           "enum": [
-            "Delta",
-            "Parquet",
-            "Csv"
+            "delta",
+            "parquet",
+            "csv"
           ]
         },
         "schemaName": {
           "type": "string",
-          "description": "Schema containing the table or view.",
+          "description": "Schema containing the table or view. Optional for tables; required for views; not used for files.",
           "minLength": 1,
           "maxLength": 256
         },
@@ -186,7 +220,7 @@
           "if": {
             "properties": {
               "type": {
-                "const": "Table"
+                "const": "table"
               }
             },
             "required": [
@@ -194,6 +228,11 @@
             ]
           },
           "then": {
+            "properties": {
+              "format": {
+                "const": "delta"
+              }
+            },
             "required": [
               "format",
               "tableName"
@@ -223,7 +262,7 @@
           "if": {
             "properties": {
               "type": {
-                "const": "File"
+                "const": "file"
               }
             },
             "required": [
@@ -231,12 +270,25 @@
             ]
           },
           "then": {
+            "properties": {
+              "format": {
+                "enum": [
+                  "parquet",
+                  "csv"
+                ]
+              }
+            },
             "required": [
               "format",
               "fileName"
             ],
             "not": {
               "anyOf": [
+                {
+                  "required": [
+                    "schemaName"
+                  ]
+                },
                 {
                   "required": [
                     "tableName"
@@ -255,7 +307,7 @@
           "if": {
             "properties": {
               "type": {
-                "const": "View"
+                "const": "view"
               }
             },
             "required": [
@@ -264,10 +316,16 @@
           },
           "then": {
             "required": [
+              "schemaName",
               "viewName"
             ],
             "not": {
               "anyOf": [
+                {
+                  "required": [
+                    "format"
+                  ]
+                },
                 {
                   "required": [
                     "tableName"
@@ -296,10 +354,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the quality rule. Must not be blank.",
+          "description": "Name of the quality rule, at most 140 characters. Allowed characters are letters, digits, underscores, spaces, hyphens and combining marks; the name starts and ends with a letter, digit or underscore. The name _global is reserved.",
           "minLength": 1,
-          "maxLength": 256,
-          "pattern": "\\S"
+          "maxLength": 140,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "^_[Gg][Ll][Oo][Bb][Aa][Ll]$"
+          }
         },
         "description": {
           "type": [
@@ -582,16 +643,12 @@
           "then": {
             "properties": {
               "typeProperties": {
-                "anyOf": [
-                  {
-                    "$ref": "#/definitions/TableLookupTypeProperties"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
+                "$ref": "#/definitions/TableLookupTypeProperties"
               }
-            }
+            },
+            "required": [
+              "typeProperties"
+            ]
           }
         },
         {
@@ -690,7 +747,7 @@
     },
     "DuplicateTypeProperties": {
       "type": "object",
-      "description": "Type properties for a Duplicate rule. Detects duplicate records based on one or more columns. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires columns or the legacy column.",
+      "description": "Type properties for a Duplicate rule. Detects duplicate records based on one or more columns. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires columns.",
       "additionalProperties": false,
       "properties": {
         "columns": {
@@ -700,23 +757,10 @@
             "$ref": "#/definitions/RuleColumn"
           },
           "minItems": 1
-        },
-        "column": {
-          "$ref": "#/definitions/RuleColumn",
-          "description": "Legacy single-column reference, accepted for definitions saved before columns was introduced. New definitions should use columns."
         }
       },
-      "anyOf": [
-        {
-          "required": [
-            "columns"
-          ]
-        },
-        {
-          "required": [
-            "column"
-          ]
-        }
+      "required": [
+        "columns"
       ]
     },
     "TimelinessTypeProperties": {
@@ -724,10 +768,6 @@
       "description": "Type properties for a Timeliness rule. Checks whether data is sufficiently current. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires timeDifference.",
       "additionalProperties": false,
       "properties": {
-        "column": {
-          "$ref": "#/definitions/RuleColumn",
-          "description": "Optional column containing the timestamp to evaluate."
-        },
         "timeDifference": {
           "type": "integer",
           "description": "Maximum acceptable age in milliseconds.",
@@ -781,14 +821,14 @@
     },
     "EnumerationTypeProperties": {
       "type": "object",
-      "description": "Type properties for an Enumeration rule. Requires values to belong to an allowed set. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column and values.",
+      "description": "Type properties for an Enumeration rule. Requires values to belong to an allowed set. Optional or null on the containing rule for stored-definition compatibility; a supplied object requires column and options.",
       "additionalProperties": false,
       "properties": {
         "column": {
           "$ref": "#/definitions/RuleColumn",
           "description": "Column whose values must be in the allowed set."
         },
-        "values": {
+        "options": {
           "type": "array",
           "description": "Allowed values for the column.",
           "items": {
@@ -800,7 +840,7 @@
       },
       "required": [
         "column",
-        "values"
+        "options"
       ]
     },
     "TableLookupTypeProperties": {
@@ -834,6 +874,10 @@
             "Lakehouse",
             "Warehouse"
           ]
+        },
+        "workspaceId": {
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar",
+          "description": "Identifier of the workspace containing the Fabric item that hosts the referenced data. It may differ from the Data Quality item's workspace. When omitted, the Data Quality item's own workspace is used."
         },
         "itemId": {
           "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/auxiliaryTypes/1.0.0/schema.json#/definitions/GuidOrVar",
@@ -872,8 +916,34 @@
                 "properties": {
                   "type": {
                     "enum": [
-                      "Table",
-                      "View"
+                      "table",
+                      "view"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceType": {
+                "const": "Lakehouse"
+              }
+            },
+            "required": [
+              "sourceType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "table",
+                      "file"
                     ]
                   }
                 }
@@ -902,10 +972,6 @@
           "type": "string",
           "description": "Criteria for handling empty results.",
           "minLength": 1
-        },
-        "column": {
-          "$ref": "#/definitions/RuleColumn",
-          "description": "Optional column reference for the expression."
         },
         "columns": {
           "type": "array",
