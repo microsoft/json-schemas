@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Microsoft App deployment configuration overlay (ms.<deployment>.config.json).",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "appDisplayName": {
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "appSettings": {
+      "type": "object",
+      "properties": {
+        "showHeader": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "connectionReferences": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "sharedConnectionId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dataSets": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "dataSources": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "tableName": {
+                        "type": "string"
+                      },
+                      "tableNameOverride": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "environmentVariableName": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "datasetOverride": {
+                  "type": "object",
+                  "properties": {
+                    "environmentVariableName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "environmentVariableName"
+                  ],
+                  "additionalProperties": false
+                },
+                "siteId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dataSources"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "xrmConnectionReferenceLogicalName": {
+            "type": "string"
+          },
+          "dataSourcesShareLinks": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "linkKind": {
+                  "type": "number"
+                },
+                "shareId": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "linkKind",
+                "shareId",
+                "url"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
