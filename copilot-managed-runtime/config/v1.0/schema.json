@@ -20,6 +20,17 @@
         }
       ]
     },
+    "projectId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
     "appDisplayName": {
       "type": "string"
     },
@@ -45,16 +56,51 @@
     "buildEntryPoint": {
       "type": "string"
     },
-    "db": {
+    "buildType": {
+      "type": "string",
+      "enum": [
+        "build",
+        "none"
+      ]
+    },
+    "data": {
+      "description": "App data configuration. schemaPath is optional; a schema is loaded only when it is set. If db is also configured, both schemaPath values must be omitted or match exactly without normalization.",
       "type": "object",
       "properties": {
         "schemaPath": {
           "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
         }
       },
-      "required": [
-        "schemaPath"
-      ],
+      "additionalProperties": false
+    },
+    "state": {
+      "description": "App state schema configuration. schemaPath is optional and used by ms project state commands.",
+      "type": "object",
+      "properties": {
+        "schemaPath": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "db": {
+      "deprecated": true,
+      "description": "Legacy alias for data. If data is also configured, both schemaPath values must be omitted or match exactly without normalization.",
+      "type": "object",
+      "properties": {
+        "schemaPath": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
       "additionalProperties": false
     },
     "iconPath": {
@@ -164,9 +210,11 @@
                         "additionalProperties": false
                       },
                       "allowedActions": {
+                        "minItems": 1,
                         "type": "array",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "pattern": "\\S"
                         }
                       }
                     },
@@ -230,35 +278,12 @@
           "gatewayObjectIdHint": {
             "type": "string"
           },
-          "dataverseTables": {
-            "type": "object",
-            "propertyNames": {
-              "type": "string"
-            },
-            "additionalProperties": {
-              "type": "object",
-              "properties": {
-                "environmentId": {
-                  "type": "string"
-                },
-                "logicalName": {
-                  "type": "string"
-                },
-                "entitySetName": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "environmentId",
-                "logicalName"
-              ],
-              "additionalProperties": false
-            }
-          },
           "allowedActions": {
+            "minItems": 1,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "pattern": "\\S"
             }
           }
         },
