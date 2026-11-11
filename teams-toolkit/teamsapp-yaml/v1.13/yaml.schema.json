@@ -86,7 +86,8 @@
           { "$ref": "#/definitions/devChannelCreate" },
           { "$ref": "#/definitions/devChannelInstallApp" },
           { "$ref": "#/definitions/typeSpecCompile" },
-          { "$ref": "#/definitions/copilotAgentPublish" }
+          { "$ref": "#/definitions/copilotAgentPublish" },
+          { "$ref": "#/definitions/copilotAgentPublishPolicy" }
         ]
       }
     },
@@ -2216,6 +2217,45 @@
             "typeSpecConfigPath": {
               "type": "string",
               "description": "Path to TypeSpec config file."
+            }
+          }
+        }
+      }
+    },
+    "copilotAgentPublishPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Publish a policy for an existing agent. Currently supports Work IQ policies only. Publication does not verify runtime enforcement.",
+      "required": ["uses", "with"],
+      "properties": {
+        "name": { "type": "string" },
+        "env": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "uses": {
+          "const": "copilotAgent/publishPolicy",
+          "description": "Publish a policy for an existing agent. Currently supports Work IQ policies only. Publication does not verify runtime enforcement."
+        },
+        "with": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["titleId", "policyPath", "callerId"],
+          "properties": {
+            "titleId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Title ID of the existing agent. This action does not create the agent or title."
+            },
+            "policyPath": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Path to a UTF-8 Work IQ policy JSON file inside the project directory, either absolute or relative to the project root. File contents are not expanded or rewritten."
+            },
+            "callerId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Nonzero App ID GUID of the agent's runtime application. Must match appId if the policy already contains it. Do not use a user object ID, tenant ID, or Toolkit client ID."
             }
           }
         }
