@@ -6,7 +6,7 @@
     "properties": {
         "$schema": {
             "title": "ActionSchema",
-            "description": "The URI/URL of this schema, which should always be https://developer.microsoft.com/json-schemas/office-js/1.0/action.schema.json in a production app",
+            "description": "The URI/URL of this schema, which should always be https://developer.microsoft.com/json-schemas/office-js/action-schema/1.0/action.schema.json in a production app",
             "type": "string"
         },
         "id": {
