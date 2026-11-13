@@ -1184,6 +1184,13 @@
                                 "type": "string",
                                 "maxLength": 128
                             },
+                            "displayName": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 128,
+                                "pattern": "\\S",
+                                "description": "The localized, user-visible display name of this activity type. Author a concise standalone noun label using sentence casing appropriate for the locale; do not include surrounding host commands such as \"Turn off\" or ending punctuation. Consumers must preserve the resolved value exactly, must not transform its casing, and must not use it as identity; type remains the stable identifier."
+                            },
                             "allowedIconIds": {
                                 "type": "array",
                                 "description": "An array containing valid icon IDs per activity type.",
@@ -1779,6 +1786,32 @@
                         }
                         },
                         "required": [ "mcpServerIdentifier" ]
+                    },
+                    "openApiConnector": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Adds support for connectors backed by an HTTP API described by an OpenAPI description, such as a Power Platform connector. The OpenAPI description is not carried in the app package; it is resolved at runtime from the connector identity supplied in the authorization referenceId.",
+                        "properties": {
+                        "authorization": {
+                            "type": "object",
+                            "description": "Authorization configuration for connecting to the connector backend.",
+                            "additionalProperties": false,
+                            "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [ "ConnectionVault" ],
+                                "description": "The type of authorization required to invoke the connector. Supported value: 'ConnectionVault' (connector-managed connection referenced by referenceId)."
+                            },
+                            "referenceId": {
+                                "type": "string",
+                                "maxLength": 128,
+                                "description": "A reference identifier. For a Power Platform connector this is the connector logical name, which identifies the connector whose OpenAPI description is resolved at runtime. The referenceId value is acquired independently when providing the necessary authorization configuration values. This mechanism exists to prevent the need for storing secret values in the manifest."
+                            }
+                            },
+                            "required": [ "type", "referenceId" ]
+                        }
+                        },
+                        "required": [ "authorization" ]
                     }
                     },
                     "additionalProperties": false

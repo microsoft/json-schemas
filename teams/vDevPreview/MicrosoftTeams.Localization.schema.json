@@ -85,6 +85,12 @@
           "type": "string",
           "maxLength": 128
       },
+      "^activities.activityTypes\\[\\b([0-9]|[1-8][0-9]|9[0-9]|1[01][0-9]|12[0-7])\\b]\\.displayName$": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "\\S"
+      },
       "^meetingExtensionDefinition.scenes\\[[0-9]\\]\\.name$": {
           "type": "string",
           "maxLength": 128
