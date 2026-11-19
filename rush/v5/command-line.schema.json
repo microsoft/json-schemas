@@ -18,7 +18,7 @@
           "title": "Command Kind",
           "description": "Indicates the kind of command: \"bulk\" commands are run separately for each project; \"global\" commands are run once for the entire repository.",
           "type": "string",
-          "enum": ["bulk", "global", "phased"]
+          "enum": ["bulk", "global", "globalPlugin", "phased"]
         },
         "name": {
           "title": "Custom Command Name",
@@ -66,6 +66,11 @@
               "description": "If true then this command can be run in parallel, i.e. executed simultaneously for multiple projects.",
               "type": "boolean"
             },
+            "allowOversubscription": {
+              "title": "allowOversubscription",
+              "type": "boolean",
+              "description": "Controls whether weighted operations can start when the total weight would exceed the limit but is currently below the limit. This setting only applies when \"enableParallelism\" is true and operations have a \"weight\" property configured in their rush-project.json \"operationSettings\". Choose true (the default) to favor parallelism.  Choose false to strictly stay under the limit."
+            },
             "ignoreDependencyOrder": {
               "title": "ignoreDependencyOrder",
               "description": "Normally projects will be processed according to their dependency order: a given project will not start processing the command until all of its dependencies have completed.  This restriction doesn't apply for certain operations, for example, a \"clean\" task that deletes output files.  In this case you can set \"ignoreDependencyOrder\" to true to increase parallelism.",
@@ -110,6 +115,7 @@
             "shellCommand": { "$ref": "#/definitions/anything" },
 
             "enableParallelism": { "$ref": "#/definitions/anything" },
+            "allowOversubscription": { "$ref": "#/definitions/anything" },
             "ignoreDependencyOrder": { "$ref": "#/definitions/anything" },
             "ignoreMissingScript": { "$ref": "#/definitions/anything" },
             "incremental": { "$ref": "#/definitions/anything" },
@@ -162,6 +168,34 @@
         }
       ]
     },
+    "globalPluginCommand": {
+      "title": "Global Plugin Command",
+      "description": "A custom command that is run once for the entire repository, whose implementation is provided entirely by a Rush plugin. This command kind can only be used in command-line.json files provided by Rush plugins.",
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/definitions/baseCommand" },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "commandKind": {
+              "enum": ["globalPlugin"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "commandKind": { "$ref": "#/definitions/anything" },
+            "name": { "$ref": "#/definitions/anything" },
+            "summary": { "$ref": "#/definitions/anything" },
+            "description": { "$ref": "#/definitions/anything" },
+            "safeForSimultaneousRushProcesses": { "$ref": "#/definitions/anything" }
+          }
+        }
+      ]
+    },
     "phasedCommand": {
       "title": "Phased Command",
       "description": "A command that contains multiple phases, that are run separately for each project",
@@ -180,6 +214,11 @@
               "title": "enableParallelism",
               "description": "If true then this command can be run in parallel, i.e. executed simultaneously for multiple projects.",
               "type": "boolean"
+            },
+            "allowOversubscription": {
+              "title": "allowOversubscription",
+              "type": "boolean",
+              "description": "Controls whether weighted operations can start when the total weight would exceed the limit but is currently below the limit. This setting only applies when \"enableParallelism\" is true and operations have a \"weight\" property configured in their rush-project.json \"operationSettings\". Choose true (the default) to favor parallelism.  Choose false to strictly stay under the limit."
             },
             "incremental": {
               "title": "Incremental",
@@ -223,6 +262,11 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "includeAllProjectsInWatchGraph": {
+                  "title": "Include All Projects In Watch Graph",
+                  "description": "If true, when entering watch mode Rush will construct the operation graph including every project in the repository (respecting phase selection), but will initially enable only those operations whose projects were selected by the user's CLI project selection parameters. Other projects will appear disabled until they change or become required by an enabled project's dependency graph. This can improve iteration by avoiding a full graph rebuild when broadening the selection mid-session.",
+                  "type": "boolean"
                 }
               }
             },
@@ -253,8 +297,10 @@
             "safeForSimultaneousRushProcesses": { "$ref": "#/definitions/anything" },
 
             "enableParallelism": { "$ref": "#/definitions/anything" },
+            "allowOversubscription": { "$ref": "#/definitions/anything" },
             "incremental": { "$ref": "#/definitions/anything" },
             "phases": { "$ref": "#/definitions/anything" },
+            "disableBuildCache": { "$ref": "#/definitions/anything" },
             "watchOptions": { "$ref": "#/definitions/anything" },
             "installOptions": { "$ref": "#/definitions/anything" }
           }
@@ -700,6 +746,7 @@
         "oneOf": [
           { "$ref": "#/definitions/bulkCommand" },
           { "$ref": "#/definitions/globalCommand" },
+          { "$ref": "#/definitions/globalPluginCommand" },
           { "$ref": "#/definitions/phasedCommand" }
         ]
       }

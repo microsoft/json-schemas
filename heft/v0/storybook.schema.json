@@ -15,7 +15,7 @@
     "cliCallingConvention": {
       "title": "Specifies the calling convention of the storybook CLI based on the storybook version.",
       "description": "Specify how the Storybook CLI should be invoked. Possible values: \"storybook6\" or \"storybook7\", defaults to \"storybook7\".",
-      "enum": ["storybook6", "storybook7", "storybook8"]
+      "enum": ["storybook6", "storybook7", "storybook8", "storybook9"]
     },
     "cliPackageName": {
       "title": "The NPM package that Heft should use to launch the Storybook toolchain.",
@@ -36,6 +36,16 @@
     "captureWebpackStats": {
       "title": "Specifies whether to capture the webpack stats for storybook build.",
       "description": "If this is true, then it will capture the webpack stats for storybook build. Defaults to false.",
+      "type": "boolean"
+    },
+    "disableTelemetry": {
+      "title": "Specifies whether to disable Storybook telemetry.",
+      "description": "If true, sets the STORYBOOK_DISABLE_TELEMETRY=1 environment variable when invoking the Storybook subprocess, which disables Storybook's telemetry data collection. Defaults to false.",
+      "type": "boolean"
+    },
+    "quiet": {
+      "title": "Specifies whether to run storybook in quiet mode (--quiet).",
+      "description": "If this is true, then it will run storybook in quiet mode. Defaults to true.",
       "type": "boolean"
     }
   }
