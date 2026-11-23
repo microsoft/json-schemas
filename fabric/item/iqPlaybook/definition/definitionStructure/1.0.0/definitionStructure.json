@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "format": "PlaybookV1",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Defines the customer playbook section hierarchy.",
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/iqPlaybook/definition/playbookV1/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}
