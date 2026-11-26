@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json",
+  "title": "Action target binding common definitions",
+  "description": "Definitions shared by the Action target bindings.",
+  "definitions": {
+    "ValueToken": {
+      "description": "One part of a target parameter value: literal text or a reference to an Action parameter.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The token kind. Determines the other allowed properties.",
+          "type": "string",
+          "enum": [
+            "SimpleValue",
+            "ParameterReference"
+          ]
+        },
+        "value": {
+          "description": "Literal text used verbatim.",
+          "type": "string",
+          "maxLength": 8000,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        },
+        "parameterName": {
+          "description": "Name of the Action parameter whose value is used. It must match the name of a parameter in actionParameters. This is validated by the service when the Action is created or imported.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false,
+      "oneOf": [
+        { "$ref": "#/definitions/SimpleValueToken" },
+        { "$ref": "#/definitions/ParameterReferenceToken" }
+      ]
+    },
+    "SimpleValueToken": {
+      "description": "A literal text part of the value.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The token kind. Determines the other allowed properties. Must be 'SimpleValue'.",
+          "type": "string",
+          "const": "SimpleValue"
+        },
+        "value": {
+          "description": "Literal text used verbatim.",
+          "type": "string",
+          "maxLength": 8000,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        }
+      },
+      "required": ["type", "value"],
+      "additionalProperties": false
+    },
+    "ParameterReferenceToken": {
+      "description": "The value of an Action parameter, supplied when the Action runs. A missing value resolves to an empty string.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The token kind. Determines the other allowed properties. Must be 'ParameterReference'.",
+          "type": "string",
+          "const": "ParameterReference"
+        },
+        "parameterName": {
+          "description": "Name of the Action parameter whose value is used. It must match the name of a parameter in actionParameters. This is validated by the service when the Action is created or imported.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        }
+      },
+      "required": ["type", "parameterName"],
+      "additionalProperties": false
+    },
+    "NameValueTokens": {
+      "description": "A named target parameter. Its value is a list of tokens that are resolved and concatenated in order when the Action runs.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Parameter name.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        },
+        "value": {
+          "description": "Parameter value: tokens resolved and concatenated in order. The resolved value (all tokens concatenated) must not exceed 500 characters. This is validated by the service when the Action runs.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/ValueToken" },
+          "maxItems": 10
+        }
+      },
+      "required": ["name", "value"],
+      "additionalProperties": false
+    }
+  }
+}

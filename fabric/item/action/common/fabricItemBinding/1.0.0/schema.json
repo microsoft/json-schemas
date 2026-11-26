@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/fabricItemBinding/1.0.0/schema.json",
+  "title": "FabricItem Action target binding",
+  "description": "Runs a job on a Fabric item.",
+  "definitions": {
+    "FabricItemActionTargetBinding": {
+      "description": "Runs a job on a Fabric item. The parameters are defined by the target item.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "The Action type. Determines the allowed context and parameters. Must be 'FabricItem'.",
+          "type": "string",
+          "const": "FabricItem"
+        },
+        "actionContext": {
+          "description": "Addresses the target item.",
+          "$ref": "#/definitions/FabricItemActionContext"
+        },
+        "parameters": {
+          "description": "Named parameters of the target.",
+          "$ref": "#/definitions/FabricItemParameters"
+        }
+      },
+      "required": ["actionType", "actionContext"],
+      "additionalProperties": false
+    },
+    "FabricItemActionContext": {
+      "description": "Identifies the Fabric item and the job to run on it. Addressing only; inputs go in parameters.",
+      "type": "object",
+      "properties": {
+        "target": {
+          "description": "The Fabric item to run. When the target is in the same workspace as the Action, workspaceId is 00000000-0000-0000-0000-000000000000 and itemId is the target's logicalId (as in its .platform file). On import or deployment it resolves to the item in the target workspace. When the target is in another workspace, workspaceId and itemId are the live ids of that item and are kept unchanged on deployment.",
+          "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/itemReference/1.0.0/schema.json#/definitions/ItemReference"
+        },
+        "subItemId": {
+          "description": "Sub-item of the target item, when the job runs on one.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        },
+        "jobType": {
+          "description": "The job type to run on the target item. Must be a job type supported by itemType.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        },
+        "itemType": {
+          "description": "The type of the target item. Must match the type of the item referenced by target.",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        }
+      },
+      "required": ["target", "jobType", "itemType"],
+      "additionalProperties": false
+    },
+    "FabricItemParameters": {
+      "description": "Parameters of the target item, whose names are discovered when the Action is created. Parameter names must be unique, and each parameter's resolved value (all tokens concatenated) must not exceed 500 characters. The service validates name uniqueness when the Action is created or imported, and the character limit when the Action runs.",
+      "type": "array",
+      "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/NameValueTokens" },
+      "maxItems": 50
+    }
+  }
+}

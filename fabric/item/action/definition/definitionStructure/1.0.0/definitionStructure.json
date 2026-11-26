@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/common/definition-structure/1.0.0/schema.json",
+  "version": "1.0.0",
+  "files": [
+    {
+      "path": "definition.json",
+      "type": "json",
+      "description": "Action definition payload: the action parameters and the target binding (Fabric item, email, Teams channel or Teams group chat) that the action executes.",
+      "maxSize": 5242880,
+      "minCount": 1,
+      "maxCount": 1,
+      "schemaRef": [
+        {
+          "uri": "https://developer.microsoft.com/json-schemas/fabric/item/action/definition/action/1.0.0/schema.json"
+        }
+      ]
+    }
+  ]
+}

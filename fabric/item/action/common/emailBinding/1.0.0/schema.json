@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/emailBinding/1.0.0/schema.json",
+  "title": "Email Action target binding",
+  "description": "Sends an email.",
+  "definitions": {
+    "EmailActionTargetBinding": {
+      "description": "Sends an email.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "The Action type. Determines the allowed context and parameters. Must be 'Email'.",
+          "type": "string",
+          "const": "Email"
+        },
+        "parameters": {
+          "description": "Named parameters of the target.",
+          "$ref": "#/definitions/EmailParameters"
+        }
+      },
+      "required": ["actionType", "parameters"],
+      "additionalProperties": false
+    },
+    "EmailParameters": {
+      "type": "array",
+      "description": "Email parameters. recipients, subject and headline are required. content is optional. Parameter names must be unique, and each parameter's resolved value (all tokens concatenated) must not exceed 5000 characters, or the lower limit stated by the parameter. The service validates name uniqueness when the Action is created or imported, and the character limits when the Action runs.",
+      "minItems": 3,
+      "maxItems": 4,
+      "items": { "$ref": "#/definitions/EmailParameter" },
+      "allOf": [
+        { "contains": { "properties": { "name": { "type": "string", "const": "recipients" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "subject" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "headline" } } } }
+      ]
+    },
+    "EmailParameter": {
+      "description": "A named parameter of the Email Action.",
+      "oneOf": [
+        {
+          "title": "recipients",
+          "description": "Required. Email addresses of the recipients, separated by ';'. The resolved value (all tokens concatenated) must not exceed 5000 characters. The resolved value must contain 1-100 email addresses separated by ';'. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "recipients"
+            },
+            "value": {
+              "description": "Value of 'recipients'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 10,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "subject",
+          "description": "Required. Email subject. The resolved value (all tokens concatenated) must not exceed 500 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "subject"
+            },
+            "value": {
+              "description": "Value of 'subject'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 10,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "headline",
+          "description": "Required. Email headline. The resolved value (all tokens concatenated) must not exceed 500 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "headline"
+            },
+            "value": {
+              "description": "Value of 'headline'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 20,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "content",
+          "description": "Optional. Email body. The resolved value (all tokens concatenated) must not exceed 5000 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "content"
+            },
+            "value": {
+              "description": "Value of 'content'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 50
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
