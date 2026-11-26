@@ -7,7 +7,7 @@
       "type": "json",
       "description": "Action definition payload: the action parameters and the target binding (Fabric item, email, Teams channel or Teams group chat) that the action executes.",
       "maxSize": 5242880,
-      "minCount": 1,
+      "minCount": 0,
       "maxCount": 1,
       "schemaRef": [
         {
