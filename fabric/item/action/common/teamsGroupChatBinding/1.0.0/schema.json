@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/teamsGroupChatBinding/1.0.0/schema.json",
+  "title": "TeamsGroupChat Action target binding",
+  "description": "Posts a message to a Teams group chat.",
+  "definitions": {
+    "TeamsGroupChatActionTargetBinding": {
+      "description": "Posts a message to a Teams group chat.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "The Action type. Determines the allowed context and parameters. Must be 'TeamsGroupChat'.",
+          "type": "string",
+          "const": "TeamsGroupChat"
+        },
+        "parameters": {
+          "description": "Named parameters of the target.",
+          "$ref": "#/definitions/TeamsGroupChatParameters"
+        }
+      },
+      "required": ["actionType", "parameters"],
+      "additionalProperties": false
+    },
+    "TeamsGroupChatParameters": {
+      "type": "array",
+      "description": "TeamsGroupChat parameters. chatId, headline and message are required. Parameter names must be unique, and each parameter's resolved value (all tokens concatenated) must not exceed 5000 characters, or the lower limit stated by the parameter. The service validates name uniqueness when the Action is created or imported, and the character limits when the Action runs.",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/definitions/TeamsGroupChatParameter" },
+      "allOf": [
+        { "contains": { "properties": { "name": { "type": "string", "const": "chatId" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "headline" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "message" } } } }
+      ]
+    },
+    "TeamsGroupChatParameter": {
+      "description": "A named parameter of the TeamsGroupChat Action.",
+      "oneOf": [
+        {
+          "title": "chatId",
+          "description": "Required. Id of the Teams group chat. The resolved value (all tokens concatenated) must not exceed 100 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "chatId"
+            },
+            "value": {
+              "description": "Value of 'chatId'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 10,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "headline",
+          "description": "Required. Message headline. The resolved value (all tokens concatenated) must not exceed 500 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "headline"
+            },
+            "value": {
+              "description": "Value of 'headline'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 20,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "message",
+          "description": "Required. Message body. The resolved value (all tokens concatenated) must not exceed 5000 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "message"
+            },
+            "value": {
+              "description": "Value of 'message'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 50,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/action/definition/action/1.0.0/schema.json",
+  "title": "Action definition",
+  "description": "The serialized definition of a Fabric Action item (ALM source-of-truth).",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Self-identifying schema URI.",
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/action/definition/action/1.0.0/schema.json"
+    },
+    "actionParameters": {
+      "description": "Parameters the Action accepts. Their values are supplied when the Action runs. Parameter names must be unique. This is validated by the service when the Action is created or imported.",
+      "type": "array",
+      "items": { "$ref": "#/definitions/ActionParameter" },
+      "maxItems": 50
+    },
+    "actionTargetBindings": {
+      "description": "Targets the Action executes. Each binding maps the Action parameters to one target.",
+      "type": "array",
+      "items": { "$ref": "#/definitions/ActionTargetBinding" },
+      "maxItems": 1,
+      "minItems": 1
+    }
+  },
+  "required": ["$schema", "actionParameters", "actionTargetBindings"],
+  "additionalProperties": false,
+  "definitions": {
+    "ActionParameter": {
+      "description": "A parameter the Action accepts. Its value is supplied when the Action runs and can be used in target parameter values via ParameterReference tokens.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Parameter name. Referenced by ParameterReference tokens.",
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        },
+        "description": {
+          "description": "Human-readable description of the parameter.",
+          "type": "string",
+          "maxLength": 1000,
+          "allOf": [{ "$ref": "https://developer.microsoft.com/json-schemas/fabric/common/variableReference/1.0.0/schema.json#/definitions/NotVariableReference" }]
+        },
+        "type": {
+          "description": "Parameter type the supplied value is converted to.",
+          "type": "string",
+          "enum": [
+            "String",
+            "Boolean",
+            "Number"
+          ]
+        },
+        "isRequired": {
+          "description": "Whether a value must be supplied when the Action runs.",
+          "type": "boolean"
+        }
+      },
+      "required": ["name", "type", "isRequired"],
+      "additionalProperties": false
+    },
+    "ActionTargetBinding": {
+      "description": "Binds the Action to one target. The actionType selects the target kind, which determines the allowed context and parameters.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "The Action type. Determines the allowed context and parameters.",
+          "type": "string",
+          "enum": [
+            "FabricItem",
+            "Email",
+            "TeamsChannel",
+            "TeamsGroupChat"
+          ]
+        },
+        "parameters": {
+          "description": "Named parameters of the target.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": ["actionType"],
+      "oneOf": [
+        { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/fabricItemBinding/1.0.0/schema.json#/definitions/FabricItemActionTargetBinding" },
+        { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/emailBinding/1.0.0/schema.json#/definitions/EmailActionTargetBinding" },
+        { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/teamsChannelBinding/1.0.0/schema.json#/definitions/TeamsChannelActionTargetBinding" },
+        { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/teamsGroupChatBinding/1.0.0/schema.json#/definitions/TeamsGroupChatActionTargetBinding" }
+      ]
+    }
+  }
+}

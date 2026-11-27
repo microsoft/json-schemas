@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/teamsChannelBinding/1.0.0/schema.json",
+  "title": "TeamsChannel Action target binding",
+  "description": "Posts a message to a Teams channel.",
+  "definitions": {
+    "TeamsChannelActionTargetBinding": {
+      "description": "Posts a message to a Teams channel.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "description": "The Action type. Determines the allowed context and parameters. Must be 'TeamsChannel'.",
+          "type": "string",
+          "const": "TeamsChannel"
+        },
+        "parameters": {
+          "description": "Named parameters of the target.",
+          "$ref": "#/definitions/TeamsChannelParameters"
+        }
+      },
+      "required": ["actionType", "parameters"],
+      "additionalProperties": false
+    },
+    "TeamsChannelParameters": {
+      "type": "array",
+      "description": "TeamsChannel parameters. teamId, channelId, headline and message are required. Parameter names must be unique, and each parameter's resolved value (all tokens concatenated) must not exceed 5000 characters, or the lower limit stated by the parameter. The service validates name uniqueness when the Action is created or imported, and the character limits when the Action runs.",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/definitions/TeamsChannelParameter" },
+      "allOf": [
+        { "contains": { "properties": { "name": { "type": "string", "const": "teamId" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "channelId" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "headline" } } } },
+        { "contains": { "properties": { "name": { "type": "string", "const": "message" } } } }
+      ]
+    },
+    "TeamsChannelParameter": {
+      "description": "A named parameter of the TeamsChannel Action.",
+      "oneOf": [
+        {
+          "title": "teamId",
+          "description": "Required. Id of the Teams team. The resolved value (all tokens concatenated) must not exceed 100 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "teamId"
+            },
+            "value": {
+              "description": "Value of 'teamId'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 10,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "channelId",
+          "description": "Required. Id of the channel within the team. The resolved value (all tokens concatenated) must not exceed 100 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "channelId"
+            },
+            "value": {
+              "description": "Value of 'channelId'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 10,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "headline",
+          "description": "Required. Message headline. The resolved value (all tokens concatenated) must not exceed 500 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "headline"
+            },
+            "value": {
+              "description": "Value of 'headline'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 20,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        },
+        {
+          "title": "message",
+          "description": "Required. Message body. The resolved value (all tokens concatenated) must not exceed 5000 characters. This is validated by the service when the Action runs.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Parameter name.",
+              "type": "string",
+              "const": "message"
+            },
+            "value": {
+              "description": "Value of 'message'.",
+              "type": "array",
+              "items": { "$ref": "https://developer.microsoft.com/json-schemas/fabric/item/action/common/bindingCommon/1.0.0/schema.json#/definitions/ValueToken" },
+              "maxItems": 50,
+              "minItems": 1
+            }
+          },
+          "required": ["name", "value"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
