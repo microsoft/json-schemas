@@ -1,0 +1,24 @@
+{
+  "$id": "https://developer.microsoft.com/json-schemas/fabric/item/appBackend/fabricAppMetadata/1.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Fabric app tooling metadata",
+  "description": "The .fabric-app-metadata.json item definition part for a Fabric app (AppBackend). Records package versions captured by Rayfin tooling, separately from the service settings in rayfin.yml. The part is exported when package versions have been recorded. It does not contain application code, service configuration, or secret values.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "https://developer.microsoft.com/json-schemas/fabric/item/appBackend/fabricAppMetadata/1.0/schema.json",
+      "description": "Schema identifier for the Fabric app tooling metadata file. This property is optional on import."
+    },
+    "packageVersions": {
+      "type": ["object", "null"],
+      "description": "Recorded package versions keyed by package name, for example @microsoft/rayfin-cli or @microsoft/rayfin-auth. This is tooling provenance, not a dependency manifest or a request to install packages. The existing import format permits this property to be omitted or null.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "Package version recorded by the tooling. Version syntax is owned by the package manager and is not constrained by this schema."
+      }
+    }
+  }
+}
